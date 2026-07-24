@@ -1,0 +1,1295 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Store Locations API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Store Locations
+  description: Store Locations
+  x-nash-topic: config
+paths:
+  /v1/set_store_location_day_capacity:
+    post:
+      tags:
+      - Store Locations
+      summary: Set the day capacity for a store location
+      description: Set the delivery capacity for a store location on a specific date. Overrides the default weekly capacity for that particular day.
+      operationId: set_store_location_day_capacity_v1_set_store_location_day_capacity_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreLocationDayCapacityInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/set_store_location_default_capacity:
+    post:
+      tags:
+      - Store Locations
+      summary: Set the weekly default capacity for a store location
+      description: Configure the default weekly capacity schedule for a store location. Defines how many orders the location can handle per day of the week.
+      operationId: set_store_location_default_capacity_v1_set_store_location_default_capacity_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreLocationDefaultCapacityInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/store_locations:
+    get:
+      tags:
+      - Store Locations
+      summary: Get store locations
+      description: List store locations for the organization with pagination. Use size and offset parameters to paginate through results.
+      operationId: store_locations_v1_list_store_locations_route_get
+      parameters:
+      - name: size
+        in: query
+        description: The size of the store locations to return.
+        required: false
+        schema:
+          title: Size
+          type: integer
+          description: The size of the store locations to return.
+          default: 10
+      - name: offset
+        in: query
+        description: The offset of the store locations to return.
+        required: false
+        schema:
+          title: Offset
+          type: integer
+          description: The offset of the store locations to return.
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStoreLocationsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    post:
+      tags:
+      - Store Locations
+      summary: Create store location
+      description: Create a new store location (pickup point) with address, hours, and capacity settings.
+      operationId: store_locations_v1_create_store_location_route_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStoreLocationInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/store_locations/coverage:
+    get:
+      tags:
+      - Store Locations
+      summary: Get store locations that cover specified location (latitude & longitude, city_zipcode)
+      description: Find store locations whose delivery zones cover a given geographic point. Provide latitude/longitude, city_zipcode, or zipcode to find matching store locations.
+      operationId: get_store_locations_coverage_v1_store_locations_coverage_get
+      parameters:
+      - name: latitude
+        in: query
+        description: The latitude of the location to check coverage for. If used, must specify longitude
+        required: false
+        schema:
+          title: Latitude
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The latitude of the location to check coverage for. If used, must specify longitude
+          default: null
+          example: '0.00'
+        example: '0.00'
+      - name: longitude
+        in: query
+        description: The longitude of the location to check coverage for. If used, must specify latitude
+        required: false
+        schema:
+          title: Longitude
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The longitude of the location to check coverage for. If used, must specify latitude
+          default: null
+          example: '0.00'
+        example: '0.00'
+      - name: cityZipcode
+        in: query
+        description: The city_zipcode pair to check coverage for. The location must have coverage set up using the `City & Zip Code` unique field, not the separate `City` or `Zip Code` fields.
+        required: false
+        schema:
+          title: Cityzipcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The city_zipcode pair to check coverage for. The location must have coverage set up using the `City & Zip Code` unique field, not the separate `City` or `Zip Code` fields.
+          default: null
+          example: sanfrancisco_94114
+        example: sanfrancisco_94114
+      - name: zipcode
+        in: query
+        description: The zipcode to check coverage for.
+        required: false
+        schema:
+          title: Zipcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zipcode to check coverage for.
+          default: null
+          example: '94114'
+        example: '94114'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/store_locations/external-identifier/{externalIdentifier}:
+    post:
+      tags:
+      - Store Locations
+      summary: Create or update store location by external identifier
+      description: Create a new store location or update an existing one using your external identifier. If a store location with the given external identifier exists, it is updated.
+      operationId: upsert_store_location_by_external_id_v1_store_locations_external_identifier__string_externalIdentifier__post
+      parameters:
+      - name: externalIdentifier
+        in: path
+        required: true
+        schema:
+          title: Externalidentifier
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStoreLocationInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/store_locations/external_identifier/{external_identifier}:
+    get:
+      tags:
+      - Store Locations
+      summary: Get store location by external identifier
+      description: Retrieve a store location using your external identifier instead of the Nash store location ID.
+      operationId: store_locations_v1_get_store_location_by_external_id_route_external_identifier__string_external_identifier__get
+      parameters:
+      - name: externalIdentifier
+        in: path
+        required: true
+        schema:
+          title: Externalidentifier
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/store_locations/upsert:
+    post:
+      tags:
+      - Store Locations
+      summary: Create or update store location
+      description: Create a new store location or update an existing one. Matches on external identifier or store location ID for upsert logic.
+      operationId: create_or_update_store_location_v1_store_locations_upsert_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStoreLocationInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/store_locations/upsert/bulk:
+    post:
+      tags:
+      - Store Locations
+      summary: Upsert multiple store locations
+      description: Create or update multiple store locations in a single request. Each store location is matched by external identifier for upsert logic.
+      operationId: upsert_store_locations_v1_store_locations_upsert_bulk_post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStoreLocationsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/store_locations/{id}:
+    get:
+      tags:
+      - Store Locations
+      summary: Get store location
+      description: Retrieve a single store location by ID, including its address, hours, capacity, and zone associations.
+      operationId: store_locations_v1_get_store_location_route__string_id__get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          title: Id
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    delete:
+      tags:
+      - Store Locations
+      summary: Delete store location
+      description: Delete a store location by ID. Orders referencing this store location will no longer have a valid pickup point.
+      operationId: store_locations_v1_delete_store_location_route__string_id__delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          title: Id
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteStoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    patch:
+      tags:
+      - Store Locations
+      summary: Update store location
+      description: Update an existing store location's details such as address, hours, or capacity. Only provided fields are updated.
+      operationId: store_locations_v1_update_store_location_route__string_id__patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          title: Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStoreLocationInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreLocationResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    ParsedAddressInputSerializer:
+      title: ParsedAddressInputSerializer
+      required:
+      - street
+      - city
+      - country
+      type: object
+      properties:
+        number:
+          title: Number
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number of the address.
+          default: null
+          example: '1600'
+        secondaryNumber:
+          title: Secondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The secondary number of the address.
+          default: null
+          example: null
+        street:
+          title: Street
+          type: string
+          description: 'The street of the address. If your geocoding service does not split numbers from street names, you can pass the street name with the number in this field. Example: 1600 Pennsylvania Avenue NW.'
+          example: Pennsylvania Avenue NW
+        county:
+          title: County
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The county of the address.
+          default: null
+          example: Washington
+        city:
+          title: City
+          type: string
+          description: The city of the address.
+          example: Washington
+        state:
+          title: State
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the address.
+          default: null
+          example: DC
+        postalCode:
+          title: Postalcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The postal code of the address.
+          default: null
+          example: '20500'
+        country:
+          title: Country
+          type: string
+          description: The country of the address.
+          example: US
+        latitude:
+          title: Latitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The latitude of the address.
+          default: null
+          example: 38.8948949
+        longitude:
+          title: Longitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The longitude of the address.
+          default: null
+          example: -77.0371581
+      description: Parsed address input serializer for creating a job.
+    StoreLocationResponse:
+      title: StoreLocationResponse
+      required:
+      - id
+      - name
+      - phoneNumber
+      - location
+      - zoneIds
+      - zoneAssociations
+      - tags
+      - integrationMetadata
+      type: object
+      properties:
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Store location unique identifier from an external system.
+          default: null
+          example: '40123'
+        operatingHours:
+          title: Operatinghours
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: '[Integration Specific]: An object with keys that correspond to days of week (monday, tuesday, etc) and their corresponding operating hours / delivery windows.'
+          default: null
+          example:
+            friday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            monday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            saturday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            sunday:
+              active: true
+              shifts:
+              - - '11:00'
+                - '18:00'
+            thursday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            tuesday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            wednesday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+        prepTimeMinutes:
+          title: Preptimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: '[Integration Specific]: the preparation time to apply for orders, if relying on Nash to compute the delivery windows. This only applies to specific integrations.'
+          default: null
+        blackoutDates:
+          title: Blackoutdates
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The blackout dates of the store location.
+          default: null
+          example:
+          - '2024-01-01'
+          - '2024-01-02'
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+          example: Taylor
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+          example: Swift
+        email:
+          title: Email
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The email of the person at the store location.
+          default: null
+          example: taylor@swift.com
+        pickupInstructions:
+          title: Pickupinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The pickup instructions of the store location. Limited to 280 characters. Nash Recommended Input: Order [insert order number] for [insert customer name] from [business name]'
+          default: null
+          example: Once you arrive at the store, please click above to let us know you are here. Then, go ahead and find a sales associate inside - they'll be happy to help you!
+        id:
+          title: Id
+          type: string
+          description: The ID of the store location.
+          example: stl_01234567890123456789
+        name:
+          title: Name
+          type: string
+          description: The name of the store location.
+          example: White House
+        phoneNumber:
+          title: Phonenumber
+          type: string
+          description: The phone number of the person at the store location.
+          example: '+1234567890'
+        location:
+          $ref: '#/components/schemas/ParsedAddressInputSerializer'
+          description: The location of the store location.
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone ids of the store location.
+          example:
+          - zone_01234567890123456789
+          - zone_01234567890123456789
+        zoneAssociations:
+          title: Zoneassociations
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: The zone associations of the store location.
+          example:
+          - end_date: '2025-01-01'
+            start_date: '2024-01-01'
+            store_location_id: stl_01234567890123456789
+            zone_id: zone_01234567890123456789
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The tags of the store location.
+          example: '[''service:rapid'', ''franchise_location'']'
+        integrationMetadata:
+          title: Integrationmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The integration metadata of the store location.
+          example:
+            integration_name: ABC
+      description: Response for store location.
+    CreateStoreLocationInputSerializer:
+      title: CreateStoreLocationInputSerializer
+      required:
+      - name
+      - phoneNumber
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Store business name at the origin. Limited to 80 characters.
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          type: string
+          description: 'The phone number to contact at the store location: ''+15555555555'''
+        email:
+          title: Email
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        pickupInstructions:
+          title: Pickupinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Any special instructions for store location. Limited to 280 characters. Nash Recommended Input: Order [insert order number] for [insert customer name] from [business name]'
+          default: null
+        address:
+          title: Address
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The full address in one line for the store location for this package within the Job. Address format: [Number] [Street], [second line], [city], [state] [zip code]. All address fields are required except ''second line''. Second line should include Apt/Suite/Unit/# appended to the number of the unit. Can be null if using address_components.'
+          default: null
+        addressComponents:
+          anyOf:
+          - $ref: '#/components/schemas/ParsedAddressInputSerializer'
+          - type: 'null'
+          description: 'A geocoded and componentized version of the pickup address. NOTE: THIS WILL BYPASS OUR ADDRESS GEOCODING SERVICE!'
+          default: null
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Store location unique identifier from an external system.
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Free form tags specific to the location.
+          default: null
+          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
+        operatingHours:
+          title: Operatinghours
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: '[Integration Specific]: An object with keys that correspond to days of week (monday, tuesday, etc) and their corresponding operating hours / delivery windows. Example: {monday: {active: true, shifts: [[10:00, 17:00]]}, tuesday: {active: true, shifts: [[10:00, 17:00]]}, wednesday: {active: true, shifts: [[10:00, 17:00]]}, thursday: {active: true, shifts: [[10:00, 17:00]]}, friday: {active: true, shifts: [[10:00, 17:00]]}, saturday: {active: true, shifts: []}, sunday: {active: true, shifts: []}}'
+          default: null
+        prepTimeMinutes:
+          title: Preptimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: '[Integration Specific]: the preparation time to apply for orders, if relying on Nash to compute the delivery windows. This only applies to specific integrations.'
+          default: null
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone ids to associate with the store location.
+          default: null
+          example:
+          - zone_01234567890123456789
+          - zone_01234567890123456789
+        zoneAssociations:
+          title: Zoneassociations
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: The zone associations to associate with the store location.
+          default: null
+          example:
+          - end_date: '2025-01-01'
+            start_date: '2024-01-01'
+            zone_id: zone_01234567890123456789
+      description: Expected payload for creating a store location.
+    ListStoreLocationsResponse:
+      title: ListStoreLocationsResponse
+      required:
+      - storeLocations
+      type: object
+      properties:
+        storeLocations:
+          title: Storelocations
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreLocationResponse'
+      description: Response for list store locations.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    UpdateStoreLocationInputSerializer:
+      title: UpdateStoreLocationInputSerializer
+      type: object
+      properties:
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Store location unique identifier from an external system.
+          default: null
+          example: '40123'
+        operatingHours:
+          title: Operatinghours
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: '[Integration Specific]: An object with keys that correspond to days of week (monday, tuesday, etc) and their corresponding operating hours / delivery windows.'
+          default: null
+          example:
+            friday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            monday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            saturday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            sunday:
+              active: true
+              shifts:
+              - - '11:00'
+                - '18:00'
+            thursday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            tuesday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            wednesday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+        prepTimeMinutes:
+          title: Preptimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: '[Integration Specific]: the preparation time to apply for orders, if relying on Nash to compute the delivery windows. This only applies to specific integrations.'
+          default: null
+        blackoutDates:
+          title: Blackoutdates
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The blackout dates of the store location.
+          default: null
+          example:
+          - '2024-01-01'
+          - '2024-01-02'
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+          example: Taylor
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+          example: Swift
+        email:
+          title: Email
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The email of the person at the store location.
+          default: null
+          example: taylor@swift.com
+        pickupInstructions:
+          title: Pickupinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The pickup instructions of the store location. Limited to 280 characters. Nash Recommended Input: Order [insert order number] for [insert customer name] from [business name]'
+          default: null
+          example: Once you arrive at the store, please click above to let us know you are here. Then, go ahead and find a sales associate inside - they'll be happy to help you!
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Store business name at the origin. Limited to 80 characters.
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The phone number to contact at the store location: ''+15555555555'''
+          default: null
+        address:
+          title: Address
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The full address in one line for the store location for this package within the Job. Address format: [Number] [Street], [second line], [city], [state] [zip code]. All address fields are required except ''second line''. Second line should include Apt/Suite/Unit/# appended to the number of the unit.'
+          default: null
+        addressComponents:
+          anyOf:
+          - $ref: '#/components/schemas/ParsedAddressInputSerializer'
+          - type: 'null'
+          description: 'A geocoded and componentized version of the pickup address. NOTE: THIS WILL BYPASS OUR ADDRESS GEOCODING SERVICE!'
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Free form tags specific to the location.
+          default: null
+          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone ids to associate with the store location.
+          default: null
+          example:
+          - zone_01234567890123456789
+          - zone_01234567890123456789
+        zoneAssociations:
+          title: Zoneassociations
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: The zone associations to associate with the store location.
+          default: null
+          example:
+          - end_date: '2025-01-01'
+            start_date: '2024-01-01'
+            zone_id: zone_01234567890123456789
+      description: Expected input payload for updating a store location.
+    StoreLocationDayCapacityInputSerializer:
+      title: StoreLocationDayCapacityInputSerializer
+      required:
+      - storeLocationId
+      - date
+      - dayCapacity
+      type: object
+      properties:
+        storeLocationId:
+          title: Storelocationid
+          type: string
+          description: The store location for which to set capacity.
+          example: stl_1234567890
+        date:
+          title: Date
+          pattern: (\d{4})-(\d{2})-(\d{2})
+          type: string
+          description: The date for the specified capacity
+          example: '2024-10-06'
+        dayCapacity:
+          title: Daycapacity
+          type: object
+          additionalProperties: true
+          description: The capacity for the day.
+          example:
+            isActive: true
+            shiftCapacity:
+              00:00: 0
+              01:00: 0
+              02:00: 0
+              03:00: 0
+              04:00: 0
+              05:00: 0
+              06:00: 0
+              07:00: 0
+              08:00: 4
+              09:00: 4
+              '10:00': 4
+              '11:00': 4
+              '12:00': 4
+              '13:00': 4
+              '14:00': 6
+              '15:00': 6
+              '16:00': 6
+              '17:00': 6
+              '18:00': 0
+              '19:00': 0
+              '20:00': 0
+              '21:00': 0
+              '22:00': 0
+              '23:00': 0
+      description: Expected payload for the set store location day capacity endpoint.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    DeleteStoreLocationResponse:
+      title: DeleteStoreLocationResponse
+      required:
+      - id
+      - isDeleted
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        isDeleted:
+          title: Isdeleted
+          type: boolean
+      description: Layered DELETE confirmation. Returns the deleted store id and the new soft-delete flag.
+    StoreLocationDefaultCapacityInputSerializer:
+      title: StoreLocationDefaultCapacityInputSerializer
+      required:
+      - storeLocationId
+      - defaultCapacity
+      type: object
+      properties:
+        storeLocationId:
+          title: Storelocationid
+          type: string
+          description: The store location for which to set capacity.
+          example: stl_1234567890
+        defaultCapacity:
+          title: Defaultcapacity
+          type: object
+          additionalProperties: true
+          description: The default weekly capacity.
+          example:
+            friday:
+              isActive: true
+              shiftCapacity:
+                00:00: 0
+                01:00: 0
+                02:00: 0
+                03:00: 0
+                04:00: 0
+                05:00: 0
+                06:00: 0
+                07:00: 0
+                08:00: 4
+                09:00: 4
+                '10:00': 4
+                '11:00': 4
+                '12:00': 4
+                '13:00': 4
+                '14:00': 6
+                '15:00': 6
+                '16:00': 6
+                '17:00': 6
+                '18:00': 0
+                '19:00': 0
+                '20:00': 0
+                '21:00': 0
+                '22:00': 0
+                '23:00': 0
+            monday:
+              isActive: true
+              shiftCapacity:
+                00:00: 0
+                01:00: 0
+                02:00: 0
+                03:00: 0
+                04:00: 0
+                05:00: 0
+                06:00: 0
+                07:00: 0
+                08:00: 4
+                09:00: 4
+                '10:00': 4
+                '11:00': 4
+                '12:00': 4
+                '13:00': 4
+                '14:00': 6
+                '15:00': 6
+                '16:00': 6
+                '17:00': 6
+                '18:00': 0
+                '19:00': 0
+                '20:00': 0
+                '21:00': 0
+                '22:00': 0
+                '23:00': 0
+            saturday:
+              isActive: true
+              shiftCapacity:
+                00:00: 0
+                01:00: 0
+                02:00: 0
+                03:00: 0
+                04:00: 0
+                05:00: 0
+                06:00: 0
+                07:00: 0
+                08:00: 4
+                09:00: 4
+                '10:00': 4
+                '11:00': 4
+                '12:00': 4
+                '13:00': 4
+                '14:00': 6
+                '15:00': 6
+                '16:00': 6
+                '17:00': 6
+                '18:00': 0
+                '19:00': 0
+                '20:00': 0
+                '21:00': 0
+                '22:00': 0
+                '23:00': 0
+            sunday:
+              isActive: true
+              shiftCapacity:
+                00:00: 0
+                01:00: 0
+                02:00: 0
+                03:00: 0
+                04:00: 0
+                05:00: 0
+                06:00: 0
+                07:00: 0
+                08:00: 4
+                09:00: 4
+                '10:00': 4
+                '11:00': 4
+                '12:00': 4
+                '13:00': 4
+                '14:00': 6
+                '15:00': 6
+                '16:00': 6
+                '17:00': 6
+                '18:00': 0
+                '19:00': 0
+                '20:00': 0
+                '21:00': 0
+                '22:00': 0
+                '23:00': 0
+            thursday:
+              isActive: true
+              shiftCapacity:
+                00:00: 0
+                01:00: 0
+                02:00: 0
+                03:00: 0
+                04:00: 0
+                05:00: 0
+                06:00: 0
+                07:00: 0
+                08:00: 4
+                09:00: 4
+                '10:00': 4
+                '11:00': 4
+                '12:00': 4
+                '13:00': 4
+                '14:00': 6
+                '15:00': 6
+                '16:00': 6
+                '17:00': 6
+                '18:00': 0
+                '19:00': 0
+                '20:00': 0
+                '21:00': 0
+                '22:00': 0
+                '23:00': 0
+            tuesday:
+              isActive: true
+              shiftCapacity:
+                00:00: 0
+                01:00: 0
+                02:00: 0
+                03:00: 0
+                04:00: 0
+                05:00: 0
+                06:00: 0
+                07:00: 0
+                08:00: 4
+                09:00: 4
+                '10:00': 4
+                '11:00': 4
+                '12:00': 4
+                '13:00': 4
+                '14:00': 6
+                '15:00': 6
+                '16:00': 6
+                '17:00': 6
+                '18:00': 0
+                '19:00': 0
+                '20:00': 0
+                '21:00': 0
+                '22:00': 0
+                '23:00': 0
+            wednesday:
+              isActive: true
+              shiftCapacity:
+                00:00: 0
+                01:00: 0
+                02:00: 0
+                03:00: 0
+                04:00: 0
+                05:00: 0
+                06:00: 0
+                07:00: 0
+                08:00: 4
+                09:00: 4
+                '10:00': 4
+                '11:00': 4
+                '12:00': 4
+                '13:00': 4
+                '14:00': 6
+                '15:00': 6
+                '16:00': 6
+                '17:00': 6
+                '18:00': 0
+                '19:00': 0
+                '20:00': 0
+                '21:00': 0
+                '22:00': 0
+                '23:00': 0
+      description: Expected payload for the set store location default capacity endpoint.
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

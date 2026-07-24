@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Organizations API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Organizations
+  description: Organizations
+  x-nash-topic: config
+paths:
+  /v1/organizations/children:
+    get:
+      tags:
+      - Organizations
+      summary: List Child Organizations
+      description: List direct child organizations of the authenticated organization. Use this to discover which org IDs to pass in the `Nash-Org-Id` header when configuring resources (e.g. notification triggers) in a specific child account.
+      operationId: list_organization_children_v1_organizations_children_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOrganizationChildrenResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    ListOrganizationChildrenResponse:
+      title: ListOrganizationChildrenResponse
+      type: object
+      properties:
+        children:
+          title: Children
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationSummaryResponse'
+          description: Direct child organizations of the authenticated organization.
+    OrganizationSummaryResponse:
+      title: OrganizationSummaryResponse
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Organization ID
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Organization name
+          default: null
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

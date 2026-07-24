@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Messaging API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Messaging
+  description: Messaging
+  x-nash-topic: config
+paths:
+  /v1/messages/send:
+    post:
+      tags:
+      - Messaging
+      summary: Send Message
+      description: Send a one-off SMS or email to the courier, customer, or pickup business associated with a delivery. The recipient is resolved from the order's contact details on file (phone for SMS, email for email).
+      operationId: send_message_v1_v1_messages_send_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageInput'
+        required: true
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    RecipientType:
+      title: RecipientType
+      enum:
+      - courier
+      - customer
+      - pickup_business
+      type: string
+      description: Enum for message recipient types.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    MessageType:
+      title: MessageType
+      enum:
+      - sms
+      - email
+      type: string
+      description: Enum for message delivery types.
+    SendMessageInput:
+      title: SendMessageInput
+      required:
+      - order_id
+      - recipient_type
+      - message_type
+      - message
+      type: object
+      properties:
+        order_id:
+          title: Order Id
+          type: string
+        recipient_type:
+          $ref: '#/components/schemas/RecipientType'
+        message_type:
+          $ref: '#/components/schemas/MessageType'
+        message:
+          title: Message
+          type: string
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

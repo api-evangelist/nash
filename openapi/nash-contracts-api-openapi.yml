@@ -1,0 +1,335 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Contracts API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Contracts
+  description: Provider contract pricing and version listings
+  x-nash-topic: provider
+paths:
+  /v1/contracts:
+    get:
+      tags:
+      - Contracts
+      summary: List Contracts
+      description: List contracts visible to the authenticated organization. Returns a slim summary payload by default; pass include=details for the full record. Supports keyset pagination via the cursor returned in next_cursor.
+      operationId: contracts_v1_list_contracts_route_get
+      parameters:
+      - name: active_only
+        in: query
+        required: false
+        schema:
+          title: Active Only
+          type: boolean
+          default: true
+      - name: provider_id
+        in: query
+        required: false
+        schema:
+          title: Provider Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      - name: only_latest_version
+        in: query
+        required: false
+        schema:
+          title: Only Latest Version
+          type: boolean
+          default: true
+      - name: include
+        in: query
+        required: false
+        schema:
+          title: Include
+          enum:
+          - summary
+          - details
+          type: string
+          default: summary
+      - name: limit
+        in: query
+        required: false
+        schema:
+          title: Limit
+          maximum: 500
+          minimum: 1.0
+          type: integer
+          default: 100
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          title: Cursor
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContractsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    ContractReadDetailed:
+      title: ContractReadDetailed
+      required:
+      - contract_id
+      - first_version_contract_id
+      - display_name
+      - is_active
+      - currency
+      - provider_id
+      - created_at
+      type: object
+      properties:
+        contract_id:
+          title: Contract Id
+          type: string
+        first_version_contract_id:
+          title: First Version Contract Id
+          type: string
+        next_version_contract_id:
+          title: Next Version Contract Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        version:
+          title: Version
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        display_name:
+          title: Display Name
+          type: string
+        is_active:
+          title: Is Active
+          type: boolean
+        currency:
+          title: Currency
+          type: string
+        provider_id:
+          title: Provider Id
+          type: string
+        provider_name:
+          title: Provider Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        external_identifier:
+          title: External Identifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        delivery_price_type:
+          title: Delivery Price Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        delivery_price:
+          title: Delivery Price
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        eligibility_criteria:
+          title: Eligibility Criteria
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        wait_fee:
+          title: Wait Fee
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        cancellation_fee:
+          title: Cancellation Fee
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        return_fee:
+          title: Return Fee
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        insurance_price:
+          title: Insurance Price
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        tip_amount:
+          title: Tip Amount
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        toll_fee:
+          title: Toll Fee
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        properties:
+          title: Properties
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        supported_orgs:
+          title: Supported Orgs
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        excluded_orgs:
+          title: Excluded Orgs
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        prev_version_contract_id:
+          title: Prev Version Contract Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        commit_message:
+          title: Commit Message
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        created_by:
+          title: Created By
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        delivery_price_function:
+          title: Delivery Price Function
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        unassigned_driver_timeout_minutes:
+          title: Unassigned Driver Timeout Minutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+      description: Full payload — populated when the caller asks for ``include=details``.
+    ListContractsResponse:
+      title: ListContractsResponse
+      required:
+      - contracts
+      type: object
+      properties:
+        contracts:
+          title: Contracts
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractReadDetailed'
+        next_cursor:
+          title: Next Cursor
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: 'Response body for ``GET /v1/contracts``.
+
+
+        Items are typed as the wider ``ContractReadDetailed``. In summary mode the
+
+        service nulls the detailed fields so summary callers get a uniform shape
+
+        with the extra fields blanked.'
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

@@ -1,0 +1,2694 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Delivery Windows API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Delivery Windows
+  description: Delivery Windows
+  x-nash-topic: config
+paths:
+  /v1/delivery-window:
+    post:
+      tags:
+      - Delivery Windows
+      summary: Create a single delivery window
+      description: Create a delivery window defining an available time slot for scheduled deliveries. Delivery windows are associated with a store location and have capacity limits.
+      operationId: create_delivery_window_v1_delivery_window_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeliveryWindowInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowOutput'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-window/{id}:
+    get:
+      tags:
+      - Delivery Windows
+      summary: Get a delivery window
+      description: Retrieve a single delivery window by ID, including its time slot, capacity, and status.
+      operationId: get_delivery_window_v1_delivery_window__string_id__get
+      parameters:
+      - name: id
+        in: path
+        description: The id of the delivery window
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The id of the delivery window
+          example: dlw_abc|10:00|12:00|2025-10-22
+        example: dlw_abc|10:00|12:00|2025-10-22
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowOutput'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    delete:
+      tags:
+      - Delivery Windows
+      summary: Delete a delivery window
+      description: Delete a delivery window by ID. Deleted windows can be restored using the restore endpoint.
+      operationId: delete_delivery_window_v1_delivery_window__string_id__delete
+      parameters:
+      - name: id
+        in: path
+        description: The id of the delivery window
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The id of the delivery window
+          example: dlw_abc|10:00|12:00|2025-10-22
+        example: dlw_abc|10:00|12:00|2025-10-22
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowOutput'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-window/{id}/disable:
+    patch:
+      tags:
+      - Delivery Windows
+      summary: Disable a delivery window
+      description: Disable a delivery window so it is no longer available for new bookings. Existing bookings are not affected.
+      operationId: disable_delivery_window_v1_delivery_window__string_id__disable_patch
+      parameters:
+      - name: id
+        in: path
+        description: The id of the delivery window
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The id of the delivery window
+          example: dlw_abc|10:00|12:00|2025-10-22
+        example: dlw_abc|10:00|12:00|2025-10-22
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowOutput'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-window/{id}/enable:
+    patch:
+      tags:
+      - Delivery Windows
+      summary: Enable a delivery window
+      description: Enable a previously disabled delivery window, making it available for booking.
+      operationId: enable_delivery_window_v1_delivery_window__string_id__enable_patch
+      parameters:
+      - name: id
+        in: path
+        description: The id of the delivery window
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The id of the delivery window
+          example: dlw_abc|10:00|12:00|2025-10-22
+        example: dlw_abc|10:00|12:00|2025-10-22
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowOutput'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-window/{id}/restore:
+    patch:
+      tags:
+      - Delivery Windows
+      summary: Restore a delivery window
+      description: Restore a previously deleted delivery window, making it active again.
+      operationId: restore_delivery_window_v1_delivery_window__string_id__restore_patch
+      parameters:
+      - name: id
+        in: path
+        description: The id of the delivery window
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The id of the delivery window
+          example: dlw_abc|10:00|12:00|2025-10-22
+        example: dlw_abc|10:00|12:00|2025-10-22
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowOutput'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-windows:
+    post:
+      tags:
+      - Delivery Windows
+      summary: Create multiple delivery windows
+      description: Create multiple delivery windows in a single request. Each window defines an available time slot with capacity for a store location.
+      operationId: create_delivery_windows_v1_delivery_windows_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeliveryWindowsInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    delete:
+      tags:
+      - Delivery Windows
+      summary: Delete multiple delivery windows
+      description: Delete multiple delivery windows in a single request. Deleted windows can be restored using the restore endpoint.
+      operationId: delete_delivery_windows_v1_delivery_windows_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryWindowsOperationInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowOutput'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    patch:
+      tags:
+      - Delivery Windows
+      summary: Update multiple delivery windows
+      description: Update multiple existing delivery windows in a single request. Only provided fields are updated for each window.
+      operationId: update_delivery_windows_v1_delivery_windows_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeliveryWindowsInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-windows/disable:
+    patch:
+      tags:
+      - Delivery Windows
+      summary: Disable multiple delivery windows
+      description: Disable multiple delivery windows in a single request so they are no longer available for new bookings.
+      operationId: disable_delivery_windows_v1_delivery_windows_disable_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryWindowsOperationInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-windows/enable:
+    patch:
+      tags:
+      - Delivery Windows
+      summary: Enable multiple delivery windows
+      description: Enable multiple previously disabled delivery windows in a single request.
+      operationId: enable_delivery_windows_v1_delivery_windows_enable_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryWindowsOperationInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-windows/restore:
+    patch:
+      tags:
+      - Delivery Windows
+      summary: Restore multiple delivery windows
+      description: Restore multiple previously deleted delivery windows in a single request.
+      operationId: restore_delivery_windows_v1_delivery_windows_restore_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryWindowsOperationInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/delivery-windows/upsert:
+    post:
+      tags:
+      - Delivery Windows
+      summary: Upsert multiple delivery windows
+      description: Create or update multiple delivery windows in a single request. Existing windows are matched by ID for updates; new windows are created.
+      operationId: upsert_delivery_windows_v1_delivery_windows_upsert_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeliveryWindowsInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryWindowsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/eligible_delivery_windows:
+    get:
+      tags:
+      - Delivery Windows
+      summary: Get eligible delivery windows for order
+      description: Find delivery windows available for a specific order based on the order's store location and requirements. Requires either order_id or external_order_id. Optionally filter by time range and requested capacity.
+      operationId: get_eligible_delivery_windows_v1_eligible_delivery_windows_get
+      parameters:
+      - name: orderId
+        in: query
+        description: The order for which to return eligible delivery windows.
+        required: false
+        schema:
+          title: Orderid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The order for which to return eligible delivery windows.
+          default: null
+          example: ord_1234567890
+        example: ord_1234567890
+      - name: externalOrderId
+        in: query
+        description: The external order id for which to return eligible delivery windows.
+        required: false
+        schema:
+          title: Externalorderid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external order id for which to return eligible delivery windows.
+          default: null
+          example: ext_1234567890
+        example: ext_1234567890
+      - name: startTime
+        in: query
+        description: The range start for delivery windows.
+        required: true
+        schema:
+          title: Starttime
+          type: string
+          description: The range start for delivery windows.
+          format: date-time
+          example: '2024-10-06T00:00:00Z'
+        example: '2024-10-06T00:00:00Z'
+      - name: endTime
+        in: query
+        description: The range end for delivery windows.
+        required: true
+        schema:
+          title: Endtime
+          type: string
+          description: The range end for delivery windows.
+          format: date-time
+          example: '2024-10-07T00:00:00Z'
+        example: '2024-10-07T00:00:00Z'
+      - name: requestedCapacity
+        in: query
+        description: Optionally specify the requested capacity for the delivery windows.
+        required: false
+        schema:
+          title: Requestedcapacity
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Optionally specify the requested capacity for the delivery windows.
+          default: null
+          example: 10.0
+        example: 10.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EligibleDeliveryWindowsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/order/external-identifier/{externalId}/delivery-window/book:
+    post:
+      tags:
+      - Delivery Windows
+      summary: Book a delivery window for order
+      description: Reserve a delivery window for an order identified by external ID. The booking holds capacity in the window until confirmed or revoked.
+      operationId: book_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_book_post
+      parameters:
+      - name: externalId
+        in: path
+        description: The external id of the order to update
+        required: true
+        schema:
+          title: Externalid
+          type: string
+          description: The external id of the order to update
+          example: '1234567890'
+        example: '1234567890'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDeliveryWindowInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderOutputExample'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/order/external-identifier/{externalId}/delivery-window/confirm:
+    post:
+      tags:
+      - Delivery Windows
+      summary: Confirm a delivery window for order
+      description: Confirm a previously booked delivery window for an order. Finalizes the booking and commits the capacity reservation.
+      operationId: confirm_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_confirm_post
+      parameters:
+      - name: externalId
+        in: path
+        description: The external id of the order to update
+        required: true
+        schema:
+          title: Externalid
+          type: string
+          description: The external id of the order to update
+          example: '1234567890'
+        example: '1234567890'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderOutputExample'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/order/external-identifier/{externalId}/delivery-window/revoke:
+    post:
+      tags:
+      - Delivery Windows
+      summary: Revoke a delivery window for order
+      description: Revoke a previously booked delivery window for an order. Releases the capacity reservation and disassociates the window from the order.
+      operationId: revoke_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_revoke_post
+      parameters:
+      - name: externalId
+        in: path
+        description: The external id of the order to update
+        required: true
+        schema:
+          title: Externalid
+          type: string
+          description: The external id of the order to update
+          example: '1234567890'
+        example: '1234567890'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderOutputExample'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    EligibleDeliveryWindow:
+      title: EligibleDeliveryWindow
+      required:
+      - id
+      - ineligibleReason
+      - allowedTags
+      - startTime
+      - startTimeLocal
+      - endTime
+      - endTimeLocal
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The id of the delivery window
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The name of the delivery window
+          default: null
+          example: S21
+        ineligibleReason:
+          title: Ineligiblereason
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ineligibility failure reason
+          example: Ineligible due to order tags
+        allowedTags:
+          title: Allowedtags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The list of allowed tags
+          example: '[''rapid'', ''oversize'']'
+        storeLocationId:
+          title: Storelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The id of the store location object
+          default: null
+          example: stl_1234567890
+        storeLocationExternalId:
+          title: Storelocationexternalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external id of the store location object, if applicable
+          default: null
+          example: '1001'
+        zoneId:
+          title: Zoneid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The id of the zone object
+          default: null
+          example: zone_1234567890
+        zoneExternalId:
+          title: Zoneexternalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external id of the zone object, if applicable
+          default: null
+          example: '1001'
+        cutoffTime:
+          title: Cutofftime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The cutoff time of the delivery window in UTC
+          example: '2024-10-04T00:00:00.000000'
+        cutoffTimeLocal:
+          title: Cutofftimelocal
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The cutoff time of the delivery window in local timezone
+          example: '2024-10-04T00:00:00.000000'
+        startTime:
+          title: Starttime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The start time of the delivery window in UTC
+          example: '2024-10-06T00:00:00.000000'
+        startTimeLocal:
+          title: Starttimelocal
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The start time of the delivery window in local timezone
+          example: '2024-10-06T00:00:00.000000'
+        endTime:
+          title: Endtime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The end time of the delivery window in UTC
+          example: '2024-10-07T00:00:00.000000'
+        endTimeLocal:
+          title: Endtimelocal
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The end time of the delivery window in local timezone
+          example: '2024-10-07T00:00:00.000000'
+        remainingCapacity:
+          title: Remainingcapacity
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The remaining capacity for the delivery window
+          default: null
+          example: 10.0
+        maximumCapacity:
+          title: Maximumcapacity
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The maximum capacity for the delivery window
+          default: null
+          example: 10.0
+        minimumOrderValueCents:
+          title: Minimumordervaluecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The minimum order value for the delivery window in cents
+          default: null
+          example: 1000
+        timezoneId:
+          title: Timezoneid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The timezone id of the return timestamps, following the TZ database format
+          default: null
+          example: America/New_York
+        priceCents:
+          title: Pricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The price for the delivery window in cents
+          default: null
+          example: 1000
+        score:
+          title: Score
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The score for the delivery window
+          default: null
+          example: 1.0
+        windowMetadata:
+          title: Windowmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value window metadata.
+          default: null
+          example:
+            key: value
+    ItemInput:
+      title: ItemInput
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The merchant ID of the item
+          default: null
+          example: abc-123
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the item
+          default: null
+          example: A box of books
+        count:
+          title: Count
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the item
+          default: null
+          example: 2
+        dimensions:
+          anyOf:
+          - $ref: '#/components/schemas/Dimensions'
+          - type: 'null'
+          description: The dimensions of the item
+          default: null
+          example:
+            depth: 14
+            height: 10
+            width: 12
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The weight of the item in kilograms (kg)
+          default: null
+          example: 1.5
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The value of the item in cents
+          default: null
+          example: 1000
+        requirements:
+          title: Requirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of requirements for this item
+          default: null
+          example:
+          - age_verification_on_delivery
+        category:
+          title: Category
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The category of the item
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Barcode value for this item.
+          default: null
+          example: 0199312650999998913643M221872801002010908
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value data to attach to this item.
+          default: null
+          example:
+            packaging_type: CTN
+        subItems:
+          title: Subitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubItemInput'
+          - type: 'null'
+          description: The nested sub-items
+          default: null
+      description: Item input object for API requests.
+    DeliveryWindowsResponse:
+      title: DeliveryWindowsResponse
+      required:
+      - deliveryWindows
+      type: object
+      properties:
+        deliveryWindows:
+          title: Deliverywindows
+          type: array
+          items:
+            $ref: '#/components/schemas/DeliveryWindowOutput'
+    QuoteSerializer:
+      title: QuoteSerializer
+      required:
+      - id
+      - providerId
+      - providerName
+      - createdTime
+      - priceCents
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Quote ID
+          example: qot_01234567890
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Quote type
+          default: null
+        providerId:
+          title: Providerid
+          type: string
+          description: Provider ID
+          example: uber_standard_mini_mart
+        providerName:
+          title: Providername
+          type: string
+          description: Provider name
+          example: Nash
+        providerLogo:
+          title: Providerlogo
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider logo
+          default: null
+          example: https://nash.com/logo.png
+        providerIsInternal:
+          title: Providerisinternal
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Is the provider internal
+          default: null
+        createdTime:
+          title: Createdtime
+          type: string
+          description: Created time
+          example: '2021-01-01T00:00:00Z'
+        expireTime:
+          title: Expiretime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Expire time
+          default: null
+          example: '2021-01-01T00:00:00Z'
+        priceCents:
+          title: Pricecents
+          type: integer
+          description: Price in cents
+          example: 1000
+        taxAmountCents:
+          title: Taxamountcents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Tax amount in cents
+          default: null
+          example: 100
+        tollFeeCents:
+          title: Tollfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Toll fee in cents
+          default: null
+          example: 100
+        nashFeeCents:
+          title: Nashfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Nash fee in cents
+          default: null
+          example: 100
+        insuranceFeeCents:
+          title: Insurancefeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Insurance fee in cents
+          default: null
+          example: 100
+        currency:
+          title: Currency
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Currency
+          default: null
+          example: USD
+        pickupWindow:
+          title: Pickupwindow
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup window
+          default: null
+          example: '2021-01-01T00:00:00Z'
+        dropoffEta:
+          title: Dropoffeta
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff ETA
+          default: null
+          example: '2021-01-01T00:00:00Z'
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Tags
+          default: null
+          example:
+          - tag1
+          - tag2
+          - autodispatch_preferred_quote
+        costSplitCustomerCents:
+          title: Costsplitcustomercents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Cost split customer in cents
+          default: null
+          example: 100
+        costSplitBusinessCents:
+          title: Costsplitbusinesscents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Cost split business in cents
+          default: null
+          example: 100
+        totalPriceBreakdown:
+          title: Totalpricebreakdown
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Total price breakdown
+          default: null
+          example:
+            subtotal: 1000
+            tax: 100
+            total: 1100
+        totalPriceCents:
+          title: Totalpricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Total price in cents
+          default: null
+          example: 1000
+        rank:
+          title: Rank
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Quote rank for preferred provider ordering
+          default: null
+          example: 1
+        price:
+          title: Price
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Price
+          default: null
+          example: 1000
+        isSuccessful:
+          title: Issuccessful
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Is successful
+          default: null
+          example: true
+        errorMessage:
+          title: Errormessage
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Error message
+          default: null
+          example: Error message
+      description: Generic serializer for quotes used in many endpoints.
+    UpdateDeliveryWindowInputSerializer:
+      title: UpdateDeliveryWindowInputSerializer
+      required:
+      - id
+      type: object
+      properties:
+        startTime:
+          title: Starttime
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The start time of the delivery window.
+          default: null
+          example: '2024-01-01T10:00:00Z'
+        startTimeLocal:
+          title: Starttimelocal
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The start time of the delivery window in local timezone.
+          default: null
+          example: '2024-01-01T10:00:00'
+        endTime:
+          title: Endtime
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The end time of the delivery window.
+          default: null
+          example: '2024-01-01T12:00:00Z'
+        endTimeLocal:
+          title: Endtimelocal
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The end time of the delivery window in local timezone.
+          default: null
+          example: '2024-01-01T12:00:00'
+        cutoffTime:
+          title: Cutofftime
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The cutoff time of the delivery window.
+          default: null
+          example: '2024-01-01T10:00:00Z'
+        cutoffTimeLocal:
+          title: Cutofftimelocal
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The cutoff time of the delivery window in local timezone.
+          default: null
+          example: '2024-01-01T10:00:00'
+        timezoneId:
+          title: Timezoneid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The timezone id of the delivery window.
+          default: null
+          example: America/New_York
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The name of the delivery window.
+          default: null
+          example: Monday Delivery Window
+        rrule:
+          title: Rrule
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The rrule of the delivery window.
+          default: null
+          example: RRULE:FREQ=WEEKLY;BYDAY=MO
+        exceptionDates:
+          title: Exceptiondates
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The exception dates of the delivery window.
+          default: null
+          example:
+          - '2024-01-01'
+          - '2024-01-02'
+        allowedTags:
+          title: Allowedtags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The allowed tags of the delivery window.
+          default: null
+          example:
+          - service:rapid
+          - service:express
+          - franchise_location
+        leadTimeMinutes:
+          title: Leadtimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The lead time of the delivery window.
+          default: null
+          example: 60
+        priceCents:
+          title: Pricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The price of the delivery window.
+          default: null
+          example: 1000
+        minimumOrderValueCents:
+          title: Minimumordervaluecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The minimum order value of the delivery window.
+          default: null
+          example: 1000
+        maximumCapacity:
+          title: Maximumcapacity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The maximum capacity of the delivery window.
+          default: null
+          example: 1000
+        storeLocationId:
+          title: Storelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The store location id of the delivery window.
+          default: null
+          example: stl_01234567890123456789
+        zoneId:
+          title: Zoneid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zone id of the delivery window.
+          default: null
+          example: zone_01234567890123456789
+        zoneExternalId:
+          title: Zoneexternalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external zone id of the delivery window.
+          default: null
+          example: ext_01234567890123456789
+        windowMetadata:
+          title: Windowmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the delivery window.
+          default: null
+          example:
+            key: value
+        isActive:
+          title: Isactive
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the delivery window is active.
+          default: null
+          example: true
+        isDeleted:
+          title: Isdeleted
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the delivery window is deleted.
+          default: null
+          example: false
+        id:
+          title: Id
+          type: string
+          description: The id of the delivery window.
+          example: dw_01234567890123456789
+      description: Expected payload for updating a delivery window.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    SubItemInput:
+      title: SubItemInput
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The merchant ID of the item
+          default: null
+          example: abc-123
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the item
+          default: null
+          example: A box of books
+        count:
+          title: Count
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the item
+          default: null
+          example: 2
+        dimensions:
+          anyOf:
+          - $ref: '#/components/schemas/Dimensions'
+          - type: 'null'
+          description: The dimensions of the item
+          default: null
+          example:
+            depth: 14
+            height: 10
+            width: 12
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The weight of the item in kilograms (kg)
+          default: null
+          example: 1.5
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The value of the item in cents
+          default: null
+          example: 1000
+        requirements:
+          title: Requirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of requirements for this item
+          default: null
+          example:
+          - age_verification_on_delivery
+        category:
+          title: Category
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The category of the item
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Barcode value for this item.
+          default: null
+          example: 0199312650999998913643M221872801002010908
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value data to attach to this item.
+          default: null
+          example:
+            packaging_type: CTN
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The SKU of the sub-item
+          default: null
+        substitution:
+          anyOf:
+          - $ref: '#/components/schemas/SubstitutionObject'
+          - type: 'null'
+          description: Substitution preferences for the sub-item
+          default: null
+        subItems:
+          title: Subitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubItemInput'
+          - type: 'null'
+          description: The nested sub-items
+          default: null
+      description: Sub-item input object for API requests.
+    SubstituteItemObject:
+      title: SubstituteItemObject
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ID of the substitute item
+          default: null
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The SKU of the substitute item
+          default: null
+        quantity:
+          title: Quantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the substitute item
+          default: null
+    UpdateDeliveryWindowsInputSerializer:
+      title: UpdateDeliveryWindowsInputSerializer
+      required:
+      - deliveryWindows
+      type: object
+      properties:
+        deliveryWindows:
+          title: Deliverywindows
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateDeliveryWindowInputSerializer'
+      description: Expected payload for updating multiple delivery windows.
+    CreateDeliveryWindowsInputSerializer:
+      title: CreateDeliveryWindowsInputSerializer
+      required:
+      - deliveryWindows
+      type: object
+      properties:
+        deliveryWindows:
+          title: Deliverywindows
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateDeliveryWindowInputSerializer'
+      description: Expected payload for creating multiple delivery windows.
+    DocumentType:
+      title: DocumentType
+      enum:
+      - shipping_label
+      - pickup_label
+      - manifest
+      - packing_slip_label
+      - proof_of_delivery
+      type: string
+    Dimensions:
+      title: Dimensions
+      type: object
+      properties:
+        height:
+          title: Height
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The height of the item in centimeters (cm)
+          default: null
+          example: 10
+        width:
+          title: Width
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The width of the item in centimeters (cm)
+          default: null
+          example: 12
+        depth:
+          title: Depth
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The depth of the item in centimeters (cm)
+          default: null
+          example: 14
+    OrderOutputExample:
+      title: OrderOutputExample
+      required:
+      - id
+      - createdAt
+      - portalUrl
+      - publicTrackingUrl
+      - status
+      - tags
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The id of the order
+          example: ord_1234567890
+        createdAt:
+          title: Createdat
+          type: string
+          description: The date and time when the order was created
+          format: date-time
+          example: '2023-08-29T19:17:46.264523'
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external id of the order
+          default: null
+          example: '1234567890'
+        externalGroupId:
+          title: Externalgroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external group id of the order
+          default: null
+          example: '1234567890'
+        referenceId:
+          title: Referenceid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: A non-unique identifier for orders, visible to the courier if supported by the provider.
+          default: null
+          example: '1234567890'
+        portalUrl:
+          title: Portalurl
+          type: string
+          description: The URL of the order in the Nash portal
+          example: https://portal.dev.usenash.com/orders/ord_1234567890
+        publicTrackingUrl:
+          title: Publictrackingurl
+          type: string
+          description: The URL of the order in the public tracking system
+          example: https://tracking.dev.usenash.com/ord_1234567890
+        status:
+          title: Status
+          type: string
+          description: The status of the order
+          example: needs_attention
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The tags of the order
+          example:
+          - REST_API
+        orderMetadata:
+          title: Ordermetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value data to attach to Nash Jobs.
+          default: null
+          example:
+            key: value
+        pickupAddress:
+          title: Pickupaddress
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The pickup address of the order
+          default: null
+          example: 185 University Ave, Palo Alto, CA 94301
+        pickupPlaceId:
+          title: Pickupplaceid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Google place id for the pickup location.
+          default: null
+          example: ChIJd8BlQJq3t4kRUKhH43CQ
+        pickupAddressNumber:
+          title: Pickupaddressnumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number on a house.
+          default: null
+          example: '185'
+        pickupAddressSecondarynumber:
+          title: Pickupaddresssecondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Secondary number on an address e.g. an apartment building.
+          default: null
+        pickupAddressFormattedStreet:
+          title: Pickupaddressformattedstreet
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The street of the address.
+          default: null
+          example: University Ave
+        pickupAddressCity:
+          title: Pickupaddresscity
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The city of the pickup address.
+          default: null
+          example: Palo Alto
+        pickupAddressCounty:
+          title: Pickupaddresscounty
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The county associated with the pickup address.
+          default: null
+          example: Santa Clara
+        pickupAddressState:
+          title: Pickupaddressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the pickup address.
+          default: null
+          example: CA
+        pickupAddressZip:
+          title: Pickupaddresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zip or postal code of the pickup address.
+          default: null
+          example: '94301'
+        pickupAddressCountry:
+          title: Pickupaddresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ISO 3166-1 alpha-2 country code of the pickup address.
+          default: null
+          example: US
+        pickupLat:
+          title: Pickuplat
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The pickup latitude coordinate.
+          default: null
+          example: 37.422222
+        pickupLng:
+          title: Pickuplng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The pickup longitude coordinate.
+          default: null
+          example: -122.139776
+        pickupPhoneNumber:
+          title: Pickupphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The phone number to contact at the pickup location in the form: ''+15555555555'''
+          default: null
+          example: '+15555555555'
+        pickupFirstName:
+          title: Pickupfirstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the person to pickup from. If unknown pass 'Manager'. Limited to 80 characters.
+          default: null
+          example: Manager
+        pickupLastName:
+          title: Pickuplastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the person to pickup from. If unknown pass 'Manager'. Limited to 80 characters.
+          default: null
+          example: Manager
+        pickupBusinessName:
+          title: Pickupbusinessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup business name at the origin.
+          default: null
+          example: Store ABC
+        pickupInstructions:
+          title: Pickupinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Any special instructions for pickup.
+          default: null
+          example: Leave at the front door
+        pickupStoreLocationId:
+          title: Pickupstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: A unique identifier for store location created in Nash.
+          default: null
+          example: stl_VwpoPJaaqWiPGnXEhWfX
+        pickupExternalStoreLocationId:
+          title: Pickupexternalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external identifier used for your store.
+          default: null
+          example: '0021112'
+        pickupZoneIds:
+          title: Pickupzoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: A list of zone IDs to consider for the Order. The pickup store location will be selected later via selected delivery window.
+          default: null
+        pickupBarcodes:
+          title: Pickupbarcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Array containing barcode values that are required to be scanned at the pickup waypoint.
+          default: null
+          example:
+          - '1234567890'
+          - 0987654321
+        pickupPayment:
+          anyOf:
+          - $ref: '#/components/schemas/PickupPayment'
+          - type: 'null'
+          description: How the courier should pay for the order at pickup (e.g. a barcode or provider card).
+          default: null
+          example:
+            barcode:
+              type: CODE128
+              value: '1234567890'
+            providerCard: false
+        dropoffAddress:
+          title: Dropoffaddress
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The dropoff address of the order
+          default: null
+          example: 401 San Antonio Rd, Mountain View, CA 94040
+        dropoffPlaceId:
+          title: Dropoffplaceid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Google place id for the dropoff location.
+          default: null
+          example: ChIJd8BlQJq3t4kRUKhH43CQ
+        dropoffAddressNumber:
+          title: Dropoffaddressnumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number on a house.
+          default: null
+          example: '401'
+        dropoffAddressSecondarynumber:
+          title: Dropoffaddresssecondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Secondary number on an address e.g. an apartment building.
+          default: null
+        dropoffAddressFormattedStreet:
+          title: Dropoffaddressformattedstreet
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The street of the address.
+          default: null
+          example: San Antonio Rd
+        dropoffAddressCity:
+          title: Dropoffaddresscity
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The city of the dropoff address.
+          default: null
+          example: Mountain View
+        dropoffAddressCounty:
+          title: Dropoffaddresscounty
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The county associated with the dropoff address.
+          default: null
+          example: Santa Clara
+        dropoffAddressState:
+          title: Dropoffaddressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the dropoff address.
+          default: null
+          example: CA
+        dropoffAddressZip:
+          title: Dropoffaddresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zip or postal code of the dropoff address.
+          default: null
+          example: '94040'
+        dropoffAddressCountry:
+          title: Dropoffaddresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ISO 3166-1 alpha-2 country code of the dropoff address.
+          default: null
+          example: US
+        dropoffLat:
+          title: Dropofflat
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The dropoff latitude coordinate.
+          default: null
+          example: 37.422222
+        dropoffLng:
+          title: Dropofflng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The dropoff longitude coordinate.
+          default: null
+          example: -122.139776
+        dropoffPhoneNumber:
+          title: Dropoffphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The phone number to contact at the dropoff location in the form: ''+15555555555'''
+          default: null
+          example: '+15555555556'
+        dropoffFirstName:
+          title: Dropofffirstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the contact at the destination.
+          default: null
+          example: Quote
+        dropoffLastName:
+          title: Dropofflastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the contact at the destination.
+          default: null
+          example: Request
+        dropoffBusinessName:
+          title: Dropoffbusinessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff business name at the destination.
+          default: null
+        dropoffInstructions:
+          title: Dropoffinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Any special instructions for dropoff.
+          default: null
+          example: Leave at the front door
+        dropoffStoreLocationId:
+          title: Dropoffstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: A unique identifier for store location created in Nash.
+          default: null
+        dropoffBarcodes:
+          title: Dropoffbarcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Array containing barcode values that are required to be scanned at the dropoff waypoint.
+          default: null
+        deliveryMode:
+          title: Deliverymode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The delivery mode of the order
+          default: null
+          example: scheduled
+        pickupStartTime:
+          title: Pickupstarttime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The start time of the pickup window.
+          default: null
+          example: '2024-08-22T23:54:08Z'
+        pickupEndTime:
+          title: Pickupendtime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The end time of the pickup window.
+          default: null
+          example: '2024-08-22T23:54:08Z'
+        dropoffStartTime:
+          title: Dropoffstarttime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The start time of the dropoff window.
+          default: null
+          example: '2024-08-22T23:54:08Z'
+        dropoffEndTime:
+          title: Dropoffendtime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The end time of the dropoff window.
+          default: null
+          example: '2024-08-22T23:54:08Z'
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the order
+          default: null
+          example: Order description
+        itemsCount:
+          title: Itemscount
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number of items in the order
+          default: null
+          example: '1'
+        requirements:
+          title: Requirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The requirements of the order
+          default: null
+          example:
+          - photo_proof_of_delivery
+        minimumVehicleSize:
+          title: Minimumvehiclesize
+          enum:
+          - any
+          - bike
+          - motorbike
+          - cargobike
+          - sedan
+          - car
+          - suv
+          - pickup_truck
+          - pickup
+          - van
+          - large_van
+          - extra_large_van
+          - truck
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The requested minimum vehicle size. Allowed values: [''any'', ''bike'', ''motorbike'', ''cargobike'', ''sedan'', ''car'', ''suv'', ''pickup_truck'', ''pickup'', ''van'', ''large_van'', ''extra_large_van'', ''truck'']'
+          default: null
+          example: car
+        currency:
+          title: Currency
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The currency of the order
+          default: null
+          example: USD
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The value of the order in cents
+          default: null
+          example: '10000'
+        tipAmountCents:
+          title: Tipamountcents
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The tip amount of the order in cents
+          default: null
+          example: '1000'
+        width:
+          title: Width
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The width of the order in cm
+          default: null
+          example: '100'
+        depth:
+          title: Depth
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The depth of the order in cm
+          default: null
+          example: '100'
+        height:
+          title: Height
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The height of the order in cm
+          default: null
+          example: '100'
+        volume:
+          title: Volume
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The volume of the order in cm^3
+          default: null
+        weight:
+          title: Weight
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The weight of the order in kg
+          default: null
+          example: '100'
+        items:
+          title: Items
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ItemInput'
+          - type: 'null'
+          description: The items of the order
+          default: null
+        dispatchStrategyId:
+          title: Dispatchstrategyid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The dispatch strategy id (or option group id) to be associated with the order. Note: It is the best practice to allow automations to control dispatch strategy and not send the dispatch strategy id in the request.'
+          default: null
+          example: dss_1234567890
+        maxDeliveryFeeCents:
+          title: Maxdeliveryfeecents
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The max delivery fee of the order in cents
+          default: null
+          example: '1000'
+        documents:
+          title: Documents
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/OrderDocumentOutput'
+          - type: 'null'
+          description: The documents of the order
+          default: null
+          example:
+          - contentType: application/pdf
+            data: SGVsbG8gd29ybGQ=
+            id: doc_1234567890
+            type: shipping_label
+            url: https://example.com/document.pdf
+        validationErrors:
+          title: Validationerrors
+          anyOf:
+          - type: object
+            additionalProperties:
+              type: string
+          - type: 'null'
+          description: The validation errors of the order
+          default: null
+          example:
+            pickupStartTime: Time is in the past
+        quotes:
+          title: Quotes
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/QuoteSerializer'
+          - type: 'null'
+          description: The quotes of the order
+          default: null
+          example:
+          - costSplitBusinessCents: null
+            costSplitCustomerCents: null
+            createdTime: '2024-09-03T20:43:45.899094'
+            currency: USD
+            dropoffEta: '2024-09-03T22:20:47.569000'
+            expireTime: '2024-09-03T21:43:45.899102'
+            id: qot_2oWASjGxMtucwGgu6A7BYC
+            insuranceFeeCents: 0
+            nashFeeCents: 300
+            pickupWindow: null
+            priceCents: 100
+            providerId: dispatch_partner
+            providerIsInternal: false
+            providerLogo: https://nash-provider-logos.s3.amazonaws.com/dispatchit-logo.jpg
+            providerName: Dispatch
+            tags: null
+            taxAmountCents: null
+            tollFeeCents: 0
+            totalPriceBreakdown:
+              priceCents: 100
+            totalPriceCents: 100
+            type: LOCAL
+        failedQuotes:
+          title: Failedquotes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The failed quotes of the order
+          default: null
+          example:
+          - quote_1234567890
+          - quote_0987654321
+    EligibleDeliveryWindowsResponse:
+      title: EligibleDeliveryWindowsResponse
+      required:
+      - eligibleDeliveryWindows
+      - ineligibleDeliveryWindows
+      type: object
+      properties:
+        eligibleDeliveryWindows:
+          title: Eligibledeliverywindows
+          type: array
+          items:
+            $ref: '#/components/schemas/EligibleDeliveryWindow'
+        ineligibleDeliveryWindows:
+          title: Ineligibledeliverywindows
+          type: array
+          items:
+            $ref: '#/components/schemas/EligibleDeliveryWindow'
+      description: Response for the eligible delivery windows endpoint.
+    PickupPayment:
+      title: PickupPayment
+      type: object
+      properties:
+        barcode:
+          anyOf:
+          - $ref: '#/components/schemas/PickupPaymentBarcode'
+          - type: 'null'
+          description: Barcode the courier presents at the pickup location to pay for the order.
+          default: null
+        providerCard:
+          title: Providercard
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: If true, the courier pays for the order at pickup using a provider-issued card.
+          default: null
+          example: true
+    OrderDocumentOutput:
+      title: OrderDocumentOutput
+      required:
+      - createdAt
+      - id
+      - type
+      - contentType
+      type: object
+      properties:
+        createdAt:
+          title: Createdat
+          type: string
+          description: The date and time when the document was created
+          format: date-time
+          example: '2023-08-29T19:17:46.264523'
+        id:
+          title: Id
+          type: string
+          description: The id of the document
+          example: doc_1234567890
+        type:
+          $ref: '#/components/schemas/DocumentType'
+          description: The type of the document
+          example: shipping_label
+        contentType:
+          title: Contenttype
+          type: string
+          description: The content type of the document
+          example: application/pdf
+        url:
+          title: Url
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The URL of the document
+          default: null
+          example: https://example.com/document.pdf
+        data:
+          title: Data
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The data of the document
+          default: null
+          example: SGVsbG8gd29ybG=
+      description: Document object returned by the API.
+    DeliveryWindowsOperationInputSerializer:
+      title: DeliveryWindowsOperationInputSerializer
+      required:
+      - ids
+      type: object
+      properties:
+        ids:
+          title: Ids
+          type: array
+          items:
+            type: string
+      description: Expected payload for deleting multiple delivery windows.
+    SubstitutionObject:
+      title: SubstitutionObject
+      type: object
+      properties:
+        preference:
+          title: Preference
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Substitution preference: refund or substitute'
+          default: null
+        source:
+          title: Source
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Source of substitution, e.g., merchant, customer
+          default: null
+        substituteItems:
+          title: Substituteitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubstituteItemObject'
+          - type: 'null'
+          description: List of substitute items
+          default: null
+    BookDeliveryWindowInputSerializer:
+      title: BookDeliveryWindowInputSerializer
+      required:
+      - deliveryWindowId
+      type: object
+      properties:
+        deliveryWindowId:
+          title: Deliverywindowid
+          type: string
+          description: The id of the delivery window
+          example: dw_1234567890
+        requestedCapacity:
+          title: Requestedcapacity
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The requested capacity for the delivery window.
+          default: null
+          example: 10.0
+        expiresAt:
+          title: Expiresat
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: The time at which the booking of a delivery window expires unless confirmed. Useful for allowing customers to reserve a delivery window while they continue to build their carts.
+          default: null
+          example: '2024-10-07T00:00:00Z'
+      description: Expected payload for the book delivery window endpoint.
+    PickupPaymentBarcode:
+      title: PickupPaymentBarcode
+      type: object
+      properties:
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The barcode symbology (e.g. CODE128, QR).
+          default: null
+          example: CODE128
+        value:
+          title: Value
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The barcode value the courier should present at pickup.
+          default: null
+          example: '1234567890'
+    CreateDeliveryWindowInputSerializer:
+      title: CreateDeliveryWindowInputSerializer
+      type: object
+      properties:
+        startTime:
+          title: Starttime
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The start time of the delivery window.
+          default: null
+          example: '2024-01-01T10:00:00Z'
+        startTimeLocal:
+          title: Starttimelocal
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The start time of the delivery window in local timezone.
+          default: null
+          example: '2024-01-01T10:00:00'
+        endTime:
+          title: Endtime
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The end time of the delivery window.
+          default: null
+          example: '2024-01-01T12:00:00Z'
+        endTimeLocal:
+          title: Endtimelocal
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The end time of the delivery window in local timezone.
+          default: null
+          example: '2024-01-01T12:00:00'
+        cutoffTime:
+          title: Cutofftime
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The cutoff time of the delivery window.
+          default: null
+          example: '2024-01-01T10:00:00Z'
+        cutoffTimeLocal:
+          title: Cutofftimelocal
+          anyOf:
+          - pattern: (\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).?(\d)*Z?
+            type: string
+          - type: 'null'
+          description: The cutoff time of the delivery window in local timezone.
+          default: null
+          example: '2024-01-01T10:00:00'
+        timezoneId:
+          title: Timezoneid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The timezone id of the delivery window.
+          default: null
+          example: America/New_York
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The name of the delivery window.
+          default: null
+          example: Monday Delivery Window
+        rrule:
+          title: Rrule
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The rrule of the delivery window.
+          default: null
+          example: RRULE:FREQ=WEEKLY;BYDAY=MO
+        exceptionDates:
+          title: Exceptiondates
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The exception dates of the delivery window.
+          default: null
+          example:
+          - '2024-01-01'
+          - '2024-01-02'
+        allowedTags:
+          title: Allowedtags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The allowed tags of the delivery window.
+          default: null
+          example:
+          - service:rapid
+          - service:express
+          - franchise_location
+        leadTimeMinutes:
+          title: Leadtimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The lead time of the delivery window.
+          default: null
+          example: 60
+        priceCents:
+          title: Pricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The price of the delivery window.
+          default: null
+          example: 1000
+        minimumOrderValueCents:
+          title: Minimumordervaluecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The minimum order value of the delivery window.
+          default: null
+          example: 1000
+        maximumCapacity:
+          title: Maximumcapacity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The maximum capacity of the delivery window.
+          default: null
+          example: 1000
+        storeLocationId:
+          title: Storelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The store location id of the delivery window.
+          default: null
+          example: stl_01234567890123456789
+        zoneId:
+          title: Zoneid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zone id of the delivery window.
+          default: null
+          example: zone_01234567890123456789
+        zoneExternalId:
+          title: Zoneexternalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external zone id of the delivery window.
+          default: null
+          example: ext_01234567890123456789
+        windowMetadata:
+          title: Windowmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the delivery window.
+          default: null
+          example:
+            key: value
+        isActive:
+          title: Isactive
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the delivery window is active.
+          default: null
+          example: true
+        isDeleted:
+          title: Isdeleted
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the delivery window is deleted.
+          default: null
+          example: false
+      description: Expected payload for creating a delivery window.
+    DeliveryWindowOutput:
+      title: DeliveryWindowOutput
+      required:
+      - id
+      - name
+      - startTime
+      - startTimeLocal
+      - endTime
+      - endTimeLocal
+      - timezoneId
+      - cutoffTime
+      - cutoffTimeLocal
+      - rrule
+      - exceptionDates
+      - allowedTags
+      - leadTimeMinutes
+      - priceCents
+      - minimumOrderValueCents
+      - maximumCapacity
+      - storeLocationId
+      - zoneId
+      - zoneExternalId
+      - windowMetadata
+      - isActive
+      - isDeleted
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the delivery window.
+          example: dw_01234567890123456789
+        name:
+          title: Name
+          type: string
+          description: The name of the delivery window.
+          example: Monday Delivery Window
+        startTime:
+          title: Starttime
+          type: string
+          description: The start time of the delivery window.
+          example: '2024-01-01T10:00:00Z'
+        startTimeLocal:
+          title: Starttimelocal
+          type: string
+          description: The start time of the delivery window in local timezone.
+          example: '2024-01-01T10:00:00'
+        endTime:
+          title: Endtime
+          type: string
+          description: The end time of the delivery window.
+          example: '2024-01-01T12:00:00Z'
+        endTimeLocal:
+          title: Endtimelocal
+          type: string
+          description: The end time of the delivery window in local timezone.
+          example: '2024-01-01T12:00:00'
+        timezoneId:
+          title: Timezoneid
+          type: string
+          description: The timezone id of the delivery window.
+          example: America/New_York
+        cutoffTime:
+          title: Cutofftime
+          type: string
+          description: The cutoff time of the delivery window.
+          example: '2024-01-01T10:00:00Z'
+        cutoffTimeLocal:
+          title: Cutofftimelocal
+          type: string
+          description: The cutoff time of the delivery window in local timezone.
+          example: '2024-01-01T10:00:00'
+        rrule:
+          title: Rrule
+          type: string
+          description: The rrule of the delivery window.
+          example: RRULE:FREQ=WEEKLY;BYDAY=MO
+        exceptionDates:
+          title: Exceptiondates
+          type: array
+          items:
+            type: string
+          description: The exception dates of the delivery window.
+          example:
+          - '2024-01-01'
+          - '2024-01-02'
+        allowedTags:
+          title: Allowedtags
+          type: array
+          items:
+            type: string
+          description: The allowed tags of the delivery window.
+          example:
+          - service:rapid
+          - service:express
+          - franchise_location
+        leadTimeMinutes:
+          title: Leadtimeminutes
+          type: integer
+          description: The lead time of the delivery window.
+          example: 60
+        priceCents:
+          title: Pricecents
+          type: integer
+          description: The price of the delivery window.
+          example: 1000
+        minimumOrderValueCents:
+          title: Minimumordervaluecents
+          type: integer
+          description: The minimum order value of the delivery window.
+          example: 1000
+        maximumCapacity:
+          title: Maximumcapacity
+          type: integer
+          description: The maximum capacity of the delivery window.
+          example: 1000
+        storeLocationId:
+          title: Storelocationid
+          type: string
+          description: The store location id of the delivery window.
+          example: stl_01234567890123456789
+        zoneId:
+          title: Zoneid
+          type: string
+          description: The zone id of the delivery window.
+          example: zone_01234567890123456789
+        zoneExternalId:
+          title: Zoneexternalid
+          type: string
+          description: The external zone id of the delivery window.
+          example: ext_01234567890123456789
+        windowMetadata:
+          title: Windowmetadata
+          type: object
+          additionalProperties: true
+          description: The metadata of the delivery window.
+          example:
+            key: value
+        isActive:
+          title: Isactive
+          type: boolean
+          description: Whether the delivery window is active.
+          example: true
+        isDeleted:
+          title: Isdeleted
+          type: boolean
+          description: Whether the delivery window is deleted.
+          example: false
+      description: Response for a delivery window.
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

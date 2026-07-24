@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Provider API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Provider
+  description: Provider
+  x-nash-topic: provider
+paths:
+  /v1/providers:
+    get:
+      tags:
+      - Provider
+      summary: Get providers
+      description: List all delivery providers configured for the organization, including their status and capabilities.
+      operationId: list_org_providers_v1_providers_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOrgProvidersOutputSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    OrgProviderPayload:
+      title: OrgProviderPayload
+      required:
+      - providerId
+      - name
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          type: string
+        name:
+          title: Name
+          type: string
+        logo:
+          title: Logo
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    ListOrgProvidersOutputSerializer:
+      title: ListOrgProvidersOutputSerializer
+      type: array
+      items:
+        $ref: '#/components/schemas/OrgProviderPayload'
+      description: Expected output when listing org providers, it will return an array of this.
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

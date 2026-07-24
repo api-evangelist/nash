@@ -1,0 +1,176 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: AI Functions
+  description: LLM-backed domain tools
+  x-nash-topic: ai
+paths:
+  /v1/ai/detect-dropoff-anomaly:
+    post:
+      tags:
+      - AI Functions
+      summary: Detect dropoff anomalies for a delivery
+      description: Runs the dropoff anomaly detection agent over a delivery's photo + coordinates history.
+      operationId: detect_dropoff_anomaly_v1_ai_detect_dropoff_anomaly_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectDropoffAnomalyInputSerializer'
+        required: true
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/ai/mask-face-in-photo:
+    post:
+      tags:
+      - AI Functions
+      summary: Mask faces in a photo
+      description: Runs the face-masking agent; returns a URL for the masked copy.
+      operationId: mask_face_in_photo_v1_ai_mask_face_in_photo_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaskFaceInPhotoInputSerializer'
+        required: true
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/ai/verify-photo:
+    post:
+      tags:
+      - AI Functions
+      summary: Verify a delivery photo via LLM
+      description: Runs the proof-of-delivery / pickup / signature photo verification agent against the latest matching photo attached to the job.
+      operationId: verify_photo_v1_ai_verify_photo_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyPhotoInputSerializer'
+        required: true
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    PhotoType:
+      title: PhotoType
+      enum:
+      - pod
+      - pickup
+      - signature
+      type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    VerifyPhotoInputSerializer:
+      title: VerifyPhotoInputSerializer
+      required:
+      - jobId
+      - photoType
+      type: object
+      properties:
+        jobId:
+          title: Jobid
+          type: string
+          description: The job to verify a photo for.
+        photoType:
+          $ref: '#/components/schemas/PhotoType'
+          description: Which photo to verify.
+        userQuestion:
+          title: Userquestion
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Optional extra guidance for the LLM (e.g. 'Is the package on the doorstep?').
+          default: null
+    MaskFaceInPhotoInputSerializer:
+      title: MaskFaceInPhotoInputSerializer
+      required:
+      - imageUrl
+      type: object
+      properties:
+        imageUrl:
+          title: Imageurl
+          type: string
+          description: Public URL of the image whose faces should be masked.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    DetectDropoffAnomalyInputSerializer:
+      title: DetectDropoffAnomalyInputSerializer
+      required:
+      - deliveryId
+      type: object
+      properties:
+        deliveryId:
+          title: Deliveryid
+          type: string
+          description: The delivery to analyse for dropoff anomalies.
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

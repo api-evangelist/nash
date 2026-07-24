@@ -1,0 +1,354 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Couriers API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Couriers
+  description: Couriers
+  x-nash-topic: provider
+paths:
+  /v1/courier:
+    post:
+      tags:
+      - Couriers
+      summary: Create a courier
+      description: Register a new courier for the organization's internal fleet with contact and vehicle details.
+      operationId: create_courier_v1_courier_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCourierInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourierResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/couriers:
+    get:
+      tags:
+      - Couriers
+      summary: Get all couriers
+      description: List all couriers registered for the organization's internal fleet.
+      operationId: get_couriers_v1_couriers_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourierResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    CourierResponse:
+      title: CourierResponse
+      required:
+      - id
+      - externalidentifier
+      - firstname
+      - lastname
+      - phonenumber
+      - createdat
+      - firstversioncontractids
+      - vehicleinfo
+      - courierlocation
+      - vehicleids
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the courier.
+        externalidentifier:
+          title: Externalidentifier
+          type: string
+          description: The external identifier of the courier.
+        firstname:
+          title: Firstname
+          type: string
+          description: The first name of the courier.
+        lastname:
+          title: Lastname
+          type: string
+          description: The last name of the courier.
+        phonenumber:
+          title: Phonenumber
+          type: string
+          description: The phone number of the courier.
+        createdat:
+          title: Createdat
+          type: string
+          description: The creation timestamp of the courier.
+        firstversioncontractids:
+          title: Firstversioncontractids
+          type: array
+          items:
+            type: string
+          description: The first version contract IDs of the courier.
+        vehicleinfo:
+          $ref: '#/components/schemas/VehicleInfo'
+          description: The vehicle info of the courier.
+        courierlocation:
+          $ref: '#/components/schemas/VehicleLocation'
+          description: The location of the courier.
+        dateofbirth:
+          title: Dateofbirth
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: The date of birth of the courier.
+          default: null
+        workrelationship:
+          anyOf:
+          - $ref: '#/components/schemas/WorkRelationship'
+          - type: 'null'
+          description: The work relationship type of the courier.
+          default: null
+        driverslicense:
+          title: Driverslicense
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The driver's license number of the courier.
+          default: null
+        vehicleids:
+          title: Vehicleids
+          type: array
+          items:
+            type: string
+          description: The vehicles of the courier.
+      description: Response for courier.
+    CreateCourierInputSerializer:
+      title: CreateCourierInputSerializer
+      required:
+      - firstname
+      - lastname
+      - phonenumber
+      type: object
+      properties:
+        externalidentifier:
+          title: Externalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external identifier of the courier.
+          default: null
+          example: courier_ext_1
+        firstname:
+          title: Firstname
+          type: string
+          description: The first name of the courier.
+          example: John
+        lastname:
+          title: Lastname
+          type: string
+          description: The last name of the courier.
+          example: Doe
+        phonenumber:
+          title: Phonenumber
+          type: string
+          description: The phone number of the courier.
+          example: '+1234567890'
+        vehicleinfo:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleInfo'
+          - type: 'null'
+          description: The vehicle info of the courier.
+          default: null
+          example:
+            color: Red
+            licensePlate: ABC123
+            make: Toyota
+            model: Camry
+            type: car
+            year: '2020'
+        dateofbirth:
+          title: Dateofbirth
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: The date of birth of the courier.
+          default: null
+          example: '1990-01-15'
+        workrelationship:
+          anyOf:
+          - $ref: '#/components/schemas/WorkRelationship'
+          - type: 'null'
+          description: The work relationship type of the courier.
+          default: null
+          example: EMPLOYEE
+        driverslicense:
+          title: Driverslicense
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The driver's license number of the courier.
+          default: null
+          example: DL123456
+        vehicleids:
+          title: Vehicleids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The vehicles of the courier.
+          default: null
+          example:
+          - veh_1
+          - veh_2
+      description: Input for creating a courier.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    VehicleInfo:
+      title: VehicleInfo
+      type: object
+      properties:
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleDisplaySize'
+          - type: 'null'
+          description: The type of the vehicle.
+          default: null
+        make:
+          title: Make
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The make of the vehicle.
+          default: null
+        model:
+          title: Model
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The model of the vehicle.
+          default: null
+        licenseplate:
+          title: Licenseplate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The license plate of the vehicle.
+          default: null
+        color:
+          title: Color
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The color of the vehicle.
+          default: null
+        year:
+          title: Year
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The year of the vehicle.
+          default: null
+      description: Response for vehicle info.
+    WorkRelationship:
+      title: WorkRelationship
+      enum:
+      - EMPLOYEE
+      - CONTRACTOR
+      type: string
+    VehicleLocation:
+      title: VehicleLocation
+      required:
+      - lat
+      - lng
+      type: object
+      properties:
+        lat:
+          title: Lat
+          type: number
+          description: The latitude of the vehicle location.
+        lng:
+          title: Lng
+          type: number
+          description: The longitude of the vehicle location.
+      description: Response for vehicle location.
+    VehicleDisplaySize:
+      title: VehicleDisplaySize
+      enum:
+      - bike
+      - motorbike
+      - cargobike
+      - car
+      - suv
+      - pickup_truck
+      - van
+      - truck
+      - large_van
+      - extra_large_van
+      type: string
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

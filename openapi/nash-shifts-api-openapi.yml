@@ -1,0 +1,668 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Shifts API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Shifts
+  description: Shifts
+  x-nash-topic: provider
+paths:
+  /v1/shift:
+    post:
+      tags:
+      - Shifts
+      summary: Create a shift
+      description: Create a courier shift with start/end times and an assigned store location.
+      operationId: create_shift_v1_shift_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShiftInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShiftResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/shift/{id}:
+    get:
+      tags:
+      - Shifts
+      summary: Get a shift
+      description: Retrieve a single courier shift by ID, including its times, assigned courier, and store location.
+      operationId: get_shift_v1_shift__string_id__get
+      parameters:
+      - name: id
+        in: path
+        description: Shift ID
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: Shift ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShiftResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/shifts:
+    get:
+      tags:
+      - Shifts
+      summary: Get all shifts
+      description: List courier shifts with optional filtering by time range and store location. Filter by start_time, end_time, store_location_id, or external_store_location_id.
+      operationId: get_shifts_v1_shifts_get
+      parameters:
+      - name: startTime
+        in: query
+        description: The start time of the shifts to list.
+        required: true
+        schema:
+          title: Starttime
+          type: string
+          description: The start time of the shifts to list.
+          format: date-time
+          example: '2025-05-01T00:00:00Z'
+        example: '2025-05-01T00:00:00Z'
+      - name: endTime
+        in: query
+        description: The end time of the shifts to list.
+        required: true
+        schema:
+          title: Endtime
+          type: string
+          description: The end time of the shifts to list.
+          format: date-time
+          example: '2025-06-01T00:00:00Z'
+        example: '2025-06-01T00:00:00Z'
+      - name: storeLocationId
+        in: query
+        description: The store location ID to list shifts for.
+        required: false
+        schema:
+          title: Storelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The store location ID to list shifts for.
+          default: null
+      - name: externalStoreLocationId
+        in: query
+        description: The external store location ID to list shifts for.
+        required: false
+        schema:
+          title: Externalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external store location ID to list shifts for.
+          default: null
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShiftResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/shifts/upsert:
+    post:
+      tags:
+      - Shifts
+      summary: Upsert shifts
+      description: Create or update multiple courier shifts in a single request. Existing shifts are matched by ID for updates; new shifts are created.
+      operationId: upsert_shifts_v1_shifts_upsert_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShiftsInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShiftResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    VehicleConfig:
+      title: VehicleConfig
+      type: object
+      properties:
+        weight:
+          title: Weight
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The weight of the vehicle.
+          default: null
+        height:
+          title: Height
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The height of the vehicle.
+          default: null
+        length:
+          title: Length
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The length of the vehicle.
+          default: null
+        width:
+          title: Width
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The width of the vehicle.
+          default: null
+        axlecount:
+          title: Axlecount
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The number of axles on the vehicle.
+          default: null
+        trailercount:
+          title: Trailercount
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The number of trailers on the vehicle.
+          default: null
+        weightunit:
+          title: Weightunit
+          anyOf:
+          - enum:
+            - kg
+            - lbs
+            type: string
+          - type: 'null'
+          description: 'Unit for weight: ''kg'' or ''lbs''. Defaults to ''kg''.'
+          default: null
+        lengthunit:
+          title: Lengthunit
+          anyOf:
+          - enum:
+            - meter
+            - in
+            type: string
+          - type: 'null'
+          description: 'Unit for length, width, and height: ''meter'' or ''in''. Defaults to ''meter''.'
+          default: null
+        maxstops:
+          title: Maxstops
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The max stops of the vehicle.
+          default: null
+        maxdistance:
+          title: Maxdistance
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The max distance of the vehicle.
+          default: null
+        maxduration:
+          title: Maxduration
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The max duration of the vehicle.
+          default: null
+        speedfactor:
+          title: Speedfactor
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The speed factor of the vehicle.
+          default: null
+        capabilities:
+          title: Capabilities
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The capabilities of the vehicle.
+          default: null
+        fixedcost:
+          title: Fixedcost
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Fixed cost to assign this vehicle with tasks.
+          default: null
+        costperunitdistance:
+          title: Costperunitdistance
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Cost per unit distance for this vehicle.
+          default: null
+        costperunittime:
+          title: Costperunittime
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Cost per unit time for this vehicle.
+          default: null
+        vehicleprofile:
+          title: Vehicleprofile
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The vehicle profile type (car, truck, bicycle, flying_distance).
+          default: null
+        minordersperroute:
+          title: Minordersperroute
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Minimum number of orders per route.
+          default: null
+        parkingtime:
+          title: Parkingtime
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Parking time at order locations (in hours).
+          default: null
+      description: Response for vehicle config.
+    BreakConfiguration:
+      title: BreakConfiguration
+      required:
+      - breakDuration
+      type: object
+      properties:
+        timeWindow:
+          title: Timewindow
+          anyOf:
+          - maxItems: 2
+            minItems: 2
+            type: array
+            prefixItems:
+            - type: integer
+            - type: integer
+          - type: 'null'
+          description: The time window of the break. (in minutes)
+          default: null
+          example:
+          - 0
+          - 30
+        breakDuration:
+          title: Breakduration
+          type: integer
+          description: The break duration of the break. (in minutes)
+          example: 30
+        maxWorkingTime:
+          title: Maxworkingtime
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The max working time of the break. (in minutes)
+          default: null
+          example: 30
+      description: Input for creating a break configuration.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    CreateShiftInputSerializer:
+      title: CreateShiftInputSerializer
+      required:
+      - name
+      - plannedStart
+      - plannedEnd
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ID of the shift.
+          default: null
+          example: sft_fKUFVWZQGbEfsyMwJYntE2
+        name:
+          title: Name
+          type: string
+          description: The name of the shift.
+          example: Shift 1
+        plannedStart:
+          title: Plannedstart
+          type: string
+          description: The planned start timestamp of the shift.
+          example: '2021-01-01T00:00:00Z'
+        plannedEnd:
+          title: Plannedend
+          type: string
+          description: The planned end timestamp of the shift.
+          example: '2021-01-01T00:00:00Z'
+        plannedBreakDuration:
+          title: Plannedbreakduration
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The planned break duration of the shift.
+          default: null
+          example: 30
+        shiftMetadata:
+          title: Shiftmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the shift.
+          default: null
+          example:
+            key: value
+        optimizationParams:
+          anyOf:
+          - $ref: '#/components/schemas/OptimizationParams'
+          - type: 'null'
+          description: The optimization parameters of the shift.
+          default: null
+        status:
+          title: Status
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The status of the shift.
+          default: null
+          example: active
+        storeLocationId:
+          title: Storelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The store location ID of the shift.
+          default: null
+          example: '123'
+        externalStoreLocationId:
+          title: Externalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external store location ID of the shift.
+          default: null
+          example: '123'
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone IDs of the shift.
+          default: null
+          example:
+          - '123'
+        externalZoneIds:
+          title: Externalzoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The external zone IDs of the shift.
+          default: null
+          example:
+          - '123'
+      description: Input for creating a shift.
+    OptimizationParams:
+      title: OptimizationParams
+      type: object
+      properties:
+        serviceTimeRelativeEfficiency:
+          title: Servicetimerelativeefficiency
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The service time relative efficiency of the shift.
+          default: null
+          example: 1.0
+        plannedBreaks:
+          title: Plannedbreaks
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/BreakConfiguration'
+          - type: 'null'
+          description: The planned breaks of the shift. (in minutes)
+          default: null
+          example:
+          - end: 30
+            start: 0
+        departureDelay:
+          title: Departuredelay
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The departure delay. (in minutes)
+          default: null
+          example: 15
+        shiftEndServiceTimeMinutes:
+          title: Shiftendservicetimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Buffer between return to depot and shift end (e.g. refueling). (in minutes)
+          default: null
+          example: 10
+        vehicleConfig:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleConfig'
+          - type: 'null'
+          description: The vehicle config of the shift.
+          default: null
+          example:
+            key: value
+      description: Input for creating optimization params.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    CreateShiftsInputSerializer:
+      title: CreateShiftsInputSerializer
+      required:
+      - shifts
+      type: object
+      properties:
+        shifts:
+          title: Shifts
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateShiftInputSerializer'
+      description: Input for creating multiple shifts.
+    ShiftResponse:
+      title: ShiftResponse
+      required:
+      - id
+      - name
+      - plannedStart
+      - plannedEnd
+      - status
+      - createdAt
+      - updatedAt
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the shift.
+        name:
+          title: Name
+          type: string
+          description: The name of the shift.
+        plannedStart:
+          title: Plannedstart
+          type: string
+          description: The planned start timestamp of the shift.
+        plannedEnd:
+          title: Plannedend
+          type: string
+          description: The planned end timestamp of the shift.
+        plannedBreakDuration:
+          title: Plannedbreakduration
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The planned break duration of the shift.
+          default: null
+        shiftMetadata:
+          title: Shiftmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the shift.
+          default: null
+        optimizationParams:
+          anyOf:
+          - $ref: '#/components/schemas/OptimizationParams'
+          - type: 'null'
+          description: The optimization parameters of the shift.
+          default: null
+        status:
+          title: Status
+          type: string
+          description: The status of the shift.
+        storeLocationId:
+          title: Storelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The store location ID of the shift.
+          default: null
+        externalStoreLocationId:
+          title: Externalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external store location ID of the shift.
+          default: null
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone IDs of the shift.
+          default: null
+        externalZoneIds:
+          title: Externalzoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The external zone IDs of the shift.
+          default: null
+        courierId:
+          title: Courierid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The courier ID of the shift.
+          default: null
+        vehicleId:
+          title: Vehicleid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The vehicle ID of the shift.
+          default: null
+        createdAt:
+          title: Createdat
+          type: string
+          description: The creation timestamp of the shift.
+        updatedAt:
+          title: Updatedat
+          type: string
+          description: The update timestamp of the shift.
+      description: Response for shift.
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

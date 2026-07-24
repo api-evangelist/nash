@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Feedback API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Feedback
+  description: Feedback
+  x-nash-topic: reporting
+paths:
+  /v1/feedback/external_identifier/{external_identifier}:
+    post:
+      tags:
+      - Feedback
+      summary: Add Delivery Feedback by External Identifier
+      description: Submit feedback for a completed delivery using your external identifier instead of the Nash delivery ID.
+      operationId: add_delivery_feedback_by_external_id_v1_feedback_external_identifier__string_external_identifier__post
+      parameters:
+      - name: externalIdentifier
+        in: path
+        description: External identifier for the job
+        required: true
+        schema:
+          title: Externalidentifier
+          type: string
+          description: External identifier for the job
+          example: ext_123
+        example: ext_123
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddFeedbackInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackOutputSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/feedback/{delivery_id}:
+    post:
+      tags:
+      - Feedback
+      summary: Add Delivery Feedback
+      description: Submit feedback for a completed delivery, such as a rating or comments about the delivery experience.
+      operationId: add_delivery_feedback_v1_feedback__string_delivery_id__post
+      parameters:
+      - name: deliveryId
+        in: path
+        description: Delivery ID
+        required: true
+        schema:
+          title: Deliveryid
+          type: string
+          description: Delivery ID
+          example: dlv_123
+        example: dlv_123
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddFeedbackInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackOutputSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    AddFeedbackInputSerializer:
+      title: AddFeedbackInputSerializer
+      required:
+      - score
+      type: object
+      properties:
+        score:
+          title: Score
+          type: number
+          description: Feedback score
+        comment:
+          title: Comment
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Feedback comment
+          default: null
+    FeedbackOutputSerializer:
+      title: FeedbackOutputSerializer
+      required:
+      - id
+      - deliveryId
+      - score
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Feedback ID
+        deliveryId:
+          title: Deliveryid
+          type: string
+          description: Delivery ID
+        score:
+          title: Score
+          type: number
+          description: Feedback score
+        comment:
+          title: Comment
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Feedback comment
+          default: null
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

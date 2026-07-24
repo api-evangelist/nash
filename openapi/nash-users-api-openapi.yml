@@ -1,0 +1,519 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Users API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Users
+  description: User, role, and organization-membership management.
+  x-nash-topic: config
+paths:
+  /v1/organization-management/roles:
+    get:
+      tags:
+      - Users
+      summary: List Roles
+      description: List every RBAC role attached to the calling organization.
+      operationId: users_v1_list_roles_route_roles_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/organization-management/roles/{role_id}/users:
+    get:
+      tags:
+      - Users
+      summary: List Users In Role
+      description: List the users that hold ``role_id`` inside the calling organization.
+      operationId: users_v1_list_users_in_role_route_roles__role_id__users_get
+      parameters:
+      - name: role_id
+        in: path
+        description: The Nash role id (``rol_…``).
+        required: true
+        schema:
+          title: Role Id
+          type: string
+          description: The Nash role id (``rol_…``).
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersListResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/organization-management/users:
+    get:
+      tags:
+      - Users
+      summary: List Users
+      description: List every user that has at least one role in the calling organization.
+      operationId: users_v1_list_users_route_users_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersListResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    post:
+      tags:
+      - Users
+      summary: Create User
+      description: Create a brand-new Nash user and grant them the supplied roles inside the calling organization. If a user with the supplied email already exists, use ``POST /users/invite`` instead to attach them to this org.
+      operationId: users_v1_create_user_route_users_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/organization-management/users/invite:
+    post:
+      tags:
+      - Users
+      summary: Invite Existing User Into Org
+      description: Attach an existing Nash user (looked up by email) to the calling organization with the supplied role ids.
+      operationId: users_v1_invite_user_route_users_invite_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInvite'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/organization-management/users/{user_id}/roles:
+    get:
+      tags:
+      - Users
+      summary: List User Roles
+      description: List the roles held by ``user_id`` inside the calling organization.
+      operationId: users_v1_get_user_roles_route_users__user_id__roles_get
+      parameters:
+      - name: user_id
+        in: path
+        description: The Nash user id (``usr_…``).
+        required: true
+        schema:
+          title: User Id
+          type: string
+          description: The Nash user id (``usr_…``).
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    post:
+      tags:
+      - Users
+      summary: Add User Roles
+      description: Add one or more existing role ids to ``user_id`` inside the calling org.
+      operationId: users_v1_add_user_roles_route_users__user_id__roles_post
+      parameters:
+      - name: user_id
+        in: path
+        description: The Nash user id (``usr_…``).
+        required: true
+        schema:
+          title: User Id
+          type: string
+          description: The Nash user id (``usr_…``).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleIds'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MutationResult'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    delete:
+      tags:
+      - Users
+      summary: Remove User Roles
+      description: Remove the supplied role ids from ``user_id`` inside the calling org. Sending the user's full role set effectively revokes their access.
+      operationId: users_v1_remove_user_roles_route_users__user_id__roles_delete
+      parameters:
+      - name: user_id
+        in: path
+        description: The Nash user id (``usr_…``).
+        required: true
+        schema:
+          title: User Id
+          type: string
+          description: The Nash user id (``usr_…``).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleIds'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MutationResult'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    patch:
+      tags:
+      - Users
+      summary: Replace User Roles
+      description: Replace the user's role set inside the calling org with exactly the supplied role ids. Roles in other orgs are unaffected.
+      operationId: users_v1_replace_user_roles_route_users__user_id__roles_patch
+      parameters:
+      - name: user_id
+        in: path
+        description: The Nash user id (``usr_…``).
+        required: true
+        schema:
+          title: User Id
+          type: string
+          description: The Nash user id (``usr_…``).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleIds'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MutationResult'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    UserRead:
+      title: UserRead
+      required:
+      - id
+      - isActive
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        email:
+          title: Email
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        auth0Id:
+          title: Auth0Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        isActive:
+          title: Isactive
+          type: boolean
+        isNashSuperuser:
+          title: Isnashsuperuser
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        isNashOperations:
+          title: Isnashoperations
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        roles:
+          title: Roles
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleRead'
+          default: []
+    MutationResult:
+      title: MutationResult
+      type: object
+      properties:
+        success:
+          title: Success
+          type: boolean
+          default: true
+      description: Standard success response for role mutation endpoints.
+    RoleIds:
+      title: RoleIds
+      required:
+      - roleIds
+      type: object
+      properties:
+        roleIds:
+          title: Roleids
+          type: array
+          items:
+            type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    RolesListResponse:
+      title: RolesListResponse
+      required:
+      - roles
+      type: object
+      properties:
+        roles:
+          title: Roles
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleRead'
+    UserInvite:
+      title: UserInvite
+      required:
+      - email
+      - roleIds
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          format: email
+        roleIds:
+          title: Roleids
+          type: array
+          items:
+            type: string
+    UsersListResponse:
+      title: UsersListResponse
+      required:
+      - users
+      type: object
+      properties:
+        users:
+          title: Users
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRead'
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    UserCreate:
+      title: UserCreate
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          format: email
+        roleIds:
+          title: Roleids
+          type: array
+          items:
+            type: string
+          default: []
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        auth0Id:
+          title: Auth0Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        isNashSuperuser:
+          title: Isnashsuperuser
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        isNashOperations:
+          title: Isnashoperations
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+    RoleRead:
+      title: RoleRead
+      required:
+      - id
+      - name
+      - organizationId
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        organizationId:
+          title: Organizationid
+          type: string
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

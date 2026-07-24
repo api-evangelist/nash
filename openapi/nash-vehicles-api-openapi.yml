@@ -1,0 +1,430 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Vehicles API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Vehicles
+  description: Vehicles
+  x-nash-topic: provider
+paths:
+  /v1/vehicle:
+    post:
+      tags:
+      - Vehicles
+      summary: Create a vehicle
+      description: Register a new vehicle for the organization's internal fleet with type and capacity details.
+      operationId: create_vehicle_v1_vehicle_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVehicleInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/vehicles:
+    get:
+      tags:
+      - Vehicles
+      summary: Get all vehicles
+      description: List all vehicles registered for the organization's internal fleet.
+      operationId: get_vehicles_v1_vehicles_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    VehicleConfig:
+      title: VehicleConfig
+      type: object
+      properties:
+        weight:
+          title: Weight
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The weight of the vehicle.
+          default: null
+        height:
+          title: Height
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The height of the vehicle.
+          default: null
+        length:
+          title: Length
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The length of the vehicle.
+          default: null
+        width:
+          title: Width
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The width of the vehicle.
+          default: null
+        axlecount:
+          title: Axlecount
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The number of axles on the vehicle.
+          default: null
+        trailercount:
+          title: Trailercount
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The number of trailers on the vehicle.
+          default: null
+        weightunit:
+          title: Weightunit
+          anyOf:
+          - enum:
+            - kg
+            - lbs
+            type: string
+          - type: 'null'
+          description: 'Unit for weight: ''kg'' or ''lbs''. Defaults to ''kg''.'
+          default: null
+        lengthunit:
+          title: Lengthunit
+          anyOf:
+          - enum:
+            - meter
+            - in
+            type: string
+          - type: 'null'
+          description: 'Unit for length, width, and height: ''meter'' or ''in''. Defaults to ''meter''.'
+          default: null
+        maxstops:
+          title: Maxstops
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The max stops of the vehicle.
+          default: null
+        maxdistance:
+          title: Maxdistance
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The max distance of the vehicle.
+          default: null
+        maxduration:
+          title: Maxduration
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The max duration of the vehicle.
+          default: null
+        speedfactor:
+          title: Speedfactor
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The speed factor of the vehicle.
+          default: null
+        capabilities:
+          title: Capabilities
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The capabilities of the vehicle.
+          default: null
+        fixedcost:
+          title: Fixedcost
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Fixed cost to assign this vehicle with tasks.
+          default: null
+        costperunitdistance:
+          title: Costperunitdistance
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Cost per unit distance for this vehicle.
+          default: null
+        costperunittime:
+          title: Costperunittime
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Cost per unit time for this vehicle.
+          default: null
+        vehicleprofile:
+          title: Vehicleprofile
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The vehicle profile type (car, truck, bicycle, flying_distance).
+          default: null
+        minordersperroute:
+          title: Minordersperroute
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Minimum number of orders per route.
+          default: null
+        parkingtime:
+          title: Parkingtime
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Parking time at order locations (in hours).
+          default: null
+      description: Response for vehicle config.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    CreateVehicleInputSerializer:
+      title: CreateVehicleInputSerializer
+      required:
+      - name
+      - enabled
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          description: The name of the vehicle.
+          example: Vehicle 1
+        enabled:
+          title: Enabled
+          type: boolean
+          description: Whether the vehicle is enabled.
+          example: true
+        externalidentifier:
+          title: Externalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external identifier of the vehicle.
+          default: null
+          example: vehicle_ext_1
+        vehicleinfo:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleInfo'
+          - type: 'null'
+          description: The vehicle info of the vehicle.
+          default: null
+          example:
+            color: Red
+            licensePlate: ABC123
+            make: Toyota
+            model: Camry
+            type: car
+            year: '2020'
+        vehicleconfig:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleConfig'
+          - type: 'null'
+          description: The vehicle config of the vehicle.
+          default: null
+          example:
+            height: 1000
+            length: 1000
+            maxDistance: 1000
+            maxDuration: 1000
+            maxStops: 1000
+            speedFactor: 1.0
+            weight: 1000
+            width: 1000
+        courierids:
+          title: Courierids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The couriers of the vehicle.
+          default: null
+          example:
+          - cor_1
+          - cor_2
+      description: Input for creating a vehicle.
+    VehicleResponse:
+      title: VehicleResponse
+      required:
+      - id
+      - name
+      - providerid
+      - externalidentifier
+      - enabled
+      - vehicleinfo
+      - vehicleconfig
+      - courierids
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the vehicle.
+        name:
+          title: Name
+          type: string
+          description: The name of the vehicle.
+        providerid:
+          title: Providerid
+          type: string
+          description: The provider ID of the vehicle.
+        externalidentifier:
+          title: Externalidentifier
+          type: string
+          description: The external identifier of the vehicle.
+        enabled:
+          title: Enabled
+          type: boolean
+          description: Whether the vehicle is enabled.
+        vehicleinfo:
+          $ref: '#/components/schemas/VehicleInfo'
+          description: The vehicle info of the vehicle.
+        vehicleconfig:
+          $ref: '#/components/schemas/VehicleConfig'
+          description: The vehicle config of the vehicle.
+        courierids:
+          title: Courierids
+          type: array
+          items:
+            type: string
+          description: The couriers of the vehicle.
+      description: Response for vehicle.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    VehicleInfo:
+      title: VehicleInfo
+      type: object
+      properties:
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleDisplaySize'
+          - type: 'null'
+          description: The type of the vehicle.
+          default: null
+        make:
+          title: Make
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The make of the vehicle.
+          default: null
+        model:
+          title: Model
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The model of the vehicle.
+          default: null
+        licenseplate:
+          title: Licenseplate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The license plate of the vehicle.
+          default: null
+        color:
+          title: Color
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The color of the vehicle.
+          default: null
+        year:
+          title: Year
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The year of the vehicle.
+          default: null
+      description: Response for vehicle info.
+    VehicleDisplaySize:
+      title: VehicleDisplaySize
+      enum:
+      - bike
+      - motorbike
+      - cargobike
+      - car
+      - suv
+      - pickup_truck
+      - van
+      - truck
+      - large_van
+      - extra_large_van
+      type: string
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

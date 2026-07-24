@@ -1,0 +1,283 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Workflow Execution API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Workflow Execution
+  description: Workflow execution history and monitoring
+  x-nash-topic: scheduling
+paths:
+  /v1/workflow-executions/{id}:
+    get:
+      tags:
+      - Workflow Execution
+      summary: Get Workflow Execution Detail
+      description: Returns a single workflow execution with all its execution steps, including step status, node references, and node variables.
+      operationId: get_workflow_execution_v1_workflow_executions__string_id__get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          title: Id
+          type: string
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/workflows/{id}/executions:
+    get:
+      tags:
+      - Workflow Execution
+      summary: List Workflow Executions
+      description: Returns paginated workflow execution history with optional filtering by status, date range, and search. Supports sorting by created_at, completed_at, or status.
+      operationId: list_workflow_executions_v1_workflows__string_id__executions_get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          title: Id
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          title: Limit
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 50
+      - name: offset
+        in: query
+        required: false
+        schema:
+          title: Offset
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 0
+      - name: sortBy
+        in: query
+        required: false
+        schema:
+          title: Sortby
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      - name: sortDirection
+        in: query
+        required: false
+        schema:
+          title: Sortdirection
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      - name: status
+        in: query
+        required: false
+        schema:
+          title: Status
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          title: Startdate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          default: null
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          title: Enddate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          default: null
+      - name: search
+        in: query
+        required: false
+        schema:
+          title: Search
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/workflows/{id}/executions/count:
+    get:
+      tags:
+      - Workflow Execution
+      summary: Count Workflow Executions
+      description: Returns the total count of workflow executions matching the given filters. Useful for pagination or dashboards without fetching full execution data.
+      operationId: count_workflow_executions_v1_workflows__string_id__executions_count_get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          title: Id
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          title: Limit
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 50
+      - name: offset
+        in: query
+        required: false
+        schema:
+          title: Offset
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 0
+      - name: sortBy
+        in: query
+        required: false
+        schema:
+          title: Sortby
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      - name: sortDirection
+        in: query
+        required: false
+        schema:
+          title: Sortdirection
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      - name: status
+        in: query
+        required: false
+        schema:
+          title: Status
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          title: Startdate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          default: null
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          title: Enddate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          default: null
+      - name: search
+        in: query
+        required: false
+        schema:
+          title: Search
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

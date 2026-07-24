@@ -1,0 +1,412 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Route Restrictions API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Route Restrictions
+  description: Org-scoped geographic areas the route optimizer must avoid traversing.
+  x-nash-topic: config
+paths:
+  /v1/optimization-strategies/{id}/route-restrictions:
+    put:
+      tags:
+      - Route Restrictions
+      summary: Set Strategy Route Restrictions
+      description: Bulk-replace the route restrictions attached to ``<id>``. Empty list detaches all restrictions.
+      operationId: route_restrictions_strategy_attach_v1_set_strategy_restrictions_route__id__route_restrictions_put
+      parameters:
+      - name: id
+        in: path
+        description: The OptimizationStrategy id (``ost_…``).
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The OptimizationStrategy id (``ost_…``).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetStrategyRestrictionsRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetStrategyRestrictionsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/route-restrictions:
+    get:
+      tags:
+      - Route Restrictions
+      summary: List Route Restrictions
+      description: List route restrictions in the calling organization's library.
+      operationId: route_restrictions_v1_list_route_restrictions_route_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteRestrictionsListResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    post:
+      tags:
+      - Route Restrictions
+      summary: Create Route Restriction
+      description: Create a new route restriction with one or more avoid polygons.
+      operationId: route_restrictions_v1_create_route_restriction_route_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteRestrictionCreate'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteRestrictionRead'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/route-restrictions/{id}:
+    get:
+      tags:
+      - Route Restrictions
+      summary: Get Route Restriction
+      description: Fetch a single route restriction by id.
+      operationId: route_restrictions_v1_get_route_restriction_route__id__get
+      parameters:
+      - name: id
+        in: path
+        description: The Nash route restriction id (``rrs_…``).
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The Nash route restriction id (``rrs_…``).
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteRestrictionRead'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    delete:
+      tags:
+      - Route Restrictions
+      summary: Delete Route Restriction
+      description: Delete a route restriction along with its CoverageArea and Polygon rows.
+      operationId: route_restrictions_v1_delete_route_restriction_route__id__delete
+      parameters:
+      - name: id
+        in: path
+        description: The Nash route restriction id (``rrs_…``).
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The Nash route restriction id (``rrs_…``).
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRouteRestrictionResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    patch:
+      tags:
+      - Route Restrictions
+      summary: Update Route Restriction
+      description: Partially update a route restriction. Omitted fields are left unchanged.
+      operationId: route_restrictions_v1_update_route_restriction_route__id__patch
+      parameters:
+      - name: id
+        in: path
+        description: The Nash route restriction id (``rrs_…``).
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: The Nash route restriction id (``rrs_…``).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteRestrictionUpdate'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteRestrictionRead'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    DeleteRouteRestrictionResponse:
+      title: DeleteRouteRestrictionResponse
+      type: object
+      properties:
+        success:
+          title: Success
+          type: boolean
+          default: true
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    SetStrategyRestrictionsRequest:
+      title: SetStrategyRestrictionsRequest
+      required:
+      - route_restriction_ids
+      type: object
+      properties:
+        route_restriction_ids:
+          title: Route Restriction Ids
+          type: array
+          items:
+            type: string
+    RouteRestrictionUpdate:
+      title: RouteRestrictionUpdate
+      type: object
+      properties:
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        polygons:
+          title: Polygons
+          anyOf:
+          - type: array
+            items:
+              type: array
+              items:
+                maxItems: 2
+                minItems: 2
+                type: array
+                prefixItems:
+                - type: number
+                - type: number
+          - type: 'null'
+          default: null
+        restriction_metadata:
+          title: Restriction Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    SetStrategyRestrictionsResponse:
+      title: SetStrategyRestrictionsResponse
+      required:
+      - route_restrictions
+      type: object
+      properties:
+        route_restrictions:
+          title: Route Restrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRestrictionRead'
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    RouteRestrictionCreate:
+      title: RouteRestrictionCreate
+      required:
+      - name
+      - polygons
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        polygons:
+          title: Polygons
+          type: array
+          items:
+            type: array
+            items:
+              maxItems: 2
+              minItems: 2
+              type: array
+              prefixItems:
+              - type: number
+              - type: number
+        restriction_metadata:
+          title: Restriction Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    RouteRestrictionsListResponse:
+      title: RouteRestrictionsListResponse
+      required:
+      - route_restrictions
+      type: object
+      properties:
+        route_restrictions:
+          title: Route Restrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRestrictionRead'
+    RouteRestrictionRead:
+      title: RouteRestrictionRead
+      required:
+      - id
+      - organization_id
+      - name
+      - coverage_area_id
+      - polygons
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        organization_id:
+          title: Organization Id
+          type: string
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        coverage_area_id:
+          title: Coverage Area Id
+          type: string
+        polygons:
+          title: Polygons
+          type: array
+          items:
+            type: array
+            items:
+              maxItems: 2
+              minItems: 2
+              type: array
+              prefixItems:
+              - type: number
+              - type: number
+        restriction_metadata:
+          title: Restriction Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        optimization_strategy_ids:
+          title: Optimization Strategy Ids
+          type: array
+          items:
+            type: string
+          default: []
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

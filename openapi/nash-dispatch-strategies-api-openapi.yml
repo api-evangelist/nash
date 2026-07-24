@@ -1,0 +1,744 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Dispatch Strategies API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Dispatch Strategies
+  description: Dispatch Strategies
+  x-nash-topic: scheduling
+paths:
+  /v1/dispatch/evaluate:
+    post:
+      tags:
+      - Dispatch Strategies
+      summary: Evaluate dynamic dispatch
+      description: Evaluate dispatch rules and rank providers without creating a job or order.
+      operationId: evaluate_dispatch_v1_dispatch_evaluate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluateDispatchInput'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluateDispatchOutput'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/options_group:
+    get:
+      tags:
+      - Dispatch Strategies
+      summary: Get dispatch strategies
+      description: List all dispatch strategies (options groups) configured for the organization. Dispatch strategies define provider selection rules, fallback logic, and quoting behavior.
+      operationId: list_options_group_v1_options_group_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOptionsGroupOutputSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    post:
+      tags:
+      - Dispatch Strategies
+      summary: Create dispatch strategy
+      description: Create a new dispatch strategy (options group) with provider selection rules, fallback logic, and quoting configuration.
+      operationId: create_options_group_v1_options_group_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptionsGroupInputMixin'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionsGroupInputMixin'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/options_group/{id}:
+    delete:
+      tags:
+      - Dispatch Strategies
+      summary: Delete dispatch strategy
+      description: Delete a dispatch strategy (options group) by ID. Orders using this strategy will need to be reassigned to another strategy.
+      operationId: delete_options_group_v1_options_group__string_id__delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          title: Id
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionsGroupInputMixin'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+    patch:
+      tags:
+      - Dispatch Strategies
+      summary: Update dispatch strategy
+      description: Update an existing dispatch strategy's provider selection rules, fallback logic, or quoting configuration. Only provided fields are updated.
+      operationId: update_options_group_v1_options_group__string_id__patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          title: Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptionsGroupInputMixin'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionsGroupInputMixin'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    RankedProvider:
+      title: RankedProvider
+      required:
+      - providerId
+      - parentProviderId
+      - providerName
+      - probability
+      - rank
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          type: string
+        parentProviderId:
+          title: Parentproviderid
+          type: string
+        providerName:
+          title: Providername
+          type: string
+        probability:
+          title: Probability
+          type: number
+        rank:
+          title: Rank
+          type: integer
+    OptionsGroupSerializer:
+      title: OptionsGroupSerializer
+      required:
+      - id
+      - label
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Dispatch Strategy ID
+          example: opn_WyMhHj
+        label:
+          title: Label
+          type: string
+          description: Dispatch Strategy Label
+          example: New York City Strategy
+        allowedProviders:
+          title: Allowedproviders
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Allowed providers
+          default: null
+          example:
+          - prv_01234567890
+          - prv_01234567891
+        enableAutoDispatch:
+          title: Enableautodispatch
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Enable auto dispatch
+          default: null
+          example: true
+        providerSelectionStrategy:
+          title: Providerselectionstrategy
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider selection strategy
+          default: null
+          example: cheapest
+        reassignOnFailure:
+          title: Reassignonfailure
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Reassign on failure
+          default: null
+          example: true
+        enableMaxDeliveryFee:
+          title: Enablemaxdeliveryfee
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Enable max delivery fee
+          default: null
+          example: true
+        maxDeliveryFeeCents:
+          title: Maxdeliveryfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Max delivery fee in cents
+          default: null
+          example: 10000
+        costSplitMaxFixedPriceCents:
+          title: Costsplitmaxfixedpricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Cost split max fixed price in cents
+          default: null
+          example: 10000
+        costSplitMaxPercentage:
+          title: Costsplitmaxpercentage
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Cost split max percentage
+          default: null
+          example: 0.1
+        costSplitStrategy:
+          title: Costsplitstrategy
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cost split strategy
+          default: null
+          example: price
+        smartReassignment:
+          title: Smartreassignment
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Smart reassignment
+          default: null
+          example: true
+      description: Generic serializer for options groups used in many endpoints.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    EvaluateDispatchInput:
+      title: EvaluateDispatchInput
+      required:
+      - quotes
+      type: object
+      properties:
+        pickupAddress:
+          title: Pickupaddress
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The full pickup address in one line. Will be geocoded to lat/lng if pickupLat/pickupLng not provided.
+          default: null
+        pickupLat:
+          title: Pickuplat
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The pickup latitude coordinate.
+          default: null
+        pickupLng:
+          title: Pickuplng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The pickup longitude coordinate.
+          default: null
+        pickupAddressCity:
+          title: Pickupaddresscity
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The city of the pickup address.
+          default: null
+        pickupAddressState:
+          title: Pickupaddressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the pickup address.
+          default: null
+        pickupAddressZip:
+          title: Pickupaddresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zip or postal code of the pickup address.
+          default: null
+        pickupAddressCountry:
+          title: Pickupaddresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ISO 3166-1 alpha-2 country code of the pickup address.
+          default: null
+        pickupBusinessName:
+          title: Pickupbusinessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup business name.
+          default: null
+        dropoffAddress:
+          title: Dropoffaddress
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The full dropoff address in one line. Will be geocoded to lat/lng if dropoffLat/dropoffLng not provided.
+          default: null
+        dropoffLat:
+          title: Dropofflat
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The dropoff latitude coordinate.
+          default: null
+        dropoffLng:
+          title: Dropofflng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The dropoff longitude coordinate.
+          default: null
+        dropoffAddressCity:
+          title: Dropoffaddresscity
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The city of the dropoff address.
+          default: null
+        dropoffAddressState:
+          title: Dropoffaddressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the dropoff address.
+          default: null
+        dropoffAddressZip:
+          title: Dropoffaddresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zip or postal code of the dropoff address.
+          default: null
+        dropoffAddressCountry:
+          title: Dropoffaddresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ISO 3166-1 alpha-2 country code of the dropoff address.
+          default: null
+        dropoffBusinessName:
+          title: Dropoffbusinessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff business name.
+          default: null
+        quotes:
+          title: Quotes
+          type: array
+          items:
+            $ref: '#/components/schemas/DispatchQuoteInput'
+        context:
+          anyOf:
+          - $ref: '#/components/schemas/DispatchRuleContextInput'
+          - type: 'null'
+          default: null
+        optionsGroupId:
+          title: Optionsgroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If provided, skip dispatch rule evaluation and use this options group directly.
+          default: null
+    ListOptionsGroupOutputSerializer:
+      title: ListOptionsGroupOutputSerializer
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionsGroupSerializer'
+      description: Expected output for listing options groups.
+    DispatchQuoteInput:
+      title: DispatchQuoteInput
+      required:
+      - providerId
+      - totalPriceCents
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          type: string
+        totalPriceCents:
+          title: Totalpricecents
+          type: integer
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    OptionsGroupInputMixin:
+      title: OptionsGroupInputMixin
+      required:
+      - label
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        label:
+          title: Label
+          maxLength: 80
+          type: string
+        allowedProviders:
+          title: Allowedproviders
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        enableAutoDispatch:
+          title: Enableautodispatch
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        providerSelectionStrategy:
+          title: Providerselectionstrategy
+          enum:
+          - lowest_price
+          - preferred_order
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        reassignOnFailure:
+          title: Reassignonfailure
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        enableMaxDeliveryFee:
+          title: Enablemaxdeliveryfee
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        maxDeliveryFeeCents:
+          title: Maxdeliveryfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        costSplitStrategy:
+          title: Costsplitstrategy
+          enum:
+          - none
+          - price
+          - percentage
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        costSplitMaxPercentage:
+          title: Costsplitmaxpercentage
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        costSplitMaxFixedPriceCents:
+          title: Costsplitmaxfixedpricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        smartReassignment:
+          title: Smartreassignment
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+      description: Common schema for inputting a dispatch strategy.
+    EvaluateDispatchOutput:
+      title: EvaluateDispatchOutput
+      required:
+      - rankedProviders
+      type: object
+      properties:
+        dispatchRule:
+          anyOf:
+          - $ref: '#/components/schemas/DispatchRuleResult'
+          - type: 'null'
+          default: null
+        rankedProviders:
+          title: Rankedproviders
+          type: array
+          items:
+            $ref: '#/components/schemas/RankedProvider'
+        strategy:
+          title: Strategy
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+    DispatchRuleContextInput:
+      title: DispatchRuleContextInput
+      type: object
+      properties:
+        packageValueCents:
+          title: Packagevaluecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        itemsCount:
+          title: Itemscount
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        pickupTime:
+          title: Pickuptime
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        dropoffTime:
+          title: Dropofftime
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        drivingDistance:
+          title: Drivingdistance
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        pickupStoreLocationId:
+          title: Pickupstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        dropoffStoreLocationId:
+          title: Dropoffstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        packageHeight:
+          title: Packageheight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        packageWidth:
+          title: Packagewidth
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        packageDepth:
+          title: Packagedepth
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        packageWeight:
+          title: Packageweight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        totalWeight:
+          title: Totalweight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        packageRequirements:
+          title: Packagerequirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        packageDeliveryMode:
+          title: Packagedeliverymode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        packageTipCents:
+          title: Packagetipcents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        numberOfPackages:
+          title: Numberofpackages
+          type: integer
+          default: 1
+        isBatch:
+          title: Isbatch
+          type: boolean
+          default: false
+    DispatchRuleResult:
+      title: DispatchRuleResult
+      type: object
+      properties:
+        matchedRuleId:
+          title: Matchedruleid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        matchedRuleLabel:
+          title: Matchedrulelabel
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        matchedRuleCondition:
+          title: Matchedrulecondition
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        optionsGroupId:
+          title: Optionsgroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        optionsGroupLabel:
+          title: Optionsgrouplabel
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

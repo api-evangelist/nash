@@ -1,0 +1,1385 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Route API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Route
+  description: Route
+  x-nash-topic: scheduling
+paths:
+  /v1/activities/{id}/dispatch:
+    post:
+      tags:
+      - Route
+      summary: Dispatch Optimized Orders
+      description: Dispatch orders from an optimization activity to delivery providers. Creates jobs and assigns them to providers based on the optimized routes.
+      operationId: dispatch_optimized_orders_v1_activities__string_id__dispatch_post
+      parameters:
+      - name: id
+        in: path
+        description: Activity id
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: Activity id
+          example: act_123
+        example: act_123
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DispatchOptimizationInputSerializer'
+        required: true
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/activities/{id}/save-routes:
+    post:
+      tags:
+      - Route
+      summary: Save Optimization Routes
+      description: Save the optimized routes from an optimization activity. Creates route records with stops and travel metrics based on the optimization results.
+      operationId: routes_v1_save_optimization_routes_activities__string_id__save_routes_post
+      parameters:
+      - name: id
+        in: path
+        description: Activity id
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: Activity id
+          example: act_123
+        example: act_123
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/routes:
+    post:
+      tags:
+      - Route
+      summary: Create or Update Route
+      description: Create a new route or update an existing one. A route defines an optimized sequence of stops with orders assigned to each stop.
+      operationId: routes_v1_upsert_route_routes_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertRouteInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpsertRouteResponseSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/routes/dispatch:
+    post:
+      tags:
+      - Route
+      summary: Dispatch Routes
+      description: Dispatch one or more routes to delivery providers. Creates jobs for each route and assigns them based on the organization's dispatch strategy.
+      operationId: routes_v1_dispatch_routes_routes_dispatch_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DispatchRoutesInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DispatchRoutesOutputSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/routes/external-identifier/{external_id}/assign:
+    post:
+      tags:
+      - Route
+      summary: Assign or Reassign a Route by external id
+      description: Assign a route to a provider, driver group (contract), courier, or vehicle. Driver group / courier / vehicle accept an internal or external id. Pre-dispatch the assignment is updated in place. Post-dispatch the route is reassigned — the active assignment is cancelled, live deliveries are cancelled, tasks are recreated and re-quoted, a fresh route assignment is created, and the requested target is applied. Returns the updated route.
+      operationId: routes_v1_assign_route_by_external_id_routes_external_identifier__external_id__assign_post
+      parameters:
+      - name: externalId
+        in: path
+        description: External identifier of the route
+        required: true
+        schema:
+          title: Externalid
+          type: string
+          description: External identifier of the route
+          example: rte_ext_123
+        example: rte_ext_123
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignRouteInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/routes/{id}:
+    get:
+      tags:
+      - Route
+      summary: Get Route
+      description: Retrieve a route by ID, including its stops, travel metrics, and associated orders.
+      operationId: routes_v1_get_route_routes__string_id__get
+      parameters:
+      - name: id
+        in: path
+        description: Route ID
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: Route ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/routes/{id}/assign:
+    post:
+      tags:
+      - Route
+      summary: Assign or Reassign a Route
+      description: Assign a route to a provider, driver group (contract), courier, or vehicle. Driver group / courier / vehicle accept an internal or external id. Pre-dispatch the assignment is updated in place. Post-dispatch the route is reassigned — the active assignment is cancelled, live deliveries are cancelled, tasks are recreated and re-quoted, a fresh route assignment is created, and the requested target is applied. Returns the updated route.
+      operationId: routes_v1_assign_route_routes__string_id__assign_post
+      parameters:
+      - name: id
+        in: path
+        description: Route ID
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: Route ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignRouteInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/routes/{id}/calculate-timing:
+    post:
+      tags:
+      - Route
+      summary: Calculate Route Timing
+      description: Calculate per-stop ETAs and polyline for a route using HERE truck routing. Updates arrival/departure times for each stop and returns the route polyline.
+      operationId: routes_v1_calculate_route_timing_routes__string_id__calculate_timing_post
+      parameters:
+      - name: id
+        in: path
+        description: Route ID
+        required: true
+        schema:
+          title: Id
+          type: string
+          description: Route ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculateRouteTimingResponseSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    DriverGroupSerializer:
+      title: DriverGroupSerializer
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: Driver group details for a route.
+    VehicleSerializer:
+      title: VehicleSerializer
+      type: object
+      properties:
+        licensePlate:
+          title: Licenseplate
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        make:
+          title: Make
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        model:
+          title: Model
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        color:
+          title: Color
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        year:
+          title: Year
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: Vehicle details for a route.
+    UpsertRouteInputSerializer:
+      title: UpsertRouteInputSerializer
+      type: object
+      properties:
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Route ID. If provided, the route will be updated. If not provided, a new route will be created.
+          default: null
+          example: rte_JphRWDiEosGpXuxwgaYfY3
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the route.
+          default: null
+          example: Route 1
+        stops:
+          title: Stops
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/RouteStopInputSerializer'
+          - type: 'null'
+          description: Complete route stops structure with timing, location, and stop types. Supports all stop types including PICKUP, DROPOFF, ROUTE_START, ROUTE_END, and DRIVER_BREAK.
+          default: null
+          example:
+          - arrival_time: '2025-04-25T08:00:00Z'
+            depart_time: '2025-04-25T08:00:00Z'
+            location:
+              lat: 40.7128
+              lng: -74.006
+            object_ids:
+            - stl_warehouse_123
+            service_time: 0
+            stop_type: ROUTE_START
+          - distance_from_previous: 5000
+            duration_from_previous: 1200
+            location:
+              lat: 40.7589
+              lng: -73.9851
+            object_ids:
+            - ord_123
+            - ord_456
+            service_time: 600
+            stop_type: PICKUP
+          - arrival_time: '2025-04-25T10:00:00Z'
+            depart_time: '2025-04-25T10:30:00Z'
+            object_ids:
+            - break_001
+            service_time: 1800
+            stop_type: DRIVER_BREAK
+          - distance_from_previous: 2000
+            duration_from_previous: 600
+            location:
+              lat: 40.7505
+              lng: -73.9934
+            object_ids:
+            - ord_123
+            service_time: 180
+            stop_type: DROPOFF
+        routeMetadata:
+          title: Routemetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Additional metadata for the route.
+          default: null
+          example:
+            priority: high
+            source: optimization_engine
+        vehicleId:
+          title: Vehicleid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Vehicle ID (or external ID) to assign to this route.
+          default: null
+          example: veh_4hL8pXq2sVn6RtY3wCbD9M
+        courierId:
+          title: Courierid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier/Driver ID (or external ID) to assign to this route.
+          default: null
+          example: cor_9dK2mNp7xVt3RfWzY8sLbQ
+        driverGroupId:
+          title: Drivergroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Driver group/Contract ID (or external ID) to assign to this route. Required when assigning a courier or vehicle.
+          default: null
+          example: cntr_7mP3xVt9Nk8sRfWzY2hLbQ
+        autoDispatch:
+          title: Autodispatch
+          type: boolean
+          description: 'If true, dispatch the route to providers in the same request after upsert. Default: false.'
+          default: false
+      description: Input for creating or updating a route.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    LatLngSerializer:
+      title: LatLngSerializer
+      required:
+      - lat
+      - lng
+      type: object
+      properties:
+        lat:
+          title: Lat
+          type: number
+          description: Latitude coordinate.
+          example: 45.558214
+        lng:
+          title: Lng
+          type: number
+          description: Longitude coordinate.
+          example: -122.587074
+      description: Latitude/longitude coordinates.
+    RouteStopSerializer:
+      title: RouteStopSerializer
+      required:
+      - stopType
+      - objectIds
+      - location
+      type: object
+      properties:
+        stopType:
+          title: Stoptype
+          type: string
+          description: Type of the stop.
+          example: PICKUP
+        objectIds:
+          title: Objectids
+          type: array
+          items:
+            type: string
+          description: List of object IDs (e.g., order IDs, store location IDs) associated with this stop.
+          example:
+          - ord_Qr5bVt8WiByGh66z2g7xEu
+          - ord_WJFuooSiRvFCaceGZjpbqs
+        arrivalTime:
+          title: Arrivaltime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Estimated arrival time at the stop (UTC).
+          default: null
+          example: '2025-04-25T03:27:00'
+        departTime:
+          title: Departtime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Estimated departure time from the stop (UTC).
+          default: null
+          example: '2025-04-25T03:30:00'
+        plannedArrivalTime:
+          title: Plannedarrivaltime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Snapshot of arrival_time captured pre-dispatch (UTC). Mirrors arrival_time while the route is undispatched, then freezes at dispatch — gives consumers the planned ETA at dispatch even after real-time tracking updates arrival_time.
+          default: null
+          example: '2025-04-25T03:27:00'
+        serviceTime:
+          title: Servicetime
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Estimated service time spent at the stop (in seconds).
+          default: null
+          example: 360.0
+        distanceFromPrevious:
+          title: Distancefromprevious
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Distance traveled from the previous stop (in meters).
+          default: null
+          example: 3376.0
+        durationFromPrevious:
+          title: Durationfromprevious
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Travel duration from the previous stop (in seconds).
+          default: null
+          example: 420.0
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LatLngSerializer'
+          - type: 'null'
+          description: Geographic location of the stop. Can be null for non-location based stops like breaks.
+        status:
+          title: Status
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Current status of the stop.
+          default: null
+          example: PENDING
+        statusDescription:
+          title: Statusdescription
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Detailed description of the current status of the stop.
+          default: null
+          example: leave_unattended
+        statusHistory:
+          title: Statushistory
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties:
+                anyOf:
+                - type: string
+                - type: 'null'
+          - type: 'null'
+          description: History of status changes for the stop.
+          default: null
+          example:
+          - created_at: '2025-04-25T03:00:00Z'
+            status: PENDING
+          - created_at: '2025-04-25T03:15:00Z'
+            status: ENROUTE
+          - created_at: '2025-04-25T03:20:00Z'
+            status: COMPLETED
+            status_description: leave_unattended
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Additional metadata for this stop.
+          default: null
+        startedAt:
+          title: Startedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the stop entered IN_PROGRESS status (UTC).
+          default: null
+          example: '2025-04-25T03:27:00Z'
+        breakDuration:
+          title: Breakduration
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Duration in seconds of the break at this stop (for DRIVER_BREAK stops).
+          default: null
+        orders:
+          title: Orders
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/StopOrderSerializer'
+          - type: 'null'
+          description: Orders associated with this stop, including tracking URLs and delivery details.
+          default: null
+      description: Represents a single stop within a planned route.
+    DispatchOptimizationInputSerializer:
+      title: DispatchOptimizationInputSerializer
+      type: object
+      properties:
+        orderIds:
+          title: Orderids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Order IDs to dispatch. If omitted, all orders from the optimization are dispatched.
+          default: null
+        autoDispatch:
+          title: Autodispatch
+          type: boolean
+          description: 'Automatically dispatch to provider (default: true)'
+          default: true
+      description: Input for dispatching optimized orders.
+    CourierSerializer:
+      title: CourierSerializer
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: Courier details for a route.
+    CalculateRouteTimingResponseSerializer:
+      title: CalculateRouteTimingResponseSerializer
+      required:
+      - route
+      type: object
+      properties:
+        route:
+          $ref: '#/components/schemas/RouteSerializer'
+          description: The route with updated per-stop ETAs and timing.
+        mappedRoutesPolyline:
+          title: Mappedroutespolyline
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: Polyline data in the same format as optimization activity results.
+          default: null
+      description: Response for route timing calculation.
+    UpsertRouteResponseSerializer:
+      title: UpsertRouteResponseSerializer
+      required:
+      - route
+      type: object
+      properties:
+        route:
+          $ref: '#/components/schemas/RouteSerializer'
+          description: The created or updated route.
+      description: Response for route upsert operation.
+    StopOrderSerializer:
+      title: StopOrderSerializer
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Order ID.
+          example: ord_Qr5bVt8WiByGh66z2g7xEu
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: External identifier for the order.
+          default: null
+        publicTrackingUrl:
+          title: Publictrackingurl
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Public tracking URL for the order.
+          default: null
+        pod:
+          title: Pod
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ProofOfDeliverySerializer'
+          - type: 'null'
+          description: Proof of delivery data (photos, signature, etc.) if captured.
+          default: null
+        orderItems:
+          title: Orderitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/OrderItemSerializer'
+          - type: 'null'
+          description: Items with lifecycle status tracking (picked, delivered, failed, etc.).
+          default: null
+      description: Order information associated with a route stop.
+    ItemStatusHistoryEntrySerializer:
+      title: ItemStatusHistoryEntrySerializer
+      required:
+      - status
+      - createdAt
+      type: object
+      properties:
+        status:
+          title: Status
+          type: string
+          description: Item status at this point in time
+          example: picked
+        createdAt:
+          title: Createdat
+          type: string
+          description: Timestamp of the status change
+          example: '2025-04-25T03:20:00'
+      description: A single status change entry in an item's status history.
+    OrderItemSerializer:
+      title: OrderItemSerializer
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The merchant ID of the item
+          default: null
+          example: item-001
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the item
+          default: null
+        count:
+          title: Count
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the item
+          default: null
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The value of the item in cents
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Barcode associated with the item
+          default: null
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: SKU of the item
+          default: null
+        category:
+          title: Category
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The category of the item
+          default: null
+        status:
+          title: Status
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Current lifecycle status of the item.
+          default: null
+          example: delivered
+        availableQuantity:
+          title: Availablequantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Quantity available after pickup (may differ from count)
+          default: null
+        statusMetadata:
+          anyOf:
+          - $ref: '#/components/schemas/ItemStatusMetadataSerializer'
+          - type: 'null'
+          description: Operational metadata tracked during the item's lifecycle.
+          default: null
+        statusHistory:
+          title: Statushistory
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ItemStatusHistoryEntrySerializer'
+          - type: 'null'
+          description: History of status changes for this item.
+          default: null
+        subItems:
+          title: Subitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/OrderItemSerializer'
+          - type: 'null'
+          description: Nested sub-items with their own status tracking.
+          default: null
+      description: 'Item with status tracking for route stop webhook payloads.
+
+
+        Combines item definition with lifecycle status from the route state machine.'
+    RouteStopInputSerializer:
+      title: RouteStopInputSerializer
+      required:
+      - stopType
+      - objectIds
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Stable id for this stop. If provided, it is preserved across upserts; if omitted, it is carried forward by matching stop_type + object_ids against the route's current stops, or a new one is minted.
+          default: null
+          example: stp_Qr5bVt8WiByGh66z2g7xEu
+        stopType:
+          title: Stoptype
+          type: string
+          description: Type of the stop.
+          example: PICKUP
+        objectIds:
+          title: Objectids
+          type: array
+          items:
+            type: string
+          description: List of object IDs (e.g., order IDs, store location IDs, break IDs) associated with this stop.
+          example:
+          - ord_Qr5bVt8WiByGh66z2g7xEu
+        serviceTime:
+          title: Servicetime
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Service time at the stop in seconds.
+          default: null
+          example: 300
+        distanceFromPrevious:
+          title: Distancefromprevious
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Distance from the previous stop in meters.
+          default: null
+          example: 1500
+        durationFromPrevious:
+          title: Durationfromprevious
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Travel duration from the previous stop in seconds.
+          default: null
+          example: 420
+        arrivalTime:
+          title: Arrivaltime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Planned arrival time at the stop (UTC).
+          default: null
+          example: '2025-04-25T03:27:00Z'
+        departTime:
+          title: Departtime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Planned departure time from the stop (UTC).
+          default: null
+          example: '2025-04-25T03:30:00Z'
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LatLngSerializer'
+          - type: 'null'
+          description: Geographic location of the stop. Required for most stop types except breaks.
+          default: null
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Additional metadata for this stop.
+          default: null
+          example:
+            priority: high
+      description: Input for a single route stop.
+    DispatchRoutesOutputSerializer:
+      title: DispatchRoutesOutputSerializer
+      required:
+      - jobs
+      type: object
+      properties:
+        jobs:
+          title: Jobs
+          type: array
+          items:
+            $ref: '#/components/schemas/DispatchedJobSerializer'
+          description: Jobs created from the dispatched routes.
+      description: Response payload for dispatching routes.
+    ItemStatusMetadataSerializer:
+      title: ItemStatusMetadataSerializer
+      type: object
+      properties:
+        pickedAt:
+          title: Pickedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the item was picked up
+          default: null
+        deliveredAt:
+          title: Deliveredat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the item was delivered
+          default: null
+        failedAt:
+          title: Failedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the item delivery failed
+          default: null
+        returnedAt:
+          title: Returnedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the item was returned
+          default: null
+        failureReason:
+          title: Failurereason
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Reason for delivery failure
+          default: null
+        failureLocation:
+          title: Failurelocation
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Where the failure occurred: ''pickup'' or ''dropoff'''
+          default: null
+          example: dropoff
+      description: Operational metadata tracked during item lifecycle in route delivery.
+    RouteSerializer:
+      title: RouteSerializer
+      required:
+      - id
+      - portalUrl
+      - type
+      - stops
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Unique identifier for the route.
+          example: rte_JphRWDiEosGpXuxwgaYfY3
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: External Route ID.
+          default: null
+          example: rte_JphRWDiEosGpXuxwgaYfY3
+        portalUrl:
+          title: Portalurl
+          type: string
+          description: Portal URL of the route.
+          example: https://portal.usenash.com/routes/rte_JphRWDiEosGpXuxwgaYfY3
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the route.
+          default: null
+          example: Route 1
+        type:
+          title: Type
+          type: string
+          description: Type of the route, indicating the pickup/dropoff structure.
+          example: SINGLE_PICKUP_MULTIPLE_DROPOFFS
+        courierId:
+          title: Courierid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier ID of the driver assigned to the route.
+          default: null
+          example: cor_9dK2mNp7xVt3RfWzY8sLbQ
+        vehicleId:
+          title: Vehicleid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Vehicle ID of the vehicle assigned to the route.
+          default: null
+          example: veh_4hL8pXq2sVn6RtY3wCbD9M
+        courier:
+          anyOf:
+          - $ref: '#/components/schemas/CourierSerializer'
+          - type: 'null'
+          description: Courier/driver details for the route.
+          default: null
+        driverGroup:
+          anyOf:
+          - $ref: '#/components/schemas/DriverGroupSerializer'
+          - type: 'null'
+          description: Driver group assigned to the route.
+          default: null
+        courierPosition:
+          anyOf:
+          - $ref: '#/components/schemas/CourierPositionSerializer'
+          - type: 'null'
+          description: Current GPS position of the assigned courier.
+          default: null
+        vehicle:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleSerializer'
+          - type: 'null'
+          description: Vehicle details for the route.
+          default: null
+        providerName:
+          title: Providername
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the delivery provider assigned to this route.
+          default: null
+        shiftId:
+          title: Shiftid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Shift ID of the shift assigned to the route.
+          default: null
+          example: shf_1234567890abcdef12345678
+        stops:
+          title: Stops
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteStopSerializer'
+          description: Ordered list of stops included in the route.
+        isDispatched:
+          title: Isdispatched
+          type: boolean
+          description: Whether the route is dispatched.
+          default: false
+        jobId:
+          title: Jobid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dispatched Job ID of this route
+          default: null
+          example: job_1234567890abcdef12345678
+        routeMetadata:
+          title: Routemetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Additional metadata for the route.
+          default: null
+          example:
+            priority: high
+            source: optimization_engine
+        validationErrors:
+          title: Validationerrors
+          anyOf:
+          - type: object
+            additionalProperties:
+              type: string
+          - type: 'null'
+          description: Validation errors for the route.
+          default: null
+          example:
+            order_123: Order 123 has pickup but no dropoff
+        encodedPolyline:
+          title: Encodedpolyline
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Encoded polyline representing the route geometry.
+          default: null
+        status:
+          title: Status
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Current status of the route.
+          default: null
+          example: CREATED
+        statusHistory:
+          title: Statushistory
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+          - type: 'null'
+          description: History of status changes for the route.
+          default: null
+          example:
+          - created_at: '2025-04-25T03:00:00Z'
+            status: CREATED
+          - created_at: '2025-04-25T03:10:00Z'
+            status: ASSIGNED
+          - created_at: '2025-04-25T03:15:00Z'
+            status: STARTED
+      description: Represents a planned sequence of stops for a delivery or batch.
+    CourierPositionSerializer:
+      title: CourierPositionSerializer
+      required:
+      - lat
+      - lng
+      type: object
+      properties:
+        lat:
+          title: Lat
+          type: number
+          description: Latitude coordinate.
+        lng:
+          title: Lng
+          type: number
+          description: Longitude coordinate.
+        updatedAt:
+          title: Updatedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the position was last updated on the server.
+          default: null
+        capturedAt:
+          title: Capturedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the GPS position was captured on driver's device.
+          default: null
+        accuracy:
+          title: Accuracy
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Estimated horizontal accuracy radius in meters.
+          default: null
+        heading:
+          title: Heading
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Heading in degrees relative to true north.
+          default: null
+        speed:
+          title: Speed
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Speed in meters per second.
+          default: null
+        altitude:
+          title: Altitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Altitude in meters above sea level.
+          default: null
+        altitudeAccuracy:
+          title: Altitudeaccuracy
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Estimated altitude accuracy in meters.
+          default: null
+        batteryLevel:
+          title: Batterylevel
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Battery level from 0.0 to 1.0, if provided by device.
+          default: null
+        batteryIsCharging:
+          title: Batteryischarging
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the device is currently charging.
+          default: null
+        isMoving:
+          title: Ismoving
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the device is currently detected as moving.
+          default: null
+      description: Current GPS position of a courier.
+    ProofOfDeliverySerializer:
+      title: ProofOfDeliverySerializer
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          title: Type
+          type: string
+          description: Type of proof of delivery, e.g., 'photo', 'signature', etc.
+        url:
+          title: Url
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: URL of the proof of delivery document.
+          default: null
+        uploadedAt:
+          title: Uploadedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the proof of delivery was uploaded.
+          default: null
+      description: Delivery tracking details for an order at a route stop.
+    AssignRouteInputSerializer:
+      title: AssignRouteInputSerializer
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider id to assign. Selects the route's successful quote for this provider.
+          default: null
+          example: uber
+        driverGroupId:
+          title: Drivergroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Driver group/Contract id (internal or external) to assign. Selects the route's successful quote for this contract.
+          default: null
+          example: cntr_7mP3xVt9Nk8sRfWzY2hLbQ
+        courierId:
+          title: Courierid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier/Driver id (internal or external) to assign to the route. The courier must belong to the route's driver group.
+          default: null
+          example: cor_9dK2mNp7xVt3RfWzY8sLbQ
+        vehicleId:
+          title: Vehicleid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Vehicle id (internal or external) to assign to the route. The vehicle must be assigned to the route's driver group (contract).
+          default: null
+          example: veh_4hL8pXq2sVn6RtY3wCbD9M
+      description: 'Input for assigning or reassigning a route.
+
+
+        Provide a provider, a driver group (contract), a courier, and/or a vehicle;
+
+        driver group / courier / vehicle ids may be internal or external. Pre-dispatch the assignment
+
+        is updated in place; post-dispatch the route is reassigned (cancel live deliveries, recreate
+
+        tasks, re-quote) and the new target applied.'
+    DispatchRoutesInputSerializer:
+      title: DispatchRoutesInputSerializer
+      required:
+      - routeIds
+      type: object
+      properties:
+        routeIds:
+          title: Routeids
+          type: array
+          items:
+            type: string
+          description: Route IDs (internal or external) to dispatch
+        autoDispatch:
+          title: Autodispatch
+          type: boolean
+          description: 'Automatically dispatch to provider (default: true)'
+          default: true
+      description: Input for dispatching routes to jobs.
+    DispatchedJobSerializer:
+      title: DispatchedJobSerializer
+      required:
+      - id
+      - portalUrl
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The job id.
+        portalUrl:
+          title: Portalurl
+          type: string
+          description: URL to view the job in the portal.
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

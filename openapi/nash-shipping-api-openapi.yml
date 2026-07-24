@@ -1,0 +1,1313 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Shipping API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Shipping
+  description: Shipping operations
+  x-nash-topic: shipping
+paths:
+  /v1/dispatch-and-manifest:
+    post:
+      tags:
+      - Shipping
+      summary: Dispatch and Manifest Orders
+      description: Create, autodispatch, and manifest shipping orders in a single request. Each order is created, autodispatched using the org's dispatch strategy, then manifested with the provider it landed on. Per-order failures are returned in `errors` instead of aborting the batch. `shippingDetails` on an order, if provided, is folded into `orderMetadata.shipping_details` before create so providers can consume it during manifest.
+      operationId: dispatch_and_manifest_v1_dispatch_and_manifest_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DispatchAndManifestInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DispatchAndManifestResponseSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/manifest:
+    post:
+      tags:
+      - Shipping
+      summary: Manifest Orders
+      description: Create manifests for dispatched shipping orders. Groups orders by store location and provider, then generates manifest documents (e.g. AusPost order summaries).
+      operationId: create_manifest_v1_manifest_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManifestOrdersInputSerializer'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestOrdersResponseSerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    DispatchAndManifestInputSerializer:
+      title: DispatchAndManifestInputSerializer
+      required:
+      - orders
+      type: object
+      properties:
+        orders:
+          title: Orders
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestOrderInput'
+          description: Orders to create, dispatch, and manifest.
+      description: Create, dispatch, and manifest orders in a single request.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    ManifestOrdersResponseSerializer:
+      title: ManifestOrdersResponseSerializer
+      required:
+      - manifests
+      type: object
+      properties:
+        manifests:
+          title: Manifests
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestResultSerializer'
+          description: List of manifest results grouped by provider and store location.
+    ItemInput:
+      title: ItemInput
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The merchant ID of the item
+          default: null
+          example: abc-123
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the item
+          default: null
+          example: A box of books
+        count:
+          title: Count
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the item
+          default: null
+          example: 2
+        dimensions:
+          anyOf:
+          - $ref: '#/components/schemas/Dimensions'
+          - type: 'null'
+          description: The dimensions of the item
+          default: null
+          example:
+            depth: 14
+            height: 10
+            width: 12
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The weight of the item in kilograms (kg)
+          default: null
+          example: 1.5
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The value of the item in cents
+          default: null
+          example: 1000
+        requirements:
+          title: Requirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of requirements for this item
+          default: null
+          example:
+          - age_verification_on_delivery
+        category:
+          title: Category
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The category of the item
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Barcode value for this item.
+          default: null
+          example: 0199312650999998913643M221872801002010908
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value data to attach to this item.
+          default: null
+          example:
+            packaging_type: CTN
+        subItems:
+          title: Subitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubItemInput'
+          - type: 'null'
+          description: The nested sub-items
+          default: null
+      description: Item input object for API requests.
+    ShippingDetails:
+      title: ShippingDetails
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider that will fulfil this order's shipment.
+          default: null
+        providerConsignmentId:
+          title: Providerconsignmentid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider consignment ID for this order's shipment.
+          default: null
+        providerExternalId:
+          title: Providerexternalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider-assigned tracking/identifier for this order (formerly tracking_number).
+          default: null
+        speed:
+          title: Speed
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Delivery speed for this order (e.g. 'STANDARD', 'EXPRESS', 'same_day').
+          default: null
+          example: STANDARD
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Shipment type for this order (provider-specific, e.g. 'NEUTRAL').
+          default: null
+          example: NEUTRAL
+        movementType:
+          title: Movementtype
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider movement type for this shipment (e.g. 'DESPATCH').
+          default: null
+          example: DESPATCH
+        chargeAccountId:
+          title: Chargeaccountid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Charge account to bill this shipment against.
+          default: null
+        sortCode:
+          title: Sortcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Identifier for the warehouse load/run this shipment belongs to (e.g. Pet Circle WMS sort code).
+          default: null
+          example: PCLOAD-01
+      description: Per-order shipping attributes applied when manifesting.
+    PackageRequirements:
+      title: PackageRequirements
+      enum:
+      - photo_proof_of_delivery
+      - signature_proof_of_delivery
+      - photo_proof_of_pickup
+      - photo_reference_on_dropoff
+      - photo_reference_capture_on_dropoff
+      - signature_proof_of_pickup
+      - photo_pre_delivery_verification
+      - age_verification_on_delivery
+      - id_verification_on_delivery
+      - barcode_scan_on_pickup
+      - barcode_scan_on_dropoff
+      - barcode_scan_on_return
+      - meet_on_delivery
+      - shipping_label
+      - two_person_team
+      - pincode_verification
+      - schedule_ii_controlled_substances
+      - alcohol
+      - tobacco
+      - vapes
+      - parking_check_in
+      - display_barcode_on_pickup
+      - pick_and_pack
+      type: string
+      description: 'Detailed description: https://docs.usenash.com/reference/package-requirements.'
+    ManifestOrderErrorSerializer:
+      title: ManifestOrderErrorSerializer
+      required:
+      - stage
+      - message
+      type: object
+      properties:
+        identifier:
+          title: Identifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Caller-supplied identifier (external_id, or positional like orders[2]).
+          default: null
+        orderId:
+          title: Orderid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Nash order ID, present once the order has been created.
+          default: null
+        stage:
+          title: Stage
+          type: string
+          description: 'Stage at which the failure occurred: ''create'', ''dispatch'', ''validate'', ''manifest''.'
+        message:
+          title: Message
+          type: string
+          description: Human-readable failure message.
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Opaque debug blob with provider-level context when available (e.g. provider_status_code, provider_message, provider_response_body). Keys inside this object are not subject to the camelCase contract — treat as free-form.
+          default: null
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    SubItemInput:
+      title: SubItemInput
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The merchant ID of the item
+          default: null
+          example: abc-123
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the item
+          default: null
+          example: A box of books
+        count:
+          title: Count
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the item
+          default: null
+          example: 2
+        dimensions:
+          anyOf:
+          - $ref: '#/components/schemas/Dimensions'
+          - type: 'null'
+          description: The dimensions of the item
+          default: null
+          example:
+            depth: 14
+            height: 10
+            width: 12
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The weight of the item in kilograms (kg)
+          default: null
+          example: 1.5
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The value of the item in cents
+          default: null
+          example: 1000
+        requirements:
+          title: Requirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of requirements for this item
+          default: null
+          example:
+          - age_verification_on_delivery
+        category:
+          title: Category
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The category of the item
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Barcode value for this item.
+          default: null
+          example: 0199312650999998913643M221872801002010908
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value data to attach to this item.
+          default: null
+          example:
+            packaging_type: CTN
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The SKU of the sub-item
+          default: null
+        substitution:
+          anyOf:
+          - $ref: '#/components/schemas/SubstitutionObject'
+          - type: 'null'
+          description: Substitution preferences for the sub-item
+          default: null
+        subItems:
+          title: Subitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubItemInput'
+          - type: 'null'
+          description: The nested sub-items
+          default: null
+      description: Sub-item input object for API requests.
+    SubstituteItemObject:
+      title: SubstituteItemObject
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ID of the substitute item
+          default: null
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The SKU of the substitute item
+          default: null
+        quantity:
+          title: Quantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the substitute item
+          default: null
+    ManifestDocumentSerializer:
+      title: ManifestDocumentSerializer
+      required:
+      - id
+      - url
+      - contentType
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Document ID.
+        url:
+          title: Url
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: URL to download the manifest PDF.
+        contentType:
+          title: Contenttype
+          type: string
+          description: MIME type of the document.
+    DispatchAndManifestResponseSerializer:
+      title: DispatchAndManifestResponseSerializer
+      required:
+      - manifests
+      type: object
+      properties:
+        manifests:
+          title: Manifests
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestResultSerializer'
+          description: Manifest results for orders that successfully created, dispatched, and manifested.
+        errors:
+          title: Errors
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestOrderErrorSerializer'
+          description: Per-order failures encountered during create, dispatch, validate, or manifest.
+    Dimensions:
+      title: Dimensions
+      type: object
+      properties:
+        height:
+          title: Height
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The height of the item in centimeters (cm)
+          default: null
+          example: 10
+        width:
+          title: Width
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The width of the item in centimeters (cm)
+          default: null
+          example: 12
+        depth:
+          title: Depth
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The depth of the item in centimeters (cm)
+          default: null
+          example: 14
+    PickupPayment:
+      title: PickupPayment
+      type: object
+      properties:
+        barcode:
+          anyOf:
+          - $ref: '#/components/schemas/PickupPaymentBarcode'
+          - type: 'null'
+          description: Barcode the courier presents at the pickup location to pay for the order.
+          default: null
+        providerCard:
+          title: Providercard
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: If true, the courier pays for the order at pickup using a provider-issued card.
+          default: null
+          example: true
+    ManifestOrderInput:
+      title: ManifestOrderInput
+      type: object
+      properties:
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Order unique identifier from an external system.
+          default: null
+        pickupAddress:
+          title: Pickupaddress
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The full address in one line for the pickup location. Format: [Number] [Street], [second line], [city], [state], [zip code].'
+          default: null
+        pickupPlaceId:
+          title: Pickupplaceid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Google place id for the pickup location.
+          default: null
+        pickupPhoneNumber:
+          title: Pickupphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The phone number to contact at the pickup location in the form: ''+15555555555'''
+          default: null
+        pickupBusinessName:
+          title: Pickupbusinessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup business name at the origin. Limited to 80 characters.
+          default: null
+        pickupFirstName:
+          title: Pickupfirstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the person to pickup from. If unknown pass 'Manager'. Limited to 80 characters.
+          default: null
+        pickupLastName:
+          title: Pickuplastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the person to pickup from. If unknown pass 'Manager'. Limited to 80 characters.
+          default: null
+        pickupInstructions:
+          title: Pickupinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Any special instructions for pickup. Limited to 280 characters.
+          default: null
+        pickupStoreLocationId:
+          title: Pickupstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: A unique identifier for store location created in Nash.
+          default: null
+        pickupExternalStoreLocationId:
+          title: Pickupexternalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external identifier used for your store.
+          default: null
+        pickupStoreLocationIds:
+          title: Pickupstorelocationids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: A list of store location IDs (internal or external) to consider for the Order. The optimal store will be selected and returned in the response in `pickupStoreLocationId` and/or `pickupStoreLocationExternalId`.
+          default: null
+        pickupZoneIds:
+          title: Pickupzoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: A list of zone IDs to consider for the Order. The pickup store location will be selected later via selected delivery window.
+          default: null
+        pickupBarcodes:
+          title: Pickupbarcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Array containing barcode values that are required to be scanned at the pickup waypoint.
+          default: null
+        pickupEmail:
+          title: Pickupemail
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The email of the contact at the pickup location.
+          default: null
+        dropoffAddress:
+          title: Dropoffaddress
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The full address in one line for the dropoff location. Format: [Number] [Street], [second line], [city], [state], [zip code].'
+          default: null
+        dropoffPlaceId:
+          title: Dropoffplaceid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Google place id for the dropoff location.
+          default: null
+        dropoffPhoneNumber:
+          title: Dropoffphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The phone number to contact at the dropoff location in the form: ''+15555555555'''
+          default: null
+        dropoffBusinessName:
+          title: Dropoffbusinessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the business at the destination. Should be left empty if there is no business. Limited to 80 characters.
+          default: null
+        dropoffFirstName:
+          title: Dropofffirstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the contact at the destination. Limited to 80 characters.
+          default: null
+        dropoffLastName:
+          title: Dropofflastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the contact at the destination. Limited to 80 characters.
+          default: null
+        dropoffInstructions:
+          title: Dropoffinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Any special instructions for dropoff. Limited to 280 characters.
+          default: null
+        dropoffBarcodes:
+          title: Dropoffbarcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Array containing barcode values/types that are required to be scanned at the dropoff waypoint.
+          default: null
+        dropoffEmail:
+          title: Dropoffemail
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The email of the contact at the dropoff location.
+          default: null
+        deliveryMode:
+          title: Deliverymode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: '''now'' or ''scheduled'' when the delivery should be scheduled'
+          default: null
+        pickupStartTime:
+          title: Pickupstarttime
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: The earliest pickup time in UTC in the form 'YYYY-MM-DDTHH:MM:SSZ'
+          default: null
+        pickupEndTime:
+          title: Pickupendtime
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: The latest pickup time in UTC in the form 'YYYY-MM-DDTHH:MM:SSZ'
+          default: null
+        dropoffStartTime:
+          title: Dropoffstarttime
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: The earliest dropoff time in UTC in the form 'YYYY-MM-DDTHH:MM:SSZ'
+          default: null
+        dropoffEndTime:
+          title: Dropoffendtime
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: The latest dropoff time in UTC in the form 'YYYY-MM-DDTHH:MM:SSZ'
+          default: null
+        deliveryWindowId:
+          title: Deliverywindowid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Delivery window id if using Nash delivery windows
+          default: null
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Order description and notes. Limited to 280 characters.
+          default: null
+        itemsCount:
+          title: Itemscount
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The number of items in this order
+          default: null
+        currency:
+          title: Currency
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Local currency
+          default: null
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+          description: Order value in cents
+          default: null
+        tipAmountCents:
+          title: Tipamountcents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Tip paid to the driver in cents
+          default: null
+        requirements:
+          title: Requirements
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/PackageRequirements'
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Package requirements.
+          default: null
+          example:
+          - photo_proof_of_delivery
+          - age_verification_on_delivery
+        minimumVehicleSize:
+          title: Minimumvehiclesize
+          enum:
+          - any
+          - bike
+          - motorbike
+          - cargobike
+          - sedan
+          - car
+          - suv
+          - pickup_truck
+          - pickup
+          - van
+          - large_van
+          - extra_large_van
+          - truck
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The requested minimum vehicle size. Allowed values: [''any'', ''bike'', ''motorbike'', ''cargobike'', ''sedan'', ''car'', ''suv'', ''pickup_truck'', ''pickup'', ''van'', ''large_van'', ''extra_large_van'', ''truck'']'
+          default: null
+          example: car
+        dispatchStrategyId:
+          title: Dispatchstrategyid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: "The dispatch strategy id (or option group id) to be associated with the order.\n\n Note: Best practice is to allow automations to control dispatch strategy and not send the dispatch strategy id in the request."
+          default: null
+        orderMetadata:
+          title: Ordermetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value data to attach to this order.
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Optional order tags, they will be included in every response
+          default: null
+        referenceId:
+          title: Referenceid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: A non-unique identifier for orders, visible to the courier if supported by the provider.
+          default: null
+        pickupAddressNumber:
+          title: Pickupaddressnumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number on a house.
+          default: null
+        pickupAddressSecondarynumber:
+          title: Pickupaddresssecondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Secondary number on an address e.g. an apartment building.
+          default: null
+        pickupAddressFormattedStreet:
+          title: Pickupaddressformattedstreet
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The street of the address.
+          default: null
+        pickupAddressCity:
+          title: Pickupaddresscity
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The city of the pickup address.
+          default: null
+        pickupAddressCounty:
+          title: Pickupaddresscounty
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The county associated with the pickup address.
+          default: null
+        pickupAddressState:
+          title: Pickupaddressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the pickup address.
+          default: null
+        pickupAddressZip:
+          title: Pickupaddresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zip or postal code of the pickup address.
+          default: null
+        pickupAddressCountry:
+          title: Pickupaddresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ISO 3166-1 alpha-2 country code of the pickup address.
+          default: null
+        pickupLat:
+          title: Pickuplat
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The pickup latitude coordinate.
+          default: null
+        pickupLng:
+          title: Pickuplng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The pickup longitude coordinate.
+          default: null
+        dropoffAddressNumber:
+          title: Dropoffaddressnumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number on a house.
+          default: null
+        dropoffAddressSecondarynumber:
+          title: Dropoffaddresssecondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Secondary number on an address e.g. an apartment building.
+          default: null
+        dropoffAddressFormattedStreet:
+          title: Dropoffaddressformattedstreet
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The street of the address.
+          default: null
+        dropoffAddressCity:
+          title: Dropoffaddresscity
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The city of the dropoff address.
+          default: null
+        dropoffAddressCounty:
+          title: Dropoffaddresscounty
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The county associated with the dropoff address.
+          default: null
+        dropoffAddressState:
+          title: Dropoffaddressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the dropoff address.
+          default: null
+        dropoffAddressZip:
+          title: Dropoffaddresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zip or postal code of the dropoff address.
+          default: null
+        dropoffAddressCountry:
+          title: Dropoffaddresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ISO 3166-1 alpha-2 country code of the dropoff address.
+          default: null
+        dropoffLat:
+          title: Dropofflat
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The dropoff latitude coordinate.
+          default: null
+        dropoffLng:
+          title: Dropofflng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The dropoff longitude coordinate.
+          default: null
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: integer
+          - type: string
+          - type: 'null'
+          description: The total weight of the package in kilograms (kg)
+          default: null
+        height:
+          title: Height
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The total height of the package in centimeters (cm)
+          default: null
+        width:
+          title: Width
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The total width of the package in centimeters (cm)
+          default: null
+        depth:
+          title: Depth
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The total depth of the package in centimeters (cm)
+          default: null
+        items:
+          title: Items
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ItemInput'
+          - type: 'null'
+          description: Lists of items in the delivery
+          default: null
+        optimizationParameters:
+          anyOf:
+          - $ref: '#/components/schemas/OptimizationParameters'
+          - type: 'null'
+          description: Order-level optimization parameters
+          default: null
+        pickupPayment:
+          anyOf:
+          - $ref: '#/components/schemas/PickupPayment'
+          - type: 'null'
+          description: How the courier should pay for the order at pickup (e.g. a barcode or provider card).
+          default: null
+        reapplyAutomations:
+          title: Reapplyautomations
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: If set to true, the order will be re-evaluated with automations.
+          default: null
+        maxDeliveryFeeCents:
+          title: Maxdeliveryfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The maximum delivery fee for the order in cents. This will override the dispatch strategy max delivery fee if both are set.
+          default: null
+        shippingDetails:
+          anyOf:
+          - $ref: '#/components/schemas/ShippingDetails'
+          - type: 'null'
+          description: Shipping attributes for this order when manifesting.
+          default: null
+      description: Order input for manifest creation — extends OrderInput with shipping details.
+    SubstitutionObject:
+      title: SubstitutionObject
+      type: object
+      properties:
+        preference:
+          title: Preference
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Substitution preference: refund or substitute'
+          default: null
+        source:
+          title: Source
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Source of substitution, e.g., merchant, customer
+          default: null
+        substituteItems:
+          title: Substituteitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubstituteItemObject'
+          - type: 'null'
+          description: List of substitute items
+          default: null
+    ManifestResultSerializer:
+      title: ManifestResultSerializer
+      required:
+      - providerId
+      - orderIds
+      - documents
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          type: string
+          description: Provider that generated the manifest.
+        orderIds:
+          title: Orderids
+          type: array
+          items:
+            type: string
+          description: Order IDs included in the manifest.
+        documents:
+          title: Documents
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestDocumentSerializer'
+          description: Generated manifest documents.
+    PickupPaymentBarcode:
+      title: PickupPaymentBarcode
+      type: object
+      properties:
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The barcode symbology (e.g. CODE128, QR).
+          default: null
+          example: CODE128
+        value:
+          title: Value
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The barcode value the courier should present at pickup.
+          default: null
+          example: '1234567890'
+    ManifestOrdersInputSerializer:
+      title: ManifestOrdersInputSerializer
+      type: object
+      properties:
+        orderIds:
+          title: Orderids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of Nash order IDs to manifest.
+          default: null
+        externalOrderIds:
+          title: Externalorderids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of external order IDs to manifest.
+          default: null
+        providerIds:
+          title: Providerids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of provider IDs. Manifests all eligible orders dispatched to these providers.
+          default: null
+      description: Manifest orders that have already been dispatched.
+    OptimizationParameters:
+      title: OptimizationParameters
+      type: object
+      properties:
+        pickupDoorstepTimeSeconds:
+          title: Pickupdoorsteptimeseconds
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Length of time (in seconds) it take the courier at the pickup location's doorstep.
+          default: null
+          example: 90
+        dropoffDoorstepTimeSeconds:
+          title: Dropoffdoorsteptimeseconds
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Length of time (in seconds) it take the courier at the dropoff location's doorstep.
+          default: null
+          example: 180
+        costsByMetric:
+          title: Costsbymetric
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The cost metric to use for the order
+          default: null
+          example:
+            distance: 10
+            weight: 200
+        clusterLabel:
+          title: Clusterlabel
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The cluster label for the order
+          default: null
+        mxLabel:
+          title: Mxlabel
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The mutually exclusive label for the order
+          default: null
+        assignmentPriority:
+          title: Assignmentpriority
+          anyOf:
+          - maximum: 3
+            minimum: 0.0
+            type: integer
+          - type: 'null'
+          description: The assignment priority for the order
+          default: null
+        sequencePriority:
+          title: Sequencepriority
+          anyOf:
+          - maximum: 499
+            minimum: 0.0
+            type: integer
+          - type: 'null'
+          description: The sequence priority for the order
+          default: null
+        sequenceGroup:
+          title: Sequencegroup
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The sequence group for the order
+          default: null
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

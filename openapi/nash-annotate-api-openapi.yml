@@ -1,0 +1,179 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Annotate API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Annotate
+  description: Annotate
+  x-nash-topic: wismo
+paths:
+  /v1/flags:
+    post:
+      tags:
+      - Annotate
+      summary: Create Flag
+      description: Create a flag annotation on a delivery or job to mark it for attention or follow-up.
+      operationId: create_flag_v1_flags_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFlagInputSerializer'
+        required: true
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/notes:
+    post:
+      tags:
+      - Annotate
+      summary: Create Note
+      description: Add a text note annotation to a delivery or job for internal record-keeping.
+      operationId: create_note_v1_notes_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNoteInputSerializer'
+        required: true
+      responses:
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    CreateFlagInputSerializer:
+      title: CreateFlagInputSerializer
+      required:
+      - notes
+      type: object
+      properties:
+        jobId:
+          title: Jobid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The job ID to create a flag for.
+          default: null
+        taskId:
+          title: Taskid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The task ID to create a flag for.
+          default: null
+        orderId:
+          title: Orderid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The order ID to create a flag for.
+          default: null
+        deliveryId:
+          title: Deliveryid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The delivery ID to create a flag for.
+          default: null
+        status:
+          $ref: '#/components/schemas/FlagStatus'
+          description: The status of the flag.
+          default: NEEDS_ATTENTION
+        notes:
+          title: Notes
+          type: string
+          description: The notes to create a flag for.
+      description: Expected payload for the create flag endpoint.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    FlagStatus:
+      title: FlagStatus
+      enum:
+      - NEEDS_ATTENTION
+      - ACKNOWLEDGED
+      - RESOLVED
+      type: string
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    CreateNoteInputSerializer:
+      title: CreateNoteInputSerializer
+      required:
+      - jobId
+      - note
+      type: object
+      properties:
+        jobId:
+          title: Jobid
+          type: string
+          description: The job ID to create a note for.
+        taskId:
+          title: Taskid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The task ID to create a note for.
+          default: null
+        note:
+          title: Note
+          type: string
+          description: The note to create.
+      description: Expected payload for the create note endpoint.
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

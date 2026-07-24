@@ -1,0 +1,549 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Webhooks API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Webhooks
+  description: Webhook delivery inspection
+  x-nash-topic: webhooks
+paths:
+  /v1/webhooks/event-types:
+    get:
+      tags:
+      - Webhooks
+      summary: List Webhook Event Types
+      description: Return the canonical Svix event type names available for this organization (e.g. `delivery.dropoff_complete`, `delivery.status_updated`). Use this to map a user's natural-language description ('the dropoff complete webhook') to the canonical name accepted by `POST /v1/webhooks/messages/replay`. When the org's endpoints subscribe to all events, the full Svix catalog is returned instead.
+      operationId: list_webhook_event_types_v1_webhooks_event_types_get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookEventTypesResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/webhooks/messages:
+    get:
+      tags:
+      - Webhooks
+      summary: List Webhook Messages
+      description: Inspect webhooks sent to this organization's configured endpoints via Svix. Primarily intended for debugging 'did the customer receive our webhook?' questions. Every outbound webhook is tagged with the relevant entity IDs (e.g. `jb_abc123`, `dlv_xyz789`), so pass the Nash ID as `tag` to find all webhooks about that entity. Returns an empty result if the organization has no Svix app configured.
+      operationId: list_webhook_messages_v1_webhooks_messages_get
+      parameters:
+      - name: tag
+        in: query
+        description: Filter messages by tag. Nash stamps entity IDs as tags on every outbound webhook, so pass the prefixed Nash ID directly — e.g. `jb_abc123` to find every webhook about a job, `dlv_xyz789` for a delivery.
+        required: false
+        schema:
+          title: Tag
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter messages by tag. Nash stamps entity IDs as tags on every outbound webhook, so pass the prefixed Nash ID directly — e.g. `jb_abc123` to find every webhook about a job, `dlv_xyz789` for a delivery.
+          default: null
+          example: jb_abc123
+        example: jb_abc123
+      - name: eventTypes
+        in: query
+        description: Comma-separated Svix event types (e.g. delivery.status_updated)
+        required: false
+        schema:
+          title: Eventtypes
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Comma-separated Svix event types (e.g. delivery.status_updated)
+          default: null
+      - name: channel
+        in: query
+        description: Filter by Svix channel
+        required: false
+        schema:
+          title: Channel
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by Svix channel
+          default: null
+      - name: before
+        in: query
+        description: Return messages sent before this timestamp
+        required: false
+        schema:
+          title: Before
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Return messages sent before this timestamp
+          default: null
+      - name: after
+        in: query
+        description: Return messages sent after this timestamp
+        required: false
+        schema:
+          title: After
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Return messages sent after this timestamp
+          default: null
+      - name: limit
+        in: query
+        required: false
+        schema:
+          title: Limit
+          maximum: 250
+          minimum: 1.0
+          type: integer
+          default: 50
+          example: 50
+        example: 50
+      - name: iterator
+        in: query
+        description: Svix pagination cursor — pass the `iterator` from a previous response to fetch the next page
+        required: false
+        schema:
+          title: Iterator
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Svix pagination cursor — pass the `iterator` from a previous response to fetch the next page
+          default: null
+      - name: withContent
+        in: query
+        description: Include the message payload in the response. Defaults to true for debugging.
+        required: false
+        schema:
+          title: Withcontent
+          type: boolean
+          description: Include the message payload in the response. Defaults to true for debugging.
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookMessagesListResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/webhooks/messages/replay:
+    post:
+      tags:
+      - Webhooks
+      summary: Replay Webhook Message
+      description: 'Resend a Svix webhook. Two lookup modes:
+
+
+        - `msgId`: replay a known message by its Svix ID.
+
+        - `tag` + `eventType`: replay the most recent message matching both filters — intended for agent flows like ''resend the dropoff_complete webhook for dlv_123''. Both fields are required together so we never replay an unrelated event for the same entity (a job has many event types tagged with the same job ID).
+
+
+        `eventType` must be the canonical Svix name (e.g. `delivery.dropoff_complete`), not a human description. Call `GET /v1/webhooks/event-types` first to map natural language to the right canonical value.
+
+
+        By default, the message is replayed to every endpoint it was originally attempted against. Pass `endpointId` to scope the replay to one endpoint. Per-endpoint Svix errors are surfaced in `results` rather than failing the whole call.'
+      operationId: replay_webhook_message_v1_webhooks_messages_replay_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookMessageReplayRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookMessageReplayResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/webhooks/messages/{msg_id}/attempts:
+    get:
+      tags:
+      - Webhooks
+      summary: List Webhook Delivery Attempts
+      description: Return the per-endpoint delivery attempt history for a single webhook message — status code, response body, timestamp, and retry attempts. Use this after locating the message via GET /v1/webhooks/messages to answer 'why didn't our webhook reach the customer?' questions.
+      operationId: list_webhook_message_attempts_v1_webhooks_messages__string_msg_id__attempts_get
+      parameters:
+      - name: msgId
+        in: path
+        description: Svix message ID
+        required: true
+        schema:
+          title: Msgid
+          type: string
+          description: Svix message ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookMessageAttemptsResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    WebhookMessageReplayResult:
+      title: WebhookMessageReplayResult
+      required:
+      - endpointId
+      - success
+      type: object
+      properties:
+        endpointId:
+          title: Endpointid
+          type: string
+        url:
+          title: Url
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        success:
+          title: Success
+          type: boolean
+        error:
+          title: Error
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Set when Svix rejected the resend (e.g. endpoint disabled, payload expunged).
+          default: null
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    WebhookMessagesListResponse:
+      title: WebhookMessagesListResponse
+      required:
+      - results
+      - done
+      type: object
+      properties:
+        results:
+          title: Results
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookMessage'
+        iterator:
+          title: Iterator
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor to pass back in the next request to fetch older messages. Null when `done` is true.
+          default: null
+        prevIterator:
+          title: Previterator
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        done:
+          title: Done
+          type: boolean
+    WebhookMessageAttempt:
+      title: WebhookMessageAttempt
+      required:
+      - id
+      - msgId
+      - endpointId
+      - url
+      - status
+      - timestamp
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        msgId:
+          title: Msgid
+          type: string
+        endpointId:
+          title: Endpointid
+          type: string
+        url:
+          title: Url
+          type: string
+        status:
+          title: Status
+          type: string
+          description: 'One of: success, pending, fail, sending'
+        responseStatusCode:
+          title: Responsestatuscode
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        responseDurationMs:
+          title: Responsedurationms
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        response:
+          title: Response
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        triggerType:
+          title: Triggertype
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        timestamp:
+          title: Timestamp
+          type: string
+          format: date-time
+    WebhookMessageReplayResponse:
+      title: WebhookMessageReplayResponse
+      required:
+      - msgId
+      - total
+      - succeeded
+      - failed
+      - results
+      type: object
+      properties:
+        msgId:
+          title: Msgid
+          type: string
+          description: Svix message ID that was replayed (resolved from filters when applicable).
+        eventType:
+          title: Eventtype
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Event type of the replayed message — confirmation that we picked the right event when looking up by `tag` + `eventType`. Null when caller replayed by `msgId` (no extra lookup performed).
+          default: null
+        total:
+          title: Total
+          type: integer
+          description: Number of endpoints the replay was dispatched to.
+        succeeded:
+          title: Succeeded
+          type: integer
+        failed:
+          title: Failed
+          type: integer
+        results:
+          title: Results
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookMessageReplayResult'
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    WebhookMessageReplayRequest:
+      title: WebhookMessageReplayRequest
+      type: object
+      properties:
+        msgId:
+          title: Msgid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Replay this specific Svix message. Mutually exclusive with `tag` + `eventType` lookup.
+          default: null
+          example: msg_01HXABC
+        tag:
+          title: Tag
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Find a message by tag (Nash entity ID like `dlv_123`) and replay it. Must be paired with `eventType`. The most recent matching message is replayed.
+          default: null
+          example: dlv_123
+        eventType:
+          title: Eventtype
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Svix event type to filter on when looking up by `tag` (e.g. `delivery.dropoff_complete`). Required when `tag` is provided so we don't replay an unrelated event for the same entity.
+          default: null
+          example: delivery.dropoff_complete
+        endpointId:
+          title: Endpointid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Replay only to this endpoint. If omitted, replays to every endpoint the message was originally attempted against.
+          default: null
+          example: ep_01HX
+        idempotencyKey:
+          title: Idempotencykey
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Optional Svix idempotency key forwarded on each per-endpoint resend call.
+          default: null
+    WebhookMessage:
+      title: WebhookMessage
+      required:
+      - id
+      - eventType
+      - timestamp
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        eventId:
+          title: Eventid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        eventType:
+          title: Eventtype
+          type: string
+        timestamp:
+          title: Timestamp
+          type: string
+          format: date-time
+        channels:
+          title: Channels
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        payload:
+          title: Payload
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    WebhookMessageAttemptsResponse:
+      title: WebhookMessageAttemptsResponse
+      required:
+      - results
+      - done
+      type: object
+      properties:
+        results:
+          title: Results
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookMessageAttempt'
+        iterator:
+          title: Iterator
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        prevIterator:
+          title: Previterator
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        done:
+          title: Done
+          type: boolean
+    WebhookEventTypesResponse:
+      title: WebhookEventTypesResponse
+      required:
+      - eventTypes
+      - source
+      type: object
+      properties:
+        eventTypes:
+          title: Eventtypes
+          type: array
+          items:
+            type: string
+          description: Sorted list of Svix event type names (e.g. `delivery.dropoff_complete`).
+        source:
+          title: Source
+          enum:
+          - org_active
+          - catalog
+          type: string
+          description: '`org_active` when filtered to types this org''s endpoints subscribe to; `catalog` when at least one endpoint subscribes to all events, in which case the full Svix event-type catalog is returned.'
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key

@@ -1,0 +1,1172 @@
+openapi: 3.1.0
+info:
+  title: Nash AI Functions Fleet API
+  version: 1.0.0
+  description: LLM-backed domain tools
+servers:
+- url: https://api.sandbox.usenash.com
+  description: Sandbox API
+- url: https://api.sandbox.ap-southeast-2.usenash.com
+  description: Sandbox API (Australia)
+- url: https://api.usenash.com
+  description: Production API
+- url: https://api.ap-southeast-2.usenash.com
+  description: Production API (Australia)
+tags:
+- name: Fleet
+  description: Inbound endpoints fleets call to update in-flight deliveries.
+  x-nash-topic: delivery
+paths:
+  /v1/fleet/deliveries:
+    patch:
+      tags:
+      - Fleet
+      summary: Bulk Update Deliveries
+      description: Apply updates to up to 100 deliveries in a single request. Each item is keyed by exactly one of `deliveryId` or `packageExternalIdentifier` (your own id set on the package at creation), plus the same field set as the single-delivery endpoint. The per-item result echoes back the key you sent under `deliveryId`. Per-item failures come back as a structured error in the response and do not affect the rest of the batch.
+      operationId: deliveries_v1_bulk_update_deliveries_route_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDeliveryUpdateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkDeliveryUpdateResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+  /v1/fleet/deliveries/{delivery_id}:
+    patch:
+      tags:
+      - Fleet
+      summary: Update Delivery
+      description: Apply a partial update — such as status, courier location, proof of delivery, courier identity, or ETAs — to a delivery your organization owns. Only available for deliveries fulfilled by your own fleet (not by a third-party courier integration). Returns the updated delivery.
+      operationId: deliveries_v1_update_delivery_route__delivery_id__patch
+      parameters:
+      - name: delivery_id
+        in: path
+        description: The Nash delivery id to update.
+        required: true
+        schema:
+          title: Delivery Id
+          type: string
+          description: The Nash delivery id to update.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryUpdate'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliverySerializer'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NashValidationError'
+components:
+  schemas:
+    DeliveryStatusUpdateValue:
+      title: DeliveryStatusUpdateValue
+      enum:
+      - not_assigned_driver
+      - assigned_driver
+      - pickup_enroute
+      - pickup_arrived
+      - pickup_complete
+      - dropoff_enroute
+      - dropoff_arrived
+      - dropoff_complete
+      - failed
+      - canceled_by_provider
+      - return_in_progress
+      - return_arrived
+      - returned_to_store
+      type: string
+      description: 'Lifecycle states a fleet can report for a delivery.
+
+
+        Ordered roughly chronologically:
+
+
+        - ``not_assigned_driver`` — provider received the dispatch but hasn''t found a driver.
+
+        - ``assigned_driver`` — a driver has accepted the dispatch but hasn''t departed.
+
+        - ``pickup_enroute`` — driver is on the way to the pickup location.
+
+        - ``pickup_arrived`` — driver is at the pickup location.
+
+        - ``pickup_complete`` — package has been picked up.
+
+        - ``dropoff_enroute`` — driver is on the way to the customer.
+
+        - ``dropoff_arrived`` — driver is at the customer.
+
+        - ``dropoff_complete`` — package delivered (terminal success).
+
+        - ``failed`` — delivery aborted; pair with ``failure`` block (terminal).
+
+        - ``canceled_by_provider`` — provider canceled the dispatch (terminal).
+
+        - ``return_in_progress`` — package is being returned to the pickup location.
+
+        - ``return_arrived`` — driver is at the pickup location to return.
+
+        - ``returned_to_store`` — package returned (terminal).'
+    ItemScanSerializer:
+      title: ItemScanSerializer
+      type: object
+      properties:
+        substitutionType:
+          title: Substitutiontype
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        barcodes:
+          title: Barcodes
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/BarcodeInfoSerializer'
+          - type: 'null'
+          default: null
+      description: Serializer for individual item scans.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    DeliveryUpdate:
+      title: DeliveryUpdate
+      type: object
+      properties:
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/DeliveryStatusUpdateValue'
+          - type: 'null'
+          description: New lifecycle status.
+          default: null
+        coordinates:
+          anyOf:
+          - $ref: '#/components/schemas/Coordinates'
+          - type: 'null'
+          description: Current courier coordinates.
+          default: null
+        proofOfDelivery:
+          title: Proofofdelivery
+          anyOf:
+          - type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/ImageProof'
+              - $ref: '#/components/schemas/BarcodeProof'
+              discriminator:
+                propertyName: podType
+                mapping:
+                  barcode_scan_on_dropoff: '#/components/schemas/BarcodeProof'
+                  barcode_scan_on_pickup: '#/components/schemas/BarcodeProof'
+                  barcode_scan_on_return: '#/components/schemas/BarcodeProof'
+                  photo_pre_delivery_verification: '#/components/schemas/ImageProof'
+                  photo_proof_of_delivery: '#/components/schemas/ImageProof'
+                  photo_proof_of_pickup: '#/components/schemas/ImageProof'
+                  signature_proof_of_delivery: '#/components/schemas/ImageProof'
+                  signature_proof_of_pickup: '#/components/schemas/ImageProof'
+          - type: 'null'
+          description: Proof artifacts captured at the stop. Image or barcode, discriminated by `podType`.
+          default: null
+        courier:
+          anyOf:
+          - $ref: '#/components/schemas/Courier'
+          - type: 'null'
+          description: Identity and vehicle of the assigned courier.
+          default: null
+        failure:
+          anyOf:
+          - $ref: '#/components/schemas/DeliveryFailure'
+          - type: 'null'
+          description: Cause when the delivery enters `failed` or `canceled_by_provider`.
+          default: null
+        pickupNote:
+          title: Pickupnote
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Note from the courier at pickup. E.g. 'used the side door'.
+          default: null
+        dropoffNote:
+          title: Dropoffnote
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Note from the courier at dropoff. E.g. 'left with concierge'.
+          default: null
+        parkingLocation:
+          title: Parkinglocation
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Where the courier parked at the stop. E.g. 'loading bay 4'.
+          default: null
+        returnParkingLocation:
+          title: Returnparkinglocation
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Where the courier parked when returning the package to the pickup location.
+          default: null
+        pickupEta:
+          title: Pickupeta
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Estimated pickup arrival time. ISO 8601.
+          default: null
+        dropoffEta:
+          title: Dropoffeta
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Estimated dropoff arrival time. ISO 8601.
+          default: null
+        externalDeliveryId:
+          title: Externaldeliveryid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider's own identifier for this delivery.
+          default: null
+      description: Partial update for a delivery dispatched to a Nash-connected provider.
+    BarcodeProof:
+      title: BarcodeProof
+      required:
+      - podType
+      - value
+      - status
+      type: object
+      properties:
+        podType:
+          title: Podtype
+          enum:
+          - barcode_scan_on_pickup
+          - barcode_scan_on_dropoff
+          - barcode_scan_on_return
+          type: string
+          description: Type of barcode scan.
+        value:
+          title: Value
+          type: string
+          description: The scanned barcode string.
+        status:
+          title: Status
+          enum:
+          - success
+          - invalid
+          - failure
+          - skipped
+          - manually_entered
+          - damaged
+          type: string
+          description: Outcome of the scan.
+      description: Barcode scan recorded at pickup, dropoff, or during a return.
+    Courier:
+      title: Courier
+      type: object
+      properties:
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier's display name.
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier's phone number, E.164.
+          default: null
+        pickupPhoneNumber:
+          title: Pickupphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Proxy phone for the pickup contact, if issued.
+          default: null
+        dropoffPhoneNumber:
+          title: Dropoffphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Proxy phone for the customer, if issued.
+          default: null
+        profileImageUrl:
+          title: Profileimageurl
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: URL of the courier's profile image.
+          default: null
+        vehicle:
+          anyOf:
+          - $ref: '#/components/schemas/CourierVehicle'
+          - type: 'null'
+          description: Vehicle the courier is using.
+          default: null
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider's own courier identifier.
+          default: null
+      description: 'Identity and vehicle for the courier currently handling the delivery.
+
+
+        Send the full block when a courier is first assigned, or any subset when
+
+        one of the fields changes (e.g., a driver swap mid-flight).'
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    ImageProof:
+      title: ImageProof
+      required:
+      - podType
+      - imageUrl
+      type: object
+      properties:
+        podType:
+          title: Podtype
+          enum:
+          - photo_proof_of_delivery
+          - signature_proof_of_delivery
+          - photo_proof_of_pickup
+          - signature_proof_of_pickup
+          - photo_pre_delivery_verification
+          type: string
+          description: Type of image artifact.
+        imageUrl:
+          title: Imageurl
+          type: string
+          description: URL of the captured image.
+      description: Image-based proof captured at pickup or dropoff (photo or signature).
+    BulkDeliveryUpdateRequest:
+      title: BulkDeliveryUpdateRequest
+      required:
+      - deliveries
+      type: object
+      properties:
+        deliveries:
+          title: Deliveries
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkDeliveryUpdateItem'
+          description: Delivery updates to apply (max 100).
+      description: Top-level body for ``PATCH /v1/deliveries`` (bulk update).
+    BulkDeliveryUpdateItem:
+      title: BulkDeliveryUpdateItem
+      type: object
+      properties:
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/DeliveryStatusUpdateValue'
+          - type: 'null'
+          description: New lifecycle status.
+          default: null
+        coordinates:
+          anyOf:
+          - $ref: '#/components/schemas/Coordinates'
+          - type: 'null'
+          description: Current courier coordinates.
+          default: null
+        proofOfDelivery:
+          title: Proofofdelivery
+          anyOf:
+          - type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/ImageProof'
+              - $ref: '#/components/schemas/BarcodeProof'
+              discriminator:
+                propertyName: podType
+                mapping:
+                  barcode_scan_on_dropoff: '#/components/schemas/BarcodeProof'
+                  barcode_scan_on_pickup: '#/components/schemas/BarcodeProof'
+                  barcode_scan_on_return: '#/components/schemas/BarcodeProof'
+                  photo_pre_delivery_verification: '#/components/schemas/ImageProof'
+                  photo_proof_of_delivery: '#/components/schemas/ImageProof'
+                  photo_proof_of_pickup: '#/components/schemas/ImageProof'
+                  signature_proof_of_delivery: '#/components/schemas/ImageProof'
+                  signature_proof_of_pickup: '#/components/schemas/ImageProof'
+          - type: 'null'
+          description: Proof artifacts captured at the stop. Image or barcode, discriminated by `podType`.
+          default: null
+        courier:
+          anyOf:
+          - $ref: '#/components/schemas/Courier'
+          - type: 'null'
+          description: Identity and vehicle of the assigned courier.
+          default: null
+        failure:
+          anyOf:
+          - $ref: '#/components/schemas/DeliveryFailure'
+          - type: 'null'
+          description: Cause when the delivery enters `failed` or `canceled_by_provider`.
+          default: null
+        pickupNote:
+          title: Pickupnote
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Note from the courier at pickup. E.g. 'used the side door'.
+          default: null
+        dropoffNote:
+          title: Dropoffnote
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Note from the courier at dropoff. E.g. 'left with concierge'.
+          default: null
+        parkingLocation:
+          title: Parkinglocation
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Where the courier parked at the stop. E.g. 'loading bay 4'.
+          default: null
+        returnParkingLocation:
+          title: Returnparkinglocation
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Where the courier parked when returning the package to the pickup location.
+          default: null
+        pickupEta:
+          title: Pickupeta
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Estimated pickup arrival time. ISO 8601.
+          default: null
+        dropoffEta:
+          title: Dropoffeta
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Estimated dropoff arrival time. ISO 8601.
+          default: null
+        externalDeliveryId:
+          title: Externaldeliveryid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider's own identifier for this delivery.
+          default: null
+        deliveryId:
+          title: Deliveryid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Nash delivery id. Provide this OR packageExternalIdentifier, not both.
+          default: null
+        packageExternalIdentifier:
+          title: Packageexternalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Your own identifier set on the package at creation. Provide this OR deliveryId, not both. Resolves the delivery server-side.
+          default: null
+      description: "One update inside a bulk PATCH /v1/deliveries call.\n\nSame field set as ``DeliveryUpdate``, keyed by **exactly one** of:\n\n- ``deliveryId`` — the Nash delivery id, or\n- ``packageExternalIdentifier`` — the id you set on the package at\n  job/order creation (e.g. via the batch-job CSV upload). Lets you drive\n  updates without first round-tripping Nash delivery ids."
+    CourierVehicle:
+      title: CourierVehicle
+      type: object
+      properties:
+        make:
+          title: Make
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Vehicle make. E.g. 'Toyota'.
+          default: null
+        model:
+          title: Model
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Vehicle model. E.g. 'Prius'.
+          default: null
+        color:
+          title: Color
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Vehicle color. E.g. 'white'.
+          default: null
+        licensePlate:
+          title: Licenseplate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: License plate.
+          default: null
+      description: Vehicle the courier is using to fulfill the delivery.
+    Coordinates:
+      title: Coordinates
+      required:
+      - latitude
+      - longitude
+      type: object
+      properties:
+        latitude:
+          title: Latitude
+          maximum: 90.0
+          minimum: -90.0
+          type: number
+          description: Latitude in decimal degrees.
+        longitude:
+          title: Longitude
+          maximum: 180.0
+          minimum: -180.0
+          type: number
+          description: Longitude in decimal degrees.
+      description: Latitude / longitude pair for the courier's current location.
+    PickedItemsSerializer:
+      title: PickedItemsSerializer
+      type: object
+      properties:
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        requestedSku:
+          title: Requestedsku
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        requestedId:
+          title: Requestedid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        quantity:
+          title: Quantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        requestedQuantity:
+          title: Requestedquantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        scannedBarcode:
+          title: Scannedbarcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        priceCents:
+          title: Pricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        status:
+          title: Status
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Per-item fulfillment outcome at pick time. One of: `picked`, `partially_picked`, `not_picked`, `substituted`.'
+          default: null
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        scans:
+          title: Scans
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ItemScanSerializer'
+          - type: 'null'
+          default: null
+      description: Generic serializer for picked items; Used for output.
+    BulkDeliveryUpdateResponse:
+      title: BulkDeliveryUpdateResponse
+      required:
+      - results
+      type: object
+      properties:
+        results:
+          title: Results
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkDeliveryUpdateResultItem'
+          description: One result per request item, in order.
+      description: Top-level response for ``PATCH /v1/deliveries``.
+    DeliveryFailureCode:
+      title: DeliveryFailureCode
+      enum:
+      - customer_unavailable
+      - address_not_found
+      - out_of_service_area
+      - damage_in_transit
+      - item_unavailable
+      - age_verification_failed
+      - no_capacity
+      - other
+      type: string
+      description: 'Structured failure / cancellation code paired with optional free-text reason.
+
+
+        Stable across providers so analytics, reassignment policy, and merchant
+
+        notifications can branch on the cause rather than parsing strings. Used
+
+        for both ``failed`` and ``canceled_by_provider`` status transitions.'
+    DocumentSerializer:
+      title: DocumentSerializer
+      required:
+      - createdAt
+      - id
+      - type
+      - contentType
+      type: object
+      properties:
+        createdAt:
+          title: Createdat
+          type: string
+        id:
+          title: Id
+          type: string
+        type:
+          title: Type
+          type: string
+        url:
+          title: Url
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        data:
+          title: Data
+          anyOf:
+          - type: string
+            format: binary
+          - type: 'null'
+          default: null
+        contentType:
+          title: Contenttype
+          type: string
+        documentMetadata:
+          title: Documentmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+      description: Generic serializer for Nash documents; Used for output.
+    DeliveryFailure:
+      title: DeliveryFailure
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/DeliveryFailureCode'
+          description: Failure code.
+        reason:
+          title: Reason
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Free-text detail.
+          default: null
+      description: Structured cause when a delivery enters ``failed`` or ``canceled_by_provider``.
+    DeliverySerializer:
+      title: DeliverySerializer
+      required:
+      - id
+      - status
+      - isActive
+      - priceCents
+      - currency
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Delivery ID
+          example: dlv_01234567890
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        status:
+          title: Status
+          type: string
+          description: Delivery status
+          example: dropoff_complete
+        statusHistory:
+          title: Statushistory
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: Delivery status history
+          default: null
+          example:
+          - created_at: '2023-08-29T19:17:46.264523'
+            status: created
+          - created_at: '2023-08-29T19:17:47.509265'
+            status: not_assigned_driver
+        isActive:
+          title: Isactive
+          type: boolean
+          description: Is the delivery active
+        pickupEta:
+          title: Pickupeta
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup ETA
+          default: null
+        dropoffEta:
+          title: Dropoffeta
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff ETA
+          default: null
+        dropoffDeadline:
+          title: Dropoffdeadline
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff deadline
+          default: null
+        priceCents:
+          title: Pricecents
+          type: integer
+          description: Price in cents
+        currency:
+          title: Currency
+          type: string
+          description: Currency
+        documents:
+          title: Documents
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/DocumentSerializer'
+          - type: 'null'
+          description: Documents
+          default: null
+        nashFeeCents:
+          title: Nashfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Nash fee in cents
+          default: null
+        courierName:
+          title: Couriername
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier name
+          default: null
+        courierPhoneNumber:
+          title: Courierphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier phone number
+          default: null
+        courierPickupPhoneNumber:
+          title: Courierpickupphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier pickup phone number
+          default: null
+        courierDropoffPhoneNumber:
+          title: Courierdropoffphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier dropoff phone number
+          default: null
+        courierLocation:
+          title: Courierlocation
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Courier location
+          default: null
+        courierVehicle:
+          title: Couriervehicle
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Courier vehicle
+          default: null
+        courierProfileImage:
+          title: Courierprofileimage
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier profile image
+          default: null
+        proofOfDelivery:
+          title: Proofofdelivery
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: Proof of delivery
+          default: null
+        providerDeliveryId:
+          title: Providerdeliveryid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider delivery id
+          default: null
+        providerBatchId:
+          title: Providerbatchid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider batch id
+          default: null
+        price:
+          title: Price
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Price
+          default: null
+        taxAmountCents:
+          title: Taxamountcents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Tax amount in cents
+          default: null
+        tollFeeCents:
+          title: Tollfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Toll fee in cents
+          default: null
+        waitFeeCents:
+          title: Waitfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Wait fee in cents
+          default: null
+        waitTimeMinutes:
+          title: Waittimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Wait time in minutes
+          default: null
+        cancellationFeeCents:
+          title: Cancellationfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Cancellation fee in cents
+          default: null
+        returnFeeCents:
+          title: Returnfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Return fee in cents
+          default: null
+        otherProviderFees:
+          title: Otherproviderfees
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Other provider fees
+          default: null
+        insuranceFeeCents:
+          title: Insurancefeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Insurance fee in cents
+          default: null
+        totalPriceBreakdown:
+          title: Totalpricebreakdown
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Total price breakdown
+          default: null
+        totalPriceCents:
+          title: Totalpricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Total price in cents
+          default: null
+        pickedItems:
+          title: Pickeditems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/PickedItemsSerializer'
+          - type: 'null'
+          description: Picked items
+          default: null
+      description: 'Generic serializer for deliveries used in many endpoints.
+
+
+        Some endpoints won''t return all fields, so they are optional. This means that they will return field names with
+
+        null values.'
+    BarcodeInfoSerializer:
+      title: BarcodeInfoSerializer
+      type: object
+      properties:
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        priceCents:
+          title: Pricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        weightUnit:
+          title: Weightunit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        productCode:
+          title: Productcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        isVariableWeight:
+          title: Isvariableweight
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        variableValue:
+          title: Variablevalue
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        format:
+          title: Format
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        indicatorDigit:
+          title: Indicatordigit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        checkDigit:
+          title: Checkdigit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        manufacturerCode:
+          title: Manufacturercode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        itemReference:
+          title: Itemreference
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        pluCheckDigit:
+          title: Plucheckdigit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        barcodeSansCheckDigit:
+          title: Barcodesanscheckdigit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        expirationDate:
+          title: Expirationdate
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: Serializer for barcode information in scans.
+    BulkDeliveryUpdateResultItem:
+      title: BulkDeliveryUpdateResultItem
+      required:
+      - deliveryId
+      - success
+      type: object
+      properties:
+        deliveryId:
+          title: Deliveryid
+          type: string
+          description: 'Echoes the key the caller sent: a Nash delivery id or a packageExternalIdentifier.'
+        success:
+          title: Success
+          type: boolean
+          description: Whether the update was applied.
+        errorCode:
+          title: Errorcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Error code if `success` is false.
+          default: null
+        errorMessage:
+          title: Errormessage
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Error detail if `success` is false.
+          default: null
+        delivery:
+          title: Delivery
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Updated delivery on success.
+          default: null
+      description: 'Per-item result for a bulk update.
+
+
+        On success, ``delivery`` carries the same shape returned under each task
+
+        by ``GET /v1/jobs/<id>`` (the canonical ``DeliverySerializer`` shape).
+
+        On failure, ``error_code`` and ``error_message`` describe why this item
+
+        was skipped. Other items in the same request are unaffected.
+
+
+        ``delivery_id`` echoes back the key the caller sent for this item — either
+
+        the Nash delivery id or the ``packageExternalIdentifier`` — so results can
+
+        be matched to the request items.'
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT, API Key
