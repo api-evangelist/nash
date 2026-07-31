@@ -1,0 +1,232 @@
+# Nash
+
+## Docs
+
+- [Nash API](https://docs.usenash.com/api-reference/api-overview.md): The Nash API is the gateway to the delivery orchestration platform. Find the right resource group, learn how to authenticate, pick an environment, and get started.
+- [Cancel Batch Job](https://docs.usenash.com/api-reference/batch-job/cancel-job-by-job-id-and-task-or-job-configuration-id.md): This endpoint allows you to cancel a batch job by job ID and task or job configuration ID.
+- [Create Batch Job](https://docs.usenash.com/api-reference/batch-job/create-batch-job.md): Create a job with multiple packages
+- [Refresh Quotes (Batch)](https://docs.usenash.com/api-reference/batch-job/refresh-quotes-by-job-id-and-batch-id.md): Refresh the quotes for a batch job.
+- [Select Quote (Batch)](https://docs.usenash.com/api-reference/batch-job/select-quote.md): Select the quote you would like to execute from a specific job.
+- [Update Batch Job](https://docs.usenash.com/api-reference/batch-job/update-job-by-job-id-and-job-configuration-id.md): This endpoint allows you to update some fields in the Nash job. Updating a job should always work before a quote is selected, but if a quote has been selected, Nash will return an error if the fleet rejects the update of the order.
+- [Book a delivery window for order](https://docs.usenash.com/api-reference/delivery-windows/book-a-delivery-window-for-order.md): Reserve a delivery window for an order identified by external ID. The booking holds capacity in the window until confirmed or revoked.
+- [Confirm a delivery window for order](https://docs.usenash.com/api-reference/delivery-windows/confirm-a-delivery-window-for-order.md): Confirm a previously booked delivery window for an order. Finalizes the booking and commits the capacity reservation.
+- [Create a single delivery window](https://docs.usenash.com/api-reference/delivery-windows/create-a-single-delivery-window.md): Create a delivery window defining an available time slot for scheduled deliveries. Delivery windows are associated with a store location and have capacity limits.
+- [Get a delivery window](https://docs.usenash.com/api-reference/delivery-windows/get-a-delivery-window.md): Retrieve a single delivery window by ID, including its time slot, capacity, and status.
+- [Get eligible delivery windows for order](https://docs.usenash.com/api-reference/delivery-windows/get-eligible-delivery-windows-for-order.md): Find delivery windows available for a specific order based on the order's store location and requirements. Requires either order_id or external_order_id. Optionally filter by time range and requested capacity.
+- [Revoke a delivery window for order](https://docs.usenash.com/api-reference/delivery-windows/revoke-a-delivery-window-for-order.md): Revoke a previously booked delivery window for an order. Releases the capacity reservation and disassociates the window from the order.
+- [Create dispatch strategy](https://docs.usenash.com/api-reference/dispatch-strategies/create-dispatch-strategy.md): Create a new dispatch strategy (options group) with provider selection rules, fallback logic, and quoting configuration.
+- [Automations](https://docs.usenash.com/api-reference/dispatch-strategies/dispatch-automations.md): Apply dispatch strategies dynamically with rule-based automations evaluated against each incoming job.
+- [Dispatch strategies](https://docs.usenash.com/api-reference/dispatch-strategies/dispatch-strategy.md): How dispatch strategies (options groups) control which providers can fulfill a job and how a provider is selected.
+- [Get Dispatch Strategies](https://docs.usenash.com/api-reference/dispatch-strategies/get-dispatch-strategies.md): List your organization's dispatch strategies.
+- [Update dispatch strategy](https://docs.usenash.com/api-reference/dispatch-strategies/update-dispatch-strategy.md): Update an existing dispatch strategy's provider selection rules, fallback logic, or quoting configuration. Only provided fields are updated.
+- [Add Delivery Feedback](https://docs.usenash.com/api-reference/feedback/add-delivery-feedback.md): Submit feedback for a completed delivery, such as a rating or comments about the delivery experience.
+- [Add Delivery Feedback by External Identifier](https://docs.usenash.com/api-reference/feedback/add-delivery-feedback-by-external-identifier.md): Submit feedback for a completed delivery using your external identifier instead of the Nash delivery ID.
+- [Simulate Delivery Status Transition](https://docs.usenash.com/api-reference/fleet-simulator/simulate-delivery-status-transition.md): Advance a delivery to a given status for testing in sandbox.
+- [Bulk Update Deliveries](https://docs.usenash.com/api-reference/fleet/bulk-update-deliveries.md): Apply updates to up to 100 deliveries in a single request. Each item is keyed by exactly one of `deliveryId` or `packageExternalIdentifier` (your own id set on the package at creation), plus the same field set as the single-delivery endpoint. The per-item result echoes back the key you sent under `d…
+- [Outbound integration](https://docs.usenash.com/api-reference/fleet/outbound-integration.md): Synchronous HTTP calls Nash makes to a fleet for quoting, dispatch, modifications, cancellations, and refresh.
+- [Update Delivery](https://docs.usenash.com/api-reference/fleet/update-delivery.md): Apply a partial update — such as status, courier location, proof of delivery, courier identity, or ETAs — to a delivery your organization owns. Only available for deliveries fulfilled by your own fleet (not by a third-party courier integration). Returns the updated delivery.
+- [Autodispatch Job](https://docs.usenash.com/api-reference/job/autodispatch-job.md): Automatically select a quote based on dispatch strategy
+- [Autodispatch Job by External Identifier](https://docs.usenash.com/api-reference/job/autodispatch-job-by-external-identifier.md): Automatically select a quote based on dispatch strategy
+- [Cancel Job by External Identifier](https://docs.usenash.com/api-reference/job/cancel-job-by-external-identifier.md): Cancels a Nash Job by the Partner's External ID if one was supplied at job creation.
+- [Cancel Job](https://docs.usenash.com/api-reference/job/cancel-job-by-job-id-and-job-configuration-id.md): Cancel a specific task or job configuration within a batch job. The objectId can be a task ID (tsk_ prefix) or job configuration ID (cfg_ prefix).
+- [Create Delivery Incident](https://docs.usenash.com/api-reference/job/create-delivery-incident.md): Create a new delivery incident for a task
+- [Create Job](https://docs.usenash.com/api-reference/job/create-job.md): Create a new job (delivery)
+- [Create or Update Job by External Identifier](https://docs.usenash.com/api-reference/job/create-or-update-job-by-external-identifier.md): Create a new job or update an existing one using your external identifier. If a job with the given external identifier exists, it is updated; otherwise a new job is created. Set autodispatch=true to automatically dispatch after creation.
+- [Get Job](https://docs.usenash.com/api-reference/job/get-job.md): Retrieve a job by its ID.
+- [Get Job by External Identifier](https://docs.usenash.com/api-reference/job/get-job-by-external-identifier.md): Retrieve a job by its external identifier.
+- [Get Refund Request](https://docs.usenash.com/api-reference/job/get-refund-request.md): Retrieve a refund request by its ID.
+- [Get Refund Requests](https://docs.usenash.com/api-reference/job/get-refund-requests.md): Retrieve a list of refund requests by task ID or job ID.
+- [Jobs overview](https://docs.usenash.com/api-reference/job/jobs.md): What a job (delivery) is in Nash, its data model, and the most common paths in the job object.
+- [Reassign a Task](https://docs.usenash.com/api-reference/job/reassign-task-by-job-id-and-task-id.md): Create a new task in a job based on a given job ID and task ID.
+- [Refresh Quotes](https://docs.usenash.com/api-reference/job/refresh-quotes-by-job-id-and-task-id.md): Regenerate quotes for a given job's task.
+- [Select Quote](https://docs.usenash.com/api-reference/job/select-quote.md): Select the quote you would like to execute from a specific job.
+- [Update Job](https://docs.usenash.com/api-reference/job/update-job-by-id.md): This endpoint allows you to update some fields in the Nash job. Updating a job should always work before a quote is selected, but if a quote has been selected, Nash will return an error if the fleet rejects the update of the order.
+- [Update job by job id and job configuration id](https://docs.usenash.com/api-reference/job/update-job-by-job-id-and-job-configuration-id.md)
+- [Server Health Check](https://docs.usenash.com/api-reference/miscellaneous/server-health-check.md): Check the health of the Nash API server.
+- [Add Contact to the Deny List](https://docs.usenash.com/api-reference/notifications/add-a-contact-to-the-deny-list.md): Adds a contact to the deny list to opt the user out of communications.
+- [Get Contacts in the Deny List](https://docs.usenash.com/api-reference/notifications/get-contacts-in-the-deny-list.md): Retrieves a list of contacts that have opted out of communications.
+- [Get Notification Trigger Catalog](https://docs.usenash.com/api-reference/notifications/get-notification-trigger-catalog.md): The full notification-trigger catalog. Each entry describes a trigger's `type` slug, human `title`, the `value` used to subscribe automations, the `entityType` (route/delivery/task/order/activity), its `statuses` vocabulary, the JSON Schema of its create `parameters`, and the `supportedFilters` / `s…
+- [List Notification Trigger Templates](https://docs.usenash.com/api-reference/notifications/list-notification-trigger-templates.md): List pre-defined notification trigger templates. Each template has a `type` slug (e.g. 'tasks_attempts_exhausted') and a human-readable `title` (e.g. 'Tasks Attempts Exhausted'). Use the `type` when creating a trigger via POST /v1/notification-triggers.
+- [Notifications](https://docs.usenash.com/api-reference/notifications/notifications.md): Configure notification triggers, channels, and message variables to keep customers and internal teams informed about deliveries.
+- [Remove Contact from the Deny List](https://docs.usenash.com/api-reference/notifications/remove-a-contact-from-the-deny-list.md): Removes a contact from the deny list to opt the user back into communications.
+- [Create Optimization Strategy](https://docs.usenash.com/api-reference/optimization-strategies/create-optimization-strategy.md): Create a new optimization strategy for the authenticated organization. A strategy configures how orders are grouped into routes (service times, pickup-time windows, contracts, store locations, zones, and optional cron schedules).
+- [Delete Optimization Strategy](https://docs.usenash.com/api-reference/optimization-strategies/delete-optimization-strategy.md): Soft-delete an optimization strategy. Fails if the strategy is referenced by an automation logic or an active automation rule.
+- [Get Optimization Strategy](https://docs.usenash.com/api-reference/optimization-strategies/get-optimization-strategy.md): Returns a single optimization strategy by id.
+- [List Optimization Strategies](https://docs.usenash.com/api-reference/optimization-strategies/list-optimization-strategies.md): Returns all optimization strategies for the authenticated organization (including soft-deleted).
+- [Update Optimization Strategy](https://docs.usenash.com/api-reference/optimization-strategies/update-optimization-strategy.md): Update an existing optimization strategy. Only provided fields are updated. Supplying `optimization_schedules` replaces the existing schedules.
+- [Add Custom Event to Order](https://docs.usenash.com/api-reference/order/add-custom-event-to-order.md): Adds a customizable event to an existing Nash order. Custom order events will be shown in the order events page alongside other Nash-generated events.
+- [Archive order](https://docs.usenash.com/api-reference/order/archive-order.md): Archive (soft-delete) an order. Archived orders are hidden from default listings but can be restored using the unarchive endpoint.
+- [Autodispatch Order](https://docs.usenash.com/api-reference/order/autodispatch-order.md): Automatically select a quote based on the order's dispatch stategy.
+- [Confirm order](https://docs.usenash.com/api-reference/order/confirm-order.md): Confirm a valid order, changing its status from 'valid' to 'confirmed'.
+- [Create or update order by external identifier](https://docs.usenash.com/api-reference/order/create-or-update-order-by-external-identifier.md): Create a new order or update an existing one using your external identifier. If an order with the given external identifier exists, it is updated; otherwise a new order is created.
+- [Create or Update Orders by External Identifier](https://docs.usenash.com/api-reference/order/create-or-update-orders-by-external-identifier-v2.md): Create or update multiple orders by external identifier in Nash
+- [Create Order](https://docs.usenash.com/api-reference/order/create-order.md): Create an order in Nash
+- [Create Orders](https://docs.usenash.com/api-reference/order/create-orders.md): Create multiple pre-dispatch orders in a single request. Each order is created independently with its own pickup and dropoff details.
+- [Bulk Order Actions](https://docs.usenash.com/api-reference/order/create-update-upsert-or-delete-orders-asynchronously-in-bulk.md): Create, update, upsert, or delete orders asynchronously in bulk.
+- [Get order](https://docs.usenash.com/api-reference/order/get-order.md): Retrieve a single order by ID, including its pickup/dropoff details, status, and metadata.
+- [Get Order Documents](https://docs.usenash.com/api-reference/order/get-order-documents.md): Get the documents for an order
+- [Create Quote](https://docs.usenash.com/api-reference/order/get-order-quotes.md): Create a new quote for an order
+- [Get Bulk Order Response](https://docs.usenash.com/api-reference/order/get-response-from-asynchronous-bulk-order-operation.md): Get the response from an asynchronous bulk order operation.
+- [Orders overview](https://docs.usenash.com/api-reference/order/order.md): What an order is, how to choose an order creation flow, and how orders relate to jobs (deliveries).
+- [Order address validation (geocoding)](https://docs.usenash.com/api-reference/order/order-address-validation-geocoding.md): How Nash validates addresses, and how to bring your own address components instead.
+- [Order requirements](https://docs.usenash.com/api-reference/order/order-requirements.md): Requirements you can attach to a Nash order, such as proof of delivery, age verification, and barcode scans.
+- [Order validations](https://docs.usenash.com/api-reference/order/order-validations.md): The validations Nash applies when you create an order, covering addresses, required fields, data formats, enums, and datetimes.
+- [Refresh order quotes](https://docs.usenash.com/api-reference/order/refresh-order-quotes.md): Request fresh price quotes from delivery providers for an existing order. Replaces any existing quotes with updated pricing from available providers.
+- [Select Quote](https://docs.usenash.com/api-reference/order/select-quote.md): Select the quote you would like to execute from a specific order.
+- [Unarchive order](https://docs.usenash.com/api-reference/order/unarchive-order.md): Restore a previously archived order, making it visible in default listings again.
+- [Undispatch an order](https://docs.usenash.com/api-reference/order/undispatch-an-order.md): Un-dispatch a route-based order: cancel its active task and provider delivery, remove it from its route (re-syncing the linked batch), and revert it to the `valid` status. Returns the updated order. Errors if the order is not dispatched, or is not associated with a route.
+- [Undispatch an order by id](https://docs.usenash.com/api-reference/order/undispatch-an-order-by-id.md): Un-dispatch a route-based order by id: cancel its active task and provider delivery, remove it from its route (re-syncing the linked batch), and revert it to the `valid` status. Returns the updated order. Errors if the order is not dispatched, or is not associated with a route.
+- [Update order](https://docs.usenash.com/api-reference/order/update-order.md): Update an existing pre-dispatch order's details such as addresses, times, or metadata. Only provided fields are updated.
+- [Upsert order by external identifier with delivery window](https://docs.usenash.com/api-reference/order/upsert-order-by-external-identifier-with-delivery-window.md): Create or update an order by external identifier and associate it with a delivery window. The order is linked to the specified delivery window for scheduled delivery.
+- [Get Providers](https://docs.usenash.com/api-reference/provider/get-providers.md): This endpoint allows you to get all available providers in your organization.
+- [Assign or Reassign a Route](https://docs.usenash.com/api-reference/route/assign-route.md): Assign a route to a provider, driver group, courier, or vehicle — before or after dispatch.
+- [Create or Update Route](https://docs.usenash.com/api-reference/route/create-or-update-route.md): Create or update a route in Nash
+- [Dispatch Optimized Orders](https://docs.usenash.com/api-reference/route/dispatch-optimized-orders.md): Dispatch orders from an optimization activity to delivery providers. Creates jobs and assigns them to providers based on the optimized routes.
+- [Dispatch Routes](https://docs.usenash.com/api-reference/route/dispatch-routes.md): Dispatch one or more routes to delivery providers. Creates jobs for each route and assigns them based on the organization's dispatch strategy.
+- [Get Route](https://docs.usenash.com/api-reference/route/get-route.md): Retrieve a route by ID, including its stops, travel metrics, and associated orders.
+- [Save Optimization Routes](https://docs.usenash.com/api-reference/route/save-optimization-routes.md): Save the optimized routes from an optimization activity. Creates route records with stops and travel metrics based on the optimization results.
+- [Create a shift](https://docs.usenash.com/api-reference/shifts/create-a-shift.md): Create a courier shift with start/end times and an assigned store location.
+- [Get a shift](https://docs.usenash.com/api-reference/shifts/get-a-shift.md): Retrieve a single courier shift by ID, including its times, assigned courier, and store location.
+- [Get all shifts](https://docs.usenash.com/api-reference/shifts/get-all-shifts.md): List courier shifts with optional filtering by time range and store location. Filter by start_time, end_time, store_location_id, or external_store_location_id.
+- [Dispatch and Manifest Orders](https://docs.usenash.com/api-reference/shipping/dispatch-and-manifest-orders.md): Create, autodispatch, and manifest shipping orders in a single request. Each order is created, autodispatched using the org's dispatch strategy, then manifested with the provider it landed on. Per-order failures are returned in `errors` instead of aborting the batch. `shippingDetails` on an order, i…
+- [Manifest Orders](https://docs.usenash.com/api-reference/shipping/manifest-orders.md): Create manifests for dispatched shipping orders. Groups orders by store location and provider, then generates manifest documents (e.g. AusPost order summaries).
+- [Create or update inventory](https://docs.usenash.com/api-reference/store-catalog/create-or-update-inventory.md): Create or update inventory levels for products at specific store locations. Links products to store locations with quantity and availability information.
+- [Create or update products](https://docs.usenash.com/api-reference/store-catalog/create-or-update-products.md): Create new products or update existing ones in the store catalog. Products are matched by external identifier for upsert logic.
+- [Get inventory](https://docs.usenash.com/api-reference/store-catalog/get-inventory.md): List inventory levels with pagination. Filter by external store location ID or external product ID.
+- [Get products](https://docs.usenash.com/api-reference/store-catalog/get-products.md): List products in the store catalog with pagination and optional filtering. Filter by IDs, SKUs, text search, or semantic search.
+- [Pick and Pack overview](https://docs.usenash.com/api-reference/store-catalog/pick-and-pack.md): How Pick and Pack works across orders, the product catalog, and store inventory.
+- [Product catalog examples](https://docs.usenash.com/api-reference/store-catalog/product-catalog-examples.md): Sample product payloads for common product types to help you structure your catalog data correctly.
+- [Create or update store location](https://docs.usenash.com/api-reference/store-locations/create-or-update-store-location.md): Create a new store location or update an existing one. Matches on external identifier or store location ID for upsert logic.
+- [Create or update store location by external identifier](https://docs.usenash.com/api-reference/store-locations/create-or-update-store-location-by-external-identifier.md): Create a new store location or update an existing one using your external identifier. If a store location with the given external identifier exists, it is updated.
+- [Create store location](https://docs.usenash.com/api-reference/store-locations/create-store-location.md): Create a new store location (pickup point) with address, hours, and capacity settings.
+- [Delete store location](https://docs.usenash.com/api-reference/store-locations/delete-store-location.md): Delete a store location by ID. Orders referencing this store location will no longer have a valid pickup point.
+- [Get Store Location](https://docs.usenash.com/api-reference/store-locations/get-store-location.md): Get a store location by ID.
+- [Get store location by external identifier](https://docs.usenash.com/api-reference/store-locations/get-store-location-by-external-identifier.md)
+- [Get Store Locations](https://docs.usenash.com/api-reference/store-locations/get-store-locations.md): Get a list of store locations.
+- [Get store locations that cover specified location (latitude & longitude, city_zipcode)](https://docs.usenash.com/api-reference/store-locations/get-store-locations-that-cover-specified-latitude-and-longitude.md): Find store locations whose delivery zones cover a given geographic point. Provide latitude/longitude, city_zipcode, or zipcode to find matching store locations.
+- [Update Store Location](https://docs.usenash.com/api-reference/store-locations/update-store-location.md): Update a store location by ID.
+- [Upsert multiple store locations](https://docs.usenash.com/api-reference/store-locations/upsert-multiple-store-locations.md): Create or update multiple store locations in a single request. Each store location is matched by external identifier for upsert logic.
+- [Upsert multiple templates](https://docs.usenash.com/api-reference/templates/upsert-multiple-templates.md): Create or update multiple notification templates in a single request. Templates define the content and format of notifications sent for delivery events.
+- [Using LLMs with Nash API](https://docs.usenash.com/api-reference/using-llms-with-nash-api.md): Point an LLM at the Nash API reference and let it speed up your integration
+- [Create a zone](https://docs.usenash.com/api-reference/zones/create-a-zone.md): Create a geographic zone defined by a polygon boundary. Zones are used to define delivery areas for store locations and apply zone-based restrictions.
+- [Delete a zone](https://docs.usenash.com/api-reference/zones/delete-a-zone.md): Delete a zone by ID. Removes the zone and its store location associations.
+- [Get zone](https://docs.usenash.com/api-reference/zones/get-zone.md): Retrieve a single zone by ID, including its polygon boundary and associated store locations.
+- [Get zone by external identifier](https://docs.usenash.com/api-reference/zones/get-zone-by-external-identifier.md): Retrieve a zone using your external identifier instead of the Nash zone ID.
+- [Get zones](https://docs.usenash.com/api-reference/zones/get-zones.md): List zones for the organization with pagination. Use size and offset parameters to paginate. Optionally include deleted zones with is_deleted.
+- [Get zones that cover specified location (latitude & longitude, city_zipcode)](https://docs.usenash.com/api-reference/zones/get-zones-that-cover-specified-location-latitude-and-longitude-city_zipcode.md): Find zones whose polygon boundaries contain a given geographic point. Provide latitude/longitude, city_zipcode, or zipcode to find matching zones.
+- [Query zones](https://docs.usenash.com/api-reference/zones/query-zones.md): Return full zone details for many zones in a single call. Filter by `ids` and/or `externalIds` (combined with OR); omit both to page through all of the organization's zones. Results come back under `data` with pagination under `meta`; each `data` item matches the shape of `GET /v1/zones/<id>`.
+- [Update a zone](https://docs.usenash.com/api-reference/zones/update-a-zone.md): Update an existing zone's name, polygon boundary, or associated store locations. Only provided fields are updated.
+- [Overview](https://docs.usenash.com/fleet/overview.md): Fulfill Nash deliveries with your own fleet: how dispatch, delivery-state updates, and the Fleet API fit together.
+- [Report delivery state](https://docs.usenash.com/fleet/report-delivery-state.md): How a fleet reports status, location, proof of delivery, and ETAs back to Nash as a job (delivery) progresses — for single and bulk updates, and how to test transitions with Fleet simulators.
+- [API tutorial: an example checkout workflow with Nom Nom Goods](https://docs.usenash.com/guides/api-tutorial-workflow-nom-nom-foods.md): A basic Nash integration through an example app checkout workflow.
+- [Sample checkout workflow](https://docs.usenash.com/guides/checkout-workflow.md): A step-by-step workflow for embedding Nash delivery quotes, dispatch, and tracking into your checkout.
+- [Set up your internal fleet](https://docs.usenash.com/guides/internal-fleet-setup.md): An admin guide to configuring an internal fleet, adding drivers, and enabling live location tracking in the Nash Portal.
+- [Production testing](https://docs.usenash.com/guides/production-testing.md): How to schedule an integration testing call with Nash and get production API keys enabled.
+- [Route optimization](https://docs.usenash.com/guides/route-optimization.md): Submit optimization requests, poll for results, and dispatch optimized routes using the Nash API.
+- [Channels: Slack, SMS & voice](https://docs.usenash.com/nash-agent/channels.md): Work with Nash from Slack, and let Nash reach a customer or driver by text or voice call on your behalf — always with your sign-off.
+- [Chat with a custom agent](https://docs.usenash.com/nash-agent/chat-with-a-custom-agent.md): Open a live conversation with one of your custom agents — it answers and works under its own instructions, scope, and execution mode.
+- [External connectors](https://docs.usenash.com/nash-agent/connectors.md): Connect external systems to Nash so your agents can use them as tools — from prebuilt integrations to your own APIs.
+- [Custom agent configuration reference](https://docs.usenash.com/nash-agent/custom-agent-configuration.md): A field-by-field reference for everything you can set on a custom agent — identity, scope, behavior, skills, knowledge, output, and limits.
+- [Custom agents](https://docs.usenash.com/nash-agent/custom-agents.md): Configure a scoped, instruction-driven Nash agent for a recurring job, then run it on demand or on a schedule.
+- [Entity monitor](https://docs.usenash.com/nash-agent/entity-monitor.md): Have an agent keep watch on a single delivery, order, route, return, or job and surface risks until it's resolved.
+- [Guardrails & confirmations](https://docs.usenash.com/nash-agent/guardrails.md): How Nash Agent decides which actions run automatically and which require your approval.
+- [How Nash gets to know how you work](https://docs.usenash.com/nash-agent/how-nash-learns-about-your-team.md): A closer look at the working-style profile behind Memory and learning — what the agent quietly picks up about you, and what you can shape by hand.
+- [Improvements](https://docs.usenash.com/nash-agent/improvements.md): Set a multi-day goal and let Nash work toward it — analyzing your operation on a cadence and proposing actions you approve or reject.
+- [Knowledge](https://docs.usenash.com/nash-agent/knowledge.md): Give the agent your reference material — SOPs, policies, and links — so it answers in your operation's context.
+- [Memory & learning](https://docs.usenash.com/nash-agent/memory-and-learning.md): Let Nash automatically remember how your team works and pick up useful context over time — an opt-in, org-controlled capability.
+- [Nash Agent](https://docs.usenash.com/nash-agent/overview.md): Nash Agent answers questions about your deliveries, investigates problems, and takes action — pausing for your approval on sensitive steps — all scoped to your organization and your permissions.
+- [Scheduling & execution](https://docs.usenash.com/nash-agent/scheduling-and-execution.md): Control how and when a custom agent runs — on a schedule, when something happens, or on demand — and whether it reports or acts.
+- [Skills](https://docs.usenash.com/nash-agent/skills.md): Reusable, named playbooks that teach the agent how to handle a specific situation — and that you can hand to a custom agent.
+- [Usage & cost](https://docs.usenash.com/nash-agent/usage.md): See what Nash Agent is doing and what it costs, then cap spend with org-wide and per-agent limits.
+- [Authentication](https://docs.usenash.com/reference/authentication.md): Authenticate Nash API requests with a Bearer API key and the Nash-Org-Id header.
+- [Delivery status](https://docs.usenash.com/reference/delivery-status.md): The normalized delivery statuses Nash reports across all providers, including terminal statuses and the guaranteed status order.
+- [Delivery windows](https://docs.usenash.com/reference/delivery-windows.md): A delivery window is a bookable time slot, tied to a store location and bounded by capacity, that an order can be scheduled into.
+- [Dispatch strategies](https://docs.usenash.com/reference/dispatch-strategies.md): How dispatch strategies control which providers can fulfill a job, how Nash selects one, what it can cost, when it dispatches, and how it recovers.
+- [Environments](https://docs.usenash.com/reference/environments.md): Base URLs and Portal links for the Nash Production and Sandbox environments, and how Sandbox differs from Production.
+- [API errors](https://docs.usenash.com/reference/errors.md): How to read Nash API errors, handle retries, and interpret the error codes returned most often.
+- [API key and Org ID](https://docs.usenash.com/reference/generating-api-key-and-org-id.md): Create an API key in the Nash Portal and find the Organization ID to send with your requests.
+- [Glossary](https://docs.usenash.com/reference/glossary.md): Definitions of the core Nash concepts you'll meet across the docs and API.
+- [How Nash works](https://docs.usenash.com/reference/how-nash-works.md): A complete overview of the Nash delivery orchestration platform — the delivery lifecycle, the provider network, and the core building blocks you integrate with.
+- [MCP integration](https://docs.usenash.com/reference/mcp-integration.md): Give your AI agent direct access to Nash deliveries through our Model Context Protocol (MCP) server.
+- [Orders, jobs & dispatch](https://docs.usenash.com/reference/nash-api-overview.md): The key concepts behind the Nash API: orders, jobs, quoting, and dispatch.
+- [Embed the Nash live-tracking experience](https://docs.usenash.com/reference/nash-embedding.md): Embed Nash's hosted live-tracking page in your web or mobile app with an iframe.
+- [Notifications](https://docs.usenash.com/reference/notifications.md): Nash's built-in notifications platform alerts customers and internal teams on delivery events across SMS, email, WhatsApp, Slack, and webhook — with reusable audiences, fine-grained targeting, and customizable messages.
+- [Plan your integration](https://docs.usenash.com/reference/plan-your-integration.md): How to plan a Nash API integration: timeline, account setup, dispatch strategies, notifications, and go-live.
+- [Rate limits & throttling](https://docs.usenash.com/reference/rate-limits-throttling.md): Nash allows 20 requests per second per organization. How 429 responses work and how to back off.
+- [Refunds & incidents](https://docs.usenash.com/reference/refunds-and-incidents.md): Report a delivery incident, optionally request a refund, and track the refund request through review.
+- [Routes](https://docs.usenash.com/reference/routes.md): A route is a planned, ordered sequence of stops for a vehicle or driver. Learn how to create, update, and dispatch routes — and how routes relate to route optimization.
+- [Shift dispatched event](https://docs.usenash.com/reference/shift-dispatched-event.md): The shift.dispatched webhook fires when orders from a delivery window (shift) are dispatched in bulk to delivery jobs. Payload structure, scenarios, and error reference.
+- [Store catalog](https://docs.usenash.com/reference/store-catalog.md): The store catalog combines a master product catalog and per-store inventory to power item-level fulfillment. Learn how products and inventory fit together, how pick & pack works, and what item-level details an order can carry.
+- [Store locations](https://docs.usenash.com/reference/store-locations.md): A store location is a physical origin — a restaurant, warehouse, or store — that deliveries depart from. Learn how to model store locations, upsert them by your own identifier, and look up which stores cover a location.
+- [Webhooks](https://docs.usenash.com/reference/webhooks.md): Set up and consume Nash webhooks: event types, payload shape, signature verification, and retries.
+- [Workflows](https://docs.usenash.com/reference/workflows.md): Nash workflows are an automation engine that responds to delivery events with filters and actions — applying dispatch strategies, modifying orders, sending notifications, and more.
+- [Zones](https://docs.usenash.com/reference/zones.md): A zone is a geographic delivery area defined by a polygon boundary or a list of cities, zip codes, states, or countries. Learn how zones model coverage, how to look up which zones cover a location, and how zones relate to store locations.
+- [Release notes](https://docs.usenash.com/release-notes/change.md): What's new in Nash — features, improvements, and fixes, week over week.
+
+## OpenAPI Specs
+
+- [openapi](https://docs.usenash.com/api-reference/openapi.json)
+- [meta](https://docs.usenash.com/styles/proselint/meta.json)
+- [Very](https://docs.usenash.com/styles/proselint/Very.yml)
+- [Uncomparables](https://docs.usenash.com/styles/proselint/Uncomparables.yml)
+- [Typography](https://docs.usenash.com/styles/proselint/Typography.yml)
+- [Spelling](https://docs.usenash.com/styles/proselint/Spelling.yml)
+- [Skunked](https://docs.usenash.com/styles/proselint/Skunked.yml)
+- [RASSyndrome](https://docs.usenash.com/styles/proselint/RASSyndrome.yml)
+- [P-Value](https://docs.usenash.com/styles/proselint/P-Value.yml)
+- [Oxymorons](https://docs.usenash.com/styles/proselint/Oxymorons.yml)
+- [Nonwords](https://docs.usenash.com/styles/proselint/Nonwords.yml)
+- [Needless](https://docs.usenash.com/styles/proselint/Needless.yml)
+- [Malapropisms](https://docs.usenash.com/styles/proselint/Malapropisms.yml)
+- [LGBTTerms](https://docs.usenash.com/styles/proselint/LGBTTerms.yml)
+- [LGBTOffensive](https://docs.usenash.com/styles/proselint/LGBTOffensive.yml)
+- [Jargon](https://docs.usenash.com/styles/proselint/Jargon.yml)
+- [Hyperbole](https://docs.usenash.com/styles/proselint/Hyperbole.yml)
+- [Hedging](https://docs.usenash.com/styles/proselint/Hedging.yml)
+- [GroupTerms](https://docs.usenash.com/styles/proselint/GroupTerms.yml)
+- [GenderBias](https://docs.usenash.com/styles/proselint/GenderBias.yml)
+- [Diacritical](https://docs.usenash.com/styles/proselint/Diacritical.yml)
+- [DenizenLabels](https://docs.usenash.com/styles/proselint/DenizenLabels.yml)
+- [DateSpacing](https://docs.usenash.com/styles/proselint/DateSpacing.yml)
+- [DateRedundancy](https://docs.usenash.com/styles/proselint/DateRedundancy.yml)
+- [DateMidnight](https://docs.usenash.com/styles/proselint/DateMidnight.yml)
+- [DateCase](https://docs.usenash.com/styles/proselint/DateCase.yml)
+- [Cursing](https://docs.usenash.com/styles/proselint/Cursing.yml)
+- [Currency](https://docs.usenash.com/styles/proselint/Currency.yml)
+- [CorporateSpeak](https://docs.usenash.com/styles/proselint/CorporateSpeak.yml)
+- [Cliches](https://docs.usenash.com/styles/proselint/Cliches.yml)
+- [But](https://docs.usenash.com/styles/proselint/But.yml)
+- [Archaisms](https://docs.usenash.com/styles/proselint/Archaisms.yml)
+- [Apologizing](https://docs.usenash.com/styles/proselint/Apologizing.yml)
+- [Annotations](https://docs.usenash.com/styles/proselint/Annotations.yml)
+- [AnimalLabels](https://docs.usenash.com/styles/proselint/AnimalLabels.yml)
+- [Airlinese](https://docs.usenash.com/styles/proselint/Airlinese.yml)
+- [WordList](https://docs.usenash.com/styles/Google/WordList.yml)
+- [Will](https://docs.usenash.com/styles/Google/Will.yml)
+- [We](https://docs.usenash.com/styles/Google/We.yml)
+- [Units](https://docs.usenash.com/styles/Google/Units.yml)
+- [Spacing](https://docs.usenash.com/styles/Google/Spacing.yml)
+- [Slang](https://docs.usenash.com/styles/Google/Slang.yml)
+- [Semicolons](https://docs.usenash.com/styles/Google/Semicolons.yml)
+- [Ranges](https://docs.usenash.com/styles/Google/Ranges.yml)
+- [Quotes](https://docs.usenash.com/styles/Google/Quotes.yml)
+- [Periods](https://docs.usenash.com/styles/Google/Periods.yml)
+- [Passive](https://docs.usenash.com/styles/Google/Passive.yml)
+- [Parens](https://docs.usenash.com/styles/Google/Parens.yml)
+- [OxfordComma](https://docs.usenash.com/styles/Google/OxfordComma.yml)
+- [Ordinal](https://docs.usenash.com/styles/Google/Ordinal.yml)
+- [OptionalPlurals](https://docs.usenash.com/styles/Google/OptionalPlurals.yml)
+- [LyHyphens](https://docs.usenash.com/styles/Google/LyHyphens.yml)
+- [Latin](https://docs.usenash.com/styles/Google/Latin.yml)
+- [Headings](https://docs.usenash.com/styles/Google/Headings.yml)
+- [HeadingPunctuation](https://docs.usenash.com/styles/Google/HeadingPunctuation.yml)
+- [Gender](https://docs.usenash.com/styles/Google/Gender.yml)
+- [FirstPerson](https://docs.usenash.com/styles/Google/FirstPerson.yml)
+- [Exclamation](https://docs.usenash.com/styles/Google/Exclamation.yml)
+- [EmDash](https://docs.usenash.com/styles/Google/EmDash.yml)
+- [Ellipses](https://docs.usenash.com/styles/Google/Ellipses.yml)
+- [DateFormat](https://docs.usenash.com/styles/Google/DateFormat.yml)
+- [Contractions](https://docs.usenash.com/styles/Google/Contractions.yml)
+- [Colons](https://docs.usenash.com/styles/Google/Colons.yml)
+- [Acronyms](https://docs.usenash.com/styles/Google/Acronyms.yml)
+- [AMPM](https://docs.usenash.com/styles/Google/AMPM.yml)

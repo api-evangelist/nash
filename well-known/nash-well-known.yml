@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of /.well-known/ across Nash hosts
+summary: >-
+  No machine-readable /.well-known/ discovery documents are published on any Nash
+  host. api.usenash.com, api.sandbox.usenash.com, www.nash.ai, and docs.usenash.com
+  all return 404 for security.txt, openid-configuration, oauth-authorization-server,
+  api-catalog, and ai-plugin.json. portal.usenash.com returns HTTP 200 for these
+  paths but serves the SPA HTML shell (Content-Type text/html), not real
+  well-known documents — recorded as not-a-document. Absence is valid data.
+hosts:
+- host: https://api.usenash.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://api.sandbox.usenash.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+- host: https://www.nash.ai
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+- host: https://docs.usenash.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+- host: https://portal.usenash.com
+  documents:
+  - {path: /.well-known/security.txt, status: 200, note: SPA HTML shell (text/html), not a real document}
+  - {path: /.well-known/openid-configuration, status: 200, note: SPA HTML shell (text/html), not a real document}
+  - {path: /.well-known/oauth-authorization-server, status: 200, note: SPA HTML shell (text/html), not a real document}

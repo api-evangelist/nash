@@ -1,0 +1,84 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.usenash.com/reference/errors
+format: nash-typed-error
+envelope:
+  shape: |
+    {
+      "error": { "code": "...", "message": "...", "details": { ... } },
+      "response_status": "422 UNPROCESSABLE_ENTITY",
+      "RequestID": "req_example"
+    }
+  fields:
+    error.code: Stable, machine-readable identifier — branch on this, not the message.
+    error.message: Human-readable description; may change without the code changing.
+    error.details: Optional structured context (e.g. failing fields under details.fields).
+    response_status: HTTP status repeated in the body.
+    RequestID: Trace identifier; also returned as the X-REQUEST-ID response header. Log it.
+  request_id_header: X-REQUEST-ID
+notes: >-
+  Older endpoints use generic codes (e.g. MISSING_RESOURCE); newer endpoints use
+  domain-prefixed codes (e.g. ORDER_NOT_FOUND, ROUTE_NOT_FOUND, TASK_NOT_FOUND).
+  Clients calling both surfaces should handle both forms. Bulk endpoints may return
+  200/202 while individual items fail — inspect per-item success/errorCode/errorMessage.
+http_statuses:
+- {status: 400, meaning: Missing data, invalid value, or a disallowed action, handling: Correct the request before retrying.}
+- {status: 401, meaning: Authentication missing, invalid, or expired, handling: Refresh or replace the credential, then retry.}
+- {status: 403, meaning: Credential valid but cannot access the resource/action, handling: Check org and API-key permissions.}
+- {status: 404, meaning: Resource does not exist in the selected environment/org or is not visible, handling: Check the ID, environment, and Nash-Org-Id.}
+- {status: 409, meaning: Conflict with an existing resource, concurrent write, or current state, handling: Retry lock/contention with backoff; resolve other conflicts first.}
+- {status: 410, meaning: A time-limited resource (e.g. tracking link) has expired, handling: Request or use a current resource.}
+- {status: 422, meaning: JSON readable but fields or business rules failed validation, handling: Correct the fields reported in message/details.}
+- {status: 429, meaning: Organization exceeded its request rate, handling: Retry with exponential backoff; honor Retry-After.}
+- {status: 500, meaning: Nash could not complete the request, handling: Retry idempotent requests with backoff; log RequestID.}
+- {status: 502/503/504, meaning: Nash or a downstream service temporarily unavailable or timed out, handling: Retry idempotent requests with backoff and jitter.}
+error_codes:
+# Common request and access codes
+- {code: BAD_REQUEST, status: 400, area: request, when: A required argument is missing, fields are mutually exclusive, or the request cannot be processed.}
+- {code: VALIDATION_ERRORS, status: '400 or 422', area: request, when: Request schema validation (422, with error.details.fields); some legacy operation-level validations return 400.}
+- {code: INVALID_VALUE, status: 400, area: request, when: A field is present but its value is outside the accepted set or range.}
+- {code: UNAUTHORIZED, status: 401, area: access, when: The API key or token is missing, invalid, or expired.}
+- {code: FORBIDDEN, status: 403, area: access, when: Authenticated but lacking permission for the resource or action.}
+- {code: MISSING_RESOURCE, status: 404, area: request, when: A referenced order, job, task, quote, dispatch strategy, or other resource cannot be found.}
+- {code: NOT_FOUND, status: 404, area: request, when: Resource not found on a generic typed-error endpoint; newer endpoints return resource-specific codes.}
+- {code: RESOURCE_ALREADY_EXISTS, status: 400, area: request, when: A unique value (often an external identifier) is already assigned on a legacy endpoint.}
+- {code: ALREADY_EXISTS / CONFLICT, status: 409, area: request, when: A resource or unique value already exists on a conflict-contract endpoint.}
+- {code: DISALLOWED_OPERATION, status: 400, area: request, when: The action is not permitted for the resource, commonly because it already advanced in its lifecycle.}
+- {code: INVALID_STATE_TRANSITION, status: 409, area: request, when: The action is valid in general but conflicts with the resource's current state.}
+- {code: LOCK_ACQUISITION_FAILURE, status: 409, area: request, when: Another request is modifying the same resource; retry after a short backoff.}
+- {code: TOO_MANY_REQUESTS, status: 429, area: request, when: The org exceeded the endpoint or organization rate limit.}
+- {code: INTERNAL_SERVER_ERROR, status: 500, area: request, when: Unexpected failure; use RequestID when contacting support.}
+# Order codes
+- {code: ORDER_NOT_FOUND, status: 404, area: order, when: The order ID or external ID does not resolve in the selected organization.}
+- {code: ORDER_EXTERNAL_ID_REQUIRED, status: 400, area: order, when: An order upsert is missing externalId.}
+- {code: ORDER_DUPLICATE_EXTERNAL_ID, status: 409, area: order, when: More than one order has the supplied external ID, so Nash cannot choose one safely.}
+- {code: ORDER_ALREADY_DISPATCHED, status: 400, area: order, when: A create/upsert/archive/route operation would change an already-dispatched order.}
+- {code: ORDER_LOCK_CONTENTION, status: 409, area: order, when: Another operation holds the order lock; retry after a short backoff.}
+- {code: INVALID_ADDRESS, status: 400, area: order, when: A pickup/dropoff address is missing parts, unparseable, ungeocodable, or has invalid coordinates.}
+- {code: INVALID_PHONE_NUMBER, status: 400, area: order, when: A pickup/dropoff phone number is missing or invalid; send E.164 format.}
+- {code: INVALID_TIME_CONSTRAINT, status: 400, area: order, when: A pickup/dropoff window is invalid, in the past where not allowed, or mis-ordered.}
+- {code: INVALID_TIP, status: 400, area: order, when: The tip value is invalid for the request.}
+- {code: ORDER_VALIDATION_ERRORS_BLOCK_ELIGIBILITY, status: 422, area: order, when: Validation errors prevent delivery-window eligibility scoring.}
+# Quote and dispatch codes
+- {code: NO_ELIGIBLE_PROVIDERS, status: 404, area: dispatch, when: No provider is eligible under the dispatch strategy, contract, service area, or order requirements.}
+- {code: NO_VALID_QUOTES, status: 404, area: dispatch, when: Quotes evaluated but none valid — unavailable, expired, over fee limits, or outside the allowed provider set.}
+- {code: AUTODISPATCH_FAILURE, status: 400, area: dispatch, when: Automatic dispatch could not select and dispatch a valid quote.}
+- {code: INVALID_OPTIONS_GROUP, status: 400, area: dispatch, when: The referenced dispatch strategy (options_group) is missing, inactive, or invalid.}
+- {code: INVALID_OPTIONS_GROUP_SETTING, status: 400, area: dispatch, when: A setting on the dispatch strategy is invalid or incompatible with the request.}
+- {code: NO_ELIGIBLE_ROUTES, status: 422, area: dispatch, when: Route optimization cannot build a route satisfying the supplied orders and constraints.}
+# Route codes
+- {code: ROUTE_NOT_FOUND, status: 404, area: route, when: The route ID does not resolve in the selected organization.}
+- {code: ROUTE_ALREADY_DISPATCHED, status: 400, area: route, when: An update is attempted on an already-dispatched route.}
+- {code: ROUTE_DELETED, status: 400, area: route, when: The action targets a deleted route.}
+- {code: ROUTE_ARCHIVED, status: 400, area: route, when: The action targets an archived route.}
+- {code: ROUTE_HAS_NO_STOPS, status: 400, area: route, when: The route cannot be processed/dispatched because it has no stops.}
+- {code: ROUTE_HAS_NO_PACKAGES, status: 400, area: route, when: The route cannot be processed/dispatched because it has no packages.}
+- {code: ROUTE_ACTION_INVALID_STATUS, status: 400, area: route, when: The route action is not available from the route's current status.}
+- {code: ROUTE_STOP_NOT_FOUND, status: 404, area: route, when: The referenced stop does not belong to the route or cannot be found.}
+# Fleet API codes
+- {code: DELIVERY_NOT_FOUND, status: 404, area: fleet, when: The delivery ID or package external ID does not resolve for the fleet organization.}
+- {code: TASK_NOT_FOUND, status: 404, area: fleet, when: The delivery task cannot be found.}
+- {code: TASK_FORBIDDEN, status: 403, area: fleet, when: The task is not owned by the selected organization.}
+- {code: TASK_MISSING_TIME_WINDOW, status: 422, area: fleet, when: The task is missing a required pickup or dropoff time-window field.}
+- {code: PICKUP_NOT_IN_SCOPE, status: 400, area: fleet, when: The pickup store is outside the caller's assigned store-location scope.}
+- {code: STORE_LOCATION_NOT_FOUND, status: 404, area: fleet, when: The referenced store location cannot be found in the organization.}

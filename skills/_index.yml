@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/nash-openapi-original.json
+api: openapi/nash-openapi-original.json
+skills:
+- file: nash-create-and-dispatch-order.md
+  name: Create and dispatch a Nash delivery order
+  api: openapi/nash-openapi-original.json
+  operations: [create_order_v1_order_post, get_order_quotes_v1_order_get_quotes_post, refresh_order_quotes_v1_order_refresh_quotes_post, autodispatch_order_v1_order__string_id__autodispatch_post, confirm_order_v1_order__string_id__confirm_patch, get_order_v1_order__string_id__get]
+- file: nash-schedule-delivery-window.md
+  name: Schedule a Nash order into a delivery window
+  api: openapi/nash-openapi-original.json
+  operations: [get_eligible_delivery_windows_v1_eligible_delivery_windows_get, book_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_book_post, confirm_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_confirm_post, revoke_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_revoke_post, create_delivery_window_v1_delivery_window_post]
+- file: nash-report-incident-and-refund.md
+  name: Report a Nash delivery incident and track a refund
+  api: openapi/nash-openapi-original.json
+  operations: [delivery_incident_v1_jobs__string_jobId__tasks__string_taskId__delivery_incident_post, get_refund_request_v1_refund_request__string_id__get, get_refund_requests_v1_refund_requests_get, get_job_v1_jobs__string_id__get]

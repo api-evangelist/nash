@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+probe: true
+source: https://www.nash.ai/legal/security
+url: https://www.nash.ai/legal/security
+certifications:
+- SOC 2
+notes: >-
+  The Security page has a dedicated "SOC 2 Compliance" section and asserts a Nash
+  security program (forced HTTPS/TLS, encryption in transit and at rest, regular
+  certificate/cipher audits). ISO 27001 also appears on the page but in the context
+  of Nash's cloud infrastructure provider (AWS: SOC 1/2/3, ISO27001), not as a Nash
+  certification, so only SOC 2 is recorded as Nash's own. Security contact:
+  support@usenash.com.
+security_contact: support@usenash.com
+evidence:
+- source: https://www.nash.ai/legal/security
+  keywords:
+  - soc 2
+  - soc2

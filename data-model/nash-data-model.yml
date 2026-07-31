@@ -1,0 +1,72 @@
+generated: '2026-07-20'
+method: derived
+source:
+- openapi/nash-openapi-original.json
+- https://docs.usenash.com/api-reference/order/order.md
+- https://docs.usenash.com/api-reference/job/jobs.md
+summary: >-
+  The Nash domain models delivery orchestration. An Order is the pre-dispatch
+  intent (pickup + dropoff + requirements); a Job (delivery) is the dispatched
+  execution. Jobs contain Tasks, each of which collects Quotes from Providers and,
+  once selected, produces a Delivery fulfilled by a Courier. Orders can be grouped
+  into Routes (optionally via Optimization Strategies), scheduled into Delivery
+  Windows, and constrained by Zones and Store Locations. Dispatch Strategies
+  control provider selection. Prefixed IDs identify each entity.
+id_prefixes:
+  order: ord_
+  job: job_
+  task: tsk_
+  delivery: dlv_
+  quote: qot_
+  location: loc_
+  document: doc_
+  package: pkg_
+  config: cfg_
+entities:
+- name: Order
+  description: Pre-dispatch delivery intent with pickup/dropoff, packages, and requirements.
+- name: Job
+  description: A dispatched delivery; the same object returned by Create Job and in webhooks. May contain multiple tasks.
+- name: Task
+  description: A delivery attempt within a job, assigned to a provider; collects quotes and yields a delivery.
+- name: Quote
+  description: A price/ETA offer from a provider for a task.
+- name: Delivery
+  description: The fulfilled leg produced from a selected quote; carries status history, proof of delivery, courier location.
+- name: Provider
+  description: A third-party courier or fleet integration eligible to fulfill a job.
+- name: Courier
+  description: The driver executing a delivery, with location and contact details.
+- name: Route
+  description: A planned, ordered sequence of stops for a vehicle/driver; groups orders.
+- name: OptimizationStrategy
+  description: Configuration for grouping orders into routes.
+- name: DispatchStrategy
+  description: Provider-selection rules, fallback, and quoting config (legacy name options_group).
+- name: DeliveryWindow
+  description: A bookable, capacity-bounded time slot tied to a store location.
+- name: Zone
+  description: A geographic delivery area (polygon or list of cities/zips/states/countries).
+- name: StoreLocation
+  description: A physical origin (restaurant/warehouse/store) that deliveries depart from.
+- name: Shift
+  description: A courier shift with start/end times and an assigned store location.
+- name: Product
+  description: An item in the store catalog, with per-store Inventory.
+relationships:
+- {from: Order, type: has_one, to: Job, via: job}
+- {from: Job, type: has_many, to: Task, via: tasks}
+- {from: Task, type: has_many, to: Quote, via: quotes}
+- {from: Task, type: has_one, to: Quote, via: winnerQuote}
+- {from: Task, type: has_one, to: Delivery, via: delivery}
+- {from: Quote, type: belongs_to, to: Provider, via: providerId}
+- {from: Delivery, type: has_one, to: Courier, via: courierName}
+- {from: Route, type: has_many, to: Order, via: orders}
+- {from: Route, type: belongs_to, to: OptimizationStrategy, via: optimization_strategy}
+- {from: Order, type: belongs_to, to: DispatchStrategy, via: options_group}
+- {from: Order, type: belongs_to, to: DeliveryWindow, via: delivery_window}
+- {from: DeliveryWindow, type: belongs_to, to: StoreLocation, via: store_location_id}
+- {from: StoreLocation, type: has_many, to: Zone, via: zones}
+- {from: Order, type: belongs_to, to: StoreLocation, via: store_location}
+- {from: Shift, type: belongs_to, to: StoreLocation, via: store_location_id}
+- {from: Product, type: has_many, to: Inventory, via: store_location}

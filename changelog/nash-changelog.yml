@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.usenash.com/release-notes/change
+scheme: weekly dated release notes (RSS-enabled), tagged by product area (Platform API, Fleet, Nash Agent, Portal) and change type (New, Improved, Fixed)
+current_api_version: v1
+rss: true
+window: recent entries only (see source for full history)
+entries:
+- date: '2026-07-13'
+  areas: [Platform API]
+  types: [Improved]
+  highlights:
+  - Webhook consumers can stop retries for one message or disable an endpoint directly from their webhook response (webhook-delivery response header).
+- date: '2026-07-06'
+  areas: [Nash Agent, Platform API, Fleet, Portal]
+  types: [New, Improved, Fixed]
+  highlights:
+  - Nash Agent shows a plain-language reason and suggested fix on every failed run, applied retroactively to past failures.
+  - A Run-now button starts a fresh agent run on demand; run history separates automated runs from chat sessions.
+- date: '2026-06-29'
+  areas: [Nash Agent, Platform API, Fleet, Portal]
+  types: [New, Improved, Fixed]
+- date: '2026-06-22'
+  areas: [Nash Agent, Platform API, Fleet, Portal]
+  types: [New, Improved, Fixed]
+- date: '2026-06-15'
+  areas: [Nash Agent, Platform API, Fleet, Portal]
+  types: [New, Improved, Fixed]
+- date: '2026-05-15'
+  areas: [Nash Agent, Platform API, Portal]
+  types: [New, Improved]
+- date: '2026-05-05'
+  areas: [Nash Agent, Platform API, Fleet, Portal]
+  types: [New, Improved, Fixed]
+- date: '2026-02-13'
+  areas: [Nash Agent, Portal]
+  types: [New, Improved, Fixed]

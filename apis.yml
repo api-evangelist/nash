@@ -1,22 +1,1021 @@
 aid: nash
 name: Nash
-description: Nash is a company surfaced as a portfolio company of a16z and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Nash is an AI-powered last-mile delivery orchestration platform that lets
+  retailers, restaurants, grocers, pharmacies, and logistics teams quote,
+  dispatch, and track deliveries across a network of third-party couriers and
+  their own internal fleets from a single API. The Nash Platform API covers
+  orders, jobs (deliveries), quoting, dispatch strategies, route optimization,
+  delivery windows, zones, store locations, shifts, store catalog, notifications,
+  and signed webhooks, alongside a Fleet API for owned-fleet delivery reporting
+  and a Nash Agent copilot exposed over a Model Context Protocol (MCP) server for
+  agent-driven delivery operations. Backed by a16z.
 url: https://raw.githubusercontent.com/api-evangelist/nash/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.nash.ai/favicon.ico
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - a16z
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Delivery
+- Last-Mile Delivery
+- Logistics
+- Dispatch
+- Route Optimization
+- Fleet Management
+- Courier
+- Shipping
+- Orders
+- Webhooks
+- AI Agents
+apis:
+- aid: nash:nash-ai-functions-api
+  name: Nash AI Functions API
+  description: LLM-backed domain tools
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - AI Functions
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-ai-functions-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-annotate-api
+  name: Nash Annotate API
+  description: Annotate
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Annotate
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-annotate-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-batch-job-api
+  name: Nash Batch Job API
+  description: Batch Job
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Batch Job
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-batch-job-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-contracts-api
+  name: Nash Contracts API
+  description: Provider contract pricing and version listings
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-contracts-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-couriers-api
+  name: Nash Couriers API
+  description: Couriers
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Couriers
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-couriers-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-delivery-windows-api
+  name: Nash Delivery Windows API
+  description: Delivery Windows
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Delivery Windows
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-delivery-windows-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-dispatch-strategies-api
+  name: Nash Dispatch Strategies API
+  description: Dispatch Strategies
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Dispatch Strategies
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-dispatch-strategies-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-feedback-api
+  name: Nash Feedback API
+  description: Feedback
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-feedback-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-fleet-api
+  name: Nash Fleet API
+  description: Inbound endpoints fleets call to update in-flight deliveries.
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Fleet
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-fleet-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-job-api
+  name: Nash Job API
+  description: Job
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Job
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-job-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-messaging-api
+  name: Nash Messaging API
+  description: Messaging
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Messaging
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-messaging-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-miscellaneous-api
+  name: Nash Miscellaneous API
+  description: Miscellaneous
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Miscellaneous
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-miscellaneous-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-notifications-api
+  name: Nash Notifications API
+  description: Notifications
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-notifications-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-optimization-strategies-api
+  name: Nash Optimization Strategies API
+  description: Create, read, update, and delete route optimization strategies.
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Optimization Strategies
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-optimization-strategies-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-order-api
+  name: Nash Order API
+  description: Order
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-order-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-organizations-api
+  name: Nash Organizations API
+  description: Organizations
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-organizations-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-provider-api
+  name: Nash Provider API
+  description: Provider
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Provider
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-provider-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-route-api
+  name: Nash Route API
+  description: Route
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Route
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-route-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-route-restrictions-api
+  name: Nash Route Restrictions API
+  description: Org-scoped geographic areas the route optimizer must avoid traversing.
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Route Restrictions
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-route-restrictions-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-shifts-api
+  name: Nash Shifts API
+  description: Shifts
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Shifts
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-shifts-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-shipping-api
+  name: Nash Shipping API
+  description: Shipping operations
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Shipping
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-shipping-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-store-catalog-api
+  name: Nash Store Catalog API
+  description: Store Catalog
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Store Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-store-catalog-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-store-locations-api
+  name: Nash Store Locations API
+  description: Store Locations
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Store Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-store-locations-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-templates-api
+  name: Nash Templates API
+  description: Templates
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-templates-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-users-api
+  name: Nash Users API
+  description: User, role, and organization-membership management.
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-users-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-vehicles-api
+  name: Nash Vehicles API
+  description: Vehicles
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Vehicles
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-vehicles-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-webhooks-api
+  name: Nash Webhooks API
+  description: Webhook delivery inspection
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-webhooks-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-workflow-api
+  name: Nash Workflow API
+  description: Workflow automation management
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Workflow
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-workflow-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-workflow-execution-api
+  name: Nash Workflow Execution API
+  description: Workflow execution history and monitoring
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Workflow Execution
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-workflow-execution-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
+- aid: nash:nash-zones-api
+  name: Nash Zones API
+  description: Zones
+  humanURL: https://docs.usenash.com/api-reference/api-overview
+  baseURL: https://api.usenash.com/v1
+  tags:
+  - Zones
+  properties:
+  - type: OpenAPI
+    url: openapi/nash-zones-api-openapi.yml
+  - type: Authentication
+    url: authentication/nash-authentication.yml
+  - type: Webhooks
+    url: asyncapi/nash-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/nash-webhooks-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/nash-error-codes.yml
+  - type: Conventions
+    url: conventions/nash-conventions.yml
+  - type: Idempotency
+    url: conventions/nash-conventions.yml
+  - type: DataModel
+    url: data-model/nash-data-model.yml
+  - type: RateLimits
+    url: rate-limits/nash-rate-limits.yml
+  - type: Sandbox
+    url: sandbox/nash-sandbox.yml
+  - type: AgenticAccess
+    url: agentic-access/nash-agentic-access.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: Website
+  url: https://www.nash.ai
+- type: DeveloperPortal
+  url: https://docs.usenash.com
+- type: Documentation
+  url: https://docs.usenash.com
+- type: APIReference
+  url: https://docs.usenash.com/api-reference/api-overview
+- type: GettingStarted
+  url: https://docs.usenash.com/reference/plan-your-integration
+- type: Quickstart
+  url: https://docs.usenash.com/reference/generating-api-key-and-org-id
+- type: Support
+  url: https://help.usenash.com
+- type: HelpCenter
+  url: https://help.usenash.com
+- type: Blog
+  url: https://www.nash.ai/blog
+- type: ChangeLog
+  url: https://docs.usenash.com/release-notes/change
+- type: StatusPage
+  url: https://status.usenash.com
+- type: GitHubOrganization
+  url: https://github.com/usenash
+- type: SignUp
+  url: https://portal.usenash.com
+- type: Login
+  url: https://portal.usenash.com
+- type: Pricing
+  url: https://www.nash.ai/pricing
+- type: TermsOfService
+  url: https://www.nash.ai/legal
+- type: PrivacyPolicy
+  url: https://www.nash.ai/legal/privacy-policy
+- type: MCPServer
+  url: mcp/nash-mcp.yml
+- type: LLMsTxt
+  url: llms/nash-llms.txt
+- type: WellKnown
+  url: well-known/nash-well-known.yml
+- type: Lifecycle
+  url: lifecycle/nash-lifecycle.yml
+- type: ChangeLog
+  name: Nash release notes (structured)
+  url: changelog/nash-changelog.yml
+- type: Conformance
+  url: conformance/nash-conformance.yml
+- type: Compliance
+  url: https://www.nash.ai/legal/security
+- type: TrustCenter
+  url: security/nash-trust-center.yml
+- type: Security
+  url: security/nash-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/nash-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/nash-domain-security.yml
+- type: Components
+  url: components/nash-components.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 25
+  pass: local-v1

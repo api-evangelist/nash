@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.usenash.com/reference/rate-limits-throttling
+scope: per-organization
+default_limit:
+  limit_count: 20
+  window: 1s
+  unit: requests
+  description: 20 requests per second per organization, counted across the whole org (not per API key).
+endpoint_overrides:
+- endpoints: store catalog endpoints
+  limit_count: 10
+  window: 1s
+- endpoints: custom order events (POST /v1/order/{id}/events)
+  limit_count: 3
+  window: 1s
+  per: order
+exceeded:
+  status: 429
+  code: TOO_MANY_REQUESTS
+  retry_after_header: Retry-After
+  guidance: >-
+    Back off exponentially with jitter (e.g. 0.5s, 1s, 2s, 4s). Honor Retry-After
+    when present. Retry idempotently using your own external identifier (externalId
+    on orders, externalIdentifier on jobs) so a retry references the same record
+    rather than creating a duplicate. Smooth outbound traffic with a token bucket
+    or concurrency cap rather than bursting.
+notes: >-
+  The limit governs requests TO the Nash API only; it does not govern Nash's
+  delivery of webhooks to your endpoint, which has its own retry policy. Sustained
+  needs above 20 rps are raised with support@usenash.com.

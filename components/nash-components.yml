@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.usenash.com/reference/nash-embedding
+summary: >-
+  Nash ships a hosted, embeddable live-tracking experience rather than a
+  client-side component/element library. It is embedded via an iframe pointing at
+  Nash's hosted tracking page, so a partner app can show real-time delivery status
+  and courier location without building its own tracking UI.
+components:
+- family: Live Tracking
+  kind: hosted embed (iframe)
+  name: Nash live-tracking page
+  description: Embed Nash's hosted live-tracking page in a web or mobile app with an iframe to show real-time delivery status, map, and courier location.
+  docs: https://docs.usenash.com/reference/nash-embedding
+  loader: iframe (hosted URL, no JS SDK/loader library)
+notes: >-
+  No JavaScript element/web-component library is published. Server-side integration
+  is via the REST API (see openapi/) — there is no first-party client SDK in the
+  Nash GitHub org (github.com/usenash publishes only a design system and a fork).

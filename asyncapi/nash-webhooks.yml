@@ -1,0 +1,48 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.usenash.com/reference/webhooks
+transport: HTTP POST to subscriber endpoints, configured in the Nash Portal (Settings > Webhook Management)
+delivery_provider: Svix
+summary: >-
+  Nash pushes real-time delivery events to subscriber endpoints. Every payload
+  carries three top-level fields — `type` (delivery | task | courier_location |
+  shift), `event` (the specific status within that type), and `data` (a Job
+  object for delivery/task events; a small payload for shift events). Endpoints are
+  registered per event type in the Portal; multiple endpoints can route different
+  events to different services.
+payload:
+  fields:
+    type: 'Event category: delivery | task | courier_location | shift'
+    event: The specific status within the type (enumerated below).
+    data: For delivery/task events, a Job (delivery) object identical to the Create Job response; for shift events, the shift.dispatched payload.
+  timestamps: ISO 8601, UTC, microseconds, no timezone suffix (e.g. 2022-03-05T01:11:51.078927)
+channels:
+- type: delivery
+  frequency: once per state transition
+  guaranteed_events: [created, assigned_driver, pickup_enroute, pickup_arrived, dropoff_enroute, dropoff_arrived, dropoff_complete]
+  events: [created, not_assigned_driver, assigned_driver, started, pickup_enroute, pickup_arrived, items_pick_update, items_pick_complete, pickup_complete, dropoff_enroute, dropoff_arrived, dropoff_complete, canceled_by_provider, return_in_progress, return_arrived, returned, scheduled, expired, failed, canceled_by_customer, canceled_by_nash, canceled_by_auto_reassign, proof_of_delivery, pincode_verification, pickup_label, shipping_label, manifested]
+- type: task
+  frequency: once per state transition
+  events: [created, updated, running, completed, canceled_by_provider, failed, canceled_by_customer, canceled_by_nash, planned_selection, refund_created, refund_updated]
+- type: courier_location
+  frequency: once every 1-2 minutes when courier location is available
+  events: [updated]
+- type: shift
+  frequency: on bulk dispatch of a delivery window
+  events: [dispatched]
+  reference: https://docs.usenash.com/reference/shift-dispatched-event
+verification:
+  provider: Svix
+  headers: [svix-id, svix-timestamp, svix-signature]
+  signing_secret: Nash Portal > Settings > Webhook Management > Endpoint > Signing Secret
+  method: Use the Svix SDKs (recommended) or verify manually with the headers + signing secret and a timestamp/replay check.
+  source_ips: https://docs.svix.com/receiving/source-ips
+retry_policy:
+  schedule: [immediately, 5s, 5m, 30m, 2h, 5h, 10h, 10h]
+  retried_on: [network error, 5xx, 408, 409, 429]
+  delivery_control:
+    'webhook-delivery: abort-message': Stop remaining retries for the current message.
+    'webhook-delivery: disable': Disable the entire endpoint until re-enabled.
+    'HTTP 410 Gone': Also disables the endpoint.
+management: https://portal.usenash.com/settings/webhook-management
+event_catalog: Portal > Webhook Management > Event Catalog tab (per-event schemas + example payloads)

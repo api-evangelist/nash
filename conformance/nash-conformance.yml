@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: derived
+source:
+- openapi/nash-openapi-original.json
+- https://docs.usenash.com/reference/errors
+- https://docs.usenash.com/reference/webhooks
+- https://www.nash.ai/legal/security
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: Publishes an OpenAPI 3.1.0 document (173 operations, 138 paths, 390 schemas) at docs.usenash.com/api-reference/openapi.json.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme; authentication is HTTP bearer API key.
+- id: oidc
+  conforms: false
+- id: http-bearer-auth
+  conforms: true
+  evidence: components.securitySchemes.Token is type http, scheme bearer (bearerFormat "JWT, API Key").
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Uses a custom typed-error envelope ({error:{code,message,details}, response_status, RequestID}), not application/problem+json.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No documented Sunset/Deprecation header support.
+- id: webhooks-signed
+  conforms: true
+  evidence: Webhooks are signed via Svix (svix-id/svix-timestamp/svix-signature) with documented verification.
+- id: e164-phone-numbers
+  conforms: true
+  evidence: Order phone numbers must be in E.164 format (INVALID_PHONE_NUMBER otherwise).
+- id: iso8601-timestamps
+  conforms: true
+  evidence: All webhook timestamps are ISO 8601 UTC with microseconds.
+- id: rate-limit-429
+  conforms: true
+  evidence: Returns 429 TOO_MANY_REQUESTS and honors Retry-After.
+- id: soc2
+  conforms: true
+  evidence: Security page (nash.ai/legal/security) declares SOC 2 compliance.
+- id: iso27001
+  conforms: partial
+  evidence: ISO 27001 is referenced on the security page in the context of Nash's cloud infrastructure provider (AWS); not asserted as a Nash certification directly.

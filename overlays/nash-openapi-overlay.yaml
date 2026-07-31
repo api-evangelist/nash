@@ -1,0 +1,35 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Nash Platform & Fleet API
+  version: 1.0.0
+# generated: '2026-07-20'
+# method: generated
+# extends the harvested spec without mutating it
+extends: openapi/nash-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: nash
+    x-apievangelist-category: last-mile-delivery
+    x-apievangelist-rating-notes: >-
+      OpenAPI 3.1 with 173 operations; bearer API-key auth (Authorization + Nash-Org-Id);
+      signed Svix webhooks; rich documented error-code registry; free sandbox with
+      fleet simulators; MCP server (sales-gated); SOC 2 security program.
+    x-apievangelist-auth: bearer-api-key
+    x-apievangelist-idempotency: external-identifier-upsert
+    x-apievangelist-rate-limit: 20 rps per organization
+- target: $.info
+  update:
+    x-apievangelist-artifacts:
+      authentication: authentication/nash-authentication.yml
+      conventions: conventions/nash-conventions.yml
+      errors: errors/nash-error-codes.yml
+      webhooks: asyncapi/nash-webhooks.yml
+      rate_limits: rate-limits/nash-rate-limits.yml
+      sandbox: sandbox/nash-sandbox.yml
+      lifecycle: lifecycle/nash-lifecycle.yml
+      data_model: data-model/nash-data-model.yml
+      agentic_access: agentic-access/nash-agentic-access.yml
+- target: $.servers
+  update:
+    x-apievangelist-note: Production US/AU and Sandbox US/AU environments; the /v1 base path applies to each host.

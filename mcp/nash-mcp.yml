@@ -1,0 +1,44 @@
+generated: '2026-07-20'
+method: searched
+status: published
+source: https://docs.usenash.com/reference/mcp-integration
+access: >-
+  Access to the Nash MCP server is enabled per organization and gated behind
+  sales — contact sales@usenash.com to be provisioned. Tools run with the
+  permissions of the API credentials behind them, so an agent can only see and do
+  what its key allows. The public docs describe the capability but do not publish
+  a connection URL or transport, so the endpoint below is left null.
+server:
+  name: nash
+  protocol: Model Context Protocol
+  transport: null
+  url: null
+capabilities:
+  # Capability areas the docs state the server exposes (verbatim grouping)
+  - area: Deliveries
+    description: Create deliveries with pickup and dropoff locations, track status in real time, and request refunds for failed or problematic ones.
+  - area: Couriers
+    description: Courier information, including location and contact details.
+  - area: Scheduling
+    description: Delivery windows, including capacity-aware booking.
+  - area: Batch operations
+    description: Act on multiple deliveries in one call.
+  - area: Store locations
+    description: Manage delivery origins.
+  - area: Documents
+    description: Retrieve proof of delivery and related documents.
+candidate_tools:
+  # DERIVED candidate mapping of the exposed capability areas to real OpenAPI operationIds
+  # (illustrative — the published server's exact tool surface is shared under NDA/sales onboarding).
+  - name: create_delivery
+    source_operation: openapi/nash-openapi-original.json#create_order_v1_order_post
+  - name: create_job
+    source_operation: openapi/nash-openapi-original.json#create_job_v1_jobs_post
+  - name: get_delivery_status
+    source_operation: openapi/nash-openapi-original.json#get_job_v1_jobs__string_id__get
+  - name: request_refund
+    source_operation: openapi/nash-openapi-original.json#delivery_incident_v1_jobs__string_jobId__tasks__string_taskId__delivery_incident_post
+  - name: book_delivery_window
+    source_operation: openapi/nash-openapi-original.json#get_eligible_delivery_windows_v1_eligible_delivery_windows_get
+related:
+  nash_agent: https://docs.usenash.com/nash-agent/overview

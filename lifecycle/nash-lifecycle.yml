@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source:
+- https://docs.usenash.com/reference/environments
+- https://docs.usenash.com/release-notes/change
+- https://status.usenash.com
+- openapi/nash-openapi-original.json
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /v1
+  docs: https://docs.usenash.com/api-reference/api-overview
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No formal deprecation/sunset policy is published. The docs note a live
+    migration from generic error codes (MISSING_RESOURCE) to domain-prefixed codes
+    (ORDER_NOT_FOUND, etc.) and advise clients to handle both forms; "options_group"
+    is the legacy name for a dispatch strategy. No OpenAPI operations are marked
+    `deprecated: true`.
+status_page: https://status.usenash.com
+release_notes: https://docs.usenash.com/release-notes/change
+environments:
+- name: Production (US)
+  api: https://api.usenash.com/v1
+  portal: https://portal.usenash.com
+  billed: true
+- name: Production (AU)
+  api: https://api.ap-southeast-2.usenash.com/v1
+  portal: https://portal.usenash.com
+  billed: true
+- name: Sandbox (US)
+  api: https://api.sandbox.usenash.com/v1
+  portal: https://portal.sandbox.usenash.com
+  billed: false
+- name: Sandbox (AU)
+  api: https://api.sandbox.ap-southeast-2.usenash.com/v1
+  portal: https://portal.sandbox.usenash.com
+  billed: false
+production_access:
+  gated: true
+  process: >-
+    Production API access is enabled by the Nash team after an integration-testing
+    call — see https://docs.usenash.com/guides/production-testing.
+deprecated_operations: []

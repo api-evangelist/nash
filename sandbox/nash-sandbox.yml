@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.usenash.com/reference/environments
+summary: >-
+  The Nash Sandbox is a free, fully-featured environment that exercises a real
+  integration without dispatching to actual drivers. All Nash API functionality is
+  supported; most endpoints work immediately with no extra configuration. Sandbox
+  pairs simulated fleets with real provider integrations. Prices in Sandbox do not
+  reflect Production settings, and SMS notifications are not sent in Sandbox.
+environments:
+  sandbox_us: https://api.sandbox.usenash.com/v1
+  sandbox_au: https://api.sandbox.ap-southeast-2.usenash.com/v1
+  sandbox_portal: https://portal.sandbox.usenash.com
+  production_us: https://api.usenash.com/v1
+separation:
+  model: separate base URL + separate Portal per environment (no test/live key prefix documented)
+  api_keys: Sandbox and Production use distinct API keys generated in their respective Portals.
+fleet_simulators:
+  description: >-
+    Mock fleets that emulate real delivery scenarios. Simulators start the job
+    based on the scheduled pickup time. Assign a simulator as the providerId on a
+    task/quote to drive deterministic status transitions.
+  simulators:
+  - id: FleetSimulator
+    behavior: Cycles through delivery statuses from not_assigned_driver up to dropoff_complete.
+  - id: FleetSimulatorFast
+    behavior: Same as FleetSimulator but with a shorter interval between status transitions.
+  - id: FailingFleetSimulator
+    behavior: Sends a `failed` delivery status.
+  status_reference: https://docs.usenash.com/reference/delivery-status
+  transition_trigger:
+    operation: openapi/nash-openapi-original.json#simulate-delivery-status-transition
+    docs: https://docs.usenash.com/api-reference/fleet-simulator/simulate-delivery-status-transition.md
+    note: Advance a delivery to a given status for testing in sandbox.
+differences_from_production:
+- SMS notifications are not triggered in Sandbox.
+- Fleet and fleet-simulator behavior is not an indication of real-world fleet behavior.
+- Sandbox pricing does not reflect Production settings.

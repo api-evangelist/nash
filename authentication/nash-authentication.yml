@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/nash-openapi-original.json
+docs: https://docs.usenash.com/reference/authentication
+summary:
+  types:
+  - http
+  scheme: bearer
+  api_key_header: Authorization
+  org_scope_header: Nash-Org-Id
+notes: >-
+  Nash authenticates every API request with a Bearer API key in the
+  `Authorization: Bearer $NASH_API_KEY` header. API keys are created in the Nash
+  Portal (portal.usenash.com). A second header, `Nash-Org-Id: $NASH_ORG_ID`, is
+  optional but REQUIRED when an API key has access to more than one organization;
+  it scopes the request to a single org. The OpenAPI advertises the scheme as
+  bearerFormat "JWT, API Key". There is no OAuth 2.0 / OIDC surface — no scopes
+  artifact applies.
+schemes:
+- name: Token
+  type: http
+  scheme: bearer
+  bearerFormat: JWT, API Key
+  in: header
+  header: Authorization
+  sources:
+  - openapi/nash-openapi-original.json

@@ -1,0 +1,70 @@
+generated: '2026-07-20'
+method: searched
+source:
+- https://docs.usenash.com/reference/authentication
+- https://docs.usenash.com/reference/rate-limits-throttling
+- https://docs.usenash.com/reference/errors
+- https://docs.usenash.com/api-reference/api-overview
+- openapi/nash-openapi-original.json
+authentication:
+  style: bearer-api-key
+  header: 'Authorization: Bearer $NASH_API_KEY'
+  org_scope_header: Nash-Org-Id
+  ref: authentication/nash-authentication.yml
+idempotency:
+  supported: true
+  mechanism: client-supplied external identifier (natural idempotency key)
+  keys:
+    orders: externalId
+    jobs: externalIdentifier
+  pattern: >-
+    Nash does not use a dedicated Idempotency-Key header. Instead, create-or-update
+    ("upsert") endpoints keyed by your own external identifier make retries safe: if
+    a record with the given external identifier already exists it is updated,
+    otherwise a new one is created. The docs explicitly recommend sending externalId
+    (orders) / externalIdentifier (jobs) so a retried call after a 429/5xx references
+    the same record instead of creating a duplicate.
+  representative_operations:
+  - openapi/nash-openapi-original.json#upsert_order_by_external_id_v1_order_external_identifier__string_externalId__post
+  - openapi/nash-openapi-original.json#create_or_update_job_by_external_id_v1_jobs_external_identifier__string_externalIdentifier__post
+  guard:
+    ORDER_DUPLICATE_EXTERNAL_ID: 409 when more than one order shares the external ID.
+  ref: errors/nash-error-codes.yml
+pagination:
+  style: offset
+  params: [size, offset]
+  response_fields: [data, meta]
+  notes: List endpoints (e.g. zones, inventory, store locations) page with size and offset; results under `data`, pagination under `meta`.
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /v1
+  ref: lifecycle/nash-lifecycle.yml
+request_tracing:
+  request_id_header: X-REQUEST-ID
+  body_field: RequestID
+  guidance: Log the request id with every failure; Nash support uses it to trace requests.
+rate_limiting:
+  limit: 20 requests/second per organization
+  signal: 429 TOO_MANY_REQUESTS with optional Retry-After
+  ref: rate-limits/nash-rate-limits.yml
+error_envelope:
+  shape: '{ "error": { "code", "message", "details" }, "response_status", "RequestID" }'
+  ref: errors/nash-error-codes.yml
+timestamps:
+  format: ISO 8601, UTC, microseconds, no timezone suffix (e.g. 2022-03-05T01:11:51.078927)
+webhooks:
+  ref: asyncapi/nash-webhooks.yml
+  signing: Svix (svix-id, svix-timestamp, svix-signature headers)
+identifiers:
+  prefixed_ids: true
+  examples:
+    job: job_
+    task: tsk_
+    delivery: dlv_
+    quote: qot_
+    order: ord_
+    location: loc_
+    document: doc_
+    package: pkg_
+    config: cfg_
