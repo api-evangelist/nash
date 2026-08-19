@@ -1,0 +1,1111 @@
+{
+  "item": [
+    {
+      "id": "e68d9f2b-4e1b-4f85-b279-468865383ff0",
+      "name": "Notifications",
+      "description": {
+        "content": "Notifications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43d0e496-0176-4281-921c-51ab92dfec60",
+          "name": "List Notification Triggers",
+          "request": {
+            "name": "List Notification Triggers",
+            "description": {
+              "content": "List notification triggers configured on the authenticated organization. Use the `Nash-Org-Id` header to scope the request to a specific org (e.g. a child org).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notification-triggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22c44a8c-c6d8-43e4-b1b9-21c1012205e4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification-triggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notificationTriggers\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"name\": \"string\",\n      \"enabled\": false,\n      \"description\": \"string\",\n      \"notificationGroupIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"name\": \"string\",\n      \"enabled\": true,\n      \"description\": \"string\",\n      \"notificationGroupIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b51e418-e650-46a9-9f87-dc77d9fa5354",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification-triggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7bbfa6c-9819-4cc1-aeef-0a075f0fda2a",
+          "name": "Create Notification Trigger",
+          "request": {
+            "name": "Create Notification Trigger",
+            "description": {
+              "content": "Create a notification trigger on the authenticated organization. The request body is a discriminated union on `type`: each trigger type (see GET /v1/notification-triggers/templates) has its own typed `parameters` shape in the OpenAPI schema. An invalid `type` returns a 400 listing all valid types. Use the `Nash-Org-Id` header to scope creation to a specific org (e.g. a child org).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notification-triggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"notificationGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"type\": \"<string>\",\n  \"parameters\": {\n    \"deliveryStatus\": \"<string>\",\n    \"sendScheduledMessage\": \"<boolean>\",\n    \"scheduledSendDeltaMinutes\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"enabled\": true,\n  \"message\": \"<string>\",\n  \"flag\": \"<boolean>\",\n  \"autoResolveFlag\": \"<boolean>\",\n  \"optionsGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contractIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isInternal\": \"<boolean>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customEventName\": \"<string>\",\n  \"conditionalLogic\": {\n    \"key_0\": 8765.455285149817,\n    \"key_1\": 4660\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae4c751c-be70-4749-acbf-df30658b0dbf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification-triggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\",\n  \"notificationGroupIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"type\": \"string\",\n  \"parameters\": {\n    \"deliveryStatus\": \"string\",\n    \"sendScheduledMessage\": false,\n    \"scheduledSendDeltaMinutes\": 1646\n  },\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"message\": \"string\",\n  \"flag\": true,\n  \"autoResolveFlag\": false,\n  \"optionsGroupIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"contractIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"isInternal\": true,\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"customEventName\": \"string\",\n  \"conditionalLogic\": {\n    \"key_0\": 9524.482771320758\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"name\": \"string\",\n  \"enabled\": true,\n  \"description\": \"string\",\n  \"notificationGroupIds\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c9f1ef8-c102-4658-8b76-148987d088ad",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification-triggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\",\n  \"notificationGroupIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"type\": \"string\",\n  \"parameters\": {\n    \"deliveryStatus\": \"string\",\n    \"sendScheduledMessage\": false,\n    \"scheduledSendDeltaMinutes\": 1646\n  },\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"message\": \"string\",\n  \"flag\": true,\n  \"autoResolveFlag\": false,\n  \"optionsGroupIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"contractIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"isInternal\": true,\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"customEventName\": \"string\",\n  \"conditionalLogic\": {\n    \"key_0\": 9524.482771320758\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f56e93f-ce6a-4bd1-a403-4da03ccdb1bd",
+          "name": "Get Notification Trigger Catalog",
+          "request": {
+            "name": "Get Notification Trigger Catalog",
+            "description": {
+              "content": "The full notification-trigger catalog. Each entry describes a trigger's `type` slug, human `title`, the `value` used to subscribe automations, the `entityType` (route/delivery/task/order/activity), its `statuses` vocabulary, the JSON Schema of its create `parameters`, and the `supportedFilters` / `supportedActions`. The shared `filterCriteria` (dispatch strategies, contracts, zones, metadata conditions) and `actions` are described once at the top level. Designed for agents and humans to discover what can be automated and how.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notification-triggers",
+                "catalog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32e16941-b76e-4b06-8a2f-5afef282caa9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification-triggers",
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"filterCriteria\": {\n    \"key_0\": {\n      \"field\": \"string\",\n      \"valueType\": \"condition_tree\",\n      \"listEndpoint\": \"string\",\n      \"operators\": [\n        \"greater_than_or_equal_to\",\n        \"equals\"\n      ],\n      \"nodeShape\": \"string\",\n      \"description\": \"\"\n    }\n  },\n  \"actions\": [\n    {\n      \"key\": \"auto_resolve_flag\",\n      \"fields\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"key\": \"send_message\",\n      \"fields\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"triggers\": [\n    {\n      \"type\": \"internal_driver_not_assigned\",\n      \"title\": \"string\",\n      \"value\": \"adb3f7e2c9|Ad-hoc Break\",\n      \"entityType\": \"route\",\n      \"category\": \"order\",\n      \"isFlag\": false,\n      \"creatable\": false,\n      \"description\": \"\",\n      \"statuses\": [\n        \"items_pick_complete\",\n        \"canceled_by_customer\"\n      ],\n      \"parametersSchema\": {\n        \"key_0\": \"string\"\n      },\n      \"supportedActions\": [\n        \"auto_resolve_flag\",\n        \"flag_delivery\"\n      ],\n      \"supportedFilters\": [\n        \"dispatch_strategies\",\n        \"dispatch_strategies\"\n      ]\n    },\n    {\n      \"type\": \"delivery_window_booked_timeout\",\n      \"title\": \"string\",\n      \"value\": \"9b2c8e1d4a|Vehicle Breakdown\",\n      \"entityType\": \"activity\",\n      \"category\": \"task\",\n      \"isFlag\": false,\n      \"creatable\": false,\n      \"description\": \"\",\n      \"statuses\": [\n        \"scheduled\",\n        \"return_in_progress\"\n      ],\n      \"parametersSchema\": {\n        \"key_0\": \"string\"\n      },\n      \"supportedActions\": [\n        \"flag_delivery\",\n        \"send_message\"\n      ],\n      \"supportedFilters\": [\n        \"contracts\",\n        \"dispatch_strategies\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a165b1b-2fbc-4a2d-aa48-0ffe65398b80",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification-triggers",
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d98a26d5-dbb4-4f5e-8738-0bd53e1c5ba9",
+          "name": "List Notification Trigger Templates",
+          "request": {
+            "name": "List Notification Trigger Templates",
+            "description": {
+              "content": "List pre-defined notification trigger templates. Each template has a `type` slug (e.g. 'tasks_attempts_exhausted') and a human-readable `title` (e.g. 'Tasks Attempts Exhausted'). Use the `type` when creating a trigger via POST /v1/notification-triggers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notification-triggers",
+                "templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71e2cd79-851d-43d8-a865-f8064fbede00",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification-triggers",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"templates\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fb7fcd0-fa8a-400f-9824-17ab17b9e2ed",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification-triggers",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12645fcd-1939-4431-810a-a1f1fd302dfb",
+          "name": "Trigger Notification",
+          "request": {
+            "name": "Trigger Notification",
+            "description": {
+              "content": "Manually trigger a notification for a specific delivery event. The notification is sent using the configured channel and template for the trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notification",
+                ":id",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Notification trigger ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5be42d69-8bc4-4ddd-9420-7d38a059c0b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification",
+                    ":id",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Notification trigger ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notificationTrigger\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "541f2834-a9ef-4c8e-aa99-07ec21587bb6",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notification",
+                    ":id",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Notification trigger ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed8c9155-34c2-4009-91cc-d86f1cb0749c",
+          "name": "Get contacts in the deny list.",
+          "request": {
+            "name": "Get contacts in the deny list.",
+            "description": {
+              "content": "Retrieve all contacts in the organization's notification deny list. Contacts on this list will not receive delivery notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organization-management",
+                "notifications",
+                "deny-list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<string>",
+                  "description": "The organization id to get the deny list for."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Use this parameter to show more pages of results (page starts at 0).."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "The number of items to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d4bbb99-2bc1-4397-9aae-cfbea8707fca",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization-management",
+                    "notifications",
+                    "deny-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"value\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"value\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0e1ebb8-b387-4368-bb84-fa76774ad1b0",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization-management",
+                    "notifications",
+                    "deny-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1723b16e-2692-42c2-bf70-fb4f0db367bb",
+          "name": "Add a contact to the deny list.",
+          "request": {
+            "name": "Add a contact to the deny list.",
+            "description": {
+              "content": "Add a contact (phone number or email) to the organization's notification deny list. The contact will no longer receive delivery notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organization-management",
+                "notifications",
+                "deny-list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "093687fa-ab4a-475d-8276-ec1803ae031e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization-management",
+                    "notifications",
+                    "deny-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"value\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "147f4083-88c0-4489-948b-576c8bf063e7",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization-management",
+                    "notifications",
+                    "deny-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aadf5963-36d4-48e7-88f0-ee36145fa257",
+          "name": "Remove a contact from the deny list.",
+          "request": {
+            "name": "Remove a contact from the deny list.",
+            "description": {
+              "content": "Remove a contact from the organization's notification deny list. The contact will resume receiving delivery notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organization-management",
+                "notifications",
+                "deny-list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "765016b2-b651-43e6-bef0-3321c1b2e984",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization-management",
+                    "notifications",
+                    "deny-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf58fc1f-47dd-40bd-b2ff-c6daafd72fa7",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization-management",
+                    "notifications",
+                    "deny-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0e2c6f4b-8fca-4068-afe7-7a8474171a73",
+    "name": "Nash AI Functions Notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

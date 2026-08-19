@@ -1,0 +1,1893 @@
+{
+  "item": [
+    {
+      "id": "023845bc-9b02-4afd-bcee-9c71e2d63c6e",
+      "name": "Zones",
+      "description": {
+        "content": "Zones",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b1bc5b47-f94e-4190-92f6-e44a0d8cfe46",
+          "name": "Get zone restrictions",
+          "request": {
+            "name": "Get zone restrictions",
+            "description": {
+              "content": "List all zone restrictions for the organization. Zone restrictions define rules that control delivery behavior within specific zones.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zone-restrictions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4497cbb-e8c5-4ac4-b5d0-a4466ba2eced",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zone-restrictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"zoneRestrictions\": [\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 3745,\n        \"key_1\": false\n      }\n    },\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ea32e45-2ca3-4f3b-a425-e2a8ba7cfd7a",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zone-restrictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e235def8-9127-40f0-8280-5910262d0679",
+          "name": "Create zone restriction",
+          "request": {
+            "name": "Create zone restriction",
+            "description": {
+              "content": "Create a zone restriction rule that controls delivery behavior within a specific zone, such as provider restrictions or time-based rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zone-restrictions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"restrictionMetadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": 2648.0493661158166\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8912aaed-fd58-4273-a9c9-67b17beffd76",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zone-restrictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"restrictionMetadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"res_01234567890123456789\",\n  \"externalId\": \"ext_01234567890123456789\",\n  \"name\": \"Zone Restriction 1\",\n  \"isActive\": true,\n  \"restrictionMetadata\": {\n    \"key_0\": 11\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b343273-c5bc-4bd2-8d17-65ad17196760",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zone-restrictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"restrictionMetadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d49dcbf-ca57-475c-b6c7-1562ae98dec0",
+          "name": "Upsert multiple zone restrictions",
+          "request": {
+            "name": "Upsert multiple zone restrictions",
+            "description": {
+              "content": "Create or update multiple zone restrictions in a single request. Existing restrictions are matched by ID for updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zone-restrictions",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"zoneRestrictions\": [\n    {\n      \"name\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"isActive\": \"<boolean>\",\n      \"restrictionMetadata\": {\n        \"key_0\": true,\n        \"key_1\": 1397.6208685118074\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"isActive\": \"<boolean>\",\n      \"restrictionMetadata\": {\n        \"key_0\": 180,\n        \"key_1\": false\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25fa1836-3c07-4257-b85d-42288464d5f1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zone-restrictions",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"zoneRestrictions\": [\n    {\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": false,\n        \"key_1\": 715.4877474070997\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"isActive\": false,\n      \"restrictionMetadata\": {\n        \"key_0\": false,\n        \"key_1\": 9121,\n        \"key_2\": 3504.962726416626,\n        \"key_3\": \"string\",\n        \"key_4\": true\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"zoneRestrictions\": [\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 3745,\n        \"key_1\": false\n      }\n    },\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5c014f0-8f46-4d04-ac13-f052128dc770",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zone-restrictions",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"zoneRestrictions\": [\n    {\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": false,\n        \"key_1\": 715.4877474070997\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"isActive\": false,\n      \"restrictionMetadata\": {\n        \"key_0\": false,\n        \"key_1\": 9121,\n        \"key_2\": 3504.962726416626,\n        \"key_3\": \"string\",\n        \"key_4\": true\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b2d32a2-abab-46e9-9462-2ac3d52949ed",
+          "name": "Update zone restriction",
+          "request": {
+            "name": "Update zone restriction",
+            "description": {
+              "content": "Update an existing zone restriction's rules or configuration. Only provided fields are updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zone-restrictions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the zone restriction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"restrictionMetadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": 2648.0493661158166\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "466e13ca-6a98-4dda-8fb1-8259e93084af",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zone-restrictions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the zone restriction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"restrictionMetadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"res_01234567890123456789\",\n  \"externalId\": \"ext_01234567890123456789\",\n  \"name\": \"Zone Restriction 1\",\n  \"isActive\": true,\n  \"restrictionMetadata\": {\n    \"key_0\": 11\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d765bd3-6051-4a10-9c4c-409d03be53da",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zone-restrictions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the zone restriction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"restrictionMetadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4affb781-7b6e-4f2e-bff5-13d8ad812551",
+          "name": "Get zones",
+          "request": {
+            "name": "Get zones",
+            "description": {
+              "content": "List zones for the organization with pagination. Use size and offset parameters to paginate. Optionally include deleted zones with is_deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "The size of the zones to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The offset of the zones to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "isDeleted",
+                  "value": "false",
+                  "description": "Whether to return deleted zones."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b1d1332-cb62-4555-811a-e7ccaddd0e3b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "isDeleted",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"zones\": [\n    {\n      \"id\": \"zone_01234567890123456789\",\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"portalUrl\": \"string\",\n      \"coverageArea\": {\n        \"key_0\": 6327,\n        \"key_1\": 9651\n      },\n      \"storeLocations\": [\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": 7925.969970492673,\n            \"key_2\": true\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 50,\n            \"key_1\": 1411\n          },\n          \"prepTimeMinutes\": 5719,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        },\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": false\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 3909.2019728787964\n          },\n          \"prepTimeMinutes\": 7404,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        }\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\"\n        }\n      ],\n      \"zoneRestrictions\": [\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": 6595\n          }\n        },\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": 7737,\n            \"key_1\": 4008.8091810002393,\n            \"key_2\": 5981\n          }\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": true,\n        \"key_1\": false,\n        \"key_2\": 5342\n      },\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"zone_01234567890123456789\",\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"portalUrl\": \"string\",\n      \"coverageArea\": {\n        \"key_0\": \"string\"\n      },\n      \"storeLocations\": [\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\"\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 3899\n          },\n          \"prepTimeMinutes\": 8752,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        },\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": 237\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": \"string\",\n            \"key_1\": 2978\n          },\n          \"prepTimeMinutes\": 4185,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        }\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": false,\n          \"key_1\": 6974,\n          \"key_2\": 625\n        },\n        {\n          \"key_0\": true\n        }\n      ],\n      \"zoneRestrictions\": [\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": false\n          }\n        },\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": true\n          }\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": 5624\n      },\n      \"isDeleted\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd465d47-1608-4e61-bcb5-0ba39c1e6b86",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "isDeleted",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80151033-f58b-40f7-b277-3673594c9857",
+          "name": "Create a zone",
+          "request": {
+            "name": "Create a zone",
+            "description": {
+              "content": "Create a geographic zone defined by a polygon boundary. Zones are used to define delivery areas for store locations and apply zone-based restrictions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"coverageAreaId\": \"<string>\",\n  \"polygon\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ],\n  \"storeLocationIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": 2032,\n      \"key_1\": 8644.18917113434,\n      \"key_2\": false\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": 1303.3787428988942\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "947cfbe0-6407-402d-9b8e-d4ad47f908a8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"coverageAreaId\": \"<string>\",\n  \"polygon\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ],\n  \"storeLocationIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": 6650.76602842143,\n      \"key_1\": 9594,\n      \"key_2\": \"string\",\n      \"key_3\": 2537\n    },\n    {\n      \"key_0\": 4822.834712802879\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 454.01487653744744\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"zone_01234567890123456789\",\n  \"name\": \"string\",\n  \"externalId\": \"string\",\n  \"portalUrl\": \"string\",\n  \"coverageArea\": {\n    \"key_0\": false,\n    \"key_1\": 6125\n  },\n  \"storeLocations\": [\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7040.161934693138,\n        \"longitude\": 9337.654429885177\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": 3152\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 7061.611930939989,\n        \"key_2\": 9259,\n        \"key_3\": 3546\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": 9536.60316107513,\n        \"key_1\": 1665.7202699908935,\n        \"key_2\": true\n      },\n      \"prepTimeMinutes\": 6570,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    },\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7113.041523154991,\n        \"longitude\": 5380.636123073862\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 9440.702464738324,\n          \"key_1\": true\n        },\n        {\n          \"key_0\": 2842.8367058215476,\n          \"key_1\": 3915,\n          \"key_2\": false\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"prepTimeMinutes\": 8991,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    }\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": 2238.8311763240285\n    },\n    {\n      \"key_0\": 6417\n    }\n  ],\n  \"zoneRestrictions\": [\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4564.222038742364,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4951\n      }\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": 1744\n  },\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da38bb42-a2b5-49af-b5d4-ca88bff9395a",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"coverageAreaId\": \"<string>\",\n  \"polygon\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ],\n  \"storeLocationIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": 6650.76602842143,\n      \"key_1\": 9594,\n      \"key_2\": \"string\",\n      \"key_3\": 2537\n    },\n    {\n      \"key_0\": 4822.834712802879\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 454.01487653744744\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f2120b5-cdac-48ae-b2f1-b344ffe61d3a",
+          "name": "Get zones that cover specified location (latitude & longitude, city_zipcode)",
+          "request": {
+            "name": "Get zones that cover specified location (latitude & longitude, city_zipcode)",
+            "description": {
+              "content": "Find zones whose polygon boundaries contain a given geographic point. Provide latitude/longitude, city_zipcode, or zipcode to find matching zones.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones",
+                "coverage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<string>",
+                  "description": "The latitude of the location to check coverage for. If used, must specify longitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<string>",
+                  "description": "The longitude of the location to check coverage for. If used, must specify latitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "cityZipcode",
+                  "value": "<string>",
+                  "description": "The city_zipcode pair to check coverage for. The location must have coverage set up using the `City & Zip Code` unique field, not the separate `City` or `Zip Code` fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "zipcode",
+                  "value": "<string>",
+                  "description": "The zipcode to check coverage for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b76fba3a-2b7b-4df2-b97e-d2339cd22386",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    "coverage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cityZipcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipcode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"zones\": [\n    {\n      \"id\": \"zone_01234567890123456789\",\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"portalUrl\": \"string\",\n      \"coverageArea\": {\n        \"key_0\": 6327,\n        \"key_1\": 9651\n      },\n      \"storeLocations\": [\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": 7925.969970492673,\n            \"key_2\": true\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 50,\n            \"key_1\": 1411\n          },\n          \"prepTimeMinutes\": 5719,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        },\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": false\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 3909.2019728787964\n          },\n          \"prepTimeMinutes\": 7404,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        }\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\"\n        }\n      ],\n      \"zoneRestrictions\": [\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": 6595\n          }\n        },\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": 7737,\n            \"key_1\": 4008.8091810002393,\n            \"key_2\": 5981\n          }\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": true,\n        \"key_1\": false,\n        \"key_2\": 5342\n      },\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"zone_01234567890123456789\",\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"portalUrl\": \"string\",\n      \"coverageArea\": {\n        \"key_0\": \"string\"\n      },\n      \"storeLocations\": [\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\"\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 3899\n          },\n          \"prepTimeMinutes\": 8752,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        },\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": 237\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": \"string\",\n            \"key_1\": 2978\n          },\n          \"prepTimeMinutes\": 4185,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        }\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": false,\n          \"key_1\": 6974,\n          \"key_2\": 625\n        },\n        {\n          \"key_0\": true\n        }\n      ],\n      \"zoneRestrictions\": [\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": false\n          }\n        },\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": true\n          }\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": 5624\n      },\n      \"isDeleted\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e44bd670-96eb-4676-afca-07f4f72ed92d",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    "coverage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cityZipcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipcode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f55b4a57-a55f-4083-b125-b20a5b733fc9",
+          "name": "Get zone by external identifier",
+          "request": {
+            "name": "Get zone by external identifier",
+            "description": {
+              "content": "Retrieve a zone using your external identifier instead of the Nash zone ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones",
+                "external_identifier",
+                ":externalIdentifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a27e7466-cc93-4843-9704-bd2b04160743",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    "external_identifier",
+                    ":externalIdentifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"zone_01234567890123456789\",\n  \"name\": \"string\",\n  \"externalId\": \"string\",\n  \"portalUrl\": \"string\",\n  \"coverageArea\": {\n    \"key_0\": false,\n    \"key_1\": 6125\n  },\n  \"storeLocations\": [\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7040.161934693138,\n        \"longitude\": 9337.654429885177\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": 3152\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 7061.611930939989,\n        \"key_2\": 9259,\n        \"key_3\": 3546\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": 9536.60316107513,\n        \"key_1\": 1665.7202699908935,\n        \"key_2\": true\n      },\n      \"prepTimeMinutes\": 6570,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    },\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7113.041523154991,\n        \"longitude\": 5380.636123073862\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 9440.702464738324,\n          \"key_1\": true\n        },\n        {\n          \"key_0\": 2842.8367058215476,\n          \"key_1\": 3915,\n          \"key_2\": false\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"prepTimeMinutes\": 8991,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    }\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": 2238.8311763240285\n    },\n    {\n      \"key_0\": 6417\n    }\n  ],\n  \"zoneRestrictions\": [\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4564.222038742364,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4951\n      }\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": 1744\n  },\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5969141f-c44a-46a1-b75f-4323e6d6bd55",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    "external_identifier",
+                    ":externalIdentifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c40c6b5d-67ca-4fa1-8e6e-49b1a9222c25",
+          "name": "Query zones",
+          "request": {
+            "name": "Query zones",
+            "description": {
+              "content": "Return full zone details for many zones in a single call. Filter by `ids` and/or `externalIds` (combined with OR); omit both to page through all of the organization's zones. Results come back under `data` with pagination under `meta`; each `data` item matches the shape of `GET /v1/zones/<id>`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isDeleted\": false,\n  \"size\": 100,\n  \"offset\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e05665af-a797-4a24-a6ed-540e8b62eb67",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalIds\": [\n    \"7810BBTORQ\",\n    \"7810BBWAUR\"\n  ],\n  \"isDeleted\": false,\n  \"offset\": 0,\n  \"size\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"portalUrl\": \"string\",\n      \"coverageArea\": {\n        \"id\": \"string\",\n        \"cityZipcodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"zipCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cities\": [\n          \"string\",\n          \"string\"\n        ],\n        \"states\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"polygons\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"polygonData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"polygonData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"storeLocations\": [\n        {\n          \"id\": \"string\",\n          \"externalId\": \"string\",\n          \"name\": \"string\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"phoneNumber\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\",\n          \"prepTimeMinutes\": 9417,\n          \"blackoutDates\": [\n            \"string\",\n            \"string\"\n          ],\n          \"operatingHours\": {\n            \"key_0\": \"string\",\n            \"key_1\": 2415\n          },\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"location\": {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressFirstLine\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressSecondarynumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lat\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lng\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"string\",\n          \"externalId\": \"string\",\n          \"name\": \"string\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"phoneNumber\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\",\n          \"prepTimeMinutes\": 596,\n          \"blackoutDates\": [\n            \"string\",\n            \"string\"\n          ],\n          \"operatingHours\": {\n            \"key_0\": 5620,\n            \"key_1\": 2716.969343478787\n          },\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"location\": {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressFirstLine\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressSecondarynumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lat\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lng\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"storeLocationId\": \"string\",\n          \"startDate\": \"2003-12-07T16:21:25.372Z\",\n          \"endDate\": \"1980-10-23T11:53:07.070Z\"\n        },\n        {\n          \"storeLocationId\": \"string\",\n          \"startDate\": \"1990-06-05T14:50:43.387Z\",\n          \"endDate\": \"1988-02-29T04:01:04.705Z\"\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": 6256,\n        \"key_1\": true,\n        \"key_2\": 3809.065176133256\n      },\n      \"isDeleted\": true\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"portalUrl\": \"string\",\n      \"coverageArea\": {\n        \"id\": \"string\",\n        \"cityZipcodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"zipCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cities\": [\n          \"string\",\n          \"string\"\n        ],\n        \"states\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"polygons\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"polygonData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"polygonData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"storeLocations\": [\n        {\n          \"id\": \"string\",\n          \"externalId\": \"string\",\n          \"name\": \"string\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"phoneNumber\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\",\n          \"prepTimeMinutes\": 4863,\n          \"blackoutDates\": [\n            \"string\",\n            \"string\"\n          ],\n          \"operatingHours\": {\n            \"key_0\": false,\n            \"key_1\": false,\n            \"key_2\": \"string\",\n            \"key_3\": 6637.036734759155\n          },\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"location\": {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressFirstLine\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressSecondarynumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lat\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lng\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"string\",\n          \"externalId\": \"string\",\n          \"name\": \"string\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"phoneNumber\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\",\n          \"prepTimeMinutes\": 8311,\n          \"blackoutDates\": [\n            \"string\",\n            \"string\"\n          ],\n          \"operatingHours\": {\n            \"key_0\": 9420,\n            \"key_1\": 2299.544021889619,\n            \"key_2\": 6520.082104153518\n          },\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"location\": {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressFirstLine\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressSecondarynumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addressZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lat\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lng\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"storeLocationId\": \"string\",\n          \"startDate\": \"1987-02-16T05:27:22.128Z\",\n          \"endDate\": \"1972-11-29T13:11:38.006Z\"\n        },\n        {\n          \"storeLocationId\": \"string\",\n          \"startDate\": \"2009-10-28T04:47:15.253Z\",\n          \"endDate\": \"1989-01-15T09:54:20.334Z\"\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": 6165.738943541066,\n        \"key_1\": true,\n        \"key_2\": false\n      },\n      \"isDeleted\": false\n    }\n  ],\n  \"meta\": {\n    \"total\": 137,\n    \"size\": 100,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43cf5a74-f23a-4a52-b594-53a7be0f8a1b",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalIds\": [\n    \"7810BBTORQ\",\n    \"7810BBWAUR\"\n  ],\n  \"isDeleted\": false,\n  \"offset\": 0,\n  \"size\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c02f37d6-6f68-469e-8cb9-0c5a2480c93c",
+          "name": "Upsert multiple zones",
+          "request": {
+            "name": "Upsert multiple zones",
+            "description": {
+              "content": "Create or update multiple zones in a single request. Existing zones are matched by ID or external identifier for updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"zones\": [\n    {\n      \"name\": \"<string>\",\n      \"coverageAreaId\": \"<string>\",\n      \"polygon\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      \"storeLocationIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": false\n        },\n        {\n          \"key_0\": 6868.596139160924,\n          \"key_1\": true\n        }\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": \"string\"\n      },\n      \"externalId\": \"<string>\",\n      \"cityZipcodes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"coverageAreaId\": \"<string>\",\n      \"polygon\": [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      \"storeLocationIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": 1969\n        },\n        {\n          \"key_0\": false,\n          \"key_1\": \"string\"\n        }\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": 271.5251350275405\n      },\n      \"externalId\": \"<string>\",\n      \"cityZipcodes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "78d7fea4-2aee-4d9f-8de9-d941247a37f6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"zones\": [\n    {\n      \"name\": \"string\",\n      \"coverageAreaId\": \"string\",\n      \"polygon\": [\n        [\n          9087.357771835319,\n          7689.1381458803635\n        ],\n        [\n          9186.787856599254,\n          1357.564564445165\n        ]\n      ],\n      \"storeLocationIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": true\n        },\n        {\n          \"key_0\": 3549\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": true,\n        \"key_3\": 1161.1170434738672\n      },\n      \"externalId\": \"string\",\n      \"cityZipcodes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"coverageAreaId\": \"string\",\n      \"polygon\": [\n        [\n          8769.279356414974,\n          6139.607745502266\n        ],\n        [\n          3370.51476214454,\n          7487.129450358114\n        ]\n      ],\n      \"storeLocationIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": 5023,\n          \"key_3\": 2137\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": 8334\n      },\n      \"externalId\": \"string\",\n      \"cityZipcodes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"zones\": [\n    {\n      \"id\": \"zone_01234567890123456789\",\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"portalUrl\": \"string\",\n      \"coverageArea\": {\n        \"key_0\": 6327,\n        \"key_1\": 9651\n      },\n      \"storeLocations\": [\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": 7925.969970492673,\n            \"key_2\": true\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 50,\n            \"key_1\": 1411\n          },\n          \"prepTimeMinutes\": 5719,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        },\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": false\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 3909.2019728787964\n          },\n          \"prepTimeMinutes\": 7404,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        }\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\"\n        }\n      ],\n      \"zoneRestrictions\": [\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": 6595\n          }\n        },\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": 7737,\n            \"key_1\": 4008.8091810002393,\n            \"key_2\": 5981\n          }\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": true,\n        \"key_1\": false,\n        \"key_2\": 5342\n      },\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"zone_01234567890123456789\",\n      \"name\": \"string\",\n      \"externalId\": \"string\",\n      \"portalUrl\": \"string\",\n      \"coverageArea\": {\n        \"key_0\": \"string\"\n      },\n      \"storeLocations\": [\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": \"string\"\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": 3899\n          },\n          \"prepTimeMinutes\": 8752,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        },\n        {\n          \"id\": \"stl_01234567890123456789\",\n          \"name\": \"White House\",\n          \"phoneNumber\": \"+1234567890\",\n          \"location\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"secondaryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"county\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"zoneIds\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"zoneAssociations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tags\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"integrationMetadata\": {\n            \"key_0\": 237\n          },\n          \"externalId\": \"string\",\n          \"operatingHours\": {\n            \"key_0\": \"string\",\n            \"key_1\": 2978\n          },\n          \"prepTimeMinutes\": 4185,\n          \"blackoutDates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"email\": \"string\",\n          \"pickupInstructions\": \"string\"\n        }\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": false,\n          \"key_1\": 6974,\n          \"key_2\": 625\n        },\n        {\n          \"key_0\": true\n        }\n      ],\n      \"zoneRestrictions\": [\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": false\n          }\n        },\n        {\n          \"id\": \"res_01234567890123456789\",\n          \"externalId\": \"ext_01234567890123456789\",\n          \"name\": \"Zone Restriction 1\",\n          \"isActive\": true,\n          \"restrictionMetadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": true\n          }\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": 5624\n      },\n      \"isDeleted\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9b932a1-5b5c-4887-9448-aada2a0f445d",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"zones\": [\n    {\n      \"name\": \"string\",\n      \"coverageAreaId\": \"string\",\n      \"polygon\": [\n        [\n          9087.357771835319,\n          7689.1381458803635\n        ],\n        [\n          9186.787856599254,\n          1357.564564445165\n        ]\n      ],\n      \"storeLocationIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": true\n        },\n        {\n          \"key_0\": 3549\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": true,\n        \"key_3\": 1161.1170434738672\n      },\n      \"externalId\": \"string\",\n      \"cityZipcodes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"coverageAreaId\": \"string\",\n      \"polygon\": [\n        [\n          8769.279356414974,\n          6139.607745502266\n        ],\n        [\n          3370.51476214454,\n          7487.129450358114\n        ]\n      ],\n      \"storeLocationIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"storeLocationAssociations\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": 5023,\n          \"key_3\": 2137\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneMetadata\": {\n        \"key_0\": 8334\n      },\n      \"externalId\": \"string\",\n      \"cityZipcodes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09b47e53-4589-44cd-a160-4d01e94b7fbe",
+          "name": "Get zone",
+          "request": {
+            "name": "Get zone",
+            "description": {
+              "content": "Retrieve a single zone by ID, including its polygon boundary and associated store locations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36b21234-b117-47e9-882e-b3b4ca1f7eea",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"zone_01234567890123456789\",\n  \"name\": \"string\",\n  \"externalId\": \"string\",\n  \"portalUrl\": \"string\",\n  \"coverageArea\": {\n    \"key_0\": false,\n    \"key_1\": 6125\n  },\n  \"storeLocations\": [\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7040.161934693138,\n        \"longitude\": 9337.654429885177\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": 3152\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 7061.611930939989,\n        \"key_2\": 9259,\n        \"key_3\": 3546\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": 9536.60316107513,\n        \"key_1\": 1665.7202699908935,\n        \"key_2\": true\n      },\n      \"prepTimeMinutes\": 6570,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    },\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7113.041523154991,\n        \"longitude\": 5380.636123073862\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 9440.702464738324,\n          \"key_1\": true\n        },\n        {\n          \"key_0\": 2842.8367058215476,\n          \"key_1\": 3915,\n          \"key_2\": false\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"prepTimeMinutes\": 8991,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    }\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": 2238.8311763240285\n    },\n    {\n      \"key_0\": 6417\n    }\n  ],\n  \"zoneRestrictions\": [\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4564.222038742364,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4951\n      }\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": 1744\n  },\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a944c11-62f3-422b-a2e1-8fefa77351cd",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca778d31-8b91-488e-9d16-79aa4fb57f78",
+          "name": "Delete a zone",
+          "request": {
+            "name": "Delete a zone",
+            "description": {
+              "content": "Delete a zone by ID. Removes the zone and its store location associations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95b0acb9-eb37-4fd3-87b2-44c6ea6a1977",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"zone_01234567890123456789\",\n  \"name\": \"string\",\n  \"externalId\": \"string\",\n  \"portalUrl\": \"string\",\n  \"coverageArea\": {\n    \"key_0\": false,\n    \"key_1\": 6125\n  },\n  \"storeLocations\": [\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7040.161934693138,\n        \"longitude\": 9337.654429885177\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": 3152\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 7061.611930939989,\n        \"key_2\": 9259,\n        \"key_3\": 3546\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": 9536.60316107513,\n        \"key_1\": 1665.7202699908935,\n        \"key_2\": true\n      },\n      \"prepTimeMinutes\": 6570,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    },\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7113.041523154991,\n        \"longitude\": 5380.636123073862\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 9440.702464738324,\n          \"key_1\": true\n        },\n        {\n          \"key_0\": 2842.8367058215476,\n          \"key_1\": 3915,\n          \"key_2\": false\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"prepTimeMinutes\": 8991,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    }\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": 2238.8311763240285\n    },\n    {\n      \"key_0\": 6417\n    }\n  ],\n  \"zoneRestrictions\": [\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4564.222038742364,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4951\n      }\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": 1744\n  },\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6962d1b-9cdb-4091-9b42-286846584c49",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a8b1f9e-384d-410c-a28e-413fb86326ce",
+          "name": "Update a zone",
+          "request": {
+            "name": "Update a zone",
+            "description": {
+              "content": "Update an existing zone's name, polygon boundary, or associated store locations. Only provided fields are updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "zones",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"coverageAreaId\": \"<string>\",\n  \"polygon\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ],\n  \"storeLocationIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": false,\n      \"key_2\": 1907\n    },\n    {\n      \"key_0\": 583.5626044142427\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7fe37f19-5fcf-454d-aefa-63e2cfe73d37",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"coverageAreaId\": \"<string>\",\n  \"polygon\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ],\n  \"storeLocationIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": true,\n      \"key_2\": 1503.563364146633\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"zone_01234567890123456789\",\n  \"name\": \"string\",\n  \"externalId\": \"string\",\n  \"portalUrl\": \"string\",\n  \"coverageArea\": {\n    \"key_0\": false,\n    \"key_1\": 6125\n  },\n  \"storeLocations\": [\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7040.161934693138,\n        \"longitude\": 9337.654429885177\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": 3152\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 7061.611930939989,\n        \"key_2\": 9259,\n        \"key_3\": 3546\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": 9536.60316107513,\n        \"key_1\": 1665.7202699908935,\n        \"key_2\": true\n      },\n      \"prepTimeMinutes\": 6570,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    },\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7113.041523154991,\n        \"longitude\": 5380.636123073862\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 9440.702464738324,\n          \"key_1\": true\n        },\n        {\n          \"key_0\": 2842.8367058215476,\n          \"key_1\": 3915,\n          \"key_2\": false\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"prepTimeMinutes\": 8991,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    }\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": 2238.8311763240285\n    },\n    {\n      \"key_0\": 6417\n    }\n  ],\n  \"zoneRestrictions\": [\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4564.222038742364,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"res_01234567890123456789\",\n      \"externalId\": \"ext_01234567890123456789\",\n      \"name\": \"Zone Restriction 1\",\n      \"isActive\": true,\n      \"restrictionMetadata\": {\n        \"key_0\": 4951\n      }\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": 1744\n  },\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e92216a7-fb90-425a-b088-b5a8a1cd6998",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "zones",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"coverageAreaId\": \"<string>\",\n  \"polygon\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ],\n  \"storeLocationIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocationAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": true,\n      \"key_2\": 1503.563364146633\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneMetadata\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 6793.564548286637\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "37cf0778-a64e-4135-a19e-d7713a9e8980",
+    "name": "Nash AI Functions Zones API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

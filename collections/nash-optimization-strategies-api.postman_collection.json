@@ -1,0 +1,488 @@
+{
+  "item": [
+    {
+      "id": "d676befe-181d-4a8b-bc00-ab60945816f4",
+      "name": "Optimization Strategies",
+      "description": {
+        "content": "Create, read, update, and delete route optimization strategies.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8025ca12-87d0-4319-97ae-c2119d23a652",
+          "name": "List Optimization Strategies",
+          "request": {
+            "name": "List Optimization Strategies",
+            "description": {
+              "content": "Returns all optimization strategies for the authenticated organization (including soft-deleted).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "optimization-strategies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e80e1ed-e33e-4ad5-b723-db76f47e8518",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "optimization-strategies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 1686.8694461253365\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36b5f4b4-0077-438e-bc35-3a2cd4390da3",
+          "name": "Create Optimization Strategy",
+          "request": {
+            "name": "Create Optimization Strategy",
+            "description": {
+              "content": "Create a new optimization strategy for the authenticated organization. A strategy configures how orders are grouped into routes (service times, pickup-time windows, contracts, store locations, zones, and optional cron schedules).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "optimization-strategies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"optimizationSchedules\": [\n    {\n      \"cronExpression\": \"<string>\",\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\",\n      \"inputTimezoneId\": \"<string>\"\n    },\n    {\n      \"cronExpression\": \"<string>\",\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\",\n      \"inputTimezoneId\": \"<string>\"\n    }\n  ],\n  \"contractIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shiftContractId\": \"<string>\",\n  \"pickupServiceTimeSeconds\": \"<integer>\",\n  \"dropoffServiceTimeSeconds\": \"<integer>\",\n  \"incrementalServiceTimeSeconds\": \"<integer>\",\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"autodispatchWithinXMinutesOfPickupTime\": \"<integer>\",\n  \"earliestDispatchMinutesBeforePickup\": \"<integer>\",\n  \"pickupTimeFromInMinutes\": \"<integer>\",\n  \"pickupTimeToInMinutes\": \"<integer>\",\n  \"contractOptimizationOverrideParameters\": [\n    {\n      \"contractId\": \"<string>\",\n      \"vehicleCount\": \"<integer>\",\n      \"dispatchStrategyId\": \"<string>\",\n      \"leadTimeMinutes\": \"<integer>\",\n      \"fixedCost\": \"<number>\",\n      \"maxOrdersPerRoute\": \"<integer>\",\n      \"minOrdersPerRoute\": \"<integer>\",\n      \"useAllVehicles\": \"<boolean>\"\n    },\n    {\n      \"contractId\": \"<string>\",\n      \"vehicleCount\": \"<integer>\",\n      \"dispatchStrategyId\": \"<string>\",\n      \"leadTimeMinutes\": \"<integer>\",\n      \"fixedCost\": \"<number>\",\n      \"maxOrdersPerRoute\": \"<integer>\",\n      \"minOrdersPerRoute\": \"<integer>\",\n      \"useAllVehicles\": \"<boolean>\"\n    }\n  ],\n  \"unassignedOrdersOptionsGroupId\": \"<string>\",\n  \"defaultTrafficSource\": \"<string>\",\n  \"trafficTimeOffsetWeeks\": \"<integer>\",\n  \"zones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"softCapabilities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"searchLevel\": \"<integer>\",\n  \"clusteringLevel\": \"<integer>\",\n  \"softClusterLabel\": \"<boolean>\",\n  \"balanceRoutes\": \"<string>\",\n  \"saveOptimizedRoutes\": \"<boolean>\",\n  \"dynamicCadenceConfig\": {\n    \"tiersBeforeCutoff\": [\n      {\n        \"intervalMinutes\": \"<integer>\",\n        \"maxHours\": \"<number>\"\n      },\n      {\n        \"intervalMinutes\": \"<integer>\",\n        \"maxHours\": \"<number>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "72ee056b-2187-4577-b301-edd6b3cd8628",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "optimization-strategies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"optimizationSchedules\": [\n    {\n      \"cronExpression\": \"string\",\n      \"startDate\": \"1968-10-26T09:08:10.037Z\",\n      \"endDate\": \"2012-03-17T16:41:11.792Z\",\n      \"inputTimezoneId\": \"string\"\n    },\n    {\n      \"cronExpression\": \"string\",\n      \"startDate\": \"1957-03-09T15:14:38.457Z\",\n      \"endDate\": \"1996-05-06T00:17:21.508Z\",\n      \"inputTimezoneId\": \"string\"\n    }\n  ],\n  \"contractIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shiftContractId\": \"<string>\",\n  \"pickupServiceTimeSeconds\": \"<integer>\",\n  \"dropoffServiceTimeSeconds\": \"<integer>\",\n  \"incrementalServiceTimeSeconds\": \"<integer>\",\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"autodispatchWithinXMinutesOfPickupTime\": \"<integer>\",\n  \"earliestDispatchMinutesBeforePickup\": \"<integer>\",\n  \"pickupTimeFromInMinutes\": \"<integer>\",\n  \"pickupTimeToInMinutes\": \"<integer>\",\n  \"contractOptimizationOverrideParameters\": [\n    {\n      \"contractId\": \"string\",\n      \"vehicleCount\": 2878,\n      \"dispatchStrategyId\": \"string\",\n      \"leadTimeMinutes\": 3916,\n      \"fixedCost\": 7069.471876748823,\n      \"maxOrdersPerRoute\": 4482,\n      \"minOrdersPerRoute\": 4903,\n      \"useAllVehicles\": false\n    },\n    {\n      \"contractId\": \"string\",\n      \"vehicleCount\": 4101,\n      \"dispatchStrategyId\": \"string\",\n      \"leadTimeMinutes\": 4181,\n      \"fixedCost\": 7932.546078614133,\n      \"maxOrdersPerRoute\": 826,\n      \"minOrdersPerRoute\": 1667,\n      \"useAllVehicles\": false\n    }\n  ],\n  \"unassignedOrdersOptionsGroupId\": \"<string>\",\n  \"defaultTrafficSource\": \"<string>\",\n  \"trafficTimeOffsetWeeks\": \"<integer>\",\n  \"zones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"softCapabilities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"searchLevel\": \"<integer>\",\n  \"clusteringLevel\": \"<integer>\",\n  \"softClusterLabel\": \"<boolean>\",\n  \"balanceRoutes\": \"none\",\n  \"saveOptimizedRoutes\": \"<boolean>\",\n  \"dynamicCadenceConfig\": {\n    \"tiersBeforeCutoff\": [\n      {\n        \"intervalMinutes\": 1367,\n        \"maxHours\": 8692.34859361979\n      },\n      {\n        \"intervalMinutes\": 6031,\n        \"maxHours\": 9774.30709486014\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 1686.8694461253365\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ded9f281-7d3a-4257-a39e-f3f184dad899",
+          "name": "Get Optimization Strategy",
+          "request": {
+            "name": "Get Optimization Strategy",
+            "description": {
+              "content": "Returns a single optimization strategy by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "optimization-strategies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5208ccb8-f4f7-484b-ba50-7fe9a258dc5e",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "optimization-strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 1686.8694461253365\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "479364e6-8240-4f86-9193-2aecc5b8d3d9",
+          "name": "Delete Optimization Strategy",
+          "request": {
+            "name": "Delete Optimization Strategy",
+            "description": {
+              "content": "Soft-delete an optimization strategy. Fails if the strategy is referenced by an automation logic or an active automation rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "optimization-strategies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "412d6364-7c06-403a-ab0d-5c5efd911cc1",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "optimization-strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 1686.8694461253365\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bcbaa21-33da-42e2-bc9e-36e172001fd7",
+          "name": "Update Optimization Strategy",
+          "request": {
+            "name": "Update Optimization Strategy",
+            "description": {
+              "content": "Update an existing optimization strategy. Only provided fields are updated. Supplying `optimization_schedules` replaces the existing schedules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "optimization-strategies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"optimizationSchedules\": [\n    {\n      \"cronExpression\": \"<string>\",\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\",\n      \"inputTimezoneId\": \"<string>\"\n    },\n    {\n      \"cronExpression\": \"<string>\",\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\",\n      \"inputTimezoneId\": \"<string>\"\n    }\n  ],\n  \"contractIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shiftContractId\": \"<string>\",\n  \"pickupServiceTimeSeconds\": \"<integer>\",\n  \"dropoffServiceTimeSeconds\": \"<integer>\",\n  \"incrementalServiceTimeSeconds\": \"<integer>\",\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"autodispatchWithinXMinutesOfPickupTime\": \"<integer>\",\n  \"earliestDispatchMinutesBeforePickup\": \"<integer>\",\n  \"pickupTimeFromInMinutes\": \"<integer>\",\n  \"pickupTimeToInMinutes\": \"<integer>\",\n  \"contractOptimizationOverrideParameters\": [\n    {\n      \"contractId\": \"<string>\",\n      \"vehicleCount\": \"<integer>\",\n      \"dispatchStrategyId\": \"<string>\",\n      \"leadTimeMinutes\": \"<integer>\",\n      \"fixedCost\": \"<number>\",\n      \"maxOrdersPerRoute\": \"<integer>\",\n      \"minOrdersPerRoute\": \"<integer>\",\n      \"useAllVehicles\": \"<boolean>\"\n    },\n    {\n      \"contractId\": \"<string>\",\n      \"vehicleCount\": \"<integer>\",\n      \"dispatchStrategyId\": \"<string>\",\n      \"leadTimeMinutes\": \"<integer>\",\n      \"fixedCost\": \"<number>\",\n      \"maxOrdersPerRoute\": \"<integer>\",\n      \"minOrdersPerRoute\": \"<integer>\",\n      \"useAllVehicles\": \"<boolean>\"\n    }\n  ],\n  \"unassignedOrdersOptionsGroupId\": \"<string>\",\n  \"defaultTrafficSource\": \"<string>\",\n  \"trafficTimeOffsetWeeks\": \"<integer>\",\n  \"zones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"softCapabilities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"searchLevel\": \"<integer>\",\n  \"clusteringLevel\": \"<integer>\",\n  \"softClusterLabel\": \"<boolean>\",\n  \"balanceRoutes\": \"<string>\",\n  \"saveOptimizedRoutes\": \"<boolean>\",\n  \"dynamicCadenceConfig\": {\n    \"tiersBeforeCutoff\": [\n      {\n        \"intervalMinutes\": \"<integer>\",\n        \"maxHours\": \"<number>\"\n      },\n      {\n        \"intervalMinutes\": \"<integer>\",\n        \"maxHours\": \"<number>\"\n      }\n    ]\n  },\n  \"label\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "106a066a-6bf5-4d74-b887-f61b5fc56ea7",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "optimization-strategies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"optimizationSchedules\": [\n    {\n      \"cronExpression\": \"string\",\n      \"startDate\": \"2001-10-06T14:22:39.630Z\",\n      \"endDate\": \"2019-07-02T08:27:02.088Z\",\n      \"inputTimezoneId\": \"string\"\n    },\n    {\n      \"cronExpression\": \"string\",\n      \"startDate\": \"1990-02-21T07:59:24.494Z\",\n      \"endDate\": \"2018-11-29T18:44:10.569Z\",\n      \"inputTimezoneId\": \"string\"\n    }\n  ],\n  \"contractIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shiftContractId\": \"<string>\",\n  \"pickupServiceTimeSeconds\": \"<integer>\",\n  \"dropoffServiceTimeSeconds\": \"<integer>\",\n  \"incrementalServiceTimeSeconds\": \"<integer>\",\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"autodispatchWithinXMinutesOfPickupTime\": \"<integer>\",\n  \"earliestDispatchMinutesBeforePickup\": \"<integer>\",\n  \"pickupTimeFromInMinutes\": \"<integer>\",\n  \"pickupTimeToInMinutes\": \"<integer>\",\n  \"contractOptimizationOverrideParameters\": [\n    {\n      \"contractId\": \"string\",\n      \"vehicleCount\": 5191,\n      \"dispatchStrategyId\": \"string\",\n      \"leadTimeMinutes\": 9084,\n      \"fixedCost\": 192.95537488314253,\n      \"maxOrdersPerRoute\": 4951,\n      \"minOrdersPerRoute\": 3397,\n      \"useAllVehicles\": true\n    },\n    {\n      \"contractId\": \"string\",\n      \"vehicleCount\": 1825,\n      \"dispatchStrategyId\": \"string\",\n      \"leadTimeMinutes\": 630,\n      \"fixedCost\": 2500.984043889416,\n      \"maxOrdersPerRoute\": 4094,\n      \"minOrdersPerRoute\": 3867,\n      \"useAllVehicles\": false\n    }\n  ],\n  \"unassignedOrdersOptionsGroupId\": \"<string>\",\n  \"defaultTrafficSource\": \"<string>\",\n  \"trafficTimeOffsetWeeks\": \"<integer>\",\n  \"zones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"storeLocations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"softCapabilities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"searchLevel\": \"<integer>\",\n  \"clusteringLevel\": \"<integer>\",\n  \"softClusterLabel\": \"<boolean>\",\n  \"balanceRoutes\": \"all_vehicle_types\",\n  \"saveOptimizedRoutes\": \"<boolean>\",\n  \"dynamicCadenceConfig\": {\n    \"tiersBeforeCutoff\": [\n      {\n        \"intervalMinutes\": 2219,\n        \"maxHours\": 9935.426018476483\n      },\n      {\n        \"intervalMinutes\": 6190,\n        \"maxHours\": 8172.474372002674\n      }\n    ]\n  },\n  \"label\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 1686.8694461253365\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bad4e259-d9bf-4d2c-a47d-96d5f8c9ec12",
+    "name": "Nash AI Functions Optimization Strategies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

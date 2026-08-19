@@ -1,0 +1,271 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Zones API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Zones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get zone restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/zone-restrictions"
+          },
+          "docs": "List all zone restrictions for the organization. Zone restrictions define rules that control delivery behavior within specific zones."
+        },
+        {
+          "info": {
+            "name": "Create zone restriction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/zone-restrictions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a zone restriction rule that controls delivery behavior within a specific zone, such as provider restrictions or time-based rules."
+        },
+        {
+          "info": {
+            "name": "Upsert multiple zone restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/zone-restrictions/upsert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update multiple zone restrictions in a single request. Existing restrictions are matched by ID for updates."
+        },
+        {
+          "info": {
+            "name": "Update zone restriction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/zone-restrictions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the zone restriction."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing zone restriction's rules or configuration. Only provided fields are updated."
+        },
+        {
+          "info": {
+            "name": "Get zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/zones",
+            "params": [
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "The size of the zones to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset of the zones to return."
+              },
+              {
+                "name": "isDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return deleted zones."
+              }
+            ]
+          },
+          "docs": "List zones for the organization with pagination. Use size and offset parameters to paginate. Optionally include deleted zones with is_deleted."
+        },
+        {
+          "info": {
+            "name": "Create a zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/zones",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a geographic zone defined by a polygon boundary. Zones are used to define delivery areas for store locations and apply zone-based restrictions."
+        },
+        {
+          "info": {
+            "name": "Get zones that cover specified location (latitude & longitude, city_zipcode)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/zones/coverage",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "0.00",
+                "type": "query",
+                "description": "The latitude of the location to check coverage for. If used, must specify longitude"
+              },
+              {
+                "name": "longitude",
+                "value": "0.00",
+                "type": "query",
+                "description": "The longitude of the location to check coverage for. If used, must specify latitude"
+              },
+              {
+                "name": "cityZipcode",
+                "value": "sanfrancisco_94114",
+                "type": "query",
+                "description": "The city_zipcode pair to check coverage for. The location must have coverage set up using the `City & Zip Code` unique field, not the separate `City` or `Zip Code` fields."
+              },
+              {
+                "name": "zipcode",
+                "value": "94114",
+                "type": "query",
+                "description": "The zipcode to check coverage for."
+              }
+            ]
+          },
+          "docs": "Find zones whose polygon boundaries contain a given geographic point. Provide latitude/longitude, city_zipcode, or zipcode to find matching zones."
+        },
+        {
+          "info": {
+            "name": "Get zone by external identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/zones/external_identifier/:externalIdentifier",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a zone using your external identifier instead of the Nash zone ID."
+        },
+        {
+          "info": {
+            "name": "Query zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/zones/query",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Return full zone details for many zones in a single call. Filter by `ids` and/or `externalIds` (combined with OR); omit both to page through all of the organization's zones. Results come back under `data` with pagination under `meta`; each `data` item matches the shape of `GET /v1/zones/<id>`."
+        },
+        {
+          "info": {
+            "name": "Upsert multiple zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/zones/upsert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update multiple zones in a single request. Existing zones are matched by ID or external identifier for updates."
+        },
+        {
+          "info": {
+            "name": "Get zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/zones/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single zone by ID, including its polygon boundary and associated store locations."
+        },
+        {
+          "info": {
+            "name": "Update a zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/zones/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing zone's name, polygon boundary, or associated store locations. Only provided fields are updated."
+        },
+        {
+          "info": {
+            "name": "Delete a zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/zones/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a zone by ID. Removes the zone and its store location associations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

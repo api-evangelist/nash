@@ -1,0 +1,2466 @@
+{
+  "item": [
+    {
+      "id": "3e905a75-2bee-4933-b89d-16b8f6f3f081",
+      "name": "Delivery Windows",
+      "description": {
+        "content": "Delivery Windows",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04821dc6-6447-409f-9fbc-bf2a85faa5a1",
+          "name": "Create a single delivery window",
+          "request": {
+            "name": "Create a single delivery window",
+            "description": {
+              "content": "Create a delivery window defining an available time slot for scheduled deliveries. Delivery windows are associated with a store location and have capacity limits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-window"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startTime\": \"<string>\",\n  \"startTimeLocal\": \"<string>\",\n  \"endTime\": \"<string>\",\n  \"endTimeLocal\": \"<string>\",\n  \"cutoffTime\": \"<string>\",\n  \"cutoffTimeLocal\": \"<string>\",\n  \"timezoneId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"rrule\": \"<string>\",\n  \"exceptionDates\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allowedTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"leadTimeMinutes\": \"<integer>\",\n  \"priceCents\": \"<integer>\",\n  \"minimumOrderValueCents\": \"<integer>\",\n  \"maximumCapacity\": \"<integer>\",\n  \"storeLocationId\": \"<string>\",\n  \"zoneId\": \"<string>\",\n  \"zoneExternalId\": \"<string>\",\n  \"windowMetadata\": {\n    \"key_0\": 8165.105436224747,\n    \"key_1\": 4967.576478341239,\n    \"key_2\": 9470\n  },\n  \"isActive\": \"<boolean>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b600f8c3-4382-470b-80cf-075b8cf1f49d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startTime\": \"<string>\",\n  \"startTimeLocal\": \"<string>\",\n  \"endTime\": \"<string>\",\n  \"endTimeLocal\": \"<string>\",\n  \"cutoffTime\": \"<string>\",\n  \"cutoffTimeLocal\": \"<string>\",\n  \"timezoneId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"rrule\": \"<string>\",\n  \"exceptionDates\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allowedTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"leadTimeMinutes\": \"<integer>\",\n  \"priceCents\": \"<integer>\",\n  \"minimumOrderValueCents\": \"<integer>\",\n  \"maximumCapacity\": \"<integer>\",\n  \"storeLocationId\": \"<string>\",\n  \"zoneId\": \"<string>\",\n  \"zoneExternalId\": \"<string>\",\n  \"windowMetadata\": {\n    \"key_0\": 3268\n  },\n  \"isActive\": \"<boolean>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dw_01234567890123456789\",\n  \"name\": \"Monday Delivery Window\",\n  \"startTime\": \"2024-01-01T10:00:00Z\",\n  \"startTimeLocal\": \"2024-01-01T10:00:00\",\n  \"endTime\": \"2024-01-01T12:00:00Z\",\n  \"endTimeLocal\": \"2024-01-01T12:00:00\",\n  \"timezoneId\": \"America/New_York\",\n  \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n  \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n  \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n  \"exceptionDates\": [\n    \"2024-01-01\",\n    \"2024-01-02\"\n  ],\n  \"allowedTags\": [\n    \"service:rapid\",\n    \"service:express\",\n    \"franchise_location\"\n  ],\n  \"leadTimeMinutes\": 60,\n  \"priceCents\": 1000,\n  \"minimumOrderValueCents\": 1000,\n  \"maximumCapacity\": 1000,\n  \"storeLocationId\": \"stl_01234567890123456789\",\n  \"zoneId\": \"zone_01234567890123456789\",\n  \"zoneExternalId\": \"ext_01234567890123456789\",\n  \"windowMetadata\": {\n    \"key\": \"value\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d41cf36a-2415-4974-b1b9-b020760b6391",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startTime\": \"<string>\",\n  \"startTimeLocal\": \"<string>\",\n  \"endTime\": \"<string>\",\n  \"endTimeLocal\": \"<string>\",\n  \"cutoffTime\": \"<string>\",\n  \"cutoffTimeLocal\": \"<string>\",\n  \"timezoneId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"rrule\": \"<string>\",\n  \"exceptionDates\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allowedTags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"leadTimeMinutes\": \"<integer>\",\n  \"priceCents\": \"<integer>\",\n  \"minimumOrderValueCents\": \"<integer>\",\n  \"maximumCapacity\": \"<integer>\",\n  \"storeLocationId\": \"<string>\",\n  \"zoneId\": \"<string>\",\n  \"zoneExternalId\": \"<string>\",\n  \"windowMetadata\": {\n    \"key_0\": 3268\n  },\n  \"isActive\": \"<boolean>\",\n  \"isDeleted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae52b7dc-1477-459a-9460-380ba54f1a15",
+          "name": "Get a delivery window",
+          "request": {
+            "name": "Get a delivery window",
+            "description": {
+              "content": "Retrieve a single delivery window by ID, including its time slot, capacity, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-window",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the delivery window"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4a377b6-f63b-4c0a-8395-fb2b41fa737e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dw_01234567890123456789\",\n  \"name\": \"Monday Delivery Window\",\n  \"startTime\": \"2024-01-01T10:00:00Z\",\n  \"startTimeLocal\": \"2024-01-01T10:00:00\",\n  \"endTime\": \"2024-01-01T12:00:00Z\",\n  \"endTimeLocal\": \"2024-01-01T12:00:00\",\n  \"timezoneId\": \"America/New_York\",\n  \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n  \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n  \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n  \"exceptionDates\": [\n    \"2024-01-01\",\n    \"2024-01-02\"\n  ],\n  \"allowedTags\": [\n    \"service:rapid\",\n    \"service:express\",\n    \"franchise_location\"\n  ],\n  \"leadTimeMinutes\": 60,\n  \"priceCents\": 1000,\n  \"minimumOrderValueCents\": 1000,\n  \"maximumCapacity\": 1000,\n  \"storeLocationId\": \"stl_01234567890123456789\",\n  \"zoneId\": \"zone_01234567890123456789\",\n  \"zoneExternalId\": \"ext_01234567890123456789\",\n  \"windowMetadata\": {\n    \"key\": \"value\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "016ca4b4-bdc9-483f-b293-b82c0ecbab67",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1828613-fd47-4356-a083-432bbb8be2aa",
+          "name": "Delete a delivery window",
+          "request": {
+            "name": "Delete a delivery window",
+            "description": {
+              "content": "Delete a delivery window by ID. Deleted windows can be restored using the restore endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-window",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the delivery window"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c34a02ae-0c63-49f5-ad88-bd544efc60d6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dw_01234567890123456789\",\n  \"name\": \"Monday Delivery Window\",\n  \"startTime\": \"2024-01-01T10:00:00Z\",\n  \"startTimeLocal\": \"2024-01-01T10:00:00\",\n  \"endTime\": \"2024-01-01T12:00:00Z\",\n  \"endTimeLocal\": \"2024-01-01T12:00:00\",\n  \"timezoneId\": \"America/New_York\",\n  \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n  \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n  \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n  \"exceptionDates\": [\n    \"2024-01-01\",\n    \"2024-01-02\"\n  ],\n  \"allowedTags\": [\n    \"service:rapid\",\n    \"service:express\",\n    \"franchise_location\"\n  ],\n  \"leadTimeMinutes\": 60,\n  \"priceCents\": 1000,\n  \"minimumOrderValueCents\": 1000,\n  \"maximumCapacity\": 1000,\n  \"storeLocationId\": \"stl_01234567890123456789\",\n  \"zoneId\": \"zone_01234567890123456789\",\n  \"zoneExternalId\": \"ext_01234567890123456789\",\n  \"windowMetadata\": {\n    \"key\": \"value\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "143c1e7f-378d-45e5-843b-9421944d4013",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb680bda-3987-4316-99b5-58d1d2f6863f",
+          "name": "Disable a delivery window",
+          "request": {
+            "name": "Disable a delivery window",
+            "description": {
+              "content": "Disable a delivery window so it is no longer available for new bookings. Existing bookings are not affected.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-window",
+                ":id",
+                "disable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the delivery window"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb4cd75b-13d7-4816-aecf-c5ddd94a9f4d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dw_01234567890123456789\",\n  \"name\": \"Monday Delivery Window\",\n  \"startTime\": \"2024-01-01T10:00:00Z\",\n  \"startTimeLocal\": \"2024-01-01T10:00:00\",\n  \"endTime\": \"2024-01-01T12:00:00Z\",\n  \"endTimeLocal\": \"2024-01-01T12:00:00\",\n  \"timezoneId\": \"America/New_York\",\n  \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n  \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n  \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n  \"exceptionDates\": [\n    \"2024-01-01\",\n    \"2024-01-02\"\n  ],\n  \"allowedTags\": [\n    \"service:rapid\",\n    \"service:express\",\n    \"franchise_location\"\n  ],\n  \"leadTimeMinutes\": 60,\n  \"priceCents\": 1000,\n  \"minimumOrderValueCents\": 1000,\n  \"maximumCapacity\": 1000,\n  \"storeLocationId\": \"stl_01234567890123456789\",\n  \"zoneId\": \"zone_01234567890123456789\",\n  \"zoneExternalId\": \"ext_01234567890123456789\",\n  \"windowMetadata\": {\n    \"key\": \"value\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd5a3091-dfe7-49af-b898-821ed48edf70",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7314d55e-41e7-49f1-a3f8-104a79a508d4",
+          "name": "Enable a delivery window",
+          "request": {
+            "name": "Enable a delivery window",
+            "description": {
+              "content": "Enable a previously disabled delivery window, making it available for booking.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-window",
+                ":id",
+                "enable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the delivery window"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5632de9a-1d63-4619-9b69-7c656edbd964",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id",
+                    "enable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dw_01234567890123456789\",\n  \"name\": \"Monday Delivery Window\",\n  \"startTime\": \"2024-01-01T10:00:00Z\",\n  \"startTimeLocal\": \"2024-01-01T10:00:00\",\n  \"endTime\": \"2024-01-01T12:00:00Z\",\n  \"endTimeLocal\": \"2024-01-01T12:00:00\",\n  \"timezoneId\": \"America/New_York\",\n  \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n  \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n  \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n  \"exceptionDates\": [\n    \"2024-01-01\",\n    \"2024-01-02\"\n  ],\n  \"allowedTags\": [\n    \"service:rapid\",\n    \"service:express\",\n    \"franchise_location\"\n  ],\n  \"leadTimeMinutes\": 60,\n  \"priceCents\": 1000,\n  \"minimumOrderValueCents\": 1000,\n  \"maximumCapacity\": 1000,\n  \"storeLocationId\": \"stl_01234567890123456789\",\n  \"zoneId\": \"zone_01234567890123456789\",\n  \"zoneExternalId\": \"ext_01234567890123456789\",\n  \"windowMetadata\": {\n    \"key\": \"value\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "689cd1f4-d507-4f94-87ad-1e51a7cccf7f",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id",
+                    "enable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1b8d2ce-a8ee-427e-b128-66bece4573ef",
+          "name": "Restore a delivery window",
+          "request": {
+            "name": "Restore a delivery window",
+            "description": {
+              "content": "Restore a previously deleted delivery window, making it active again.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-window",
+                ":id",
+                "restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the delivery window"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f8c5727-cdb3-4955-bbeb-4e699733bffe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dw_01234567890123456789\",\n  \"name\": \"Monday Delivery Window\",\n  \"startTime\": \"2024-01-01T10:00:00Z\",\n  \"startTimeLocal\": \"2024-01-01T10:00:00\",\n  \"endTime\": \"2024-01-01T12:00:00Z\",\n  \"endTimeLocal\": \"2024-01-01T12:00:00\",\n  \"timezoneId\": \"America/New_York\",\n  \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n  \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n  \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n  \"exceptionDates\": [\n    \"2024-01-01\",\n    \"2024-01-02\"\n  ],\n  \"allowedTags\": [\n    \"service:rapid\",\n    \"service:express\",\n    \"franchise_location\"\n  ],\n  \"leadTimeMinutes\": 60,\n  \"priceCents\": 1000,\n  \"minimumOrderValueCents\": 1000,\n  \"maximumCapacity\": 1000,\n  \"storeLocationId\": \"stl_01234567890123456789\",\n  \"zoneId\": \"zone_01234567890123456789\",\n  \"zoneExternalId\": \"ext_01234567890123456789\",\n  \"windowMetadata\": {\n    \"key\": \"value\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f06407ca-ed41-463e-b383-877de4ce3ba9",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-window",
+                    ":id",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the delivery window"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea13b8b6-f001-4ce5-9ec3-751bf030df31",
+          "name": "Create multiple delivery windows",
+          "request": {
+            "name": "Create multiple delivery windows",
+            "description": {
+              "content": "Create multiple delivery windows in a single request. Each window defines an available time slot with capacity for a store location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-windows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"startTime\": \"<string>\",\n      \"startTimeLocal\": \"<string>\",\n      \"endTime\": \"<string>\",\n      \"endTimeLocal\": \"<string>\",\n      \"cutoffTime\": \"<string>\",\n      \"cutoffTimeLocal\": \"<string>\",\n      \"timezoneId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"rrule\": \"<string>\",\n      \"exceptionDates\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedTags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"leadTimeMinutes\": \"<integer>\",\n      \"priceCents\": \"<integer>\",\n      \"minimumOrderValueCents\": \"<integer>\",\n      \"maximumCapacity\": \"<integer>\",\n      \"storeLocationId\": \"<string>\",\n      \"zoneId\": \"<string>\",\n      \"zoneExternalId\": \"<string>\",\n      \"windowMetadata\": {\n        \"key_0\": 938.0420501010633,\n        \"key_1\": false\n      },\n      \"isActive\": \"<boolean>\",\n      \"isDeleted\": \"<boolean>\"\n    },\n    {\n      \"startTime\": \"<string>\",\n      \"startTimeLocal\": \"<string>\",\n      \"endTime\": \"<string>\",\n      \"endTimeLocal\": \"<string>\",\n      \"cutoffTime\": \"<string>\",\n      \"cutoffTimeLocal\": \"<string>\",\n      \"timezoneId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"rrule\": \"<string>\",\n      \"exceptionDates\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedTags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"leadTimeMinutes\": \"<integer>\",\n      \"priceCents\": \"<integer>\",\n      \"minimumOrderValueCents\": \"<integer>\",\n      \"maximumCapacity\": \"<integer>\",\n      \"storeLocationId\": \"<string>\",\n      \"zoneId\": \"<string>\",\n      \"zoneExternalId\": \"<string>\",\n      \"windowMetadata\": {\n        \"key_0\": 1862.5947312056956,\n        \"key_1\": \"string\",\n        \"key_2\": false\n      },\n      \"isActive\": \"<boolean>\",\n      \"isDeleted\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a465f6d1-34a9-484f-88a1-ba3c9eb4d616",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"startTime\": \"7493-52-74T15:09:06286\",\n      \"startTimeLocal\": \"3471-83-86T27:65:99)8251Z\",\n      \"endTime\": \"7546-16-83T08:69:28.\",\n      \"endTimeLocal\": \"4183-24-44T32:27:66N39810772Z\",\n      \"cutoffTime\": \"9009-94-56T86:32:48q846342488Z\",\n      \"cutoffTimeLocal\": \"9693-50-16T38:65:37664289456\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 3976,\n      \"priceCents\": 1909,\n      \"minimumOrderValueCents\": 6769,\n      \"maximumCapacity\": 6117,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": 736,\n        \"key_1\": 8576.990900561292,\n        \"key_2\": 5082.024480213221,\n        \"key_3\": 1956.1756341911973\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    },\n    {\n      \"startTime\": \"4540-06-91T78:28:0183694Z\",\n      \"startTimeLocal\": \"6182-52-54T94:77:869\",\n      \"endTime\": \"6626-16-40T69:27:23:82430879\",\n      \"endTimeLocal\": \"4254-16-40T12:74:085Z\",\n      \"cutoffTime\": \"9369-61-18T30:00:97>4228079\",\n      \"cutoffTimeLocal\": \"0872-88-14T06:03:487829\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 3663,\n      \"priceCents\": 9086,\n      \"minimumOrderValueCents\": 1957,\n      \"maximumCapacity\": 9236,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": \"string\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "416094f9-ee09-41d2-8daf-57a7324f2c7a",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"startTime\": \"7493-52-74T15:09:06286\",\n      \"startTimeLocal\": \"3471-83-86T27:65:99)8251Z\",\n      \"endTime\": \"7546-16-83T08:69:28.\",\n      \"endTimeLocal\": \"4183-24-44T32:27:66N39810772Z\",\n      \"cutoffTime\": \"9009-94-56T86:32:48q846342488Z\",\n      \"cutoffTimeLocal\": \"9693-50-16T38:65:37664289456\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 3976,\n      \"priceCents\": 1909,\n      \"minimumOrderValueCents\": 6769,\n      \"maximumCapacity\": 6117,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": 736,\n        \"key_1\": 8576.990900561292,\n        \"key_2\": 5082.024480213221,\n        \"key_3\": 1956.1756341911973\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    },\n    {\n      \"startTime\": \"4540-06-91T78:28:0183694Z\",\n      \"startTimeLocal\": \"6182-52-54T94:77:869\",\n      \"endTime\": \"6626-16-40T69:27:23:82430879\",\n      \"endTimeLocal\": \"4254-16-40T12:74:085Z\",\n      \"cutoffTime\": \"9369-61-18T30:00:97>4228079\",\n      \"cutoffTimeLocal\": \"0872-88-14T06:03:487829\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 3663,\n      \"priceCents\": 9086,\n      \"minimumOrderValueCents\": 1957,\n      \"maximumCapacity\": 9236,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": \"string\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0718594a-49ef-4e3a-94b4-3db80bf14664",
+          "name": "Delete multiple delivery windows",
+          "request": {
+            "name": "Delete multiple delivery windows",
+            "description": {
+              "content": "Delete multiple delivery windows in a single request. Deleted windows can be restored using the restore endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-windows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbf2ba80-cd17-46bc-b540-866d402c4aaf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dw_01234567890123456789\",\n  \"name\": \"Monday Delivery Window\",\n  \"startTime\": \"2024-01-01T10:00:00Z\",\n  \"startTimeLocal\": \"2024-01-01T10:00:00\",\n  \"endTime\": \"2024-01-01T12:00:00Z\",\n  \"endTimeLocal\": \"2024-01-01T12:00:00\",\n  \"timezoneId\": \"America/New_York\",\n  \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n  \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n  \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n  \"exceptionDates\": [\n    \"2024-01-01\",\n    \"2024-01-02\"\n  ],\n  \"allowedTags\": [\n    \"service:rapid\",\n    \"service:express\",\n    \"franchise_location\"\n  ],\n  \"leadTimeMinutes\": 60,\n  \"priceCents\": 1000,\n  \"minimumOrderValueCents\": 1000,\n  \"maximumCapacity\": 1000,\n  \"storeLocationId\": \"stl_01234567890123456789\",\n  \"zoneId\": \"zone_01234567890123456789\",\n  \"zoneExternalId\": \"ext_01234567890123456789\",\n  \"windowMetadata\": {\n    \"key\": \"value\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5dcd7c9-0896-437c-8f29-da8886ec5cf0",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8d687e8-5d1a-46b9-9c9a-496ec7b44b82",
+          "name": "Update multiple delivery windows",
+          "request": {
+            "name": "Update multiple delivery windows",
+            "description": {
+              "content": "Update multiple existing delivery windows in a single request. Only provided fields are updated for each window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-windows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"<string>\",\n      \"startTime\": \"<string>\",\n      \"startTimeLocal\": \"<string>\",\n      \"endTime\": \"<string>\",\n      \"endTimeLocal\": \"<string>\",\n      \"cutoffTime\": \"<string>\",\n      \"cutoffTimeLocal\": \"<string>\",\n      \"timezoneId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"rrule\": \"<string>\",\n      \"exceptionDates\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedTags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"leadTimeMinutes\": \"<integer>\",\n      \"priceCents\": \"<integer>\",\n      \"minimumOrderValueCents\": \"<integer>\",\n      \"maximumCapacity\": \"<integer>\",\n      \"storeLocationId\": \"<string>\",\n      \"zoneId\": \"<string>\",\n      \"zoneExternalId\": \"<string>\",\n      \"windowMetadata\": {\n        \"key_0\": 303\n      },\n      \"isActive\": \"<boolean>\",\n      \"isDeleted\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"startTime\": \"<string>\",\n      \"startTimeLocal\": \"<string>\",\n      \"endTime\": \"<string>\",\n      \"endTimeLocal\": \"<string>\",\n      \"cutoffTime\": \"<string>\",\n      \"cutoffTimeLocal\": \"<string>\",\n      \"timezoneId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"rrule\": \"<string>\",\n      \"exceptionDates\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedTags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"leadTimeMinutes\": \"<integer>\",\n      \"priceCents\": \"<integer>\",\n      \"minimumOrderValueCents\": \"<integer>\",\n      \"maximumCapacity\": \"<integer>\",\n      \"storeLocationId\": \"<string>\",\n      \"zoneId\": \"<string>\",\n      \"zoneExternalId\": \"<string>\",\n      \"windowMetadata\": {\n        \"key_0\": 2388,\n        \"key_1\": false\n      },\n      \"isActive\": \"<boolean>\",\n      \"isDeleted\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b19777ef-6d66-4773-b88d-5670c4cde9a3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"startTime\": \"6634-21-79T05:03:31j63112\",\n      \"startTimeLocal\": \"1334-25-72T66:16:05e23785556Z\",\n      \"endTime\": \"5895-68-09T74:80:65c7\",\n      \"endTimeLocal\": \"9822-78-17T54:78:21x016\",\n      \"cutoffTime\": \"9840-12-60T72:48:78684873Z\",\n      \"cutoffTimeLocal\": \"6419-28-51T74:22:153498328\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 7094,\n      \"priceCents\": 3738,\n      \"minimumOrderValueCents\": 4619,\n      \"maximumCapacity\": 7406,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": 6264.51556811891\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    },\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"startTime\": \"6376-72-41T81:88:68K8567421163Z\",\n      \"startTimeLocal\": \"0319-80-08T09:99:266\",\n      \"endTime\": \"9140-64-13T11:28:0160643568\",\n      \"endTimeLocal\": \"8026-94-31T83:98:697559927912Z\",\n      \"cutoffTime\": \"5782-65-39T38:96:087775695\",\n      \"cutoffTimeLocal\": \"5281-48-29T17:33:47725Z\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 9195,\n      \"priceCents\": 5365,\n      \"minimumOrderValueCents\": 5858,\n      \"maximumCapacity\": 9604,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": 3119.1234953912904\n      },\n      \"isActive\": false,\n      \"isDeleted\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c4fe108-e00d-4b97-aecf-cb577a3b5e6a",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"startTime\": \"6634-21-79T05:03:31j63112\",\n      \"startTimeLocal\": \"1334-25-72T66:16:05e23785556Z\",\n      \"endTime\": \"5895-68-09T74:80:65c7\",\n      \"endTimeLocal\": \"9822-78-17T54:78:21x016\",\n      \"cutoffTime\": \"9840-12-60T72:48:78684873Z\",\n      \"cutoffTimeLocal\": \"6419-28-51T74:22:153498328\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 7094,\n      \"priceCents\": 3738,\n      \"minimumOrderValueCents\": 4619,\n      \"maximumCapacity\": 7406,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": 6264.51556811891\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    },\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"startTime\": \"6376-72-41T81:88:68K8567421163Z\",\n      \"startTimeLocal\": \"0319-80-08T09:99:266\",\n      \"endTime\": \"9140-64-13T11:28:0160643568\",\n      \"endTimeLocal\": \"8026-94-31T83:98:697559927912Z\",\n      \"cutoffTime\": \"5782-65-39T38:96:087775695\",\n      \"cutoffTimeLocal\": \"5281-48-29T17:33:47725Z\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 9195,\n      \"priceCents\": 5365,\n      \"minimumOrderValueCents\": 5858,\n      \"maximumCapacity\": 9604,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": 3119.1234953912904\n      },\n      \"isActive\": false,\n      \"isDeleted\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ce7bf2a-f544-4a29-8851-137299070816",
+          "name": "Disable multiple delivery windows",
+          "request": {
+            "name": "Disable multiple delivery windows",
+            "description": {
+              "content": "Disable multiple delivery windows in a single request so they are no longer available for new bookings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-windows",
+                "disable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6a8283f-1912-49b6-8ae2-14145ba24b66",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7ebb916-43a1-4159-b4e5-4696e95b28a0",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20d8f750-480f-425f-8eaa-dfc24e50d866",
+          "name": "Enable multiple delivery windows",
+          "request": {
+            "name": "Enable multiple delivery windows",
+            "description": {
+              "content": "Enable multiple previously disabled delivery windows in a single request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-windows",
+                "enable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f87dc5f-8f8c-4343-83dc-ac642d5067eb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows",
+                    "enable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3334536b-101e-4470-9fd9-b946182db301",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows",
+                    "enable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7459fa2d-9937-48dd-bd0a-e5bf31b234a6",
+          "name": "Restore multiple delivery windows",
+          "request": {
+            "name": "Restore multiple delivery windows",
+            "description": {
+              "content": "Restore multiple previously deleted delivery windows in a single request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-windows",
+                "restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "add34abf-712d-4942-852e-0b6fd0a9062e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97a8331a-acee-406e-a612-d609d58a82fa",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9882a9cd-9677-4947-8676-7ac26d0cab03",
+          "name": "Upsert multiple delivery windows",
+          "request": {
+            "name": "Upsert multiple delivery windows",
+            "description": {
+              "content": "Create or update multiple delivery windows in a single request. Existing windows are matched by ID for updates; new windows are created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delivery-windows",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"startTime\": \"<string>\",\n      \"startTimeLocal\": \"<string>\",\n      \"endTime\": \"<string>\",\n      \"endTimeLocal\": \"<string>\",\n      \"cutoffTime\": \"<string>\",\n      \"cutoffTimeLocal\": \"<string>\",\n      \"timezoneId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"rrule\": \"<string>\",\n      \"exceptionDates\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedTags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"leadTimeMinutes\": \"<integer>\",\n      \"priceCents\": \"<integer>\",\n      \"minimumOrderValueCents\": \"<integer>\",\n      \"maximumCapacity\": \"<integer>\",\n      \"storeLocationId\": \"<string>\",\n      \"zoneId\": \"<string>\",\n      \"zoneExternalId\": \"<string>\",\n      \"windowMetadata\": {\n        \"key_0\": 938.0420501010633,\n        \"key_1\": false\n      },\n      \"isActive\": \"<boolean>\",\n      \"isDeleted\": \"<boolean>\"\n    },\n    {\n      \"startTime\": \"<string>\",\n      \"startTimeLocal\": \"<string>\",\n      \"endTime\": \"<string>\",\n      \"endTimeLocal\": \"<string>\",\n      \"cutoffTime\": \"<string>\",\n      \"cutoffTimeLocal\": \"<string>\",\n      \"timezoneId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"rrule\": \"<string>\",\n      \"exceptionDates\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedTags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"leadTimeMinutes\": \"<integer>\",\n      \"priceCents\": \"<integer>\",\n      \"minimumOrderValueCents\": \"<integer>\",\n      \"maximumCapacity\": \"<integer>\",\n      \"storeLocationId\": \"<string>\",\n      \"zoneId\": \"<string>\",\n      \"zoneExternalId\": \"<string>\",\n      \"windowMetadata\": {\n        \"key_0\": 1862.5947312056956,\n        \"key_1\": \"string\",\n        \"key_2\": false\n      },\n      \"isActive\": \"<boolean>\",\n      \"isDeleted\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "07a9a8c3-bc25-4448-b74e-e4ed4f0dcb66",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"startTime\": \"7493-52-74T15:09:06286\",\n      \"startTimeLocal\": \"3471-83-86T27:65:99)8251Z\",\n      \"endTime\": \"7546-16-83T08:69:28.\",\n      \"endTimeLocal\": \"4183-24-44T32:27:66N39810772Z\",\n      \"cutoffTime\": \"9009-94-56T86:32:48q846342488Z\",\n      \"cutoffTimeLocal\": \"9693-50-16T38:65:37664289456\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 3976,\n      \"priceCents\": 1909,\n      \"minimumOrderValueCents\": 6769,\n      \"maximumCapacity\": 6117,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": 736,\n        \"key_1\": 8576.990900561292,\n        \"key_2\": 5082.024480213221,\n        \"key_3\": 1956.1756341911973\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    },\n    {\n      \"startTime\": \"4540-06-91T78:28:0183694Z\",\n      \"startTimeLocal\": \"6182-52-54T94:77:869\",\n      \"endTime\": \"6626-16-40T69:27:23:82430879\",\n      \"endTimeLocal\": \"4254-16-40T12:74:085Z\",\n      \"cutoffTime\": \"9369-61-18T30:00:97>4228079\",\n      \"cutoffTimeLocal\": \"0872-88-14T06:03:487829\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 3663,\n      \"priceCents\": 9086,\n      \"minimumOrderValueCents\": 1957,\n      \"maximumCapacity\": 9236,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": \"string\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deliveryWindows\": [\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    },\n    {\n      \"id\": \"dw_01234567890123456789\",\n      \"name\": \"Monday Delivery Window\",\n      \"startTime\": \"2024-01-01T10:00:00Z\",\n      \"startTimeLocal\": \"2024-01-01T10:00:00\",\n      \"endTime\": \"2024-01-01T12:00:00Z\",\n      \"endTimeLocal\": \"2024-01-01T12:00:00\",\n      \"timezoneId\": \"America/New_York\",\n      \"cutoffTime\": \"2024-01-01T10:00:00Z\",\n      \"cutoffTimeLocal\": \"2024-01-01T10:00:00\",\n      \"rrule\": \"RRULE:FREQ=WEEKLY;BYDAY=MO\",\n      \"exceptionDates\": [\n        \"2024-01-01\",\n        \"2024-01-02\"\n      ],\n      \"allowedTags\": [\n        \"service:rapid\",\n        \"service:express\",\n        \"franchise_location\"\n      ],\n      \"leadTimeMinutes\": 60,\n      \"priceCents\": 1000,\n      \"minimumOrderValueCents\": 1000,\n      \"maximumCapacity\": 1000,\n      \"storeLocationId\": \"stl_01234567890123456789\",\n      \"zoneId\": \"zone_01234567890123456789\",\n      \"zoneExternalId\": \"ext_01234567890123456789\",\n      \"windowMetadata\": {\n        \"key\": \"value\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c181e69c-62ae-4da0-a720-6ec6316b2282",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delivery-windows",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryWindows\": [\n    {\n      \"startTime\": \"7493-52-74T15:09:06286\",\n      \"startTimeLocal\": \"3471-83-86T27:65:99)8251Z\",\n      \"endTime\": \"7546-16-83T08:69:28.\",\n      \"endTimeLocal\": \"4183-24-44T32:27:66N39810772Z\",\n      \"cutoffTime\": \"9009-94-56T86:32:48q846342488Z\",\n      \"cutoffTimeLocal\": \"9693-50-16T38:65:37664289456\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 3976,\n      \"priceCents\": 1909,\n      \"minimumOrderValueCents\": 6769,\n      \"maximumCapacity\": 6117,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": 736,\n        \"key_1\": 8576.990900561292,\n        \"key_2\": 5082.024480213221,\n        \"key_3\": 1956.1756341911973\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    },\n    {\n      \"startTime\": \"4540-06-91T78:28:0183694Z\",\n      \"startTimeLocal\": \"6182-52-54T94:77:869\",\n      \"endTime\": \"6626-16-40T69:27:23:82430879\",\n      \"endTimeLocal\": \"4254-16-40T12:74:085Z\",\n      \"cutoffTime\": \"9369-61-18T30:00:97>4228079\",\n      \"cutoffTimeLocal\": \"0872-88-14T06:03:487829\",\n      \"timezoneId\": \"string\",\n      \"name\": \"string\",\n      \"rrule\": \"string\",\n      \"exceptionDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"leadTimeMinutes\": 3663,\n      \"priceCents\": 9086,\n      \"minimumOrderValueCents\": 1957,\n      \"maximumCapacity\": 9236,\n      \"storeLocationId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"windowMetadata\": {\n        \"key_0\": \"string\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb1c4284-08c0-4c5d-a80d-44ab36d5ba45",
+          "name": "Get eligible delivery windows for order",
+          "request": {
+            "name": "Get eligible delivery windows for order",
+            "description": {
+              "content": "Find delivery windows available for a specific order based on the order's store location and requirements. Requires either order_id or external_order_id. Optionally filter by time range and requested capacity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "eligible_delivery_windows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderId",
+                  "value": "<string>",
+                  "description": "The order for which to return eligible delivery windows."
+                },
+                {
+                  "disabled": false,
+                  "key": "externalOrderId",
+                  "value": "<string>",
+                  "description": "The external order id for which to return eligible delivery windows."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) The range start for delivery windows."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) The range end for delivery windows."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestedCapacity",
+                  "value": "<number>",
+                  "description": "Optionally specify the requested capacity for the delivery windows."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7883ac45-7f52-485a-a3c6-b910edf8269a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "eligible_delivery_windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalOrderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2024-10-06T00:00:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2024-10-07T00:00:00Z"
+                    },
+                    {
+                      "key": "requestedCapacity",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eligibleDeliveryWindows\": [\n    {\n      \"id\": \"string\",\n      \"ineligibleReason\": \"string\",\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"startTime\": \"string\",\n      \"startTimeLocal\": \"string\",\n      \"endTime\": \"string\",\n      \"endTimeLocal\": \"string\",\n      \"name\": \"string\",\n      \"storeLocationId\": \"string\",\n      \"storeLocationExternalId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"cutoffTime\": \"string\",\n      \"cutoffTimeLocal\": \"string\",\n      \"remainingCapacity\": 1010.0456281746251,\n      \"maximumCapacity\": 7121.932476181132,\n      \"minimumOrderValueCents\": 900,\n      \"timezoneId\": \"string\",\n      \"priceCents\": 6933,\n      \"score\": 2035.141163048324,\n      \"windowMetadata\": {\n        \"key_0\": 4763\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"ineligibleReason\": \"string\",\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"startTime\": \"string\",\n      \"startTimeLocal\": \"string\",\n      \"endTime\": \"string\",\n      \"endTimeLocal\": \"string\",\n      \"name\": \"string\",\n      \"storeLocationId\": \"string\",\n      \"storeLocationExternalId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"cutoffTime\": \"string\",\n      \"cutoffTimeLocal\": \"string\",\n      \"remainingCapacity\": 9525.028802100844,\n      \"maximumCapacity\": 1497.35951887905,\n      \"minimumOrderValueCents\": 2733,\n      \"timezoneId\": \"string\",\n      \"priceCents\": 5676,\n      \"score\": 2114.179531262633,\n      \"windowMetadata\": {\n        \"key_0\": false,\n        \"key_1\": 4896\n      }\n    }\n  ],\n  \"ineligibleDeliveryWindows\": [\n    {\n      \"id\": \"string\",\n      \"ineligibleReason\": \"string\",\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"startTime\": \"string\",\n      \"startTimeLocal\": \"string\",\n      \"endTime\": \"string\",\n      \"endTimeLocal\": \"string\",\n      \"name\": \"string\",\n      \"storeLocationId\": \"string\",\n      \"storeLocationExternalId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"cutoffTime\": \"string\",\n      \"cutoffTimeLocal\": \"string\",\n      \"remainingCapacity\": 8200.06917990603,\n      \"maximumCapacity\": 2305.8529584833786,\n      \"minimumOrderValueCents\": 1185,\n      \"timezoneId\": \"string\",\n      \"priceCents\": 4331,\n      \"score\": 1720.2711938067628,\n      \"windowMetadata\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"ineligibleReason\": \"string\",\n      \"allowedTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"startTime\": \"string\",\n      \"startTimeLocal\": \"string\",\n      \"endTime\": \"string\",\n      \"endTimeLocal\": \"string\",\n      \"name\": \"string\",\n      \"storeLocationId\": \"string\",\n      \"storeLocationExternalId\": \"string\",\n      \"zoneId\": \"string\",\n      \"zoneExternalId\": \"string\",\n      \"cutoffTime\": \"string\",\n      \"cutoffTimeLocal\": \"string\",\n      \"remainingCapacity\": 6344.54209783813,\n      \"maximumCapacity\": 5682.86515369874,\n      \"minimumOrderValueCents\": 459,\n      \"timezoneId\": \"string\",\n      \"priceCents\": 5738,\n      \"score\": 912.6038936997282,\n      \"windowMetadata\": {\n        \"key_0\": 4979.311674817881,\n        \"key_1\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "affcbf42-213b-4906-a072-31cfcb876ca2",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "eligible_delivery_windows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalOrderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2024-10-06T00:00:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2024-10-07T00:00:00Z"
+                    },
+                    {
+                      "key": "requestedCapacity",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd6d0478-5451-4539-a105-f538edf65a0a",
+          "name": "Book a delivery window for order",
+          "request": {
+            "name": "Book a delivery window for order",
+            "description": {
+              "content": "Reserve a delivery window for an order identified by external ID. The booking holds capacity in the window until confirmed or revoked.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "order",
+                "external-identifier",
+                ":externalId",
+                "delivery-window",
+                "book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) The external id of the order to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deliveryWindowId\": \"<string>\",\n  \"requestedCapacity\": \"<number>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c79fc1d3-5a61-4d21-95b4-17ab5fbfe802",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "order",
+                    "external-identifier",
+                    ":externalId",
+                    "delivery-window",
+                    "book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) The external id of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryWindowId\": \"dw_1234567890\",\n  \"requestedCapacity\": \"<number>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ord_1234567890\",\n  \"createdAt\": \"2023-08-29T19:17:46.264523\",\n  \"portalUrl\": \"https://portal.dev.usenash.com/orders/ord_1234567890\",\n  \"publicTrackingUrl\": \"https://tracking.dev.usenash.com/ord_1234567890\",\n  \"status\": \"needs_attention\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"externalId\": \"string\",\n  \"externalGroupId\": \"string\",\n  \"referenceId\": \"string\",\n  \"orderMetadata\": {\n    \"key_0\": 5248\n  },\n  \"pickupAddress\": \"string\",\n  \"pickupPlaceId\": \"string\",\n  \"pickupAddressNumber\": \"string\",\n  \"pickupAddressSecondarynumber\": \"string\",\n  \"pickupAddressFormattedStreet\": \"string\",\n  \"pickupAddressCity\": \"string\",\n  \"pickupAddressCounty\": \"string\",\n  \"pickupAddressState\": \"string\",\n  \"pickupAddressZip\": \"string\",\n  \"pickupAddressCountry\": \"string\",\n  \"pickupLat\": 2417.035170900783,\n  \"pickupLng\": 3410.309815853212,\n  \"pickupPhoneNumber\": \"string\",\n  \"pickupFirstName\": \"string\",\n  \"pickupLastName\": \"string\",\n  \"pickupBusinessName\": \"string\",\n  \"pickupInstructions\": \"string\",\n  \"pickupStoreLocationId\": \"string\",\n  \"pickupExternalStoreLocationId\": \"string\",\n  \"pickupZoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"pickupBarcodes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"pickupPayment\": {\n    \"barcode\": {\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    \"providerCard\": false\n  },\n  \"dropoffAddress\": \"string\",\n  \"dropoffPlaceId\": \"string\",\n  \"dropoffAddressNumber\": \"string\",\n  \"dropoffAddressSecondarynumber\": \"string\",\n  \"dropoffAddressFormattedStreet\": \"string\",\n  \"dropoffAddressCity\": \"string\",\n  \"dropoffAddressCounty\": \"string\",\n  \"dropoffAddressState\": \"string\",\n  \"dropoffAddressZip\": \"string\",\n  \"dropoffAddressCountry\": \"string\",\n  \"dropoffLat\": 4019.512740080825,\n  \"dropoffLng\": 3753.984782611429,\n  \"dropoffPhoneNumber\": \"string\",\n  \"dropoffFirstName\": \"string\",\n  \"dropoffLastName\": \"string\",\n  \"dropoffBusinessName\": \"string\",\n  \"dropoffInstructions\": \"string\",\n  \"dropoffStoreLocationId\": \"string\",\n  \"dropoffBarcodes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"deliveryMode\": \"string\",\n  \"pickupStartTime\": \"string\",\n  \"pickupEndTime\": \"string\",\n  \"dropoffStartTime\": \"string\",\n  \"dropoffEndTime\": \"string\",\n  \"description\": \"string\",\n  \"itemsCount\": \"string\",\n  \"requirements\": [\n    \"string\",\n    \"string\"\n  ],\n  \"minimumVehicleSize\": \"string\",\n  \"currency\": \"string\",\n  \"valueCents\": \"string\",\n  \"tipAmountCents\": \"string\",\n  \"width\": \"string\",\n  \"depth\": \"string\",\n  \"height\": \"string\",\n  \"volume\": \"string\",\n  \"weight\": \"string\",\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"count\": 6213,\n      \"dimensions\": {\n        \"height\": 3260.375413749169,\n        \"width\": 2699.512735588616,\n        \"depth\": 1001.3789760171021\n      },\n      \"weight\": 5620.438254681386,\n      \"valueCents\": 8649,\n      \"requirements\": [\n        \"string\",\n        \"string\"\n      ],\n      \"category\": \"string\",\n      \"barcode\": \"string\",\n      \"metadata\": {\n        \"key_0\": true,\n        \"key_1\": 2513.8462662962233,\n        \"key_2\": false\n      },\n      \"subItems\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"count\": 6334,\n      \"dimensions\": {\n        \"height\": 6370.722383283881,\n        \"width\": 226.16289393307397,\n        \"depth\": 7251.527108638564\n      },\n      \"weight\": 3788.175952257993,\n      \"valueCents\": 2042,\n      \"requirements\": [\n        \"string\",\n        \"string\"\n      ],\n      \"category\": \"string\",\n      \"barcode\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"subItems\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"dispatchStrategyId\": \"string\",\n  \"maxDeliveryFeeCents\": \"string\",\n  \"documents\": [\n    {\n      \"createdAt\": \"2023-08-29T19:17:46.264523\",\n      \"id\": \"doc_1234567890\",\n      \"type\": \"shipping_label\",\n      \"contentType\": \"application/pdf\",\n      \"url\": \"string\",\n      \"data\": \"string\"\n    },\n    {\n      \"createdAt\": \"2023-08-29T19:17:46.264523\",\n      \"id\": \"doc_1234567890\",\n      \"type\": \"shipping_label\",\n      \"contentType\": \"application/pdf\",\n      \"url\": \"string\",\n      \"data\": \"string\"\n    }\n  ],\n  \"validationErrors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"quotes\": [\n    {\n      \"id\": \"qot_01234567890\",\n      \"providerId\": \"uber_standard_mini_mart\",\n      \"providerName\": \"Nash\",\n      \"createdTime\": \"2021-01-01T00:00:00Z\",\n      \"priceCents\": 1000,\n      \"type\": \"string\",\n      \"providerLogo\": \"string\",\n      \"providerIsInternal\": false,\n      \"expireTime\": \"string\",\n      \"taxAmountCents\": 8256,\n      \"tollFeeCents\": 7976,\n      \"nashFeeCents\": 9903,\n      \"insuranceFeeCents\": 1496,\n      \"currency\": \"string\",\n      \"pickupWindow\": \"string\",\n      \"dropoffEta\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"costSplitCustomerCents\": 6478,\n      \"costSplitBusinessCents\": 7875,\n      \"totalPriceBreakdown\": {\n        \"key_0\": \"string\"\n      },\n      \"totalPriceCents\": 1371,\n      \"rank\": 2628,\n      \"price\": 1537.45533719167,\n      \"isSuccessful\": true,\n      \"errorMessage\": \"string\"\n    },\n    {\n      \"id\": \"qot_01234567890\",\n      \"providerId\": \"uber_standard_mini_mart\",\n      \"providerName\": \"Nash\",\n      \"createdTime\": \"2021-01-01T00:00:00Z\",\n      \"priceCents\": 1000,\n      \"type\": \"string\",\n      \"providerLogo\": \"string\",\n      \"providerIsInternal\": true,\n      \"expireTime\": \"string\",\n      \"taxAmountCents\": 4048,\n      \"tollFeeCents\": 6330,\n      \"nashFeeCents\": 7367,\n      \"insuranceFeeCents\": 6244,\n      \"currency\": \"string\",\n      \"pickupWindow\": \"string\",\n      \"dropoffEta\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"costSplitCustomerCents\": 4381,\n      \"costSplitBusinessCents\": 9378,\n      \"totalPriceBreakdown\": {\n        \"key_0\": 6348,\n        \"key_1\": 6097,\n        \"key_2\": 5694.407000056934,\n        \"key_3\": \"string\"\n      },\n      \"totalPriceCents\": 4498,\n      \"rank\": 6914,\n      \"price\": 3092.3589460761814,\n      \"isSuccessful\": true,\n      \"errorMessage\": \"string\"\n    }\n  ],\n  \"failedQuotes\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3b484a3-f79b-4277-9ab9-061109e6800b",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "order",
+                    "external-identifier",
+                    ":externalId",
+                    "delivery-window",
+                    "book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) The external id of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryWindowId\": \"dw_1234567890\",\n  \"requestedCapacity\": \"<number>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e52e01ac-6ea4-477f-9a70-143eb75709f3",
+          "name": "Confirm a delivery window for order",
+          "request": {
+            "name": "Confirm a delivery window for order",
+            "description": {
+              "content": "Confirm a previously booked delivery window for an order. Finalizes the booking and commits the capacity reservation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "order",
+                "external-identifier",
+                ":externalId",
+                "delivery-window",
+                "confirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) The external id of the order to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7515589f-fdaf-45dd-828b-e08baff3ccf6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "order",
+                    "external-identifier",
+                    ":externalId",
+                    "delivery-window",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) The external id of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ord_1234567890\",\n  \"createdAt\": \"2023-08-29T19:17:46.264523\",\n  \"portalUrl\": \"https://portal.dev.usenash.com/orders/ord_1234567890\",\n  \"publicTrackingUrl\": \"https://tracking.dev.usenash.com/ord_1234567890\",\n  \"status\": \"needs_attention\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"externalId\": \"string\",\n  \"externalGroupId\": \"string\",\n  \"referenceId\": \"string\",\n  \"orderMetadata\": {\n    \"key_0\": 5248\n  },\n  \"pickupAddress\": \"string\",\n  \"pickupPlaceId\": \"string\",\n  \"pickupAddressNumber\": \"string\",\n  \"pickupAddressSecondarynumber\": \"string\",\n  \"pickupAddressFormattedStreet\": \"string\",\n  \"pickupAddressCity\": \"string\",\n  \"pickupAddressCounty\": \"string\",\n  \"pickupAddressState\": \"string\",\n  \"pickupAddressZip\": \"string\",\n  \"pickupAddressCountry\": \"string\",\n  \"pickupLat\": 2417.035170900783,\n  \"pickupLng\": 3410.309815853212,\n  \"pickupPhoneNumber\": \"string\",\n  \"pickupFirstName\": \"string\",\n  \"pickupLastName\": \"string\",\n  \"pickupBusinessName\": \"string\",\n  \"pickupInstructions\": \"string\",\n  \"pickupStoreLocationId\": \"string\",\n  \"pickupExternalStoreLocationId\": \"string\",\n  \"pickupZoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"pickupBarcodes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"pickupPayment\": {\n    \"barcode\": {\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    \"providerCard\": false\n  },\n  \"dropoffAddress\": \"string\",\n  \"dropoffPlaceId\": \"string\",\n  \"dropoffAddressNumber\": \"string\",\n  \"dropoffAddressSecondarynumber\": \"string\",\n  \"dropoffAddressFormattedStreet\": \"string\",\n  \"dropoffAddressCity\": \"string\",\n  \"dropoffAddressCounty\": \"string\",\n  \"dropoffAddressState\": \"string\",\n  \"dropoffAddressZip\": \"string\",\n  \"dropoffAddressCountry\": \"string\",\n  \"dropoffLat\": 4019.512740080825,\n  \"dropoffLng\": 3753.984782611429,\n  \"dropoffPhoneNumber\": \"string\",\n  \"dropoffFirstName\": \"string\",\n  \"dropoffLastName\": \"string\",\n  \"dropoffBusinessName\": \"string\",\n  \"dropoffInstructions\": \"string\",\n  \"dropoffStoreLocationId\": \"string\",\n  \"dropoffBarcodes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"deliveryMode\": \"string\",\n  \"pickupStartTime\": \"string\",\n  \"pickupEndTime\": \"string\",\n  \"dropoffStartTime\": \"string\",\n  \"dropoffEndTime\": \"string\",\n  \"description\": \"string\",\n  \"itemsCount\": \"string\",\n  \"requirements\": [\n    \"string\",\n    \"string\"\n  ],\n  \"minimumVehicleSize\": \"string\",\n  \"currency\": \"string\",\n  \"valueCents\": \"string\",\n  \"tipAmountCents\": \"string\",\n  \"width\": \"string\",\n  \"depth\": \"string\",\n  \"height\": \"string\",\n  \"volume\": \"string\",\n  \"weight\": \"string\",\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"count\": 6213,\n      \"dimensions\": {\n        \"height\": 3260.375413749169,\n        \"width\": 2699.512735588616,\n        \"depth\": 1001.3789760171021\n      },\n      \"weight\": 5620.438254681386,\n      \"valueCents\": 8649,\n      \"requirements\": [\n        \"string\",\n        \"string\"\n      ],\n      \"category\": \"string\",\n      \"barcode\": \"string\",\n      \"metadata\": {\n        \"key_0\": true,\n        \"key_1\": 2513.8462662962233,\n        \"key_2\": false\n      },\n      \"subItems\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"count\": 6334,\n      \"dimensions\": {\n        \"height\": 6370.722383283881,\n        \"width\": 226.16289393307397,\n        \"depth\": 7251.527108638564\n      },\n      \"weight\": 3788.175952257993,\n      \"valueCents\": 2042,\n      \"requirements\": [\n        \"string\",\n        \"string\"\n      ],\n      \"category\": \"string\",\n      \"barcode\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"subItems\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"dispatchStrategyId\": \"string\",\n  \"maxDeliveryFeeCents\": \"string\",\n  \"documents\": [\n    {\n      \"createdAt\": \"2023-08-29T19:17:46.264523\",\n      \"id\": \"doc_1234567890\",\n      \"type\": \"shipping_label\",\n      \"contentType\": \"application/pdf\",\n      \"url\": \"string\",\n      \"data\": \"string\"\n    },\n    {\n      \"createdAt\": \"2023-08-29T19:17:46.264523\",\n      \"id\": \"doc_1234567890\",\n      \"type\": \"shipping_label\",\n      \"contentType\": \"application/pdf\",\n      \"url\": \"string\",\n      \"data\": \"string\"\n    }\n  ],\n  \"validationErrors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"quotes\": [\n    {\n      \"id\": \"qot_01234567890\",\n      \"providerId\": \"uber_standard_mini_mart\",\n      \"providerName\": \"Nash\",\n      \"createdTime\": \"2021-01-01T00:00:00Z\",\n      \"priceCents\": 1000,\n      \"type\": \"string\",\n      \"providerLogo\": \"string\",\n      \"providerIsInternal\": false,\n      \"expireTime\": \"string\",\n      \"taxAmountCents\": 8256,\n      \"tollFeeCents\": 7976,\n      \"nashFeeCents\": 9903,\n      \"insuranceFeeCents\": 1496,\n      \"currency\": \"string\",\n      \"pickupWindow\": \"string\",\n      \"dropoffEta\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"costSplitCustomerCents\": 6478,\n      \"costSplitBusinessCents\": 7875,\n      \"totalPriceBreakdown\": {\n        \"key_0\": \"string\"\n      },\n      \"totalPriceCents\": 1371,\n      \"rank\": 2628,\n      \"price\": 1537.45533719167,\n      \"isSuccessful\": true,\n      \"errorMessage\": \"string\"\n    },\n    {\n      \"id\": \"qot_01234567890\",\n      \"providerId\": \"uber_standard_mini_mart\",\n      \"providerName\": \"Nash\",\n      \"createdTime\": \"2021-01-01T00:00:00Z\",\n      \"priceCents\": 1000,\n      \"type\": \"string\",\n      \"providerLogo\": \"string\",\n      \"providerIsInternal\": true,\n      \"expireTime\": \"string\",\n      \"taxAmountCents\": 4048,\n      \"tollFeeCents\": 6330,\n      \"nashFeeCents\": 7367,\n      \"insuranceFeeCents\": 6244,\n      \"currency\": \"string\",\n      \"pickupWindow\": \"string\",\n      \"dropoffEta\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"costSplitCustomerCents\": 4381,\n      \"costSplitBusinessCents\": 9378,\n      \"totalPriceBreakdown\": {\n        \"key_0\": 6348,\n        \"key_1\": 6097,\n        \"key_2\": 5694.407000056934,\n        \"key_3\": \"string\"\n      },\n      \"totalPriceCents\": 4498,\n      \"rank\": 6914,\n      \"price\": 3092.3589460761814,\n      \"isSuccessful\": true,\n      \"errorMessage\": \"string\"\n    }\n  ],\n  \"failedQuotes\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db968488-44f3-4b20-8af5-d7ece7f42500",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "order",
+                    "external-identifier",
+                    ":externalId",
+                    "delivery-window",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) The external id of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c92fbc0-182b-4f71-b134-8a64c2099756",
+          "name": "Revoke a delivery window for order",
+          "request": {
+            "name": "Revoke a delivery window for order",
+            "description": {
+              "content": "Revoke a previously booked delivery window for an order. Releases the capacity reservation and disassociates the window from the order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "order",
+                "external-identifier",
+                ":externalId",
+                "delivery-window",
+                "revoke"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) The external id of the order to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "805cf68b-6c3c-4728-8aa9-cce5e5b65bc5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "order",
+                    "external-identifier",
+                    ":externalId",
+                    "delivery-window",
+                    "revoke"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) The external id of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ord_1234567890\",\n  \"createdAt\": \"2023-08-29T19:17:46.264523\",\n  \"portalUrl\": \"https://portal.dev.usenash.com/orders/ord_1234567890\",\n  \"publicTrackingUrl\": \"https://tracking.dev.usenash.com/ord_1234567890\",\n  \"status\": \"needs_attention\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"externalId\": \"string\",\n  \"externalGroupId\": \"string\",\n  \"referenceId\": \"string\",\n  \"orderMetadata\": {\n    \"key_0\": 5248\n  },\n  \"pickupAddress\": \"string\",\n  \"pickupPlaceId\": \"string\",\n  \"pickupAddressNumber\": \"string\",\n  \"pickupAddressSecondarynumber\": \"string\",\n  \"pickupAddressFormattedStreet\": \"string\",\n  \"pickupAddressCity\": \"string\",\n  \"pickupAddressCounty\": \"string\",\n  \"pickupAddressState\": \"string\",\n  \"pickupAddressZip\": \"string\",\n  \"pickupAddressCountry\": \"string\",\n  \"pickupLat\": 2417.035170900783,\n  \"pickupLng\": 3410.309815853212,\n  \"pickupPhoneNumber\": \"string\",\n  \"pickupFirstName\": \"string\",\n  \"pickupLastName\": \"string\",\n  \"pickupBusinessName\": \"string\",\n  \"pickupInstructions\": \"string\",\n  \"pickupStoreLocationId\": \"string\",\n  \"pickupExternalStoreLocationId\": \"string\",\n  \"pickupZoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"pickupBarcodes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"pickupPayment\": {\n    \"barcode\": {\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    \"providerCard\": false\n  },\n  \"dropoffAddress\": \"string\",\n  \"dropoffPlaceId\": \"string\",\n  \"dropoffAddressNumber\": \"string\",\n  \"dropoffAddressSecondarynumber\": \"string\",\n  \"dropoffAddressFormattedStreet\": \"string\",\n  \"dropoffAddressCity\": \"string\",\n  \"dropoffAddressCounty\": \"string\",\n  \"dropoffAddressState\": \"string\",\n  \"dropoffAddressZip\": \"string\",\n  \"dropoffAddressCountry\": \"string\",\n  \"dropoffLat\": 4019.512740080825,\n  \"dropoffLng\": 3753.984782611429,\n  \"dropoffPhoneNumber\": \"string\",\n  \"dropoffFirstName\": \"string\",\n  \"dropoffLastName\": \"string\",\n  \"dropoffBusinessName\": \"string\",\n  \"dropoffInstructions\": \"string\",\n  \"dropoffStoreLocationId\": \"string\",\n  \"dropoffBarcodes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"deliveryMode\": \"string\",\n  \"pickupStartTime\": \"string\",\n  \"pickupEndTime\": \"string\",\n  \"dropoffStartTime\": \"string\",\n  \"dropoffEndTime\": \"string\",\n  \"description\": \"string\",\n  \"itemsCount\": \"string\",\n  \"requirements\": [\n    \"string\",\n    \"string\"\n  ],\n  \"minimumVehicleSize\": \"string\",\n  \"currency\": \"string\",\n  \"valueCents\": \"string\",\n  \"tipAmountCents\": \"string\",\n  \"width\": \"string\",\n  \"depth\": \"string\",\n  \"height\": \"string\",\n  \"volume\": \"string\",\n  \"weight\": \"string\",\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"count\": 6213,\n      \"dimensions\": {\n        \"height\": 3260.375413749169,\n        \"width\": 2699.512735588616,\n        \"depth\": 1001.3789760171021\n      },\n      \"weight\": 5620.438254681386,\n      \"valueCents\": 8649,\n      \"requirements\": [\n        \"string\",\n        \"string\"\n      ],\n      \"category\": \"string\",\n      \"barcode\": \"string\",\n      \"metadata\": {\n        \"key_0\": true,\n        \"key_1\": 2513.8462662962233,\n        \"key_2\": false\n      },\n      \"subItems\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"count\": 6334,\n      \"dimensions\": {\n        \"height\": 6370.722383283881,\n        \"width\": 226.16289393307397,\n        \"depth\": 7251.527108638564\n      },\n      \"weight\": 3788.175952257993,\n      \"valueCents\": 2042,\n      \"requirements\": [\n        \"string\",\n        \"string\"\n      ],\n      \"category\": \"string\",\n      \"barcode\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"subItems\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"requirements\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sku\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"substitution\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"subItems\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"dispatchStrategyId\": \"string\",\n  \"maxDeliveryFeeCents\": \"string\",\n  \"documents\": [\n    {\n      \"createdAt\": \"2023-08-29T19:17:46.264523\",\n      \"id\": \"doc_1234567890\",\n      \"type\": \"shipping_label\",\n      \"contentType\": \"application/pdf\",\n      \"url\": \"string\",\n      \"data\": \"string\"\n    },\n    {\n      \"createdAt\": \"2023-08-29T19:17:46.264523\",\n      \"id\": \"doc_1234567890\",\n      \"type\": \"shipping_label\",\n      \"contentType\": \"application/pdf\",\n      \"url\": \"string\",\n      \"data\": \"string\"\n    }\n  ],\n  \"validationErrors\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"quotes\": [\n    {\n      \"id\": \"qot_01234567890\",\n      \"providerId\": \"uber_standard_mini_mart\",\n      \"providerName\": \"Nash\",\n      \"createdTime\": \"2021-01-01T00:00:00Z\",\n      \"priceCents\": 1000,\n      \"type\": \"string\",\n      \"providerLogo\": \"string\",\n      \"providerIsInternal\": false,\n      \"expireTime\": \"string\",\n      \"taxAmountCents\": 8256,\n      \"tollFeeCents\": 7976,\n      \"nashFeeCents\": 9903,\n      \"insuranceFeeCents\": 1496,\n      \"currency\": \"string\",\n      \"pickupWindow\": \"string\",\n      \"dropoffEta\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"costSplitCustomerCents\": 6478,\n      \"costSplitBusinessCents\": 7875,\n      \"totalPriceBreakdown\": {\n        \"key_0\": \"string\"\n      },\n      \"totalPriceCents\": 1371,\n      \"rank\": 2628,\n      \"price\": 1537.45533719167,\n      \"isSuccessful\": true,\n      \"errorMessage\": \"string\"\n    },\n    {\n      \"id\": \"qot_01234567890\",\n      \"providerId\": \"uber_standard_mini_mart\",\n      \"providerName\": \"Nash\",\n      \"createdTime\": \"2021-01-01T00:00:00Z\",\n      \"priceCents\": 1000,\n      \"type\": \"string\",\n      \"providerLogo\": \"string\",\n      \"providerIsInternal\": true,\n      \"expireTime\": \"string\",\n      \"taxAmountCents\": 4048,\n      \"tollFeeCents\": 6330,\n      \"nashFeeCents\": 7367,\n      \"insuranceFeeCents\": 6244,\n      \"currency\": \"string\",\n      \"pickupWindow\": \"string\",\n      \"dropoffEta\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"costSplitCustomerCents\": 4381,\n      \"costSplitBusinessCents\": 9378,\n      \"totalPriceBreakdown\": {\n        \"key_0\": 6348,\n        \"key_1\": 6097,\n        \"key_2\": 5694.407000056934,\n        \"key_3\": \"string\"\n      },\n      \"totalPriceCents\": 4498,\n      \"rank\": 6914,\n      \"price\": 3092.3589460761814,\n      \"isSuccessful\": true,\n      \"errorMessage\": \"string\"\n    }\n  ],\n  \"failedQuotes\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20d1d9a2-052d-4383-b820-5ca902edcdb6",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "order",
+                    "external-identifier",
+                    ":externalId",
+                    "delivery-window",
+                    "revoke"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) The external id of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d57ef0a7-05c8-4209-b1e1-34cebc68db28",
+    "name": "Nash AI Functions Delivery Windows API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

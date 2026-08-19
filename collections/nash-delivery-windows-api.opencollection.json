@@ -1,0 +1,337 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Delivery Windows API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Delivery Windows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a single delivery window",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-window",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a delivery window defining an available time slot for scheduled deliveries. Delivery windows are associated with a store location and have capacity limits."
+        },
+        {
+          "info": {
+            "name": "Get a delivery window",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-window/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "dlw_abc|10:00|12:00|2025-10-22",
+                "type": "path",
+                "description": "The id of the delivery window"
+              }
+            ]
+          },
+          "docs": "Retrieve a single delivery window by ID, including its time slot, capacity, and status."
+        },
+        {
+          "info": {
+            "name": "Delete a delivery window",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-window/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "dlw_abc|10:00|12:00|2025-10-22",
+                "type": "path",
+                "description": "The id of the delivery window"
+              }
+            ]
+          },
+          "docs": "Delete a delivery window by ID. Deleted windows can be restored using the restore endpoint."
+        },
+        {
+          "info": {
+            "name": "Disable a delivery window",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-window/:id/disable",
+            "params": [
+              {
+                "name": "id",
+                "value": "dlw_abc|10:00|12:00|2025-10-22",
+                "type": "path",
+                "description": "The id of the delivery window"
+              }
+            ]
+          },
+          "docs": "Disable a delivery window so it is no longer available for new bookings. Existing bookings are not affected."
+        },
+        {
+          "info": {
+            "name": "Enable a delivery window",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-window/:id/enable",
+            "params": [
+              {
+                "name": "id",
+                "value": "dlw_abc|10:00|12:00|2025-10-22",
+                "type": "path",
+                "description": "The id of the delivery window"
+              }
+            ]
+          },
+          "docs": "Enable a previously disabled delivery window, making it available for booking."
+        },
+        {
+          "info": {
+            "name": "Restore a delivery window",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-window/:id/restore",
+            "params": [
+              {
+                "name": "id",
+                "value": "dlw_abc|10:00|12:00|2025-10-22",
+                "type": "path",
+                "description": "The id of the delivery window"
+              }
+            ]
+          },
+          "docs": "Restore a previously deleted delivery window, making it active again."
+        },
+        {
+          "info": {
+            "name": "Create multiple delivery windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-windows",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create multiple delivery windows in a single request. Each window defines an available time slot with capacity for a store location."
+        },
+        {
+          "info": {
+            "name": "Update multiple delivery windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-windows",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update multiple existing delivery windows in a single request. Only provided fields are updated for each window."
+        },
+        {
+          "info": {
+            "name": "Delete multiple delivery windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-windows",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete multiple delivery windows in a single request. Deleted windows can be restored using the restore endpoint."
+        },
+        {
+          "info": {
+            "name": "Disable multiple delivery windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-windows/disable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disable multiple delivery windows in a single request so they are no longer available for new bookings."
+        },
+        {
+          "info": {
+            "name": "Enable multiple delivery windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-windows/enable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable multiple previously disabled delivery windows in a single request."
+        },
+        {
+          "info": {
+            "name": "Restore multiple delivery windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-windows/restore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restore multiple previously deleted delivery windows in a single request."
+        },
+        {
+          "info": {
+            "name": "Upsert multiple delivery windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/delivery-windows/upsert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update multiple delivery windows in a single request. Existing windows are matched by ID for updates; new windows are created."
+        },
+        {
+          "info": {
+            "name": "Get eligible delivery windows for order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/eligible_delivery_windows",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "ord_1234567890",
+                "type": "query",
+                "description": "The order for which to return eligible delivery windows."
+              },
+              {
+                "name": "externalOrderId",
+                "value": "ext_1234567890",
+                "type": "query",
+                "description": "The external order id for which to return eligible delivery windows."
+              },
+              {
+                "name": "startTime",
+                "value": "2024-10-06T00:00:00Z",
+                "type": "query",
+                "description": "The range start for delivery windows."
+              },
+              {
+                "name": "endTime",
+                "value": "2024-10-07T00:00:00Z",
+                "type": "query",
+                "description": "The range end for delivery windows."
+              },
+              {
+                "name": "requestedCapacity",
+                "value": "10",
+                "type": "query",
+                "description": "Optionally specify the requested capacity for the delivery windows."
+              }
+            ]
+          },
+          "docs": "Find delivery windows available for a specific order based on the order's store location and requirements. Requires either order_id or external_order_id. Optionally filter by time range and requested capacity."
+        },
+        {
+          "info": {
+            "name": "Book a delivery window for order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/external-identifier/:externalId/delivery-window/book",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "1234567890",
+                "type": "path",
+                "description": "The external id of the order to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reserve a delivery window for an order identified by external ID. The booking holds capacity in the window until confirmed or revoked."
+        },
+        {
+          "info": {
+            "name": "Confirm a delivery window for order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/external-identifier/:externalId/delivery-window/confirm",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "1234567890",
+                "type": "path",
+                "description": "The external id of the order to update"
+              }
+            ]
+          },
+          "docs": "Confirm a previously booked delivery window for an order. Finalizes the booking and commits the capacity reservation."
+        },
+        {
+          "info": {
+            "name": "Revoke a delivery window for order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/external-identifier/:externalId/delivery-window/revoke",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "1234567890",
+                "type": "path",
+                "description": "The external id of the order to update"
+              }
+            ]
+          },
+          "docs": "Revoke a previously booked delivery window for an order. Releases the capacity reservation and disassociates the window from the order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

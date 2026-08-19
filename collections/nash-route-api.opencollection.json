@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Route API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Route",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Dispatch Optimized Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/activities/:id/dispatch",
+            "params": [
+              {
+                "name": "id",
+                "value": "act_123",
+                "type": "path",
+                "description": "Activity id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Dispatch orders from an optimization activity to delivery providers. Creates jobs and assigns them to providers based on the optimized routes."
+        },
+        {
+          "info": {
+            "name": "Save Optimization Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/activities/:id/save-routes",
+            "params": [
+              {
+                "name": "id",
+                "value": "act_123",
+                "type": "path",
+                "description": "Activity id"
+              }
+            ]
+          },
+          "docs": "Save the optimized routes from an optimization activity. Creates route records with stops and travel metrics based on the optimization results."
+        },
+        {
+          "info": {
+            "name": "Create or Update Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/routes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new route or update an existing one. A route defines an optimized sequence of stops with orders assigned to each stop."
+        },
+        {
+          "info": {
+            "name": "Dispatch Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/routes/dispatch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Dispatch one or more routes to delivery providers. Creates jobs for each route and assigns them based on the organization's dispatch strategy."
+        },
+        {
+          "info": {
+            "name": "Assign or Reassign a Route by external id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/routes/external-identifier/:external_id/assign",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "rte_ext_123",
+                "type": "path",
+                "description": "External identifier of the route"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign a route to a provider, driver group (contract), courier, or vehicle. Driver group / courier / vehicle accept an internal or external id. Pre-dispatch the assignment is updated in place. Post-dispatch the route is reassigned — the active assignment is cancelled, live deliveries are cancelled, tasks are recreated and re-quoted, a fresh route assignment is created, and the requested target is applied. Returns the updated route."
+        },
+        {
+          "info": {
+            "name": "Get Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/routes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Route ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a route by ID, including its stops, travel metrics, and associated orders."
+        },
+        {
+          "info": {
+            "name": "Assign or Reassign a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/routes/:id/assign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Route ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign a route to a provider, driver group (contract), courier, or vehicle. Driver group / courier / vehicle accept an internal or external id. Pre-dispatch the assignment is updated in place. Post-dispatch the route is reassigned — the active assignment is cancelled, live deliveries are cancelled, tasks are recreated and re-quoted, a fresh route assignment is created, and the requested target is applied. Returns the updated route."
+        },
+        {
+          "info": {
+            "name": "Calculate Route Timing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/routes/:id/calculate-timing",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Route ID"
+              }
+            ]
+          },
+          "docs": "Calculate per-stop ETAs and polyline for a route using HERE truck routing. Updates arrival/departure times for each stop and returns the route polyline."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

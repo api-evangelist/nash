@@ -1,0 +1,1745 @@
+{
+  "item": [
+    {
+      "id": "a7c085c3-0efa-4709-a276-6c17e1c1dae5",
+      "name": "Store Locations",
+      "description": {
+        "content": "Store Locations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a02f9f9a-bf24-4b8d-852f-01a6523386de",
+          "name": "Set the day capacity for a store location",
+          "request": {
+            "name": "Set the day capacity for a store location",
+            "description": {
+              "content": "Set the delivery capacity for a store location on a specific date. Overrides the default weekly capacity for that particular day.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "set_store_location_day_capacity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storeLocationId\": \"<string>\",\n  \"date\": \"<string>\",\n  \"dayCapacity\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5ca1808e-673c-4492-b045-cb528e2a3a2c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "set_store_location_day_capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeLocationId\": \"stl_1234567890\",\n  \"date\": \"2024-10-06\",\n  \"dayCapacity\": {\n    \"isActive\": true,\n    \"shiftCapacity\": {\n      \"00:00\": 0,\n      \"01:00\": 0,\n      \"02:00\": 0,\n      \"03:00\": 0,\n      \"04:00\": 0,\n      \"05:00\": 0,\n      \"06:00\": 0,\n      \"07:00\": 0,\n      \"08:00\": 4,\n      \"09:00\": 4,\n      \"10:00\": 4,\n      \"11:00\": 4,\n      \"12:00\": 4,\n      \"13:00\": 4,\n      \"14:00\": 6,\n      \"15:00\": 6,\n      \"16:00\": 6,\n      \"17:00\": 6,\n      \"18:00\": 0,\n      \"19:00\": 0,\n      \"20:00\": 0,\n      \"21:00\": 0,\n      \"22:00\": 0,\n      \"23:00\": 0\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4261145d-c6c6-41b0-aca9-cad0659bae2a",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "set_store_location_day_capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeLocationId\": \"stl_1234567890\",\n  \"date\": \"2024-10-06\",\n  \"dayCapacity\": {\n    \"isActive\": true,\n    \"shiftCapacity\": {\n      \"00:00\": 0,\n      \"01:00\": 0,\n      \"02:00\": 0,\n      \"03:00\": 0,\n      \"04:00\": 0,\n      \"05:00\": 0,\n      \"06:00\": 0,\n      \"07:00\": 0,\n      \"08:00\": 4,\n      \"09:00\": 4,\n      \"10:00\": 4,\n      \"11:00\": 4,\n      \"12:00\": 4,\n      \"13:00\": 4,\n      \"14:00\": 6,\n      \"15:00\": 6,\n      \"16:00\": 6,\n      \"17:00\": 6,\n      \"18:00\": 0,\n      \"19:00\": 0,\n      \"20:00\": 0,\n      \"21:00\": 0,\n      \"22:00\": 0,\n      \"23:00\": 0\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e60ae144-ec21-4519-a480-cd28ba998dc1",
+          "name": "Set the weekly default capacity for a store location",
+          "request": {
+            "name": "Set the weekly default capacity for a store location",
+            "description": {
+              "content": "Configure the default weekly capacity schedule for a store location. Defines how many orders the location can handle per day of the week.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "set_store_location_default_capacity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storeLocationId\": \"<string>\",\n  \"defaultCapacity\": {\n    \"key_0\": 7047,\n    \"key_1\": true,\n    \"key_2\": 4899.339917057953\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b6fefc1-ec3b-467c-8489-9acc77dcecc4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "set_store_location_default_capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeLocationId\": \"stl_1234567890\",\n  \"defaultCapacity\": {\n    \"friday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"monday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"saturday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"sunday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"thursday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"tuesday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"wednesday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09376dc0-d69b-4432-9bb4-34903cd034e3",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "set_store_location_default_capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeLocationId\": \"stl_1234567890\",\n  \"defaultCapacity\": {\n    \"friday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"monday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"saturday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"sunday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"thursday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"tuesday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    },\n    \"wednesday\": {\n      \"isActive\": true,\n      \"shiftCapacity\": {\n        \"00:00\": 0,\n        \"01:00\": 0,\n        \"02:00\": 0,\n        \"03:00\": 0,\n        \"04:00\": 0,\n        \"05:00\": 0,\n        \"06:00\": 0,\n        \"07:00\": 0,\n        \"08:00\": 4,\n        \"09:00\": 4,\n        \"10:00\": 4,\n        \"11:00\": 4,\n        \"12:00\": 4,\n        \"13:00\": 4,\n        \"14:00\": 6,\n        \"15:00\": 6,\n        \"16:00\": 6,\n        \"17:00\": 6,\n        \"18:00\": 0,\n        \"19:00\": 0,\n        \"20:00\": 0,\n        \"21:00\": 0,\n        \"22:00\": 0,\n        \"23:00\": 0\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d972fa32-e845-4db8-9b61-1003c77cc797",
+          "name": "Get store locations",
+          "request": {
+            "name": "Get store locations",
+            "description": {
+              "content": "List store locations for the organization with pagination. Use size and offset parameters to paginate through results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "The size of the store locations to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The offset of the store locations to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cbaaaaf6-7b63-4bbd-88a0-0e54989d80a5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"storeLocations\": [\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7461.734294702379,\n        \"longitude\": 6997.540555302325\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 5709\n        },\n        {\n          \"key_0\": false\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9172\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": 5745\n      },\n      \"prepTimeMinutes\": 6121,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    },\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 890.086487628996,\n        \"longitude\": 722.2987381403334\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 1795\n        },\n        {\n          \"key_0\": 5244.991930769973,\n          \"key_1\": 4442.474881339305,\n          \"key_2\": 6044\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": 6764,\n        \"key_3\": 6990\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": 477.7967839709285\n      },\n      \"prepTimeMinutes\": 5207,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9678398f-24f5-4288-9077-9c8f4d154270",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5255e9be-3986-442e-889e-2ab1a5f91cb0",
+          "name": "Create store location",
+          "request": {
+            "name": "Create store location",
+            "description": {
+              "content": "Create a new store location (pickup point) with address, hours, and capacity settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"number\": \"<string>\",\n    \"secondaryNumber\": \"<string>\",\n    \"county\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\"\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": \"string\",\n    \"key_1\": 4764,\n    \"key_2\": 4960.778982250243\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 8730.38996151301,\n      \"key_2\": 3855.1841036759492\n    },\n    {\n      \"key_0\": 465\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22451c4a-4129-4ca4-8acc-a33292d109e1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 4845.866805526478,\n    \"longitude\": 2085.808513479551\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": 5880,\n    \"key_1\": \"string\",\n    \"key_2\": 1161.6044007685512\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 7454.834555809213,\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 6748.191103362367\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91b829ca-7af2-4fdd-8fbe-4f334647f215",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 4845.866805526478,\n    \"longitude\": 2085.808513479551\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": 5880,\n    \"key_1\": \"string\",\n    \"key_2\": 1161.6044007685512\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 7454.834555809213,\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 6748.191103362367\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b35132dd-f079-44db-aeb1-019f19b17126",
+          "name": "Get store locations that cover specified location (latitude & longitude, city_zipcode)",
+          "request": {
+            "name": "Get store locations that cover specified location (latitude & longitude, city_zipcode)",
+            "description": {
+              "content": "Find store locations whose delivery zones cover a given geographic point. Provide latitude/longitude, city_zipcode, or zipcode to find matching store locations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations",
+                "coverage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<string>",
+                  "description": "The latitude of the location to check coverage for. If used, must specify longitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<string>",
+                  "description": "The longitude of the location to check coverage for. If used, must specify latitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "cityZipcode",
+                  "value": "<string>",
+                  "description": "The city_zipcode pair to check coverage for. The location must have coverage set up using the `City & Zip Code` unique field, not the separate `City` or `Zip Code` fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "zipcode",
+                  "value": "<string>",
+                  "description": "The zipcode to check coverage for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0b793eb-a234-4581-af3e-8793020815d6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "coverage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cityZipcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipcode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d7fd699-fe30-45bd-bee6-be3dfb16824a",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "coverage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cityZipcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipcode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13349727-e920-4ae3-b836-0da49124e092",
+          "name": "Create or update store location by external identifier",
+          "request": {
+            "name": "Create or update store location by external identifier",
+            "description": {
+              "content": "Create a new store location or update an existing one using your external identifier. If a store location with the given external identifier exists, it is updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations",
+                "external-identifier",
+                ":externalIdentifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"number\": \"<string>\",\n    \"secondaryNumber\": \"<string>\",\n    \"county\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\"\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": \"string\",\n    \"key_1\": 4764,\n    \"key_2\": 4960.778982250243\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 8730.38996151301,\n      \"key_2\": 3855.1841036759492\n    },\n    {\n      \"key_0\": 465\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b45721c-144b-40c8-800f-5706871cb67d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "external-identifier",
+                    ":externalIdentifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 4845.866805526478,\n    \"longitude\": 2085.808513479551\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": 5880,\n    \"key_1\": \"string\",\n    \"key_2\": 1161.6044007685512\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 7454.834555809213,\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 6748.191103362367\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b339382-4cea-48bb-85cb-6b09180ab3c4",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "external-identifier",
+                    ":externalIdentifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 4845.866805526478,\n    \"longitude\": 2085.808513479551\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": 5880,\n    \"key_1\": \"string\",\n    \"key_2\": 1161.6044007685512\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 7454.834555809213,\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 6748.191103362367\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "849b900c-c4af-4ee5-8723-1fa7bdaf1828",
+          "name": "Get store location by external identifier",
+          "request": {
+            "name": "Get store location by external identifier",
+            "description": {
+              "content": "Retrieve a store location using your external identifier instead of the Nash store location ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations",
+                "external_identifier",
+                ":external_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0163c9e0-c894-4efb-9fb0-bedc15193981",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "external_identifier",
+                    ":external_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd3f9800-7871-491e-b250-e5ada916f366",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "external_identifier",
+                    ":external_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0118affb-9fa2-4c05-b9f4-3c2fbb1f24f6",
+          "name": "Create or update store location",
+          "request": {
+            "name": "Create or update store location",
+            "description": {
+              "content": "Create a new store location or update an existing one. Matches on external identifier or store location ID for upsert logic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"number\": \"<string>\",\n    \"secondaryNumber\": \"<string>\",\n    \"county\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\"\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": \"string\",\n    \"key_1\": 4764,\n    \"key_2\": 4960.778982250243\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 8730.38996151301,\n      \"key_2\": 3855.1841036759492\n    },\n    {\n      \"key_0\": 465\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12c04db2-6a9e-4ba4-870b-3bc38599d530",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 4845.866805526478,\n    \"longitude\": 2085.808513479551\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": 5880,\n    \"key_1\": \"string\",\n    \"key_2\": 1161.6044007685512\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 7454.834555809213,\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 6748.191103362367\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37d63955-1e13-479d-b36a-895b7ed52b4b",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 4845.866805526478,\n    \"longitude\": 2085.808513479551\n  },\n  \"externalId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"operatingHours\": {\n    \"key_0\": 5880,\n    \"key_1\": \"string\",\n    \"key_2\": 1161.6044007685512\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 7454.834555809213,\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 6748.191103362367\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1fcdd61-ea2c-4370-b998-95e7b4119963",
+          "name": "Upsert multiple store locations",
+          "request": {
+            "name": "Upsert multiple store locations",
+            "description": {
+              "content": "Create or update multiple store locations in a single request. Each store location is matched by external identifier for upsert logic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations",
+                "upsert",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e59d059b-1163-49b9-b668-0ea4c97bf376",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "upsert",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"storeLocations\": [\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 7461.734294702379,\n        \"longitude\": 6997.540555302325\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 5709\n        },\n        {\n          \"key_0\": false\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9172\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": 5745\n      },\n      \"prepTimeMinutes\": 6121,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    },\n    {\n      \"id\": \"stl_01234567890123456789\",\n      \"name\": \"White House\",\n      \"phoneNumber\": \"+1234567890\",\n      \"location\": {\n        \"street\": \"Pennsylvania Avenue NW\",\n        \"city\": \"Washington\",\n        \"country\": \"US\",\n        \"number\": \"string\",\n        \"secondaryNumber\": \"string\",\n        \"county\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"latitude\": 890.086487628996,\n        \"longitude\": 722.2987381403334\n      },\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoneAssociations\": [\n        {\n          \"key_0\": 1795\n        },\n        {\n          \"key_0\": 5244.991930769973,\n          \"key_1\": 4442.474881339305,\n          \"key_2\": 6044\n        }\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"integrationMetadata\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": 6764,\n        \"key_3\": 6990\n      },\n      \"externalId\": \"string\",\n      \"operatingHours\": {\n        \"key_0\": 477.7967839709285\n      },\n      \"prepTimeMinutes\": 5207,\n      \"blackoutDates\": [\n        \"string\",\n        \"string\"\n      ],\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"pickupInstructions\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "890c3a49-cc5e-468e-94d6-96fb503da756",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    "upsert",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89d86835-cc22-4820-b8c0-d0cd3f475d90",
+          "name": "Get store location",
+          "request": {
+            "name": "Get store location",
+            "description": {
+              "content": "Retrieve a single store location by ID, including its address, hours, capacity, and zone associations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b86aa2f4-9fcf-4158-b4b9-e028d00a9d4b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b9ed65c-b596-40fc-9d51-6253b2cffc85",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e4c4d4d-3ec1-4636-bbf5-5d7122b9a63f",
+          "name": "Delete store location",
+          "request": {
+            "name": "Delete store location",
+            "description": {
+              "content": "Delete a store location by ID. Orders referencing this store location will no longer have a valid pickup point.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ea87f4d-6ef1-4ec1-b9a6-12d01810cbb4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"isDeleted\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95745e32-2f0d-48d1-bd07-81f70eaad2b3",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "331515af-ec48-4b6e-9a46-eee07d509e16",
+          "name": "Update store location",
+          "request": {
+            "name": "Update store location",
+            "description": {
+              "content": "Update an existing store location's details such as address, hours, or capacity. Only provided fields are updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "store_locations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"operatingHours\": {\n    \"key_0\": 1585.1736762250657\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"blackoutDates\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"number\": \"<string>\",\n    \"secondaryNumber\": \"<string>\",\n    \"county\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": 2064,\n      \"key_1\": \"string\",\n      \"key_2\": false,\n      \"key_3\": \"string\"\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66d04e31-fd48-4083-a3f0-44defaa9f107",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"operatingHours\": {\n    \"key_0\": 7757.390711181438,\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"blackoutDates\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 3168.210503935902,\n    \"longitude\": 7365.974802196166\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": 5487.586397723824,\n      \"key_1\": 6130\n    },\n    {\n      \"key_0\": 8527.741243009781\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"stl_01234567890123456789\",\n  \"name\": \"White House\",\n  \"phoneNumber\": \"+1234567890\",\n  \"location\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 1020.3924619148219,\n    \"longitude\": 6795.791436093122\n  },\n  \"zoneIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8144.294313827068\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"integrationMetadata\": {\n    \"key_0\": false,\n    \"key_1\": 6533,\n    \"key_2\": false,\n    \"key_3\": true\n  },\n  \"externalId\": \"string\",\n  \"operatingHours\": {\n    \"key_0\": 8670.006668788486,\n    \"key_1\": \"string\",\n    \"key_2\": 4509,\n    \"key_3\": 703.7268234268623,\n    \"key_4\": 2021.6989374519633\n  },\n  \"prepTimeMinutes\": 9744,\n  \"blackoutDates\": [\n    \"string\",\n    \"string\"\n  ],\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"string\",\n  \"pickupInstructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "854ddbe9-8877-496e-8c6d-e04ca8c9ed98",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "store_locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"operatingHours\": {\n    \"key_0\": 7757.390711181438,\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"prepTimeMinutes\": \"<integer>\",\n  \"blackoutDates\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"pickupInstructions\": \"<string>\",\n  \"name\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"address\": \"<string>\",\n  \"addressComponents\": {\n    \"street\": \"Pennsylvania Avenue NW\",\n    \"city\": \"Washington\",\n    \"country\": \"US\",\n    \"number\": \"string\",\n    \"secondaryNumber\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"latitude\": 3168.210503935902,\n    \"longitude\": 7365.974802196166\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"zoneAssociations\": [\n    {\n      \"key_0\": 5487.586397723824,\n      \"key_1\": 6130\n    },\n    {\n      \"key_0\": 8527.741243009781\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9044,\n        \"key_1\": true,\n        \"key_2\": 663\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2943.8216554330534\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4523f3ff-4517-4caa-ae88-6c0841869f3e",
+    "name": "Nash AI Functions Store Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

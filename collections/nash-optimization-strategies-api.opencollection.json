@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Optimization Strategies API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Optimization Strategies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Optimization Strategies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/optimization-strategies"
+          },
+          "docs": "Returns all optimization strategies for the authenticated organization (including soft-deleted)."
+        },
+        {
+          "info": {
+            "name": "Create Optimization Strategy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/optimization-strategies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new optimization strategy for the authenticated organization. A strategy configures how orders are grouped into routes (service times, pickup-time windows, contracts, store locations, zones, and optional cron schedules)."
+        },
+        {
+          "info": {
+            "name": "Get Optimization Strategy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/optimization-strategies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single optimization strategy by id."
+        },
+        {
+          "info": {
+            "name": "Update Optimization Strategy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/optimization-strategies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing optimization strategy. Only provided fields are updated. Supplying `optimization_schedules` replaces the existing schedules."
+        },
+        {
+          "info": {
+            "name": "Delete Optimization Strategy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/optimization-strategies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Soft-delete an optimization strategy. Fails if the strategy is referenced by an automation logic or an active automation rule."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

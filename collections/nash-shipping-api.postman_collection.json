@@ -1,0 +1,306 @@
+{
+  "item": [
+    {
+      "id": "79aa9192-de0b-483f-a4b5-b6b70060c4e6",
+      "name": "Shipping",
+      "description": {
+        "content": "Shipping operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9530a2c1-95d5-45b7-8db6-d73a549fb088",
+          "name": "Dispatch and Manifest Orders",
+          "request": {
+            "name": "Dispatch and Manifest Orders",
+            "description": {
+              "content": "Create, autodispatch, and manifest shipping orders in a single request. Each order is created, autodispatched using the org's dispatch strategy, then manifested with the provider it landed on. Per-order failures are returned in `errors` instead of aborting the batch. `shippingDetails` on an order, if provided, is folded into `orderMetadata.shipping_details` before create so providers can consume it during manifest.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dispatch-and-manifest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orders\": [\n    {\n      \"externalId\": \"<string>\",\n      \"pickupAddress\": \"<string>\",\n      \"pickupPlaceId\": \"<string>\",\n      \"pickupPhoneNumber\": \"<string>\",\n      \"pickupBusinessName\": \"<string>\",\n      \"pickupFirstName\": \"<string>\",\n      \"pickupLastName\": \"<string>\",\n      \"pickupInstructions\": \"<string>\",\n      \"pickupStoreLocationId\": \"<string>\",\n      \"pickupExternalStoreLocationId\": \"<string>\",\n      \"pickupStoreLocationIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"pickupZoneIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"pickupBarcodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"pickupEmail\": \"<string>\",\n      \"dropoffAddress\": \"<string>\",\n      \"dropoffPlaceId\": \"<string>\",\n      \"dropoffPhoneNumber\": \"<string>\",\n      \"dropoffBusinessName\": \"<string>\",\n      \"dropoffFirstName\": \"<string>\",\n      \"dropoffLastName\": \"<string>\",\n      \"dropoffInstructions\": \"<string>\",\n      \"dropoffBarcodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"dropoffEmail\": \"<string>\",\n      \"deliveryMode\": \"<string>\",\n      \"pickupStartTime\": \"<dateTime>\",\n      \"pickupEndTime\": \"<dateTime>\",\n      \"dropoffStartTime\": \"<dateTime>\",\n      \"dropoffEndTime\": \"<dateTime>\",\n      \"deliveryWindowId\": \"<string>\",\n      \"description\": \"<string>\",\n      \"itemsCount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"valueCents\": \"<integer>\",\n      \"tipAmountCents\": \"<integer>\",\n      \"requirements\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"minimumVehicleSize\": \"<string>\",\n      \"dispatchStrategyId\": \"<string>\",\n      \"orderMetadata\": {\n        \"key_0\": 8877.873946121666\n      },\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"referenceId\": \"<string>\",\n      \"pickupAddressNumber\": \"<string>\",\n      \"pickupAddressSecondarynumber\": \"<string>\",\n      \"pickupAddressFormattedStreet\": \"<string>\",\n      \"pickupAddressCity\": \"<string>\",\n      \"pickupAddressCounty\": \"<string>\",\n      \"pickupAddressState\": \"<string>\",\n      \"pickupAddressZip\": \"<string>\",\n      \"pickupAddressCountry\": \"<string>\",\n      \"pickupLat\": \"<number>\",\n      \"pickupLng\": \"<number>\",\n      \"dropoffAddressNumber\": \"<string>\",\n      \"dropoffAddressSecondarynumber\": \"<string>\",\n      \"dropoffAddressFormattedStreet\": \"<string>\",\n      \"dropoffAddressCity\": \"<string>\",\n      \"dropoffAddressCounty\": \"<string>\",\n      \"dropoffAddressState\": \"<string>\",\n      \"dropoffAddressZip\": \"<string>\",\n      \"dropoffAddressCountry\": \"<string>\",\n      \"dropoffLat\": \"<number>\",\n      \"dropoffLng\": \"<number>\",\n      \"weight\": \"<number>\",\n      \"height\": \"<number>\",\n      \"width\": \"<number>\",\n      \"depth\": \"<number>\",\n      \"items\": [\n        {\n          \"id\": \"<string>\",\n          \"description\": \"<string>\",\n          \"count\": \"<integer>\",\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": \"<number>\",\n          \"valueCents\": \"<integer>\",\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"<string>\",\n          \"barcode\": \"<string>\",\n          \"metadata\": {\n            \"key_0\": true,\n            \"key_1\": 9571,\n            \"key_2\": 6501.116761853356\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"description\": \"<string>\",\n          \"count\": \"<integer>\",\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": \"<number>\",\n          \"valueCents\": \"<integer>\",\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"<string>\",\n          \"barcode\": \"<string>\",\n          \"metadata\": {\n            \"key_0\": \"string\"\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"optimizationParameters\": {\n        \"pickupDoorstepTimeSeconds\": \"<integer>\",\n        \"dropoffDoorstepTimeSeconds\": \"<integer>\",\n        \"costsByMetric\": {\n          \"key_0\": false,\n          \"key_1\": 7610.523144599385\n        },\n        \"clusterLabel\": \"<string>\",\n        \"mxLabel\": \"<string>\",\n        \"assignmentPriority\": \"<integer>\",\n        \"sequencePriority\": \"<integer>\",\n        \"sequenceGroup\": \"<string>\"\n      },\n      \"pickupPayment\": {\n        \"barcode\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"providerCard\": \"<boolean>\"\n      },\n      \"reapplyAutomations\": \"<boolean>\",\n      \"maxDeliveryFeeCents\": \"<integer>\",\n      \"shippingDetails\": {\n        \"providerId\": \"<string>\",\n        \"providerConsignmentId\": \"<string>\",\n        \"providerExternalId\": \"<string>\",\n        \"speed\": \"<string>\",\n        \"type\": \"<string>\",\n        \"movementType\": \"<string>\",\n        \"chargeAccountId\": \"<string>\",\n        \"sortCode\": \"<string>\"\n      }\n    },\n    {\n      \"externalId\": \"<string>\",\n      \"pickupAddress\": \"<string>\",\n      \"pickupPlaceId\": \"<string>\",\n      \"pickupPhoneNumber\": \"<string>\",\n      \"pickupBusinessName\": \"<string>\",\n      \"pickupFirstName\": \"<string>\",\n      \"pickupLastName\": \"<string>\",\n      \"pickupInstructions\": \"<string>\",\n      \"pickupStoreLocationId\": \"<string>\",\n      \"pickupExternalStoreLocationId\": \"<string>\",\n      \"pickupStoreLocationIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"pickupZoneIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"pickupBarcodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"pickupEmail\": \"<string>\",\n      \"dropoffAddress\": \"<string>\",\n      \"dropoffPlaceId\": \"<string>\",\n      \"dropoffPhoneNumber\": \"<string>\",\n      \"dropoffBusinessName\": \"<string>\",\n      \"dropoffFirstName\": \"<string>\",\n      \"dropoffLastName\": \"<string>\",\n      \"dropoffInstructions\": \"<string>\",\n      \"dropoffBarcodes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"dropoffEmail\": \"<string>\",\n      \"deliveryMode\": \"<string>\",\n      \"pickupStartTime\": \"<dateTime>\",\n      \"pickupEndTime\": \"<dateTime>\",\n      \"dropoffStartTime\": \"<dateTime>\",\n      \"dropoffEndTime\": \"<dateTime>\",\n      \"deliveryWindowId\": \"<string>\",\n      \"description\": \"<string>\",\n      \"itemsCount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"valueCents\": \"<integer>\",\n      \"tipAmountCents\": \"<integer>\",\n      \"requirements\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"minimumVehicleSize\": \"<string>\",\n      \"dispatchStrategyId\": \"<string>\",\n      \"orderMetadata\": {\n        \"key_0\": \"string\"\n      },\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"referenceId\": \"<string>\",\n      \"pickupAddressNumber\": \"<string>\",\n      \"pickupAddressSecondarynumber\": \"<string>\",\n      \"pickupAddressFormattedStreet\": \"<string>\",\n      \"pickupAddressCity\": \"<string>\",\n      \"pickupAddressCounty\": \"<string>\",\n      \"pickupAddressState\": \"<string>\",\n      \"pickupAddressZip\": \"<string>\",\n      \"pickupAddressCountry\": \"<string>\",\n      \"pickupLat\": \"<number>\",\n      \"pickupLng\": \"<number>\",\n      \"dropoffAddressNumber\": \"<string>\",\n      \"dropoffAddressSecondarynumber\": \"<string>\",\n      \"dropoffAddressFormattedStreet\": \"<string>\",\n      \"dropoffAddressCity\": \"<string>\",\n      \"dropoffAddressCounty\": \"<string>\",\n      \"dropoffAddressState\": \"<string>\",\n      \"dropoffAddressZip\": \"<string>\",\n      \"dropoffAddressCountry\": \"<string>\",\n      \"dropoffLat\": \"<number>\",\n      \"dropoffLng\": \"<number>\",\n      \"weight\": \"<number>\",\n      \"height\": \"<number>\",\n      \"width\": \"<number>\",\n      \"depth\": \"<number>\",\n      \"items\": [\n        {\n          \"id\": \"<string>\",\n          \"description\": \"<string>\",\n          \"count\": \"<integer>\",\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": \"<number>\",\n          \"valueCents\": \"<integer>\",\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"<string>\",\n          \"barcode\": \"<string>\",\n          \"metadata\": {\n            \"key_0\": 5767.542372094445,\n            \"key_1\": 2892.423264050489\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"description\": \"<string>\",\n          \"count\": \"<integer>\",\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": \"<number>\",\n          \"valueCents\": \"<integer>\",\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"<string>\",\n          \"barcode\": \"<string>\",\n          \"metadata\": {\n            \"key_0\": false,\n            \"key_1\": 1525.3616143472925,\n            \"key_2\": \"string\"\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"optimizationParameters\": {\n        \"pickupDoorstepTimeSeconds\": \"<integer>\",\n        \"dropoffDoorstepTimeSeconds\": \"<integer>\",\n        \"costsByMetric\": {\n          \"key_0\": false,\n          \"key_1\": 4094.1824334007083\n        },\n        \"clusterLabel\": \"<string>\",\n        \"mxLabel\": \"<string>\",\n        \"assignmentPriority\": \"<integer>\",\n        \"sequencePriority\": \"<integer>\",\n        \"sequenceGroup\": \"<string>\"\n      },\n      \"pickupPayment\": {\n        \"barcode\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"providerCard\": \"<boolean>\"\n      },\n      \"reapplyAutomations\": \"<boolean>\",\n      \"maxDeliveryFeeCents\": \"<integer>\",\n      \"shippingDetails\": {\n        \"providerId\": \"<string>\",\n        \"providerConsignmentId\": \"<string>\",\n        \"providerExternalId\": \"<string>\",\n        \"speed\": \"<string>\",\n        \"type\": \"<string>\",\n        \"movementType\": \"<string>\",\n        \"chargeAccountId\": \"<string>\",\n        \"sortCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ac80dfa-c8c5-4b93-9d5e-066c9501468b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dispatch-and-manifest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orders\": [\n    {\n      \"externalId\": \"string\",\n      \"pickupAddress\": \"string\",\n      \"pickupPlaceId\": \"string\",\n      \"pickupPhoneNumber\": \"string\",\n      \"pickupBusinessName\": \"string\",\n      \"pickupFirstName\": \"string\",\n      \"pickupLastName\": \"string\",\n      \"pickupInstructions\": \"string\",\n      \"pickupStoreLocationId\": \"string\",\n      \"pickupExternalStoreLocationId\": \"string\",\n      \"pickupStoreLocationIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupZoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupBarcodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupEmail\": \"string\",\n      \"dropoffAddress\": \"string\",\n      \"dropoffPlaceId\": \"string\",\n      \"dropoffPhoneNumber\": \"string\",\n      \"dropoffBusinessName\": \"string\",\n      \"dropoffFirstName\": \"string\",\n      \"dropoffLastName\": \"string\",\n      \"dropoffInstructions\": \"string\",\n      \"dropoffBarcodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dropoffEmail\": \"string\",\n      \"deliveryMode\": \"string\",\n      \"pickupStartTime\": \"2004-07-10T18:45:11.418Z\",\n      \"pickupEndTime\": \"2008-03-12T14:17:19.819Z\",\n      \"dropoffStartTime\": \"2025-12-09T04:48:58.920Z\",\n      \"dropoffEndTime\": \"1970-05-27T16:59:03.886Z\",\n      \"deliveryWindowId\": \"string\",\n      \"description\": \"string\",\n      \"itemsCount\": 3978,\n      \"currency\": \"string\",\n      \"valueCents\": 6697,\n      \"tipAmountCents\": 2867,\n      \"requirements\": [\n        \"barcode_scan_on_dropoff\",\n        \"signature_proof_of_pickup\"\n      ],\n      \"minimumVehicleSize\": \"string\",\n      \"dispatchStrategyId\": \"string\",\n      \"orderMetadata\": {\n        \"key_0\": 1075,\n        \"key_1\": true\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"referenceId\": \"string\",\n      \"pickupAddressNumber\": \"string\",\n      \"pickupAddressSecondarynumber\": \"string\",\n      \"pickupAddressFormattedStreet\": \"string\",\n      \"pickupAddressCity\": \"string\",\n      \"pickupAddressCounty\": \"string\",\n      \"pickupAddressState\": \"string\",\n      \"pickupAddressZip\": \"string\",\n      \"pickupAddressCountry\": \"string\",\n      \"pickupLat\": 7538.053723994604,\n      \"pickupLng\": 3833.636842941286,\n      \"dropoffAddressNumber\": \"string\",\n      \"dropoffAddressSecondarynumber\": \"string\",\n      \"dropoffAddressFormattedStreet\": \"string\",\n      \"dropoffAddressCity\": \"string\",\n      \"dropoffAddressCounty\": \"string\",\n      \"dropoffAddressState\": \"string\",\n      \"dropoffAddressZip\": \"string\",\n      \"dropoffAddressCountry\": \"string\",\n      \"dropoffLat\": 6484.084684588061,\n      \"dropoffLng\": 6088.923794206999,\n      \"weight\": 8519.49197058816,\n      \"height\": 9234.399704862504,\n      \"width\": 8010.416846657249,\n      \"depth\": 2147.998067028658,\n      \"items\": [\n        {\n          \"id\": \"string\",\n          \"description\": \"string\",\n          \"count\": 8088,\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": 8818.075674213194,\n          \"valueCents\": 4478,\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"barcode\": \"string\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"description\": \"string\",\n          \"count\": 4860,\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": 9214.086424382707,\n          \"valueCents\": 9739,\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"barcode\": \"string\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": true,\n            \"key_2\": true,\n            \"key_3\": true\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"optimizationParameters\": {\n        \"pickupDoorstepTimeSeconds\": 7323,\n        \"dropoffDoorstepTimeSeconds\": 1516,\n        \"costsByMetric\": {\n          \"key_0\": 7944.656085421467\n        },\n        \"clusterLabel\": \"string\",\n        \"mxLabel\": \"string\",\n        \"assignmentPriority\": 0,\n        \"sequencePriority\": 8,\n        \"sequenceGroup\": \"string\"\n      },\n      \"pickupPayment\": {\n        \"barcode\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"providerCard\": true\n      },\n      \"reapplyAutomations\": false,\n      \"maxDeliveryFeeCents\": 2221,\n      \"shippingDetails\": {\n        \"providerId\": \"string\",\n        \"providerConsignmentId\": \"string\",\n        \"providerExternalId\": \"string\",\n        \"speed\": \"string\",\n        \"type\": \"string\",\n        \"movementType\": \"string\",\n        \"chargeAccountId\": \"string\",\n        \"sortCode\": \"string\"\n      }\n    },\n    {\n      \"externalId\": \"string\",\n      \"pickupAddress\": \"string\",\n      \"pickupPlaceId\": \"string\",\n      \"pickupPhoneNumber\": \"string\",\n      \"pickupBusinessName\": \"string\",\n      \"pickupFirstName\": \"string\",\n      \"pickupLastName\": \"string\",\n      \"pickupInstructions\": \"string\",\n      \"pickupStoreLocationId\": \"string\",\n      \"pickupExternalStoreLocationId\": \"string\",\n      \"pickupStoreLocationIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupZoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupBarcodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupEmail\": \"string\",\n      \"dropoffAddress\": \"string\",\n      \"dropoffPlaceId\": \"string\",\n      \"dropoffPhoneNumber\": \"string\",\n      \"dropoffBusinessName\": \"string\",\n      \"dropoffFirstName\": \"string\",\n      \"dropoffLastName\": \"string\",\n      \"dropoffInstructions\": \"string\",\n      \"dropoffBarcodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dropoffEmail\": \"string\",\n      \"deliveryMode\": \"string\",\n      \"pickupStartTime\": \"2011-05-08T15:39:10.308Z\",\n      \"pickupEndTime\": \"1969-01-04T15:00:27.617Z\",\n      \"dropoffStartTime\": \"1998-08-15T00:06:17.794Z\",\n      \"dropoffEndTime\": \"1957-01-13T19:53:42.358Z\",\n      \"deliveryWindowId\": \"string\",\n      \"description\": \"string\",\n      \"itemsCount\": 5923,\n      \"currency\": \"string\",\n      \"valueCents\": 9472,\n      \"tipAmountCents\": 667,\n      \"requirements\": [\n        \"photo_reference_capture_on_dropoff\",\n        \"shipping_label\"\n      ],\n      \"minimumVehicleSize\": \"string\",\n      \"dispatchStrategyId\": \"string\",\n      \"orderMetadata\": {\n        \"key_0\": true\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"referenceId\": \"string\",\n      \"pickupAddressNumber\": \"string\",\n      \"pickupAddressSecondarynumber\": \"string\",\n      \"pickupAddressFormattedStreet\": \"string\",\n      \"pickupAddressCity\": \"string\",\n      \"pickupAddressCounty\": \"string\",\n      \"pickupAddressState\": \"string\",\n      \"pickupAddressZip\": \"string\",\n      \"pickupAddressCountry\": \"string\",\n      \"pickupLat\": 1467.052619224084,\n      \"pickupLng\": 8509.127862108122,\n      \"dropoffAddressNumber\": \"string\",\n      \"dropoffAddressSecondarynumber\": \"string\",\n      \"dropoffAddressFormattedStreet\": \"string\",\n      \"dropoffAddressCity\": \"string\",\n      \"dropoffAddressCounty\": \"string\",\n      \"dropoffAddressState\": \"string\",\n      \"dropoffAddressZip\": \"string\",\n      \"dropoffAddressCountry\": \"string\",\n      \"dropoffLat\": 6177.380528140716,\n      \"dropoffLng\": 762.0341744894832,\n      \"weight\": 2390.008928274151,\n      \"height\": 8026.228041985384,\n      \"width\": 9575.28965483188,\n      \"depth\": 7383.092221030792,\n      \"items\": [\n        {\n          \"id\": \"string\",\n          \"description\": \"string\",\n          \"count\": 7513,\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": 2081.6644412311202,\n          \"valueCents\": 8631,\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"barcode\": \"string\",\n          \"metadata\": {\n            \"key_0\": 3799.1900765421815\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"description\": \"string\",\n          \"count\": 3789,\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": 1321.270054937983,\n          \"valueCents\": 4896,\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"barcode\": \"string\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": true\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"optimizationParameters\": {\n        \"pickupDoorstepTimeSeconds\": 6110,\n        \"dropoffDoorstepTimeSeconds\": 3891,\n        \"costsByMetric\": {\n          \"key_0\": \"string\"\n        },\n        \"clusterLabel\": \"string\",\n        \"mxLabel\": \"string\",\n        \"assignmentPriority\": 0,\n        \"sequencePriority\": 48,\n        \"sequenceGroup\": \"string\"\n      },\n      \"pickupPayment\": {\n        \"barcode\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"providerCard\": true\n      },\n      \"reapplyAutomations\": false,\n      \"maxDeliveryFeeCents\": 7292,\n      \"shippingDetails\": {\n        \"providerId\": \"string\",\n        \"providerConsignmentId\": \"string\",\n        \"providerExternalId\": \"string\",\n        \"speed\": \"string\",\n        \"type\": \"string\",\n        \"movementType\": \"string\",\n        \"chargeAccountId\": \"string\",\n        \"sortCode\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"manifests\": [\n    {\n      \"providerId\": \"string\",\n      \"orderIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"documents\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"contentType\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"contentType\": \"string\"\n        }\n      ]\n    },\n    {\n      \"providerId\": \"string\",\n      \"orderIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"documents\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"contentType\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"contentType\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"errors\": [\n    {\n      \"stage\": \"string\",\n      \"message\": \"string\",\n      \"identifier\": \"string\",\n      \"orderId\": \"string\",\n      \"details\": {\n        \"key_0\": 1567.8172488050611,\n        \"key_1\": 8232,\n        \"key_2\": 9708\n      }\n    },\n    {\n      \"stage\": \"string\",\n      \"message\": \"string\",\n      \"identifier\": \"string\",\n      \"orderId\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58504898-c441-48c7-8007-5189e2ca764b",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dispatch-and-manifest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orders\": [\n    {\n      \"externalId\": \"string\",\n      \"pickupAddress\": \"string\",\n      \"pickupPlaceId\": \"string\",\n      \"pickupPhoneNumber\": \"string\",\n      \"pickupBusinessName\": \"string\",\n      \"pickupFirstName\": \"string\",\n      \"pickupLastName\": \"string\",\n      \"pickupInstructions\": \"string\",\n      \"pickupStoreLocationId\": \"string\",\n      \"pickupExternalStoreLocationId\": \"string\",\n      \"pickupStoreLocationIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupZoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupBarcodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupEmail\": \"string\",\n      \"dropoffAddress\": \"string\",\n      \"dropoffPlaceId\": \"string\",\n      \"dropoffPhoneNumber\": \"string\",\n      \"dropoffBusinessName\": \"string\",\n      \"dropoffFirstName\": \"string\",\n      \"dropoffLastName\": \"string\",\n      \"dropoffInstructions\": \"string\",\n      \"dropoffBarcodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dropoffEmail\": \"string\",\n      \"deliveryMode\": \"string\",\n      \"pickupStartTime\": \"2004-07-10T18:45:11.418Z\",\n      \"pickupEndTime\": \"2008-03-12T14:17:19.819Z\",\n      \"dropoffStartTime\": \"2025-12-09T04:48:58.920Z\",\n      \"dropoffEndTime\": \"1970-05-27T16:59:03.886Z\",\n      \"deliveryWindowId\": \"string\",\n      \"description\": \"string\",\n      \"itemsCount\": 3978,\n      \"currency\": \"string\",\n      \"valueCents\": 6697,\n      \"tipAmountCents\": 2867,\n      \"requirements\": [\n        \"barcode_scan_on_dropoff\",\n        \"signature_proof_of_pickup\"\n      ],\n      \"minimumVehicleSize\": \"string\",\n      \"dispatchStrategyId\": \"string\",\n      \"orderMetadata\": {\n        \"key_0\": 1075,\n        \"key_1\": true\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"referenceId\": \"string\",\n      \"pickupAddressNumber\": \"string\",\n      \"pickupAddressSecondarynumber\": \"string\",\n      \"pickupAddressFormattedStreet\": \"string\",\n      \"pickupAddressCity\": \"string\",\n      \"pickupAddressCounty\": \"string\",\n      \"pickupAddressState\": \"string\",\n      \"pickupAddressZip\": \"string\",\n      \"pickupAddressCountry\": \"string\",\n      \"pickupLat\": 7538.053723994604,\n      \"pickupLng\": 3833.636842941286,\n      \"dropoffAddressNumber\": \"string\",\n      \"dropoffAddressSecondarynumber\": \"string\",\n      \"dropoffAddressFormattedStreet\": \"string\",\n      \"dropoffAddressCity\": \"string\",\n      \"dropoffAddressCounty\": \"string\",\n      \"dropoffAddressState\": \"string\",\n      \"dropoffAddressZip\": \"string\",\n      \"dropoffAddressCountry\": \"string\",\n      \"dropoffLat\": 6484.084684588061,\n      \"dropoffLng\": 6088.923794206999,\n      \"weight\": 8519.49197058816,\n      \"height\": 9234.399704862504,\n      \"width\": 8010.416846657249,\n      \"depth\": 2147.998067028658,\n      \"items\": [\n        {\n          \"id\": \"string\",\n          \"description\": \"string\",\n          \"count\": 8088,\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": 8818.075674213194,\n          \"valueCents\": 4478,\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"barcode\": \"string\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"description\": \"string\",\n          \"count\": 4860,\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": 9214.086424382707,\n          \"valueCents\": 9739,\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"barcode\": \"string\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": true,\n            \"key_2\": true,\n            \"key_3\": true\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"optimizationParameters\": {\n        \"pickupDoorstepTimeSeconds\": 7323,\n        \"dropoffDoorstepTimeSeconds\": 1516,\n        \"costsByMetric\": {\n          \"key_0\": 7944.656085421467\n        },\n        \"clusterLabel\": \"string\",\n        \"mxLabel\": \"string\",\n        \"assignmentPriority\": 0,\n        \"sequencePriority\": 8,\n        \"sequenceGroup\": \"string\"\n      },\n      \"pickupPayment\": {\n        \"barcode\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"providerCard\": true\n      },\n      \"reapplyAutomations\": false,\n      \"maxDeliveryFeeCents\": 2221,\n      \"shippingDetails\": {\n        \"providerId\": \"string\",\n        \"providerConsignmentId\": \"string\",\n        \"providerExternalId\": \"string\",\n        \"speed\": \"string\",\n        \"type\": \"string\",\n        \"movementType\": \"string\",\n        \"chargeAccountId\": \"string\",\n        \"sortCode\": \"string\"\n      }\n    },\n    {\n      \"externalId\": \"string\",\n      \"pickupAddress\": \"string\",\n      \"pickupPlaceId\": \"string\",\n      \"pickupPhoneNumber\": \"string\",\n      \"pickupBusinessName\": \"string\",\n      \"pickupFirstName\": \"string\",\n      \"pickupLastName\": \"string\",\n      \"pickupInstructions\": \"string\",\n      \"pickupStoreLocationId\": \"string\",\n      \"pickupExternalStoreLocationId\": \"string\",\n      \"pickupStoreLocationIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupZoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupBarcodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pickupEmail\": \"string\",\n      \"dropoffAddress\": \"string\",\n      \"dropoffPlaceId\": \"string\",\n      \"dropoffPhoneNumber\": \"string\",\n      \"dropoffBusinessName\": \"string\",\n      \"dropoffFirstName\": \"string\",\n      \"dropoffLastName\": \"string\",\n      \"dropoffInstructions\": \"string\",\n      \"dropoffBarcodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dropoffEmail\": \"string\",\n      \"deliveryMode\": \"string\",\n      \"pickupStartTime\": \"2011-05-08T15:39:10.308Z\",\n      \"pickupEndTime\": \"1969-01-04T15:00:27.617Z\",\n      \"dropoffStartTime\": \"1998-08-15T00:06:17.794Z\",\n      \"dropoffEndTime\": \"1957-01-13T19:53:42.358Z\",\n      \"deliveryWindowId\": \"string\",\n      \"description\": \"string\",\n      \"itemsCount\": 5923,\n      \"currency\": \"string\",\n      \"valueCents\": 9472,\n      \"tipAmountCents\": 667,\n      \"requirements\": [\n        \"photo_reference_capture_on_dropoff\",\n        \"shipping_label\"\n      ],\n      \"minimumVehicleSize\": \"string\",\n      \"dispatchStrategyId\": \"string\",\n      \"orderMetadata\": {\n        \"key_0\": true\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"referenceId\": \"string\",\n      \"pickupAddressNumber\": \"string\",\n      \"pickupAddressSecondarynumber\": \"string\",\n      \"pickupAddressFormattedStreet\": \"string\",\n      \"pickupAddressCity\": \"string\",\n      \"pickupAddressCounty\": \"string\",\n      \"pickupAddressState\": \"string\",\n      \"pickupAddressZip\": \"string\",\n      \"pickupAddressCountry\": \"string\",\n      \"pickupLat\": 1467.052619224084,\n      \"pickupLng\": 8509.127862108122,\n      \"dropoffAddressNumber\": \"string\",\n      \"dropoffAddressSecondarynumber\": \"string\",\n      \"dropoffAddressFormattedStreet\": \"string\",\n      \"dropoffAddressCity\": \"string\",\n      \"dropoffAddressCounty\": \"string\",\n      \"dropoffAddressState\": \"string\",\n      \"dropoffAddressZip\": \"string\",\n      \"dropoffAddressCountry\": \"string\",\n      \"dropoffLat\": 6177.380528140716,\n      \"dropoffLng\": 762.0341744894832,\n      \"weight\": 2390.008928274151,\n      \"height\": 8026.228041985384,\n      \"width\": 9575.28965483188,\n      \"depth\": 7383.092221030792,\n      \"items\": [\n        {\n          \"id\": \"string\",\n          \"description\": \"string\",\n          \"count\": 7513,\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": 2081.6644412311202,\n          \"valueCents\": 8631,\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"barcode\": \"string\",\n          \"metadata\": {\n            \"key_0\": 3799.1900765421815\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"description\": \"string\",\n          \"count\": 3789,\n          \"dimensions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": 1321.270054937983,\n          \"valueCents\": 4896,\n          \"requirements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"barcode\": \"string\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": true\n          },\n          \"subItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"optimizationParameters\": {\n        \"pickupDoorstepTimeSeconds\": 6110,\n        \"dropoffDoorstepTimeSeconds\": 3891,\n        \"costsByMetric\": {\n          \"key_0\": \"string\"\n        },\n        \"clusterLabel\": \"string\",\n        \"mxLabel\": \"string\",\n        \"assignmentPriority\": 0,\n        \"sequencePriority\": 48,\n        \"sequenceGroup\": \"string\"\n      },\n      \"pickupPayment\": {\n        \"barcode\": {\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"providerCard\": true\n      },\n      \"reapplyAutomations\": false,\n      \"maxDeliveryFeeCents\": 7292,\n      \"shippingDetails\": {\n        \"providerId\": \"string\",\n        \"providerConsignmentId\": \"string\",\n        \"providerExternalId\": \"string\",\n        \"speed\": \"string\",\n        \"type\": \"string\",\n        \"movementType\": \"string\",\n        \"chargeAccountId\": \"string\",\n        \"sortCode\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 7387,\n        \"key_2\": 7942.563341726912\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 8741,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7abef145-12a6-47fb-8344-1d7f0dc2e487",
+          "name": "Manifest Orders",
+          "request": {
+            "name": "Manifest Orders",
+            "description": {
+              "content": "Create manifests for dispatched shipping orders. Groups orders by store location and provider, then generates manifest documents (e.g. AusPost order summaries).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "manifest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalOrderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"providerIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "15647b53-cce4-4056-9755-de24959c5e9b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "manifest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalOrderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"providerIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"manifests\": [\n    {\n      \"providerId\": \"string\",\n      \"orderIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"documents\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"contentType\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"contentType\": \"string\"\n        }\n      ]\n    },\n    {\n      \"providerId\": \"string\",\n      \"orderIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"documents\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"contentType\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"contentType\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bf14df1-1263-4488-b3b9-685a63a90935",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "manifest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalOrderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"providerIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 7387,\n        \"key_2\": 7942.563341726912\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 8741,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6e92a4b4-f4c2-4128-bf17-af3af3b2ab39",
+    "name": "Nash AI Functions Shipping API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

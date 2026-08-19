@@ -1,0 +1,1124 @@
+{
+  "item": [
+    {
+      "id": "3d481132-beb5-47d3-bdcf-03141a951c9f",
+      "name": "Route",
+      "description": {
+        "content": "Route",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2a3bdad-fda3-4992-aec0-868933d51db6",
+          "name": "Dispatch Optimized Orders",
+          "request": {
+            "name": "Dispatch Optimized Orders",
+            "description": {
+              "content": "Dispatch orders from an optimization activity to delivery providers. Creates jobs and assigns them to providers based on the optimized routes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "activities",
+                ":id",
+                "dispatch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Activity id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoDispatch\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69cc09b8-1dfa-4bec-b55f-0af2bc99826b",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "activities",
+                    ":id",
+                    "dispatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Activity id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoDispatch\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3478.4946522277028,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5064bb9-850d-4960-bf25-3458300b0df0",
+          "name": "Save Optimization Routes",
+          "request": {
+            "name": "Save Optimization Routes",
+            "description": {
+              "content": "Save the optimized routes from an optimization activity. Creates route records with stops and travel metrics based on the optimization results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "activities",
+                ":id",
+                "save-routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Activity id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1497661a-3a11-474e-a655-a70e4287782e",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "activities",
+                    ":id",
+                    "save-routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Activity id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3478.4946522277028,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86cdca80-759a-4f25-9f4c-7cb24540c38e",
+          "name": "Create or Update Route",
+          "request": {
+            "name": "Create or Update Route",
+            "description": {
+              "content": "Create a new route or update an existing one. A route defines an optimized sequence of stops with orders assigned to each stop.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"stops\": [\n    {\n      \"stopType\": \"<string>\",\n      \"objectIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"serviceTime\": \"<integer>\",\n      \"distanceFromPrevious\": \"<integer>\",\n      \"durationFromPrevious\": \"<integer>\",\n      \"arrivalTime\": \"<string>\",\n      \"departTime\": \"<string>\",\n      \"location\": {\n        \"lat\": \"<number>\",\n        \"lng\": \"<number>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"stopType\": \"<string>\",\n      \"objectIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"serviceTime\": \"<integer>\",\n      \"distanceFromPrevious\": \"<integer>\",\n      \"durationFromPrevious\": \"<integer>\",\n      \"arrivalTime\": \"<string>\",\n      \"departTime\": \"<string>\",\n      \"location\": {\n        \"lat\": \"<number>\",\n        \"lng\": \"<number>\"\n      },\n      \"metadata\": {\n        \"key_0\": 1082,\n        \"key_1\": true\n      }\n    }\n  ],\n  \"routeMetadata\": {\n    \"key_0\": 2199.044880445775,\n    \"key_1\": \"string\"\n  },\n  \"vehicleId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"autoDispatch\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "500a53d3-bb72-49da-a3db-3dfa2324e1c3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"stops\": [\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\"\n      ],\n      \"id\": \"string\",\n      \"serviceTime\": 2040,\n      \"distanceFromPrevious\": 7033,\n      \"durationFromPrevious\": 5714,\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 7639.958015337005\n      }\n    },\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\"\n      ],\n      \"id\": \"string\",\n      \"serviceTime\": 0,\n      \"distanceFromPrevious\": 1851,\n      \"durationFromPrevious\": 9000,\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"metadata\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    }\n  ],\n  \"routeMetadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6285\n  },\n  \"vehicleId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"autoDispatch\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"route\": {\n    \"id\": \"rte_JphRWDiEosGpXuxwgaYfY3\",\n    \"portalUrl\": \"https://portal.usenash.com/routes/rte_JphRWDiEosGpXuxwgaYfY3\",\n    \"type\": \"SINGLE_PICKUP_MULTIPLE_DROPOFFS\",\n    \"stops\": [\n      {\n        \"stopType\": \"PICKUP\",\n        \"objectIds\": [\n          \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"ord_WJFuooSiRvFCaceGZjpbqs\"\n        ],\n        \"location\": {\n          \"lat\": 45.558214,\n          \"lng\": -122.587074\n        },\n        \"arrivalTime\": \"string\",\n        \"departTime\": \"string\",\n        \"plannedArrivalTime\": \"string\",\n        \"serviceTime\": 7627.989192029686,\n        \"distanceFromPrevious\": 5876.449146544397,\n        \"durationFromPrevious\": 7756.711800581387,\n        \"status\": \"string\",\n        \"statusDescription\": \"string\",\n        \"statusHistory\": [\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": 3124.8048793534135\n        },\n        \"startedAt\": \"string\",\n        \"breakDuration\": 7694,\n        \"orders\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publicTrackingUrl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderItems\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publicTrackingUrl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderItems\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"stopType\": \"PICKUP\",\n        \"objectIds\": [\n          \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"ord_WJFuooSiRvFCaceGZjpbqs\"\n        ],\n        \"location\": {\n          \"lat\": 45.558214,\n          \"lng\": -122.587074\n        },\n        \"arrivalTime\": \"string\",\n        \"departTime\": \"string\",\n        \"plannedArrivalTime\": \"string\",\n        \"serviceTime\": 6420.076629186091,\n        \"distanceFromPrevious\": 1663.6746456910023,\n        \"durationFromPrevious\": 4173.657379605964,\n        \"status\": \"string\",\n        \"statusDescription\": \"string\",\n        \"statusHistory\": [\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"metadata\": {\n          \"key_0\": 8835.636539076324,\n          \"key_1\": true\n        },\n        \"startedAt\": \"string\",\n        \"breakDuration\": 2011,\n        \"orders\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publicTrackingUrl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderItems\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publicTrackingUrl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderItems\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"externalId\": \"string\",\n    \"name\": \"string\",\n    \"courierId\": \"string\",\n    \"vehicleId\": \"string\",\n    \"courier\": {\n      \"id\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"driverGroup\": {\n      \"id\": \"string\",\n      \"externalId\": \"string\"\n    },\n    \"courierPosition\": {\n      \"lat\": 7913.924351887777,\n      \"lng\": 2389.2562060161795,\n      \"updatedAt\": \"string\",\n      \"capturedAt\": \"string\",\n      \"accuracy\": 6248.834125699082,\n      \"heading\": 7879.1785265961635,\n      \"speed\": 2865.4243726959917,\n      \"altitude\": 5387.671156555004,\n      \"altitudeAccuracy\": 4858.044660093134,\n      \"batteryLevel\": 7829.651233180912,\n      \"batteryIsCharging\": false,\n      \"isMoving\": true\n    },\n    \"vehicle\": {\n      \"licensePlate\": \"string\",\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"color\": \"string\",\n      \"year\": 503,\n      \"type\": \"string\"\n    },\n    \"providerName\": \"string\",\n    \"shiftId\": \"string\",\n    \"isDispatched\": false,\n    \"jobId\": \"string\",\n    \"routeMetadata\": {\n      \"key_0\": 8020,\n      \"key_1\": 5282,\n      \"key_2\": \"string\"\n    },\n    \"validationErrors\": {\n      \"key_0\": \"string\"\n    },\n    \"encodedPolyline\": \"string\",\n    \"status\": \"string\",\n    \"statusHistory\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bc31cff-9544-49b6-837d-9a37e5523d6e",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"stops\": [\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\"\n      ],\n      \"id\": \"string\",\n      \"serviceTime\": 2040,\n      \"distanceFromPrevious\": 7033,\n      \"durationFromPrevious\": 5714,\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 7639.958015337005\n      }\n    },\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\"\n      ],\n      \"id\": \"string\",\n      \"serviceTime\": 0,\n      \"distanceFromPrevious\": 1851,\n      \"durationFromPrevious\": 9000,\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"metadata\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    }\n  ],\n  \"routeMetadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6285\n  },\n  \"vehicleId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"autoDispatch\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3478.4946522277028,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bced1a3-c732-401f-ab1b-c43619ad7857",
+          "name": "Dispatch Routes",
+          "request": {
+            "name": "Dispatch Routes",
+            "description": {
+              "content": "Dispatch one or more routes to delivery providers. Creates jobs for each route and assigns them based on the organization's dispatch strategy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "routes",
+                "dispatch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"routeIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoDispatch\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3afda592-30d3-4330-a71d-f78b762fc5b4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    "dispatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"routeIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoDispatch\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobs\": [\n    {\n      \"id\": \"string\",\n      \"portalUrl\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"portalUrl\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5b0390d-d30e-4dc3-bbb9-13fe816cbf12",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    "dispatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"routeIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoDispatch\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3478.4946522277028,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d15e47e-b941-4517-a88a-a60028b2b195",
+          "name": "Assign or Reassign a Route by external id",
+          "request": {
+            "name": "Assign or Reassign a Route by external id",
+            "description": {
+              "content": "Assign a route to a provider, driver group (contract), courier, or vehicle. Driver group / courier / vehicle accept an internal or external id. Pre-dispatch the assignment is updated in place. Post-dispatch the route is reassigned — the active assignment is cancelled, live deliveries are cancelled, tasks are recreated and re-quoted, a fresh route assignment is created, and the requested target is applied. Returns the updated route.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "routes",
+                "external-identifier",
+                ":external_id",
+                "assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) External identifier of the route"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"vehicleId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bce41f90-188d-4cf0-a88e-4afd4f5f6a96",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    "external-identifier",
+                    ":external_id",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) External identifier of the route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"providerId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"vehicleId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"rte_JphRWDiEosGpXuxwgaYfY3\",\n  \"portalUrl\": \"https://portal.usenash.com/routes/rte_JphRWDiEosGpXuxwgaYfY3\",\n  \"type\": \"SINGLE_PICKUP_MULTIPLE_DROPOFFS\",\n  \"stops\": [\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n        \"ord_WJFuooSiRvFCaceGZjpbqs\"\n      ],\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"plannedArrivalTime\": \"string\",\n      \"serviceTime\": 5220.944313583041,\n      \"distanceFromPrevious\": 4985.141332768729,\n      \"durationFromPrevious\": 8025.002586145543,\n      \"status\": \"string\",\n      \"statusDescription\": \"string\",\n      \"statusHistory\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": 7641\n      },\n      \"startedAt\": \"string\",\n      \"breakDuration\": 6850,\n      \"orders\": [\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n        \"ord_WJFuooSiRvFCaceGZjpbqs\"\n      ],\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"plannedArrivalTime\": \"string\",\n      \"serviceTime\": 9743.12855020721,\n      \"distanceFromPrevious\": 3743.1545447811022,\n      \"durationFromPrevious\": 5976.427822931576,\n      \"status\": \"string\",\n      \"statusDescription\": \"string\",\n      \"statusHistory\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": 6307\n      },\n      \"startedAt\": \"string\",\n      \"breakDuration\": 7524,\n      \"orders\": [\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"externalId\": \"string\",\n  \"name\": \"string\",\n  \"courierId\": \"string\",\n  \"vehicleId\": \"string\",\n  \"courier\": {\n    \"id\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"driverGroup\": {\n    \"id\": \"string\",\n    \"externalId\": \"string\"\n  },\n  \"courierPosition\": {\n    \"lat\": 668.1654570744166,\n    \"lng\": 5352.08683409503,\n    \"updatedAt\": \"string\",\n    \"capturedAt\": \"string\",\n    \"accuracy\": 8160.429868516954,\n    \"heading\": 6534.310817685997,\n    \"speed\": 2859.0497523526506,\n    \"altitude\": 6779.103347097447,\n    \"altitudeAccuracy\": 595.2808665169596,\n    \"batteryLevel\": 6186.525624058391,\n    \"batteryIsCharging\": true,\n    \"isMoving\": false\n  },\n  \"vehicle\": {\n    \"licensePlate\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"color\": \"string\",\n    \"year\": 4980,\n    \"type\": \"string\"\n  },\n  \"providerName\": \"string\",\n  \"shiftId\": \"string\",\n  \"isDispatched\": false,\n  \"jobId\": \"string\",\n  \"routeMetadata\": {\n    \"key_0\": 892.7696653187278,\n    \"key_1\": \"string\"\n  },\n  \"validationErrors\": {\n    \"key_0\": \"string\"\n  },\n  \"encodedPolyline\": \"string\",\n  \"status\": \"string\",\n  \"statusHistory\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1c0111b-b19b-467e-ae96-6714ba551139",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    "external-identifier",
+                    ":external_id",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) External identifier of the route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"providerId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"vehicleId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3478.4946522277028,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac4f607a-da61-4611-8ddd-d8e8e4705f99",
+          "name": "Get Route",
+          "request": {
+            "name": "Get Route",
+            "description": {
+              "content": "Retrieve a route by ID, including its stops, travel metrics, and associated orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "routes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Route ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61f8b6af-fab3-4705-8775-490adf6c4bde",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"rte_JphRWDiEosGpXuxwgaYfY3\",\n  \"portalUrl\": \"https://portal.usenash.com/routes/rte_JphRWDiEosGpXuxwgaYfY3\",\n  \"type\": \"SINGLE_PICKUP_MULTIPLE_DROPOFFS\",\n  \"stops\": [\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n        \"ord_WJFuooSiRvFCaceGZjpbqs\"\n      ],\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"plannedArrivalTime\": \"string\",\n      \"serviceTime\": 5220.944313583041,\n      \"distanceFromPrevious\": 4985.141332768729,\n      \"durationFromPrevious\": 8025.002586145543,\n      \"status\": \"string\",\n      \"statusDescription\": \"string\",\n      \"statusHistory\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": 7641\n      },\n      \"startedAt\": \"string\",\n      \"breakDuration\": 6850,\n      \"orders\": [\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n        \"ord_WJFuooSiRvFCaceGZjpbqs\"\n      ],\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"plannedArrivalTime\": \"string\",\n      \"serviceTime\": 9743.12855020721,\n      \"distanceFromPrevious\": 3743.1545447811022,\n      \"durationFromPrevious\": 5976.427822931576,\n      \"status\": \"string\",\n      \"statusDescription\": \"string\",\n      \"statusHistory\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": 6307\n      },\n      \"startedAt\": \"string\",\n      \"breakDuration\": 7524,\n      \"orders\": [\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"externalId\": \"string\",\n  \"name\": \"string\",\n  \"courierId\": \"string\",\n  \"vehicleId\": \"string\",\n  \"courier\": {\n    \"id\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"driverGroup\": {\n    \"id\": \"string\",\n    \"externalId\": \"string\"\n  },\n  \"courierPosition\": {\n    \"lat\": 668.1654570744166,\n    \"lng\": 5352.08683409503,\n    \"updatedAt\": \"string\",\n    \"capturedAt\": \"string\",\n    \"accuracy\": 8160.429868516954,\n    \"heading\": 6534.310817685997,\n    \"speed\": 2859.0497523526506,\n    \"altitude\": 6779.103347097447,\n    \"altitudeAccuracy\": 595.2808665169596,\n    \"batteryLevel\": 6186.525624058391,\n    \"batteryIsCharging\": true,\n    \"isMoving\": false\n  },\n  \"vehicle\": {\n    \"licensePlate\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"color\": \"string\",\n    \"year\": 4980,\n    \"type\": \"string\"\n  },\n  \"providerName\": \"string\",\n  \"shiftId\": \"string\",\n  \"isDispatched\": false,\n  \"jobId\": \"string\",\n  \"routeMetadata\": {\n    \"key_0\": 892.7696653187278,\n    \"key_1\": \"string\"\n  },\n  \"validationErrors\": {\n    \"key_0\": \"string\"\n  },\n  \"encodedPolyline\": \"string\",\n  \"status\": \"string\",\n  \"statusHistory\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bd12e48-7636-4263-a154-e5bda8c18092",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3478.4946522277028,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "725b6a2e-1b87-42ac-a98a-4dc092c10c2f",
+          "name": "Assign or Reassign a Route",
+          "request": {
+            "name": "Assign or Reassign a Route",
+            "description": {
+              "content": "Assign a route to a provider, driver group (contract), courier, or vehicle. Driver group / courier / vehicle accept an internal or external id. Pre-dispatch the assignment is updated in place. Post-dispatch the route is reassigned — the active assignment is cancelled, live deliveries are cancelled, tasks are recreated and re-quoted, a fresh route assignment is created, and the requested target is applied. Returns the updated route.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "routes",
+                ":id",
+                "assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Route ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"vehicleId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58fbd6fd-db47-4113-91a1-87fc3d663e90",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    ":id",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"providerId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"vehicleId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"rte_JphRWDiEosGpXuxwgaYfY3\",\n  \"portalUrl\": \"https://portal.usenash.com/routes/rte_JphRWDiEosGpXuxwgaYfY3\",\n  \"type\": \"SINGLE_PICKUP_MULTIPLE_DROPOFFS\",\n  \"stops\": [\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n        \"ord_WJFuooSiRvFCaceGZjpbqs\"\n      ],\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"plannedArrivalTime\": \"string\",\n      \"serviceTime\": 5220.944313583041,\n      \"distanceFromPrevious\": 4985.141332768729,\n      \"durationFromPrevious\": 8025.002586145543,\n      \"status\": \"string\",\n      \"statusDescription\": \"string\",\n      \"statusHistory\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": 7641\n      },\n      \"startedAt\": \"string\",\n      \"breakDuration\": 6850,\n      \"orders\": [\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"stopType\": \"PICKUP\",\n      \"objectIds\": [\n        \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n        \"ord_WJFuooSiRvFCaceGZjpbqs\"\n      ],\n      \"location\": {\n        \"lat\": 45.558214,\n        \"lng\": -122.587074\n      },\n      \"arrivalTime\": \"string\",\n      \"departTime\": \"string\",\n      \"plannedArrivalTime\": \"string\",\n      \"serviceTime\": 9743.12855020721,\n      \"distanceFromPrevious\": 3743.1545447811022,\n      \"durationFromPrevious\": 5976.427822931576,\n      \"status\": \"string\",\n      \"statusDescription\": \"string\",\n      \"statusHistory\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": 6307\n      },\n      \"startedAt\": \"string\",\n      \"breakDuration\": 7524,\n      \"orders\": [\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"externalId\": \"string\",\n          \"publicTrackingUrl\": \"string\",\n          \"pod\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"orderItems\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"externalId\": \"string\",\n  \"name\": \"string\",\n  \"courierId\": \"string\",\n  \"vehicleId\": \"string\",\n  \"courier\": {\n    \"id\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"driverGroup\": {\n    \"id\": \"string\",\n    \"externalId\": \"string\"\n  },\n  \"courierPosition\": {\n    \"lat\": 668.1654570744166,\n    \"lng\": 5352.08683409503,\n    \"updatedAt\": \"string\",\n    \"capturedAt\": \"string\",\n    \"accuracy\": 8160.429868516954,\n    \"heading\": 6534.310817685997,\n    \"speed\": 2859.0497523526506,\n    \"altitude\": 6779.103347097447,\n    \"altitudeAccuracy\": 595.2808665169596,\n    \"batteryLevel\": 6186.525624058391,\n    \"batteryIsCharging\": true,\n    \"isMoving\": false\n  },\n  \"vehicle\": {\n    \"licensePlate\": \"string\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"color\": \"string\",\n    \"year\": 4980,\n    \"type\": \"string\"\n  },\n  \"providerName\": \"string\",\n  \"shiftId\": \"string\",\n  \"isDispatched\": false,\n  \"jobId\": \"string\",\n  \"routeMetadata\": {\n    \"key_0\": 892.7696653187278,\n    \"key_1\": \"string\"\n  },\n  \"validationErrors\": {\n    \"key_0\": \"string\"\n  },\n  \"encodedPolyline\": \"string\",\n  \"status\": \"string\",\n  \"statusHistory\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d95efd1e-64ce-45b8-8414-d4d4be956054",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    ":id",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"providerId\": \"<string>\",\n  \"driverGroupId\": \"<string>\",\n  \"courierId\": \"<string>\",\n  \"vehicleId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3478.4946522277028,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e6e3d0a-b446-4f3e-b623-561c12e05045",
+          "name": "Calculate Route Timing",
+          "request": {
+            "name": "Calculate Route Timing",
+            "description": {
+              "content": "Calculate per-stop ETAs and polyline for a route using HERE truck routing. Updates arrival/departure times for each stop and returns the route polyline.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "routes",
+                ":id",
+                "calculate-timing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Route ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bd77ccf-2dd5-4326-89f2-0d9f520859ad",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    ":id",
+                    "calculate-timing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"route\": {\n    \"id\": \"rte_JphRWDiEosGpXuxwgaYfY3\",\n    \"portalUrl\": \"https://portal.usenash.com/routes/rte_JphRWDiEosGpXuxwgaYfY3\",\n    \"type\": \"SINGLE_PICKUP_MULTIPLE_DROPOFFS\",\n    \"stops\": [\n      {\n        \"stopType\": \"PICKUP\",\n        \"objectIds\": [\n          \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"ord_WJFuooSiRvFCaceGZjpbqs\"\n        ],\n        \"location\": {\n          \"lat\": 45.558214,\n          \"lng\": -122.587074\n        },\n        \"arrivalTime\": \"string\",\n        \"departTime\": \"string\",\n        \"plannedArrivalTime\": \"string\",\n        \"serviceTime\": 1277.2274704727704,\n        \"distanceFromPrevious\": 8797.487016979794,\n        \"durationFromPrevious\": 7747.8324879670745,\n        \"status\": \"string\",\n        \"statusDescription\": \"string\",\n        \"statusHistory\": [\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"metadata\": {\n          \"key_0\": true,\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"startedAt\": \"string\",\n        \"breakDuration\": 3399,\n        \"orders\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publicTrackingUrl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderItems\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publicTrackingUrl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderItems\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"stopType\": \"PICKUP\",\n        \"objectIds\": [\n          \"ord_Qr5bVt8WiByGh66z2g7xEu\",\n          \"ord_WJFuooSiRvFCaceGZjpbqs\"\n        ],\n        \"location\": {\n          \"lat\": 45.558214,\n          \"lng\": -122.587074\n        },\n        \"arrivalTime\": \"string\",\n        \"departTime\": \"string\",\n        \"plannedArrivalTime\": \"string\",\n        \"serviceTime\": 3060.0520300752664,\n        \"distanceFromPrevious\": 7969.38694564337,\n        \"durationFromPrevious\": 627.9297839704224,\n        \"status\": \"string\",\n        \"statusDescription\": \"string\",\n        \"statusHistory\": [\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"metadata\": {\n          \"key_0\": 517,\n          \"key_1\": 4509\n        },\n        \"startedAt\": \"string\",\n        \"breakDuration\": 9183,\n        \"orders\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publicTrackingUrl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderItems\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publicTrackingUrl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderItems\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"externalId\": \"string\",\n    \"name\": \"string\",\n    \"courierId\": \"string\",\n    \"vehicleId\": \"string\",\n    \"courier\": {\n      \"id\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"driverGroup\": {\n      \"id\": \"string\",\n      \"externalId\": \"string\"\n    },\n    \"courierPosition\": {\n      \"lat\": 8155.015808042428,\n      \"lng\": 1047.9260296045545,\n      \"updatedAt\": \"string\",\n      \"capturedAt\": \"string\",\n      \"accuracy\": 5534.653439914082,\n      \"heading\": 557.804201166282,\n      \"speed\": 6680.143065430571,\n      \"altitude\": 1947.0123490803037,\n      \"altitudeAccuracy\": 6502.248554961422,\n      \"batteryLevel\": 3358.310546053387,\n      \"batteryIsCharging\": false,\n      \"isMoving\": true\n    },\n    \"vehicle\": {\n      \"licensePlate\": \"string\",\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"color\": \"string\",\n      \"year\": 3168,\n      \"type\": \"string\"\n    },\n    \"providerName\": \"string\",\n    \"shiftId\": \"string\",\n    \"isDispatched\": false,\n    \"jobId\": \"string\",\n    \"routeMetadata\": {\n      \"key_0\": 8701.899470052665,\n      \"key_1\": \"string\"\n    },\n    \"validationErrors\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"encodedPolyline\": \"string\",\n    \"status\": \"string\",\n    \"statusHistory\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ]\n  },\n  \"mappedRoutesPolyline\": [\n    {\n      \"key_0\": 6697.908321092845\n    },\n    {\n      \"key_0\": 2396.4731860838806,\n      \"key_1\": 1262.2825099633994,\n      \"key_2\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "970e4f7b-5893-4d73-b90e-c661e8571538",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "routes",
+                    ":id",
+                    "calculate-timing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3478.4946522277028,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3905830a-378a-46e2-bcc2-789b8d4207b0",
+    "name": "Nash AI Functions Route API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,652 @@
+{
+  "item": [
+    {
+      "id": "a6dc4cc8-e73b-4d2a-a8ab-5e167afbdb38",
+      "name": "Webhooks",
+      "description": {
+        "content": "Webhook delivery inspection",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "910af953-03d5-4245-a497-17e14148e657",
+          "name": "List Webhook Event Types",
+          "request": {
+            "name": "List Webhook Event Types",
+            "description": {
+              "content": "Return the canonical Svix event type names available for this organization (e.g. `delivery.dropoff_complete`, `delivery.status_updated`). Use this to map a user's natural-language description ('the dropoff complete webhook') to the canonical name accepted by `POST /v1/webhooks/messages/replay`. When the org's endpoints subscribe to all events, the full Svix catalog is returned instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "event-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef5f005d-6698-4719-8166-7273616d750c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "event-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eventTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"source\": \"catalog\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd48984a-b4bc-438b-85c0-58c064a64e63",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "event-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2516.080185588403,\n        \"key_1\": 5250,\n        \"key_2\": 2068.1143575809633,\n        \"key_3\": 2263.493740989949,\n        \"key_4\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44d5f3c7-ef98-42d3-9333-44254283461d",
+          "name": "List Webhook Messages",
+          "request": {
+            "name": "List Webhook Messages",
+            "description": {
+              "content": "Inspect webhooks sent to this organization's configured endpoints via Svix. Primarily intended for debugging 'did the customer receive our webhook?' questions. Every outbound webhook is tagged with the relevant entity IDs (e.g. `jb_abc123`, `dlv_xyz789`), so pass the Nash ID as `tag` to find all webhooks about that entity. Returns an empty result if the organization has no Svix app configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Filter messages by tag. Nash stamps entity IDs as tags on every outbound webhook, so pass the prefixed Nash ID directly — e.g. `jb_abc123` to find every webhook about a job, `dlv_xyz789` for a delivery."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventTypes",
+                  "value": "<string>",
+                  "description": "Comma-separated Svix event types (e.g. delivery.status_updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "channel",
+                  "value": "<string>",
+                  "description": "Filter by Svix channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<dateTime>",
+                  "description": "Return messages sent before this timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<dateTime>",
+                  "description": "Return messages sent after this timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "iterator",
+                  "value": "<string>",
+                  "description": "Svix pagination cursor — pass the `iterator` from a previous response to fetch the next page"
+                },
+                {
+                  "disabled": false,
+                  "key": "withContent",
+                  "value": "true",
+                  "description": "Include the message payload in the response. Defaults to true for debugging."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d54f7c0d-93bf-4037-90d8-abb8dbb8a864",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "iterator",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "withContent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"eventType\": \"string\",\n      \"timestamp\": \"2023-09-19T15:04:20.419Z\",\n      \"eventId\": \"string\",\n      \"channels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"payload\": {\n        \"key_0\": true\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"eventType\": \"string\",\n      \"timestamp\": \"2005-06-21T06:42:40.586Z\",\n      \"eventId\": \"string\",\n      \"channels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"payload\": {\n        \"key_0\": 3036.4074442364517,\n        \"key_1\": 256,\n        \"key_2\": 1730\n      }\n    }\n  ],\n  \"done\": false,\n  \"iterator\": \"string\",\n  \"prevIterator\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1a106cd-386a-49f2-ae04-776916bbd610",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "iterator",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "withContent",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2516.080185588403,\n        \"key_1\": 5250,\n        \"key_2\": 2068.1143575809633,\n        \"key_3\": 2263.493740989949,\n        \"key_4\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6b4a2c8-6f1d-43b4-9dc2-cae7dec8486e",
+          "name": "Replay Webhook Message",
+          "request": {
+            "name": "Replay Webhook Message",
+            "description": {
+              "content": "Resend a Svix webhook. Two lookup modes:\n\n- `msgId`: replay a known message by its Svix ID.\n- `tag` + `eventType`: replay the most recent message matching both filters — intended for agent flows like 'resend the dropoff_complete webhook for dlv_123'. Both fields are required together so we never replay an unrelated event for the same entity (a job has many event types tagged with the same job ID).\n\n`eventType` must be the canonical Svix name (e.g. `delivery.dropoff_complete`), not a human description. Call `GET /v1/webhooks/event-types` first to map natural language to the right canonical value.\n\nBy default, the message is replayed to every endpoint it was originally attempted against. Pass `endpointId` to scope the replay to one endpoint. Per-endpoint Svix errors are surfaced in `results` rather than failing the whole call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "messages",
+                "replay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"msgId\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"endpointId\": \"<string>\",\n  \"idempotencyKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "957d3ac2-e024-41a3-8b1b-105364e4147a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "messages",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"msgId\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"endpointId\": \"<string>\",\n  \"idempotencyKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"msgId\": \"string\",\n  \"total\": 5643,\n  \"succeeded\": 2746,\n  \"failed\": 8345,\n  \"results\": [\n    {\n      \"endpointId\": \"string\",\n      \"success\": true,\n      \"url\": \"string\",\n      \"error\": \"string\"\n    },\n    {\n      \"endpointId\": \"string\",\n      \"success\": false,\n      \"url\": \"string\",\n      \"error\": \"string\"\n    }\n  ],\n  \"eventType\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a56d874-062e-43da-bdaa-7c2b1cfe112e",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "messages",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"msgId\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"endpointId\": \"<string>\",\n  \"idempotencyKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2516.080185588403,\n        \"key_1\": 5250,\n        \"key_2\": 2068.1143575809633,\n        \"key_3\": 2263.493740989949,\n        \"key_4\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e40cd66-6c41-48eb-a81f-e905b464f376",
+          "name": "List Webhook Delivery Attempts",
+          "request": {
+            "name": "List Webhook Delivery Attempts",
+            "description": {
+              "content": "Return the per-endpoint delivery attempt history for a single webhook message — status code, response body, timestamp, and retry attempts. Use this after locating the message via GET /v1/webhooks/messages to answer 'why didn't our webhook reach the customer?' questions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "messages",
+                ":msg_id",
+                "attempts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "msgId",
+                  "description": "(Required) Svix message ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4089e7e5-63e2-47bf-a5fd-f1ffc7f89d64",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "messages",
+                    ":msg_id",
+                    "attempts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "msgId",
+                      "description": "(Required) Svix message ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"msgId\": \"string\",\n      \"endpointId\": \"string\",\n      \"url\": \"string\",\n      \"status\": \"string\",\n      \"timestamp\": \"1978-01-04T20:23:15.600Z\",\n      \"responseStatusCode\": 128,\n      \"responseDurationMs\": 4037,\n      \"response\": \"string\",\n      \"triggerType\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"msgId\": \"string\",\n      \"endpointId\": \"string\",\n      \"url\": \"string\",\n      \"status\": \"string\",\n      \"timestamp\": \"1956-04-12T12:05:57.670Z\",\n      \"responseStatusCode\": 3255,\n      \"responseDurationMs\": 9439,\n      \"response\": \"string\",\n      \"triggerType\": \"string\"\n    }\n  ],\n  \"done\": true,\n  \"iterator\": \"string\",\n  \"prevIterator\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bf9c431-66d6-4ac8-8fd1-77088ef6f6d9",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "messages",
+                    ":msg_id",
+                    "attempts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "msgId",
+                      "description": "(Required) Svix message ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 2516.080185588403,\n        \"key_1\": 5250,\n        \"key_2\": 2068.1143575809633,\n        \"key_3\": 2263.493740989949,\n        \"key_4\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5f2e761c-2e8d-4602-9969-14191032f260",
+    "name": "Nash AI Functions Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

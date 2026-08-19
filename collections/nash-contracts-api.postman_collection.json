@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "73c45f7d-ec6e-44c5-882d-5b63e806db0d",
+      "name": "Contracts",
+      "description": {
+        "content": "Provider contract pricing and version listings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bfb2cd6c-d0b4-486d-9aa7-4ffa5e42010c",
+          "name": "List Contracts",
+          "request": {
+            "name": "List Contracts",
+            "description": {
+              "content": "List contracts visible to the authenticated organization. Returns a slim summary payload by default; pass include=details for the full record. Supports keyset pagination via the cursor returned in next_cursor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active_only",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "only_latest_version",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "summary"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b74ae93e-13a3-4aa9-9c57-280291b1eb51",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active_only",
+                      "value": "true"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "only_latest_version",
+                      "value": "true"
+                    },
+                    {
+                      "key": "include",
+                      "value": "summary"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contracts\": [\n    {\n      \"contract_id\": \"string\",\n      \"first_version_contract_id\": \"string\",\n      \"display_name\": \"string\",\n      \"is_active\": true,\n      \"currency\": \"string\",\n      \"provider_id\": \"string\",\n      \"created_at\": \"2015-04-24T13:50:50.285Z\",\n      \"next_version_contract_id\": \"string\",\n      \"version\": 8143,\n      \"provider_name\": \"string\",\n      \"external_identifier\": \"string\",\n      \"delivery_price_type\": \"string\",\n      \"delivery_price\": {\n        \"key_0\": \"string\"\n      },\n      \"eligibility_criteria\": {\n        \"key_0\": true\n      },\n      \"wait_fee\": {\n        \"key_0\": 3141.4549304211982\n      },\n      \"cancellation_fee\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"return_fee\": {\n        \"key_0\": 7266.386636724725,\n        \"key_1\": true\n      },\n      \"insurance_price\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": true,\n        \"key_3\": true,\n        \"key_4\": \"string\"\n      },\n      \"tip_amount\": {\n        \"key_0\": false\n      },\n      \"toll_fee\": {\n        \"key_0\": 7258,\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      },\n      \"properties\": {\n        \"key_0\": 4747.643713212756,\n        \"key_1\": \"string\"\n      },\n      \"supported_orgs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"excluded_orgs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"prev_version_contract_id\": \"string\",\n      \"commit_message\": \"string\",\n      \"created_by\": \"string\",\n      \"delivery_price_function\": \"string\",\n      \"unassigned_driver_timeout_minutes\": 7626\n    },\n    {\n      \"contract_id\": \"string\",\n      \"first_version_contract_id\": \"string\",\n      \"display_name\": \"string\",\n      \"is_active\": true,\n      \"currency\": \"string\",\n      \"provider_id\": \"string\",\n      \"created_at\": \"1947-12-24T15:36:31.736Z\",\n      \"next_version_contract_id\": \"string\",\n      \"version\": 1034,\n      \"provider_name\": \"string\",\n      \"external_identifier\": \"string\",\n      \"delivery_price_type\": \"string\",\n      \"delivery_price\": {\n        \"key_0\": 7396.950737976361,\n        \"key_1\": 4626,\n        \"key_2\": \"string\"\n      },\n      \"eligibility_criteria\": {\n        \"key_0\": false\n      },\n      \"wait_fee\": {\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"cancellation_fee\": {\n        \"key_0\": true\n      },\n      \"return_fee\": {\n        \"key_0\": 4464.49706587493,\n        \"key_1\": 1705\n      },\n      \"insurance_price\": {\n        \"key_0\": true,\n        \"key_1\": 5208\n      },\n      \"tip_amount\": {\n        \"key_0\": true\n      },\n      \"toll_fee\": {\n        \"key_0\": true\n      },\n      \"properties\": {\n        \"key_0\": 5338.363741770851\n      },\n      \"supported_orgs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"excluded_orgs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"prev_version_contract_id\": \"string\",\n      \"commit_message\": \"string\",\n      \"created_by\": \"string\",\n      \"delivery_price_function\": \"string\",\n      \"unassigned_driver_timeout_minutes\": 9405\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "965e592d-c717-43d2-a81e-1c9beb6ff133",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active_only",
+                      "value": "true"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "only_latest_version",
+                      "value": "true"
+                    },
+                    {
+                      "key": "include",
+                      "value": "summary"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 1548,\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9d5458b0-843a-466c-8140-c1544c3f03b7",
+    "name": "Nash AI Functions Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

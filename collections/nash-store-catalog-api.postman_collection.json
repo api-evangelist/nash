@@ -1,0 +1,970 @@
+{
+  "item": [
+    {
+      "id": "cd4cf3da-a486-490b-b47a-f1f6277dcb4c",
+      "name": "Store Catalog",
+      "description": {
+        "content": "Store Catalog",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca805538-a354-43c2-96bf-0c05ee3455c8",
+          "name": "Get inventory",
+          "request": {
+            "name": "Get inventory",
+            "description": {
+              "content": "List inventory levels with pagination. Filter by external store location ID or external product ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageIndex",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "numResultsPerPage",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "skus",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "semanticSearch",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalStoreLocationId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalProductId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76d9edc5-ccd0-4442-83f1-25fb8fda9815",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageIndex",
+                      "value": "0"
+                    },
+                    {
+                      "key": "numResultsPerPage",
+                      "value": "100"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "semanticSearch",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalStoreLocationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalProductId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"inventory\": [\n    {\n      \"id\": \"string\",\n      \"productId\": \"prod_123\",\n      \"storeLocationId\": \"store_001\",\n      \"quantity\": 50,\n      \"available\": true,\n      \"externalProductId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"valueCents\": 238,\n      \"currency\": \"string\",\n      \"location\": {\n        \"aisle\": \"string\",\n        \"bay\": \"string\",\n        \"shelf\": \"string\"\n      },\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"valueCentsPerMeasurementUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 6074.0897856689\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": true,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 2648.6257957735247\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": false,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 9627.472431448663\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"productId\": \"prod_123\",\n      \"storeLocationId\": \"store_001\",\n      \"quantity\": 50,\n      \"available\": true,\n      \"externalProductId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"valueCents\": 8429,\n      \"currency\": \"string\",\n      \"location\": {\n        \"aisle\": \"string\",\n        \"bay\": \"string\",\n        \"shelf\": \"string\"\n      },\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"valueCentsPerMeasurementUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 3213.837188091937\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": true,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 4095.797178983186\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": false,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 2079.2648522294376\n        }\n      ]\n    }\n  ],\n  \"totalResults\": 188\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ce9d3ca-7e9f-4b8d-8f50-e68150780292",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageIndex",
+                      "value": "0"
+                    },
+                    {
+                      "key": "numResultsPerPage",
+                      "value": "100"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "semanticSearch",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalStoreLocationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalProductId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9656\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a49bfd4-7879-4f59-bacc-95ef2f2cd4e2",
+          "name": "Create or update inventory",
+          "request": {
+            "name": "Create or update inventory",
+            "description": {
+              "content": "Create or update inventory levels for products at specific store locations. Links products to store locations with quantity and availability information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inventory\": [\n    {\n      \"available\": \"<boolean>\",\n      \"externalProductId\": \"<string>\",\n      \"externalStoreLocationId\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"valueCents\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"location\": {\n        \"aisle\": \"<string>\",\n        \"bay\": \"<string>\",\n        \"shelf\": \"<string>\"\n      },\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"valueCentsPerMeasurementUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": \"<number>\"\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"<string>\",\n          \"serviceType\": \"<string>\",\n          \"valueCents\": \"<integer>\",\n          \"currency\": \"<string>\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": \"<boolean>\",\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": \"<number>\"\n        },\n        {\n          \"provider\": \"<string>\",\n          \"serviceType\": \"<string>\",\n          \"valueCents\": \"<integer>\",\n          \"currency\": \"<string>\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": \"<boolean>\",\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"available\": \"<boolean>\",\n      \"externalProductId\": \"<string>\",\n      \"externalStoreLocationId\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"valueCents\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"location\": {\n        \"aisle\": \"<string>\",\n        \"bay\": \"<string>\",\n        \"shelf\": \"<string>\"\n      },\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"valueCentsPerMeasurementUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": \"<number>\"\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"<string>\",\n          \"serviceType\": \"<string>\",\n          \"valueCents\": \"<integer>\",\n          \"currency\": \"<string>\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": \"<boolean>\",\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": \"<number>\"\n        },\n        {\n          \"provider\": \"<string>\",\n          \"serviceType\": \"<string>\",\n          \"valueCents\": \"<integer>\",\n          \"currency\": \"<string>\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": \"<boolean>\",\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": \"<number>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "260216f8-9cb6-4831-a9db-9be724f0f639",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inventory\": [\n    {\n      \"available\": true,\n      \"externalProductId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"quantity\": 1720,\n      \"valueCents\": 2532,\n      \"currency\": \"string\",\n      \"location\": {\n        \"aisle\": \"string\",\n        \"bay\": \"string\",\n        \"shelf\": \"string\"\n      },\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"valueCentsPerMeasurementUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 459.7359450055605\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": true,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 9728.022071380736\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": false,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 8808.251089631292\n        }\n      ]\n    },\n    {\n      \"available\": true,\n      \"externalProductId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"quantity\": 937,\n      \"valueCents\": 3312,\n      \"currency\": \"string\",\n      \"location\": {\n        \"aisle\": \"string\",\n        \"bay\": \"string\",\n        \"shelf\": \"string\"\n      },\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"valueCentsPerMeasurementUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 2745.6751547948033\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": true,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 3684.7012408214187\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": false,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 1360.8028960624508\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"productId\": \"prod_123\",\n    \"storeLocationId\": \"store_001\",\n    \"quantity\": 50,\n    \"available\": true,\n    \"externalProductId\": \"string\",\n    \"externalStoreLocationId\": \"string\",\n    \"valueCents\": 2558,\n    \"currency\": \"string\",\n    \"location\": {\n      \"aisle\": \"string\",\n      \"bay\": \"string\",\n      \"shelf\": \"string\"\n    },\n    \"details\": {\n      \"weightedItemInfo\": {\n        \"valueCentsPerMeasurementUnit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"taxPercentage\": 9242.754486860595\n    },\n    \"providerConfigs\": [\n      {\n        \"provider\": \"X\",\n        \"serviceType\": \"pick_and_deliver\",\n        \"valueCents\": 299,\n        \"currency\": \"USD\",\n        \"details\": {\n          \"weightedItemInfo\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"available\": true,\n        \"discount\": {\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"startTime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"endTime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 1512.866850980501\n      },\n      {\n        \"provider\": \"X\",\n        \"serviceType\": \"pick_and_deliver\",\n        \"valueCents\": 299,\n        \"currency\": \"USD\",\n        \"details\": {\n          \"weightedItemInfo\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"available\": true,\n        \"discount\": {\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"startTime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"endTime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 3265.5491238040036\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"productId\": \"prod_123\",\n    \"storeLocationId\": \"store_001\",\n    \"quantity\": 50,\n    \"available\": true,\n    \"externalProductId\": \"string\",\n    \"externalStoreLocationId\": \"string\",\n    \"valueCents\": 9945,\n    \"currency\": \"string\",\n    \"location\": {\n      \"aisle\": \"string\",\n      \"bay\": \"string\",\n      \"shelf\": \"string\"\n    },\n    \"details\": {\n      \"weightedItemInfo\": {\n        \"valueCentsPerMeasurementUnit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"taxPercentage\": 2957.1854662521823\n    },\n    \"providerConfigs\": [\n      {\n        \"provider\": \"X\",\n        \"serviceType\": \"pick_and_deliver\",\n        \"valueCents\": 299,\n        \"currency\": \"USD\",\n        \"details\": {\n          \"weightedItemInfo\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"available\": false,\n        \"discount\": {\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"startTime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"endTime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 3219.5039895932587\n      },\n      {\n        \"provider\": \"X\",\n        \"serviceType\": \"pick_and_deliver\",\n        \"valueCents\": 299,\n        \"currency\": \"USD\",\n        \"details\": {\n          \"weightedItemInfo\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"available\": false,\n        \"discount\": {\n          \"valueCents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"startTime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"endTime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 9288.926112118186\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cdf1ba8-6212-4380-a005-1d2d13583907",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inventory\": [\n    {\n      \"available\": true,\n      \"externalProductId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"quantity\": 1720,\n      \"valueCents\": 2532,\n      \"currency\": \"string\",\n      \"location\": {\n        \"aisle\": \"string\",\n        \"bay\": \"string\",\n        \"shelf\": \"string\"\n      },\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"valueCentsPerMeasurementUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 459.7359450055605\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": true,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 9728.022071380736\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": false,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 8808.251089631292\n        }\n      ]\n    },\n    {\n      \"available\": true,\n      \"externalProductId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"quantity\": 937,\n      \"valueCents\": 3312,\n      \"currency\": \"string\",\n      \"location\": {\n        \"aisle\": \"string\",\n        \"bay\": \"string\",\n        \"shelf\": \"string\"\n      },\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"valueCentsPerMeasurementUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"taxPercentage\": 2745.6751547948033\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": true,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 3684.7012408214187\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"valueCents\": 299,\n          \"currency\": \"USD\",\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"available\": false,\n          \"discount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"taxPercentage\": 1360.8028960624508\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9656\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29275036-9ff7-4162-86f6-8d68fb1ba318",
+          "name": "Get Product by External Identifier",
+          "request": {
+            "name": "Get Product by External Identifier",
+            "description": {
+              "content": "Retrieve a product from the store catalog using your external identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "product",
+                "external_identifier",
+                ":externalIdentifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalIdentifier",
+                  "description": "(Required) product external identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8c76480-b1d7-4821-a5ca-3bbf14680703",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "product",
+                    "external_identifier",
+                    ":externalIdentifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalIdentifier",
+                      "description": "(Required) product external identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"Organic Bananas\",\n  \"externalIdentifier\": \"string\",\n  \"sku\": \"string\",\n  \"description\": \"string\",\n  \"imageUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"categories\": [\n    \"string\",\n    \"string\"\n  ],\n  \"weight\": 4663.236555306484,\n  \"dimensions\": {\n    \"depth\": 8924.507417422621,\n    \"width\": 4453.133653961729,\n    \"height\": 5760.727350663389\n  },\n  \"identifiers\": [\n    {\n      \"type\": \"UPC\",\n      \"value\": \"123456789012\"\n    },\n    {\n      \"type\": \"UPC\",\n      \"value\": \"123456789012\"\n    }\n  ],\n  \"attributes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"details\": {\n    \"weightedItemInfo\": {\n      \"weightPerItem\": 5512.6763117990795,\n      \"weightUnit\": \"string\"\n    },\n    \"sizeSpecification\": {\n      \"value\": 1618.091897531767,\n      \"description\": \"string\"\n    },\n    \"packSizeSpecification\": {\n      \"value\": \"string\",\n      \"description\": \"string\"\n    }\n  },\n  \"providerConfigs\": [\n    {\n      \"provider\": \"X\",\n      \"serviceType\": \"pick_and_deliver\",\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": true\n    },\n    {\n      \"provider\": \"X\",\n      \"serviceType\": \"pick_and_deliver\",\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc24c590-c54c-4d84-a63a-044d7825ceb4",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "product",
+                    "external_identifier",
+                    ":externalIdentifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalIdentifier",
+                      "description": "(Required) product external identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9656\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d4f0ed8-48d5-43ec-9044-7a04bd7a155e",
+          "name": "Get Product",
+          "request": {
+            "name": "Get Product",
+            "description": {
+              "content": "Retrieve a single product from the store catalog by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "product",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) product id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b05d728-36f0-4d33-a66b-7a5eb773422a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "product",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) product id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"Organic Bananas\",\n  \"externalIdentifier\": \"string\",\n  \"sku\": \"string\",\n  \"description\": \"string\",\n  \"imageUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"categories\": [\n    \"string\",\n    \"string\"\n  ],\n  \"weight\": 4663.236555306484,\n  \"dimensions\": {\n    \"depth\": 8924.507417422621,\n    \"width\": 4453.133653961729,\n    \"height\": 5760.727350663389\n  },\n  \"identifiers\": [\n    {\n      \"type\": \"UPC\",\n      \"value\": \"123456789012\"\n    },\n    {\n      \"type\": \"UPC\",\n      \"value\": \"123456789012\"\n    }\n  ],\n  \"attributes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"details\": {\n    \"weightedItemInfo\": {\n      \"weightPerItem\": 5512.6763117990795,\n      \"weightUnit\": \"string\"\n    },\n    \"sizeSpecification\": {\n      \"value\": 1618.091897531767,\n      \"description\": \"string\"\n    },\n    \"packSizeSpecification\": {\n      \"value\": \"string\",\n      \"description\": \"string\"\n    }\n  },\n  \"providerConfigs\": [\n    {\n      \"provider\": \"X\",\n      \"serviceType\": \"pick_and_deliver\",\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": true\n    },\n    {\n      \"provider\": \"X\",\n      \"serviceType\": \"pick_and_deliver\",\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73dd09a2-5fd0-4208-ae03-aaf9b183950d",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "product",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) product id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9656\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f300488a-831a-42d7-b3a9-d15431130b0c",
+          "name": "Get products",
+          "request": {
+            "name": "Get products",
+            "description": {
+              "content": "List products in the store catalog with pagination and optional filtering. Filter by IDs, SKUs, text search, or semantic search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageIndex",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "numResultsPerPage",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "skus",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63ed3c39-a358-4b8a-bf33-e947d78e9082",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageIndex",
+                      "value": "0"
+                    },
+                    {
+                      "key": "numResultsPerPage",
+                      "value": "100"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"Organic Bananas\",\n      \"externalIdentifier\": \"string\",\n      \"sku\": \"string\",\n      \"description\": \"string\",\n      \"imageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"weight\": 7588.070442874354,\n      \"dimensions\": {\n        \"depth\": 9024.438791081951,\n        \"width\": 6951.867173677781,\n        \"height\": 2674.918582388838\n      },\n      \"identifiers\": [\n        {\n          \"type\": \"UPC\",\n          \"value\": \"123456789012\"\n        },\n        {\n          \"type\": \"UPC\",\n          \"value\": \"123456789012\"\n        }\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"weightPerItem\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"packSizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": true\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"Organic Bananas\",\n      \"externalIdentifier\": \"string\",\n      \"sku\": \"string\",\n      \"description\": \"string\",\n      \"imageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"weight\": 4583.372655315874,\n      \"dimensions\": {\n        \"depth\": 3771.68141953814,\n        \"width\": 8872.661989794296,\n        \"height\": 7004.003856833975\n      },\n      \"identifiers\": [\n        {\n          \"type\": \"UPC\",\n          \"value\": \"123456789012\"\n        },\n        {\n          \"type\": \"UPC\",\n          \"value\": \"123456789012\"\n        }\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"weightPerItem\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"packSizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": true\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": false\n        }\n      ]\n    }\n  ],\n  \"totalResults\": 4373\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ef19cbc-9799-4377-985c-911772c8987b",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageIndex",
+                      "value": "0"
+                    },
+                    {
+                      "key": "numResultsPerPage",
+                      "value": "100"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9656\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b316b4e-afb7-43d5-9e44-da16da0ffe1b",
+          "name": "Create or update products",
+          "request": {
+            "name": "Create or update products",
+            "description": {
+              "content": "Create new products or update existing ones in the store catalog. Products are matched by external identifier for upsert logic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    {\n      \"name\": \"<string>\",\n      \"categories\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"weight\": \"<number>\",\n      \"dimensions\": {\n        \"depth\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\"\n      },\n      \"identifiers\": [\n        {\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"externalIdentifier\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"imageUrls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"attributes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"weightPerItem\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"packSizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"skillsRequired\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"dropoffServiceTimeSeconds\": \"<integer>\"\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"<string>\",\n          \"serviceType\": \"<string>\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": \"<boolean>\"\n        },\n        {\n          \"provider\": \"<string>\",\n          \"serviceType\": \"<string>\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"categories\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"weight\": \"<number>\",\n      \"dimensions\": {\n        \"depth\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\"\n      },\n      \"identifiers\": [\n        {\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"externalIdentifier\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"imageUrls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"attributes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"weightPerItem\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"packSizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"skillsRequired\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"dropoffServiceTimeSeconds\": \"<integer>\"\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"<string>\",\n          \"serviceType\": \"<string>\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": \"<boolean>\"\n        },\n        {\n          \"provider\": \"<string>\",\n          \"serviceType\": \"<string>\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": \"<boolean>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12cbd4db-b079-4ac7-9ee7-5431e114fa21",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"name\": \"Organic Bananas\",\n      \"categories\": [\n        \"Produce\",\n        \"Fruits\",\n        \"Organic\"\n      ],\n      \"weight\": 0.5,\n      \"dimensions\": {\n        \"depth\": 8,\n        \"height\": 4,\n        \"width\": 12\n      },\n      \"identifiers\": [\n        {\n          \"type\": \"UPC\",\n          \"value\": \"123456789012\"\n        }\n      ],\n      \"externalIdentifier\": \"string\",\n      \"sku\": \"string\",\n      \"description\": \"string\",\n      \"imageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"weightPerItem\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"packSizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"skillsRequired\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dropoffServiceTimeSeconds\": 5380\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": true\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": true\n        }\n      ]\n    },\n    {\n      \"name\": \"Organic Bananas\",\n      \"categories\": [\n        \"Produce\",\n        \"Fruits\",\n        \"Organic\"\n      ],\n      \"weight\": 0.5,\n      \"dimensions\": {\n        \"depth\": 8,\n        \"height\": 4,\n        \"width\": 12\n      },\n      \"identifiers\": [\n        {\n          \"type\": \"UPC\",\n          \"value\": \"123456789012\"\n        }\n      ],\n      \"externalIdentifier\": \"string\",\n      \"sku\": \"string\",\n      \"description\": \"string\",\n      \"imageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"weightPerItem\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"packSizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"skillsRequired\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dropoffServiceTimeSeconds\": 2198\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": false\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": false\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"Organic Bananas\",\n    \"externalIdentifier\": \"string\",\n    \"sku\": \"string\",\n    \"description\": \"string\",\n    \"imageUrls\": [\n      \"string\",\n      \"string\"\n    ],\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"weight\": 1407.3252453461694,\n    \"dimensions\": {\n      \"depth\": 4473.116296930258,\n      \"width\": 4005.891103866831,\n      \"height\": 90.49747800855768\n    },\n    \"identifiers\": [\n      {\n        \"type\": \"UPC\",\n        \"value\": \"123456789012\"\n      },\n      {\n        \"type\": \"UPC\",\n        \"value\": \"123456789012\"\n      }\n    ],\n    \"attributes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"details\": {\n      \"weightedItemInfo\": {\n        \"weightPerItem\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"weightUnit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"sizeSpecification\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"packSizeSpecification\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"providerConfigs\": [\n      {\n        \"provider\": \"X\",\n        \"serviceType\": \"pick_and_deliver\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"enabled\": false\n      },\n      {\n        \"provider\": \"X\",\n        \"serviceType\": \"pick_and_deliver\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"enabled\": false\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"Organic Bananas\",\n    \"externalIdentifier\": \"string\",\n    \"sku\": \"string\",\n    \"description\": \"string\",\n    \"imageUrls\": [\n      \"string\",\n      \"string\"\n    ],\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"weight\": 2658.1272303855185,\n    \"dimensions\": {\n      \"depth\": 624.4836038440304,\n      \"width\": 2897.9055034499925,\n      \"height\": 6149.696984707775\n    },\n    \"identifiers\": [\n      {\n        \"type\": \"UPC\",\n        \"value\": \"123456789012\"\n      },\n      {\n        \"type\": \"UPC\",\n        \"value\": \"123456789012\"\n      }\n    ],\n    \"attributes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"details\": {\n      \"weightedItemInfo\": {\n        \"weightPerItem\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"weightUnit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"sizeSpecification\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"packSizeSpecification\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"providerConfigs\": [\n      {\n        \"provider\": \"X\",\n        \"serviceType\": \"pick_and_deliver\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"enabled\": false\n      },\n      {\n        \"provider\": \"X\",\n        \"serviceType\": \"pick_and_deliver\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"enabled\": true\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31c1c88d-48ff-4527-a8e7-e3a56462b6f7",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"name\": \"Organic Bananas\",\n      \"categories\": [\n        \"Produce\",\n        \"Fruits\",\n        \"Organic\"\n      ],\n      \"weight\": 0.5,\n      \"dimensions\": {\n        \"depth\": 8,\n        \"height\": 4,\n        \"width\": 12\n      },\n      \"identifiers\": [\n        {\n          \"type\": \"UPC\",\n          \"value\": \"123456789012\"\n        }\n      ],\n      \"externalIdentifier\": \"string\",\n      \"sku\": \"string\",\n      \"description\": \"string\",\n      \"imageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"weightPerItem\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"packSizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"skillsRequired\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dropoffServiceTimeSeconds\": 5380\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": true\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": true\n        }\n      ]\n    },\n    {\n      \"name\": \"Organic Bananas\",\n      \"categories\": [\n        \"Produce\",\n        \"Fruits\",\n        \"Organic\"\n      ],\n      \"weight\": 0.5,\n      \"dimensions\": {\n        \"depth\": 8,\n        \"height\": 4,\n        \"width\": 12\n      },\n      \"identifiers\": [\n        {\n          \"type\": \"UPC\",\n          \"value\": \"123456789012\"\n        }\n      ],\n      \"externalIdentifier\": \"string\",\n      \"sku\": \"string\",\n      \"description\": \"string\",\n      \"imageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"details\": {\n        \"weightedItemInfo\": {\n          \"weightPerItem\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightUnit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"packSizeSpecification\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"skillsRequired\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dropoffServiceTimeSeconds\": 2198\n      },\n      \"providerConfigs\": [\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": false\n        },\n        {\n          \"provider\": \"X\",\n          \"serviceType\": \"pick_and_deliver\",\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enabled\": false\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 9656\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "53d3265d-75bf-4206-8a5e-3777dcdcc7c9",
+    "name": "Nash AI Functions Store Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

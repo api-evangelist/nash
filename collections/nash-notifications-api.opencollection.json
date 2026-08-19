@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Notifications API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notification Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/notification-triggers"
+          },
+          "docs": "List notification triggers configured on the authenticated organization. Use the `Nash-Org-Id` header to scope the request to a specific org (e.g. a child org)."
+        },
+        {
+          "info": {
+            "name": "Create Notification Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/notification-triggers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a notification trigger on the authenticated organization. The request body is a discriminated union on `type`: each trigger type (see GET /v1/notification-triggers/templates) has its own typed `parameters` shape in the OpenAPI schema. An invalid `type` returns a 400 listing all valid types. Use the `Nash-Org-Id` header to scope creation to a specific org (e.g. a child org)."
+        },
+        {
+          "info": {
+            "name": "Get Notification Trigger Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/notification-triggers/catalog"
+          },
+          "docs": "The full notification-trigger catalog. Each entry describes a trigger's `type` slug, human `title`, the `value` used to subscribe automations, the `entityType` (route/delivery/task/order/activity), its `statuses` vocabulary, the JSON Schema of its create `parameters`, and the `supportedFilters` / `supportedActions`. The shared `filterCriteria` (dispatch strategies, contracts, zones, metadata conditions) and `actions` are described once at the top level. Designed for agents and humans to discover"
+        },
+        {
+          "info": {
+            "name": "List Notification Trigger Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/notification-triggers/templates"
+          },
+          "docs": "List pre-defined notification trigger templates. Each template has a `type` slug (e.g. 'tasks_attempts_exhausted') and a human-readable `title` (e.g. 'Tasks Attempts Exhausted'). Use the `type` when creating a trigger via POST /v1/notification-triggers."
+        },
+        {
+          "info": {
+            "name": "Trigger Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/notification/:id/trigger",
+            "params": [
+              {
+                "name": "id",
+                "value": "ntf_123",
+                "type": "path",
+                "description": "Notification trigger ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manually trigger a notification for a specific delivery event. The notification is sent using the configured channel and template for the trigger."
+        },
+        {
+          "info": {
+            "name": "Get contacts in the deny list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/notifications/deny-list",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "The organization id to get the deny list for."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Use this parameter to show more pages of results (page starts at 0).."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return per page."
+              }
+            ]
+          },
+          "docs": "Retrieve all contacts in the organization's notification deny list. Contacts on this list will not receive delivery notifications."
+        },
+        {
+          "info": {
+            "name": "Add a contact to the deny list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/notifications/deny-list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a contact (phone number or email) to the organization's notification deny list. The contact will no longer receive delivery notifications."
+        },
+        {
+          "info": {
+            "name": "Remove a contact from the deny list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/notifications/deny-list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a contact from the organization's notification deny list. The contact will resume receiving delivery notifications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

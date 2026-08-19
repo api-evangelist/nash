@@ -1,0 +1,542 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Order API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a pre-dispatch order with pickup and dropoff details. Orders are flexible data structures that become packages when dispatched to a provider."
+        },
+        {
+          "info": {
+            "name": "Create or update order by external identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/external-identifier/:externalId",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "1234567890",
+                "type": "path",
+                "description": "The external id of the order to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new order or update an existing one using your external identifier. If an order with the given external identifier exists, it is updated; otherwise a new order is created."
+        },
+        {
+          "info": {
+            "name": "Autodispatch order by external identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/external-identifier/:externalId/autodispatch",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "1234567890",
+                "type": "path",
+                "description": "The external id of the order to update"
+              }
+            ]
+          },
+          "docs": "Dispatch an order using your external identifier and the organization's dispatch strategy. Creates a job, requests quotes, and automatically selects the best quote."
+        },
+        {
+          "info": {
+            "name": "Upsert order by external identifier with delivery window",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/external-identifier/:externalId/delivery-window",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "1234567890",
+                "type": "path",
+                "description": "The external id of the order to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update an order by external identifier and associate it with a delivery window. The order is linked to the specified delivery window for scheduled delivery."
+        },
+        {
+          "info": {
+            "name": "Get order quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/get_quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request delivery price quotes from available providers for an order. Returns the order with attached quotes that can be selected to dispatch."
+        },
+        {
+          "info": {
+            "name": "Refresh order quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/refresh_quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request fresh price quotes from delivery providers for an existing order. Replaces any existing quotes with updated pricing from available providers."
+        },
+        {
+          "info": {
+            "name": "Get order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/order/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "Unique reference number for the order: either order.id (starts with \"ord_\") or order.externalId"
+              }
+            ]
+          },
+          "docs": "Retrieve a single order by ID, including its pickup/dropoff details, status, and metadata."
+        },
+        {
+          "info": {
+            "name": "Update order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/order/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "Unique reference number for the order: either order.id (starts with \"ord_\") or order.externalId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing pre-dispatch order's details such as addresses, times, or metadata. Only provided fields are updated."
+        },
+        {
+          "info": {
+            "name": "Archive order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/order/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "Unique reference number for the order: either order.id (starts with \"ord_\") or order.externalId"
+              }
+            ]
+          },
+          "docs": "Archive (soft-delete) an order. Archived orders are hidden from default listings but can be restored using the unarchive endpoint."
+        },
+        {
+          "info": {
+            "name": "Autodispatch order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/:id/autodispatch",
+            "params": [
+              {
+                "name": "id",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "Unique reference number for the order: either order.id (starts with \"ord_\") or order.externalId"
+              }
+            ]
+          },
+          "docs": "Dispatch an order using the organization's dispatch strategy. Creates a job, requests quotes from providers, and automatically selects the best quote."
+        },
+        {
+          "info": {
+            "name": "Confirm order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/order/:id/confirm",
+            "params": [
+              {
+                "name": "id",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "Unique reference number for the order: either order.id (starts with \"ord_\") or order.externalId"
+              }
+            ]
+          },
+          "docs": "Confirm a valid order, changing its status from 'valid' to 'confirmed'."
+        },
+        {
+          "info": {
+            "name": "Get order documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/order/:id/documents",
+            "params": [
+              {
+                "name": "id",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "Unique reference number for the order: either order.id (starts with \"ord_\") or order.externalId"
+              },
+              {
+                "name": "loadData",
+                "value": "",
+                "type": "query",
+                "description": "Whether to load the document data and return it as part of the response."
+              }
+            ]
+          },
+          "docs": "Retrieve documents associated with an order such as shipping labels or proof of delivery. Set load_data=true to include the document content in the response."
+        },
+        {
+          "info": {
+            "name": "Add custom event to order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/order/:id/events",
+            "params": [
+              {
+                "name": "id",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "Unique reference number for the order: either order.id (starts with \"ord_\") or order.externalId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a custom event to an order's event timeline. Rate limited to 3 requests per second per order with a max payload of 1KB."
+        },
+        {
+          "info": {
+            "name": "Unarchive order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/order/:id/unarchive",
+            "params": [
+              {
+                "name": "id",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "Unique reference number for the order: either order.id (starts with \"ord_\") or order.externalId"
+              }
+            ]
+          },
+          "docs": "Restore a previously archived order, making it visible in default listings again."
+        },
+        {
+          "info": {
+            "name": "List/Search Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/orders",
+            "params": [
+              {
+                "name": "limit",
+                "value": "25",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "created_at",
+                "type": "query",
+                "description": "Sort field: created_at, updated_at, value_cents, pickup_start_time, pickup_end_time, dropoff_start_time, dropoff_end_time"
+              },
+              {
+                "name": "sortDirection",
+                "value": "DESC",
+                "type": "query",
+                "description": "Sort direction: ASC or DESC"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound for pickup/dropoff/created-at window. Defaults to 30 days ago."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound for pickup/dropoff/created-at window. Defaults to now."
+              },
+              {
+                "name": "status",
+                "value": "active,pending_confirmation",
+                "type": "query",
+                "description": "Comma-separated list of order statuses (e.g. active,pending_confirmation)"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of order ids. Bypasses date filter when set."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of tags"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Free-form search"
+              },
+              {
+                "name": "hasRoute",
+                "value": "all",
+                "type": "query",
+                "description": "Filter by route state: has_route, no_route, or all"
+              },
+              {
+                "name": "pickupStoreLocationIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated store location ids"
+              },
+              {
+                "name": "dropoffStoreLocationIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated store location ids"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of pickup or dropoff cities"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of pickup or dropoff states"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of pickup or dropoff countries"
+              },
+              {
+                "name": "pickupBusinessName",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list"
+              },
+              {
+                "name": "dropoffBusinessName",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list"
+              },
+              {
+                "name": "creationSource",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list"
+              },
+              {
+                "name": "dispatchStrategyId",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list"
+              }
+            ]
+          },
+          "docs": "List orders with filters, sorting, and pagination. Returns a slim payload suitable for discovery; use GET /v1/order/<id> for full details."
+        },
+        {
+          "info": {
+            "name": "Create Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create multiple pre-dispatch orders in a single request. Each order is created independently with its own pickup and dropoff details."
+        },
+        {
+          "info": {
+            "name": "Create, update, upsert, or delete orders asynchronously in bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/orders/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a bulk operation to create, update, upsert, or delete multiple orders asynchronously. Returns a bulk operation ID that can be polled for results using the GET bulk endpoint."
+        },
+        {
+          "info": {
+            "name": "Get response from asynchronous bulk order operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/orders/bulk/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "act_1234567890",
+                "type": "path",
+                "description": "The ID of the bulk operation"
+              }
+            ]
+          },
+          "docs": "Retrieve the results of a previously submitted bulk order operation. Returns the status and individual results for each order in the batch."
+        },
+        {
+          "info": {
+            "name": "Create or update orders by external identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/orders/external-identifier",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new orders or update existing ones using external identifiers. If an order with a given external identifier exists, it is updated; otherwise a new order is created."
+        },
+        {
+          "info": {
+            "name": "Undispatch an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/orders/external-identifier/:external_id/undispatch",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "1234567890",
+                "type": "path",
+                "description": "The external id of the order to update"
+              }
+            ]
+          },
+          "docs": "Un-dispatch a route-based order: cancel its active task and provider delivery, remove it from its route (re-syncing the linked batch), and revert it to the `valid` status. Returns the updated order. Errors if the order is not dispatched, or is not associated with a route."
+        },
+        {
+          "info": {
+            "name": "Undispatch an order by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/orders/:order_id/undispatch",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "ord_1234567890",
+                "type": "path",
+                "description": "The id of the order (starts with \"ord_\")."
+              }
+            ]
+          },
+          "docs": "Un-dispatch a route-based order by id: cancel its active task and provider delivery, remove it from its route (re-syncing the linked batch), and revert it to the `valid` status. Returns the updated order. Errors if the order is not dispatched, or is not associated with a route."
+        },
+        {
+          "info": {
+            "name": "Create or update orders by external identifier (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v2/orders/upsert/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new orders or update existing ones by external identifier. Returns a `results` array — one entry per input order, in the same order as the request — each carrying a `success` or `failed` status, plus a `summary` of the counts. A hard failure on one order does not fail the batch; the rest still commit."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

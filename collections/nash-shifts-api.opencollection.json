@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Shifts API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shifts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a shift",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/shift",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a courier shift with start/end times and an assigned store location."
+        },
+        {
+          "info": {
+            "name": "Get a shift",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/shift/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Shift ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a single courier shift by ID, including its times, assigned courier, and store location."
+        },
+        {
+          "info": {
+            "name": "Get all shifts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/shifts",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "2025-05-01T00:00:00Z",
+                "type": "query",
+                "description": "The start time of the shifts to list."
+              },
+              {
+                "name": "endTime",
+                "value": "2025-06-01T00:00:00Z",
+                "type": "query",
+                "description": "The end time of the shifts to list."
+              },
+              {
+                "name": "storeLocationId",
+                "value": "",
+                "type": "query",
+                "description": "The store location ID to list shifts for."
+              },
+              {
+                "name": "externalStoreLocationId",
+                "value": "",
+                "type": "query",
+                "description": "The external store location ID to list shifts for."
+              }
+            ]
+          },
+          "docs": "List courier shifts with optional filtering by time range and store location. Filter by start_time, end_time, store_location_id, or external_store_location_id."
+        },
+        {
+          "info": {
+            "name": "Upsert shifts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/shifts/upsert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update multiple courier shifts in a single request. Existing shifts are matched by ID for updates; new shifts are created."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

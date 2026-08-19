@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Fleet API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fleet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Update Deliveries",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/fleet/deliveries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply updates to up to 100 deliveries in a single request. Each item is keyed by exactly one of `deliveryId` or `packageExternalIdentifier` (your own id set on the package at creation), plus the same field set as the single-delivery endpoint. The per-item result echoes back the key you sent under `deliveryId`. Per-item failures come back as a structured error in the response and do not affect the rest of the batch."
+        },
+        {
+          "info": {
+            "name": "Update Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/fleet/deliveries/:delivery_id",
+            "params": [
+              {
+                "name": "delivery_id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash delivery id to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply a partial update — such as status, courier location, proof of delivery, courier identity, or ETAs — to a delivery your organization owns. Only available for deliveries fulfilled by your own fleet (not by a third-party courier integration). Returns the updated delivery."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

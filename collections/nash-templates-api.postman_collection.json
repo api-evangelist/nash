@@ -1,0 +1,172 @@
+{
+  "item": [
+    {
+      "id": "0046921e-dcb4-494b-a599-0f08c81b5541",
+      "name": "Templates",
+      "description": {
+        "content": "Templates",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1fb17fb-da40-4924-ac43-51f138ebbaed",
+          "name": "Upsert multiple templates",
+          "request": {
+            "name": "Upsert multiple templates",
+            "description": {
+              "content": "Create or update multiple notification templates in a single request. Templates define the content and format of notifications sent for delivery events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "templates",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"templates\": [\n    {\n      \"type\": \"<string>\",\n      \"deliveryWindowTemplatePayload\": {\n        \"key_0\": \"string\"\n      },\n      \"shiftTemplatePayload\": {\n        \"key_0\": \"string\"\n      },\n      \"externalId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"startDatetime\": \"<string>\",\n      \"endDatetime\": \"<string>\",\n      \"daysOfWeek\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"generationFrequencyValue\": \"<integer>\",\n      \"generationFrequencyUnit\": \"<string>\",\n      \"createInstancesUpToValue\": \"<integer>\",\n      \"createInstancesUpToUnit\": \"<string>\",\n      \"overrideExistingInstances\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"deliveryWindowTemplatePayload\": {\n        \"key_0\": 3991.503773964602\n      },\n      \"shiftTemplatePayload\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"externalId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"startDatetime\": \"<string>\",\n      \"endDatetime\": \"<string>\",\n      \"daysOfWeek\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"generationFrequencyValue\": \"<integer>\",\n      \"generationFrequencyUnit\": \"<string>\",\n      \"createInstancesUpToValue\": \"<integer>\",\n      \"createInstancesUpToUnit\": \"<string>\",\n      \"overrideExistingInstances\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "939fb253-78c0-4e50-835b-ca079699a610",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "templates",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"templates\": [\n    {\n      \"type\": \"DELIVERY_WINDOW\",\n      \"deliveryWindowTemplatePayload\": {\n        \"key_0\": \"string\"\n      },\n      \"shiftTemplatePayload\": {\n        \"key_0\": 1923.6942482830343,\n        \"key_1\": false\n      },\n      \"externalId\": \"string\",\n      \"name\": \"string\",\n      \"startDatetime\": \"8079-47-18T38:62:08@577128818\",\n      \"endDatetime\": \"0027-76-09T23:49:63Q2115Z\",\n      \"daysOfWeek\": [\n        \"string\",\n        \"string\"\n      ],\n      \"generationFrequencyValue\": 2548,\n      \"generationFrequencyUnit\": \"string\",\n      \"createInstancesUpToValue\": 616,\n      \"createInstancesUpToUnit\": \"string\",\n      \"overrideExistingInstances\": true\n    },\n    {\n      \"type\": \"DELIVERY_WINDOW\",\n      \"deliveryWindowTemplatePayload\": {\n        \"key_0\": 6848\n      },\n      \"shiftTemplatePayload\": {\n        \"key_0\": true\n      },\n      \"externalId\": \"string\",\n      \"name\": \"string\",\n      \"startDatetime\": \"8582-14-67T30:51:6480191012839\",\n      \"endDatetime\": \"1671-00-54T28:29:03648310363\",\n      \"daysOfWeek\": [\n        \"string\",\n        \"string\"\n      ],\n      \"generationFrequencyValue\": 671,\n      \"generationFrequencyUnit\": \"string\",\n      \"createInstancesUpToValue\": 5052,\n      \"createInstancesUpToUnit\": \"string\",\n      \"overrideExistingInstances\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"templates\": [\n    {\n      \"id\": \"tpl_01234567890123456789\",\n      \"type\": \"DELIVERY_WINDOW\",\n      \"payload\": {\n        \"key_0\": 8022,\n        \"key_1\": 4925,\n        \"key_2\": 7752\n      },\n      \"externalId\": \"string\",\n      \"name\": \"string\",\n      \"startDatetime\": \"2024-01-01T12:00:00\",\n      \"endDatetime\": \"2024-01-01T12:00:00\",\n      \"daysOfWeek\": [\n        \"MONDAY\",\n        \"TUESDAY\"\n      ],\n      \"generationFrequencyValue\": 1,\n      \"generationFrequencyUnit\": \"DAY\",\n      \"createInstancesUpToValue\": 1,\n      \"createInstancesUpToUnit\": \"DAY\",\n      \"overrideExistingInstances\": true\n    },\n    {\n      \"id\": \"tpl_01234567890123456789\",\n      \"type\": \"DELIVERY_WINDOW\",\n      \"payload\": {\n        \"key_0\": true,\n        \"key_1\": 3648.75274490447\n      },\n      \"externalId\": \"string\",\n      \"name\": \"string\",\n      \"startDatetime\": \"2024-01-01T12:00:00\",\n      \"endDatetime\": \"2024-01-01T12:00:00\",\n      \"daysOfWeek\": [\n        \"MONDAY\",\n        \"TUESDAY\"\n      ],\n      \"generationFrequencyValue\": 1,\n      \"generationFrequencyUnit\": \"DAY\",\n      \"createInstancesUpToValue\": 1,\n      \"createInstancesUpToUnit\": \"DAY\",\n      \"overrideExistingInstances\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fe011e6-3bf1-483e-8b73-cc72d4d00fdd",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "templates",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"templates\": [\n    {\n      \"type\": \"DELIVERY_WINDOW\",\n      \"deliveryWindowTemplatePayload\": {\n        \"key_0\": \"string\"\n      },\n      \"shiftTemplatePayload\": {\n        \"key_0\": 1923.6942482830343,\n        \"key_1\": false\n      },\n      \"externalId\": \"string\",\n      \"name\": \"string\",\n      \"startDatetime\": \"8079-47-18T38:62:08@577128818\",\n      \"endDatetime\": \"0027-76-09T23:49:63Q2115Z\",\n      \"daysOfWeek\": [\n        \"string\",\n        \"string\"\n      ],\n      \"generationFrequencyValue\": 2548,\n      \"generationFrequencyUnit\": \"string\",\n      \"createInstancesUpToValue\": 616,\n      \"createInstancesUpToUnit\": \"string\",\n      \"overrideExistingInstances\": true\n    },\n    {\n      \"type\": \"DELIVERY_WINDOW\",\n      \"deliveryWindowTemplatePayload\": {\n        \"key_0\": 6848\n      },\n      \"shiftTemplatePayload\": {\n        \"key_0\": true\n      },\n      \"externalId\": \"string\",\n      \"name\": \"string\",\n      \"startDatetime\": \"8582-14-67T30:51:6480191012839\",\n      \"endDatetime\": \"1671-00-54T28:29:03648310363\",\n      \"daysOfWeek\": [\n        \"string\",\n        \"string\"\n      ],\n      \"generationFrequencyValue\": 671,\n      \"generationFrequencyUnit\": \"string\",\n      \"createInstancesUpToValue\": 5052,\n      \"createInstancesUpToUnit\": \"string\",\n      \"overrideExistingInstances\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3020.7397014005464\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 4478.380918163943\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1b5fe410-74af-41e2-889d-485a36421f17",
+    "name": "Nash AI Functions Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

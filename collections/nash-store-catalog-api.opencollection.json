@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Store Catalog API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Store Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/inventory",
+            "params": [
+              {
+                "name": "pageIndex",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "numResultsPerPage",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "organic apples",
+                "type": "query"
+              },
+              {
+                "name": "ids",
+                "value": "pro_123,pro_456",
+                "type": "query"
+              },
+              {
+                "name": "skus",
+                "value": "SKU-001,SKU-002",
+                "type": "query"
+              },
+              {
+                "name": "semanticSearch",
+                "value": "fresh fruit for smoothies",
+                "type": "query"
+              },
+              {
+                "name": "externalStoreLocationId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "externalProductId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List inventory levels with pagination. Filter by external store location ID or external product ID."
+        },
+        {
+          "info": {
+            "name": "Create or update inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/inventory",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update inventory levels for products at specific store locations. Links products to store locations with quantity and availability information."
+        },
+        {
+          "info": {
+            "name": "Get Product by External Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/product/external_identifier/:externalIdentifier",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "ext_001",
+                "type": "path",
+                "description": "product external identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a product from the store catalog using your external identifier."
+        },
+        {
+          "info": {
+            "name": "Get Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/product/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "prod_123",
+                "type": "path",
+                "description": "product id"
+              }
+            ]
+          },
+          "docs": "Retrieve a single product from the store catalog by its ID."
+        },
+        {
+          "info": {
+            "name": "Get products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/products",
+            "params": [
+              {
+                "name": "pageIndex",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "numResultsPerPage",
+                "value": "100",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "organic apples",
+                "type": "query"
+              },
+              {
+                "name": "ids",
+                "value": "pro_123,pro_456",
+                "type": "query"
+              },
+              {
+                "name": "skus",
+                "value": "SKU-001,SKU-002",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List products in the store catalog with pagination and optional filtering. Filter by IDs, SKUs, text search, or semantic search."
+        },
+        {
+          "info": {
+            "name": "Create or update products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/products",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new products or update existing ones in the store catalog. Products are matched by external identifier for upsert logic."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

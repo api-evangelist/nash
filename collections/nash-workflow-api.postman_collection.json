@@ -1,0 +1,729 @@
+{
+  "item": [
+    {
+      "id": "9b009f1a-0e1a-404f-b5f3-c389255d7982",
+      "name": "Workflow",
+      "description": {
+        "content": "Workflow automation management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "65f249b8-6554-4998-b564-c99883791f2c",
+          "name": "List Workflows",
+          "request": {
+            "name": "List Workflows",
+            "description": {
+              "content": "Returns all non-archived workflows for the authenticated organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workflows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e9e7411-12ec-43d5-aa5a-3c2d1abd254e",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 7339.658569128526,\n        \"key_1\": 8975,\n        \"key_2\": \"string\",\n        \"key_3\": 3389.955644104776\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22916c0d-1ba2-4b73-a17f-92adbdfd3e08",
+          "name": "Create Workflow",
+          "request": {
+            "name": "Create Workflow",
+            "description": {
+              "content": "Create a new workflow with nodes, edges, and a trigger. The workflow is created in draft status by default. Nodes define the actions and filters, edges define the execution flow between nodes, and the trigger defines when the workflow is activated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workflows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"nodes\": [\n    {\n      \"nodeType\": \"<string>\",\n      \"nodeKey\": \"<string>\",\n      \"nodeAction\": \"<string>\",\n      \"nodeActionConfig\": {\n        \"key_0\": false,\n        \"key_1\": \"string\",\n        \"key_2\": true\n      },\n      \"nodeFilterConfig\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": 4738\n        }\n      ],\n      \"nodeLabel\": \"<string>\",\n      \"isEnabled\": \"<boolean>\",\n      \"isTrigger\": \"<boolean>\"\n    },\n    {\n      \"nodeType\": \"<string>\",\n      \"nodeKey\": \"<string>\",\n      \"nodeAction\": \"<string>\",\n      \"nodeActionConfig\": {\n        \"key_0\": 9945.432658678335,\n        \"key_1\": 5426\n      },\n      \"nodeFilterConfig\": [\n        {\n          \"key_0\": 1792.827154562976,\n          \"key_1\": 1653.8780640419282,\n          \"key_2\": 4030\n        },\n        {\n          \"key_0\": true,\n          \"key_1\": 2307\n        }\n      ],\n      \"nodeLabel\": \"<string>\",\n      \"isEnabled\": \"<boolean>\",\n      \"isTrigger\": \"<boolean>\"\n    }\n  ],\n  \"edges\": [\n    {\n      \"edgeKey\": \"<string>\",\n      \"sourceNodeKey\": \"<string>\",\n      \"targetNodeKey\": \"<string>\",\n      \"executionOrder\": \"<integer>\",\n      \"edgeType\": \"<string>\"\n    },\n    {\n      \"edgeKey\": \"<string>\",\n      \"sourceNodeKey\": \"<string>\",\n      \"targetNodeKey\": \"<string>\",\n      \"executionOrder\": \"<integer>\",\n      \"edgeType\": \"<string>\"\n    }\n  ],\n  \"trigger\": {\n    \"triggerType\": \"<string>\",\n    \"eventTriggerType\": \"<string>\",\n    \"eventName\": \"<string>\",\n    \"notificationTriggerParameters\": {\n      \"key_0\": 5453.238647917311\n    },\n    \"isEnabled\": \"<boolean>\"\n  },\n  \"description\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6375c6cc-b7c6-42b9-ae05-e77be5e1b342",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"nodes\": [\n    {\n      \"nodeType\": \"action\",\n      \"nodeKey\": \"string\",\n      \"nodeAction\": \"remove_order_from_route\",\n      \"nodeActionConfig\": {\n        \"key_0\": 6681\n      },\n      \"nodeFilterConfig\": [\n        {\n          \"key_0\": true\n        },\n        {\n          \"key_0\": true,\n          \"key_1\": 9040.545908186094\n        }\n      ],\n      \"nodeLabel\": \"string\",\n      \"isEnabled\": false,\n      \"isTrigger\": false\n    },\n    {\n      \"nodeType\": \"switch\",\n      \"nodeKey\": \"string\",\n      \"nodeAction\": \"send_sms\",\n      \"nodeActionConfig\": {\n        \"key_0\": 4499\n      },\n      \"nodeFilterConfig\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": 9069\n        }\n      ],\n      \"nodeLabel\": \"string\",\n      \"isEnabled\": true,\n      \"isTrigger\": false\n    }\n  ],\n  \"edges\": [\n    {\n      \"edgeKey\": \"string\",\n      \"sourceNodeKey\": \"string\",\n      \"targetNodeKey\": \"string\",\n      \"executionOrder\": 5770,\n      \"edgeType\": \"negative\"\n    },\n    {\n      \"edgeKey\": \"string\",\n      \"sourceNodeKey\": \"string\",\n      \"targetNodeKey\": \"string\",\n      \"executionOrder\": 6766,\n      \"edgeType\": \"negative\"\n    }\n  ],\n  \"trigger\": {\n    \"triggerType\": \"cron\",\n    \"eventTriggerType\": \"string\",\n    \"eventName\": \"string\",\n    \"notificationTriggerParameters\": {\n      \"key_0\": \"string\"\n    },\n    \"isEnabled\": true\n  },\n  \"description\": \"<string>\",\n  \"status\": \"template\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 7339.658569128526,\n        \"key_1\": 8975,\n        \"key_2\": \"string\",\n        \"key_3\": 3389.955644104776\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "148aa053-3ee1-406f-ba24-c56d27d6577a",
+          "name": "Get Workflow Schema",
+          "request": {
+            "name": "Get Workflow Schema",
+            "description": {
+              "content": "Returns self-describing workflow metadata including triggers, action config schemas, filter operators/fields, and supported workflow node, edge, and status types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workflows",
+                "schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a656e706-b619-4b6c-8ba2-1f1b8f855971",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflows",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d0fdb5d6-4cd9-40b7-92c0-59ac11059e39",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflows",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 7339.658569128526,\n        \"key_1\": 8975,\n        \"key_2\": \"string\",\n        \"key_3\": 3389.955644104776\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0bd9fcf-1360-46bd-a8d9-15eaba1ede42",
+          "name": "Get Workflow",
+          "request": {
+            "name": "Get Workflow",
+            "description": {
+              "content": "Returns a single workflow by ID, including its latest version with nodes, edges, and trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workflows",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36340ab2-5d58-40fd-acab-bb1ebc46c553",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflows",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 7339.658569128526,\n        \"key_1\": 8975,\n        \"key_2\": \"string\",\n        \"key_3\": 3389.955644104776\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da2ac24c-c7e0-4388-adbc-1a30472138ef",
+          "name": "Update Workflow",
+          "request": {
+            "name": "Update Workflow",
+            "description": {
+              "content": "Update an existing workflow. Only provided fields are updated. If nodes, edges, and trigger are all provided, a new workflow version is created. These three structure fields must be provided together or not at all.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workflows",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"nodes\": [\n    {\n      \"nodeType\": \"<string>\",\n      \"nodeKey\": \"<string>\",\n      \"nodeAction\": \"<string>\",\n      \"nodeActionConfig\": {\n        \"key_0\": 8297.685335741904,\n        \"key_1\": \"string\"\n      },\n      \"nodeFilterConfig\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": \"string\"\n        }\n      ],\n      \"nodeLabel\": \"<string>\",\n      \"isEnabled\": \"<boolean>\",\n      \"isTrigger\": \"<boolean>\"\n    },\n    {\n      \"nodeType\": \"<string>\",\n      \"nodeKey\": \"<string>\",\n      \"nodeAction\": \"<string>\",\n      \"nodeActionConfig\": {\n        \"key_0\": 4524,\n        \"key_1\": 10,\n        \"key_2\": \"string\",\n        \"key_3\": false\n      },\n      \"nodeFilterConfig\": [\n        {\n          \"key_0\": 5116,\n          \"key_1\": 9548,\n          \"key_2\": false,\n          \"key_3\": true\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"nodeLabel\": \"<string>\",\n      \"isEnabled\": \"<boolean>\",\n      \"isTrigger\": \"<boolean>\"\n    }\n  ],\n  \"edges\": [\n    {\n      \"edgeKey\": \"<string>\",\n      \"sourceNodeKey\": \"<string>\",\n      \"targetNodeKey\": \"<string>\",\n      \"executionOrder\": \"<integer>\",\n      \"edgeType\": \"<string>\"\n    },\n    {\n      \"edgeKey\": \"<string>\",\n      \"sourceNodeKey\": \"<string>\",\n      \"targetNodeKey\": \"<string>\",\n      \"executionOrder\": \"<integer>\",\n      \"edgeType\": \"<string>\"\n    }\n  ],\n  \"trigger\": {\n    \"triggerType\": \"<string>\",\n    \"eventTriggerType\": \"<string>\",\n    \"eventName\": \"<string>\",\n    \"notificationTriggerParameters\": {\n      \"key_0\": 7755\n    },\n    \"isEnabled\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbe481b7-53a0-4794-89cc-12a497ee33ab",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflows",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"template\",\n  \"nodes\": [\n    {\n      \"nodeType\": \"switch\",\n      \"nodeKey\": \"string\",\n      \"nodeAction\": \"add_requirements\",\n      \"nodeActionConfig\": {\n        \"key_0\": 5923,\n        \"key_1\": 8753\n      },\n      \"nodeFilterConfig\": [\n        {\n          \"key_0\": 8768,\n          \"key_1\": false,\n          \"key_2\": \"string\"\n        },\n        {\n          \"key_0\": 9285\n        }\n      ],\n      \"nodeLabel\": \"string\",\n      \"isEnabled\": false,\n      \"isTrigger\": true\n    },\n    {\n      \"nodeType\": \"subgraph\",\n      \"nodeKey\": \"string\",\n      \"nodeAction\": \"emit_custom_event\",\n      \"nodeActionConfig\": {\n        \"key_0\": 1457.6391139388145,\n        \"key_1\": \"string\"\n      },\n      \"nodeFilterConfig\": [\n        {\n          \"key_0\": false\n        },\n        {\n          \"key_0\": 5865,\n          \"key_1\": 6160.075850401552,\n          \"key_2\": 2458\n        }\n      ],\n      \"nodeLabel\": \"string\",\n      \"isEnabled\": false,\n      \"isTrigger\": true\n    }\n  ],\n  \"edges\": [\n    {\n      \"edgeKey\": \"string\",\n      \"sourceNodeKey\": \"string\",\n      \"targetNodeKey\": \"string\",\n      \"executionOrder\": 6910,\n      \"edgeType\": \"negative\"\n    },\n    {\n      \"edgeKey\": \"string\",\n      \"sourceNodeKey\": \"string\",\n      \"targetNodeKey\": \"string\",\n      \"executionOrder\": 7801,\n      \"edgeType\": \"success\"\n    }\n  ],\n  \"trigger\": {\n    \"triggerType\": \"cron\",\n    \"eventTriggerType\": \"string\",\n    \"eventName\": \"string\",\n    \"notificationTriggerParameters\": {\n      \"key_0\": false,\n      \"key_1\": 8903\n    },\n    \"isEnabled\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 7339.658569128526,\n        \"key_1\": 8975,\n        \"key_2\": \"string\",\n        \"key_3\": 3389.955644104776\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3693627f-5175-46e0-8314-5a8f129e5ae2",
+          "name": "Set Workflow Status",
+          "request": {
+            "name": "Set Workflow Status",
+            "description": {
+              "content": "Change the status of a workflow (draft, active, inactive, archived, template). Archiving a workflow disables its notification trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workflows",
+                ":id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc0ced9b-c49e-4e83-8675-bc869acfa6f3",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflows",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 7339.658569128526,\n        \"key_1\": 8975,\n        \"key_2\": \"string\",\n        \"key_3\": 3389.955644104776\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f2b1e3e-e618-4cd9-9d88-2d183a0ce530",
+          "name": "Trigger Workflow",
+          "request": {
+            "name": "Trigger Workflow",
+            "description": {
+              "content": "Trigger an active workflow with optional entity references and input data. Supports sync and async execution modes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workflows",
+                ":id",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobId\": \"<string>\",\n  \"entityRefs\": {\n    \"key_0\": \"<string>\"\n  },\n  \"input\": {\n    \"key_0\": 7490.981888897158,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  },\n  \"sync\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "41022eeb-969f-490b-891b-a5312d894bcc",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workflows",
+                    ":id",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobId\": \"<string>\",\n  \"entityRefs\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"input\": {\n    \"key_0\": 6619.230782157239,\n    \"key_1\": true\n  },\n  \"sync\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 7339.658569128526,\n        \"key_1\": 8975,\n        \"key_2\": \"string\",\n        \"key_3\": 3389.955644104776\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "afbbe764-d5de-46d8-a58d-63ff59c08913",
+    "name": "Nash AI Functions Workflow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

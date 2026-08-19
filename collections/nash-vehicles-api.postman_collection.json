@@ -1,0 +1,277 @@
+{
+  "item": [
+    {
+      "id": "ce29084e-7643-4f1c-a0eb-b8f16cef47ea",
+      "name": "Vehicles",
+      "description": {
+        "content": "Vehicles",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ddeeb2e5-6e23-4312-a22d-e49530734014",
+          "name": "Create a vehicle",
+          "request": {
+            "name": "Create a vehicle",
+            "description": {
+              "content": "Register a new vehicle for the organization's internal fleet with type and capacity details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vehicle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"externalidentifier\": \"<string>\",\n  \"vehicleinfo\": {\n    \"type\": \"<string>\",\n    \"make\": \"<string>\",\n    \"model\": \"<string>\",\n    \"licenseplate\": \"<string>\",\n    \"color\": \"<string>\",\n    \"year\": \"<string>\"\n  },\n  \"vehicleconfig\": {\n    \"weight\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"length\": \"<integer>\",\n    \"width\": \"<integer>\",\n    \"axlecount\": \"<integer>\",\n    \"trailercount\": \"<integer>\",\n    \"weightunit\": \"<string>\",\n    \"lengthunit\": \"<string>\",\n    \"maxstops\": \"<integer>\",\n    \"maxdistance\": \"<integer>\",\n    \"maxduration\": \"<integer>\",\n    \"speedfactor\": \"<number>\",\n    \"capabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"fixedcost\": \"<number>\",\n    \"costperunitdistance\": \"<number>\",\n    \"costperunittime\": \"<number>\",\n    \"vehicleprofile\": \"<string>\",\n    \"minordersperroute\": \"<integer>\",\n    \"parkingtime\": \"<number>\"\n  },\n  \"courierids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b6114d28-a0d3-42c7-bc50-ca24d069b2c9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Vehicle 1\",\n  \"enabled\": true,\n  \"externalidentifier\": \"<string>\",\n  \"vehicleinfo\": {\n    \"type\": \"motorbike\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"licenseplate\": \"string\",\n    \"color\": \"string\",\n    \"year\": \"string\"\n  },\n  \"vehicleconfig\": {\n    \"weight\": 7765,\n    \"height\": 9920,\n    \"length\": 3203,\n    \"width\": 5665,\n    \"axlecount\": 6632,\n    \"trailercount\": 6509,\n    \"weightunit\": \"lbs\",\n    \"lengthunit\": \"meter\",\n    \"maxstops\": 4489,\n    \"maxdistance\": 839,\n    \"maxduration\": 105,\n    \"speedfactor\": 8545.799538676181,\n    \"capabilities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fixedcost\": 2429.7234037333037,\n    \"costperunitdistance\": 1856.9799984841206,\n    \"costperunittime\": 4789.225840956755,\n    \"vehicleprofile\": \"string\",\n    \"minordersperroute\": 8450,\n    \"parkingtime\": 9664.555725319397\n  },\n  \"courierids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"providerid\": \"string\",\n  \"externalidentifier\": \"string\",\n  \"enabled\": true,\n  \"vehicleinfo\": {\n    \"type\": \"bike\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"licenseplate\": \"string\",\n    \"color\": \"string\",\n    \"year\": \"string\"\n  },\n  \"vehicleconfig\": {\n    \"weight\": 6170,\n    \"height\": 2290,\n    \"length\": 9231,\n    \"width\": 6894,\n    \"axlecount\": 7466,\n    \"trailercount\": 5838,\n    \"weightunit\": \"kg\",\n    \"lengthunit\": \"in\",\n    \"maxstops\": 9413,\n    \"maxdistance\": 5562,\n    \"maxduration\": 2008,\n    \"speedfactor\": 8253.471050936507,\n    \"capabilities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fixedcost\": 1512.7287764156595,\n    \"costperunitdistance\": 2349.1953694914846,\n    \"costperunittime\": 5719.967612426414,\n    \"vehicleprofile\": \"string\",\n    \"minordersperroute\": 2848,\n    \"parkingtime\": 9488.42721628267\n  },\n  \"courierids\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b62534f1-8196-452d-a42d-0ecece42a0d9",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Vehicle 1\",\n  \"enabled\": true,\n  \"externalidentifier\": \"<string>\",\n  \"vehicleinfo\": {\n    \"type\": \"motorbike\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"licenseplate\": \"string\",\n    \"color\": \"string\",\n    \"year\": \"string\"\n  },\n  \"vehicleconfig\": {\n    \"weight\": 7765,\n    \"height\": 9920,\n    \"length\": 3203,\n    \"width\": 5665,\n    \"axlecount\": 6632,\n    \"trailercount\": 6509,\n    \"weightunit\": \"lbs\",\n    \"lengthunit\": \"meter\",\n    \"maxstops\": 4489,\n    \"maxdistance\": 839,\n    \"maxduration\": 105,\n    \"speedfactor\": 8545.799538676181,\n    \"capabilities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fixedcost\": 2429.7234037333037,\n    \"costperunitdistance\": 1856.9799984841206,\n    \"costperunittime\": 4789.225840956755,\n    \"vehicleprofile\": \"string\",\n    \"minordersperroute\": 8450,\n    \"parkingtime\": 9664.555725319397\n  },\n  \"courierids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 6429\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 8706\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1471b5a4-727f-444f-859c-393f870786e7",
+          "name": "Get all vehicles",
+          "request": {
+            "name": "Get all vehicles",
+            "description": {
+              "content": "List all vehicles registered for the organization's internal fleet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vehicles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "040e3880-4e37-4dd3-9c61-040d15279b9d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"providerid\": \"string\",\n  \"externalidentifier\": \"string\",\n  \"enabled\": true,\n  \"vehicleinfo\": {\n    \"type\": \"bike\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"licenseplate\": \"string\",\n    \"color\": \"string\",\n    \"year\": \"string\"\n  },\n  \"vehicleconfig\": {\n    \"weight\": 6170,\n    \"height\": 2290,\n    \"length\": 9231,\n    \"width\": 6894,\n    \"axlecount\": 7466,\n    \"trailercount\": 5838,\n    \"weightunit\": \"kg\",\n    \"lengthunit\": \"in\",\n    \"maxstops\": 9413,\n    \"maxdistance\": 5562,\n    \"maxduration\": 2008,\n    \"speedfactor\": 8253.471050936507,\n    \"capabilities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fixedcost\": 1512.7287764156595,\n    \"costperunitdistance\": 2349.1953694914846,\n    \"costperunittime\": 5719.967612426414,\n    \"vehicleprofile\": \"string\",\n    \"minordersperroute\": 2848,\n    \"parkingtime\": 9488.42721628267\n  },\n  \"courierids\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74d316ae-1e3d-452d-b16d-6a6f8423c66c",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 6429\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 8706\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "23e4d8e2-19dd-46f6-9a84-a39921547d73",
+    "name": "Nash AI Functions Vehicles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

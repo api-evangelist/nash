@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AI Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Detect dropoff anomalies for a delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/ai/detect-dropoff-anomaly",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the dropoff anomaly detection agent over a delivery's photo + coordinates history."
+        },
+        {
+          "info": {
+            "name": "Mask faces in a photo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/ai/mask-face-in-photo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the face-masking agent; returns a URL for the masked copy."
+        },
+        {
+          "info": {
+            "name": "Verify a delivery photo via LLM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/ai/verify-photo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the proof-of-delivery / pickup / signature photo verification agent against the latest matching photo attached to the job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

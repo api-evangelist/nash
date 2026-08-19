@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Dispatch Strategies API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dispatch Strategies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Evaluate dynamic dispatch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/dispatch/evaluate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluate dispatch rules and rank providers without creating a job or order."
+        },
+        {
+          "info": {
+            "name": "Get dispatch strategies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/options_group"
+          },
+          "docs": "List all dispatch strategies (options groups) configured for the organization. Dispatch strategies define provider selection rules, fallback logic, and quoting behavior."
+        },
+        {
+          "info": {
+            "name": "Create dispatch strategy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/options_group",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new dispatch strategy (options group) with provider selection rules, fallback logic, and quoting configuration."
+        },
+        {
+          "info": {
+            "name": "Update dispatch strategy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/options_group/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing dispatch strategy's provider selection rules, fallback logic, or quoting configuration. Only provided fields are updated."
+        },
+        {
+          "info": {
+            "name": "Delete dispatch strategy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/options_group/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a dispatch strategy (options group) by ID. Orders using this strategy will need to be reassigned to another strategy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

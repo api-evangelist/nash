@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/roles"
+          },
+          "docs": "List every RBAC role attached to the calling organization."
+        },
+        {
+          "info": {
+            "name": "List Users In Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/roles/:role_id/users",
+            "params": [
+              {
+                "name": "role_id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash role id (``rol_…``)."
+              }
+            ]
+          },
+          "docs": "List the users that hold ``role_id`` inside the calling organization."
+        },
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/users"
+          },
+          "docs": "List every user that has at least one role in the calling organization."
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a brand-new Nash user and grant them the supplied roles inside the calling organization. If a user with the supplied email already exists, use ``POST /users/invite`` instead to attach them to this org."
+        },
+        {
+          "info": {
+            "name": "Invite Existing User Into Org",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/users/invite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attach an existing Nash user (looked up by email) to the calling organization with the supplied role ids."
+        },
+        {
+          "info": {
+            "name": "List User Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/users/:user_id/roles",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash user id (``usr_…``)."
+              }
+            ]
+          },
+          "docs": "List the roles held by ``user_id`` inside the calling organization."
+        },
+        {
+          "info": {
+            "name": "Add User Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/users/:user_id/roles",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash user id (``usr_…``)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more existing role ids to ``user_id`` inside the calling org."
+        },
+        {
+          "info": {
+            "name": "Replace User Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/users/:user_id/roles",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash user id (``usr_…``)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the user's role set inside the calling org with exactly the supplied role ids. Roles in other orgs are unaffected."
+        },
+        {
+          "info": {
+            "name": "Remove User Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/organization-management/users/:user_id/roles",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash user id (``usr_…``)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove the supplied role ids from ``user_id`` inside the calling org. Sending the user's full role set effectively revokes their access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

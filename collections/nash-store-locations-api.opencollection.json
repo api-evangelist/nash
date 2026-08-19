@@ -1,0 +1,249 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Store Locations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Store Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set the day capacity for a store location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/set_store_location_day_capacity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the delivery capacity for a store location on a specific date. Overrides the default weekly capacity for that particular day."
+        },
+        {
+          "info": {
+            "name": "Set the weekly default capacity for a store location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/set_store_location_default_capacity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configure the default weekly capacity schedule for a store location. Defines how many orders the location can handle per day of the week."
+        },
+        {
+          "info": {
+            "name": "Get store locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations",
+            "params": [
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "The size of the store locations to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset of the store locations to return."
+              }
+            ]
+          },
+          "docs": "List store locations for the organization with pagination. Use size and offset parameters to paginate through results."
+        },
+        {
+          "info": {
+            "name": "Create store location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new store location (pickup point) with address, hours, and capacity settings."
+        },
+        {
+          "info": {
+            "name": "Get store locations that cover specified location (latitude & longitude, city_zipcode)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations/coverage",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "0.00",
+                "type": "query",
+                "description": "The latitude of the location to check coverage for. If used, must specify longitude"
+              },
+              {
+                "name": "longitude",
+                "value": "0.00",
+                "type": "query",
+                "description": "The longitude of the location to check coverage for. If used, must specify latitude"
+              },
+              {
+                "name": "cityZipcode",
+                "value": "sanfrancisco_94114",
+                "type": "query",
+                "description": "The city_zipcode pair to check coverage for. The location must have coverage set up using the `City & Zip Code` unique field, not the separate `City` or `Zip Code` fields."
+              },
+              {
+                "name": "zipcode",
+                "value": "94114",
+                "type": "query",
+                "description": "The zipcode to check coverage for."
+              }
+            ]
+          },
+          "docs": "Find store locations whose delivery zones cover a given geographic point. Provide latitude/longitude, city_zipcode, or zipcode to find matching store locations."
+        },
+        {
+          "info": {
+            "name": "Create or update store location by external identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations/external-identifier/:externalIdentifier",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new store location or update an existing one using your external identifier. If a store location with the given external identifier exists, it is updated."
+        },
+        {
+          "info": {
+            "name": "Get store location by external identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations/external_identifier/:external_identifier",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a store location using your external identifier instead of the Nash store location ID."
+        },
+        {
+          "info": {
+            "name": "Create or update store location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations/upsert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new store location or update an existing one. Matches on external identifier or store location ID for upsert logic."
+        },
+        {
+          "info": {
+            "name": "Upsert multiple store locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations/upsert/bulk"
+          },
+          "docs": "Create or update multiple store locations in a single request. Each store location is matched by external identifier for upsert logic."
+        },
+        {
+          "info": {
+            "name": "Get store location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single store location by ID, including its address, hours, capacity, and zone associations."
+        },
+        {
+          "info": {
+            "name": "Update store location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing store location's details such as address, hours, or capacity. Only provided fields are updated."
+        },
+        {
+          "info": {
+            "name": "Delete store location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/store_locations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a store location by ID. Orders referencing this store location will no longer have a valid pickup point."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

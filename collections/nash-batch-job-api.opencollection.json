@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Batch Job API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Batch Job",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Batch Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/batch_job",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a batch job containing multiple packages for multi-stop delivery. Each package has its own pickup and dropoff locations within a single job."
+        },
+        {
+          "info": {
+            "name": "Update Job by JobID/ExternalIdentifier and Job Configuration ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:id/:jobConfigurationId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job ID or External Identifier"
+              },
+              {
+                "name": "jobConfigurationId",
+                "value": "",
+                "type": "path",
+                "description": "Job Configuration ID (for updating a package in a batch job)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a specific package within a batch job. Use the job configuration ID to target a particular package's details."
+        },
+        {
+          "info": {
+            "name": "Refresh Quotes by Job ID and Batch ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:jobId/batch/:batchId/refresh_quotes",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "batchId",
+                "value": "",
+                "type": "path",
+                "description": "batch id"
+              }
+            ]
+          },
+          "docs": "Request fresh price quotes from delivery providers for all tasks in a batch. Replaces existing quotes with updated pricing for the entire batch."
+        },
+        {
+          "info": {
+            "name": "Cancel Job by Job ID and Task or Job Configuration ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:jobId/:objectId/cancel",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "Task ID or Job Configuration ID"
+              }
+            ]
+          },
+          "docs": "Cancel a specific task or job configuration within a batch job. The objectId can be a task ID (tsk_ prefix) or job configuration ID (cfg_ prefix)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

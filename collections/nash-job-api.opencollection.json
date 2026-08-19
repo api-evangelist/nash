@@ -1,0 +1,567 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Job API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Job",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List/Search Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/jobs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "25",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort field (e.g. created_at, pickup_start_time)"
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query",
+                "description": "ASC or DESC"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Defaults to 3 days ago."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Defaults to 7 days from now so in-flight and scheduled deliveries are included."
+              },
+              {
+                "name": "deliveryStatuses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated delivery statuses (e.g. created,accepted_by_courier,delivered)"
+              },
+              {
+                "name": "providerNames",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated provider names"
+              },
+              {
+                "name": "courierNames",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated courier names"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated job tags"
+              },
+              {
+                "name": "packageTags",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated package tags"
+              },
+              {
+                "name": "pickupStoreLocationIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated"
+              },
+              {
+                "name": "dropoffStoreLocationIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Free-form search across IDs, external identifiers, short reference codes, addresses, and courier/customer names. For an exact match on a single field, use the dedicated filter (e.g. short_reference_code)."
+              },
+              {
+                "name": "shortReferenceCode",
+                "value": "",
+                "type": "query",
+                "description": "Exact match on the 7-digit short reference code shown on delivery cards. Codes are non-unique; multiple jobs may be returned. When provided, the default date window is widened to 90 days so older jobs are discoverable."
+              },
+              {
+                "name": "customerName",
+                "value": "",
+                "type": "query",
+                "description": "Fuzzy, case-insensitive substring match on the end customer's name (pickup or dropoff full name) over the denormalized task. Use this to locate a delivery when the caller only knows the customer's name. Matches names only — not business names, addresses, or courier names (use `search` for broader free-form matching). When provided, the default date window is widened to 90 days so older deliveries are discoverable."
+              },
+              {
+                "name": "isBatch",
+                "value": "",
+                "type": "query",
+                "description": "Filter to batch jobs only"
+              },
+              {
+                "name": "hasNotes",
+                "value": "",
+                "type": "query",
+                "description": "Filter to jobs with notes"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated pickup/dropoff cities"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated pickup/dropoff states"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated pickup/dropoff countries"
+              }
+            ]
+          },
+          "docs": "List jobs (deliveries) with filters, sorting, and pagination. Returns a slim payload suitable for discovery; use GET /v1/jobs/<id> for full details."
+        },
+        {
+          "info": {
+            "name": "Create Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new delivery job with pickup and dropoff details. A job represents a post-dispatch delivery request. Set quote_request_only=true to get price quotes without dispatching."
+        },
+        {
+          "info": {
+            "name": "Get Job by External Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/external_identifier/:externalIdentifier",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "job external identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a job using your external identifier instead of the Nash job ID. Useful when integrating with external systems that track their own order IDs."
+        },
+        {
+          "info": {
+            "name": "Create or Update Job by External Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/external_identifier/:externalIdentifier",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "job external identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new job or update an existing one using your external identifier. If a job with the given external identifier exists, it is updated; otherwise a new job is created. Set autodispatch=true to automatically dispatch after creation."
+        },
+        {
+          "info": {
+            "name": "Autodispatch job by external identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/external_identifier/:externalIdentifier/autodispatch",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "job external identifier"
+              }
+            ]
+          },
+          "docs": "Automatically dispatch an existing job using your external identifier. Requests quotes from providers and selects the best one based on the organization's dispatch strategy."
+        },
+        {
+          "info": {
+            "name": "Cancel Job by External Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/external_identifier/:externalIdentifier/cancel",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "job external identifier"
+              }
+            ]
+          },
+          "docs": "Cancel an active job using your external identifier. Cancels the delivery with the assigned provider and updates the job status."
+        },
+        {
+          "info": {
+            "name": "Get Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "compressedPayload",
+                "value": "",
+                "type": "query",
+                "description": "Return a slimmer job payload by excluding the full `quotes` and `failedQuotes` arrays and reducing `advancedTask` to just `{id}`. Prefer `compressed_payload=true` by default for status / ETA / tracking / cancellation flows — it can shrink responses by 10x+ on jobs that shopped many providers. Set to false (or omit) only when the caller needs quote data: pricing breakdowns, provider selection rationale, or failed-dispatch error messages."
+              }
+            ]
+          },
+          "docs": "Retrieve a job by its ID, including all job configurations, tasks, deliveries, and quotes. Pass `compressed_payload=true` by default — it drops the quotes and failedQuotes arrays and collapses advancedTask to just its id, which typically shrinks the response 10x+. Only omit it (or pass false) when the caller explicitly needs quote details: pricing, provider selection, or failed-dispatch error messages."
+        },
+        {
+          "info": {
+            "name": "Update Job by JobID/ExternalIdentifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job ID or External Identifier"
+              },
+              {
+                "name": "jobConfigurationId",
+                "value": "",
+                "type": "path",
+                "description": "Job Configuration ID (for updating a package in a batch job)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing job's details such as pickup/dropoff times, addresses, or metadata. The id can be a Nash job ID or your external identifier."
+        },
+        {
+          "info": {
+            "name": "Autodispatch job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:id/autodispatch",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              }
+            ]
+          },
+          "docs": "Automatically dispatch an existing job using the organization's dispatch strategy. Requests quotes from providers and selects the best one based on configured rules."
+        },
+        {
+          "info": {
+            "name": "Rebook Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:id/rebook",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "compressedPayload",
+                "value": "",
+                "type": "query",
+                "description": "Return a slimmer job payload by excluding the full `quotes` and `failedQuotes` arrays and reducing `advancedTask` to just `{id}`. Prefer `compressed_payload=true` by default for status / ETA / tracking / cancellation flows — it can shrink responses by 10x+ on jobs that shopped many providers. Set to false (or omit) only when the caller needs quote data: pricing breakdowns, provider selection rationale, or failed-dispatch error messages."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel the existing job and create a new one with updated details. The original job is canceled before the new job is created from the provided data."
+        },
+        {
+          "info": {
+            "name": "Refresh job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:id/refresh",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              }
+            ]
+          },
+          "docs": "Refresh a job's status by fetching the latest delivery information from the assigned provider. Useful for syncing state when provider webhooks may have been missed."
+        },
+        {
+          "info": {
+            "name": "Cancel Job by Job ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:jobId/cancel",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "Task ID or Job Configuration ID"
+              }
+            ]
+          },
+          "docs": "Cancel an active job and its associated deliveries. Cancels the delivery with the assigned provider and updates the job status."
+        },
+        {
+          "info": {
+            "name": "Create delivery incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:jobId/tasks/:taskId/delivery_incident",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "task id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Report a delivery incident such as a damaged package, missing items, or late delivery. Creates an incident record linked to the specified task."
+        },
+        {
+          "info": {
+            "name": "Select Quote by Job ID and Task ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:jobId/tasks/:taskId/quotes",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "task id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Select the winning quote for a specific task within a job. Deprecated: prefer the Select Quote endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Refresh Quotes by Job ID and Task ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:jobId/tasks/:taskId/refresh_quotes",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "task id"
+              }
+            ]
+          },
+          "docs": "Request fresh price quotes from delivery providers for a specific task. Replaces any existing quotes with updated pricing."
+        },
+        {
+          "info": {
+            "name": "Reassign task by Job ID and Task ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/jobs/:jobId/:taskId/reassign",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "job id"
+              },
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "task id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel the current delivery attempt and create a new task for reassignment. A new task is created on the same job configuration, allowing a different provider to fulfill the delivery."
+        },
+        {
+          "info": {
+            "name": "Get Refund Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/refund-request/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "rfrq_01234567890123456789",
+                "type": "path",
+                "description": "The ID of the refund request."
+              }
+            ]
+          },
+          "docs": "Retrieve a single refund request by its ID, including status and resolution details."
+        },
+        {
+          "info": {
+            "name": "Get Refund Requests by Task ID or Job ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/refund-requests",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "query",
+                "description": "The task ID to filter by."
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "query",
+                "description": "The job ID to filter by."
+              }
+            ]
+          },
+          "docs": "Retrieve all refund requests associated with a task or job. At least one of task_id or job_id must be provided."
+        },
+        {
+          "info": {
+            "name": "Select Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/select_quote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Select a delivery quote to dispatch the job to a provider. Selecting a quote creates a delivery and begins the fulfillment process with the chosen provider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

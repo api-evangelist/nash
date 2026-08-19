@@ -1,0 +1,277 @@
+{
+  "item": [
+    {
+      "id": "f4a9865b-5681-444f-9b61-c7a491110197",
+      "name": "Couriers",
+      "description": {
+        "content": "Couriers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c63180b-0fe0-4d3e-b2fb-5c3b3492adec",
+          "name": "Create a courier",
+          "request": {
+            "name": "Create a courier",
+            "description": {
+              "content": "Register a new courier for the organization's internal fleet with contact and vehicle details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "courier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phonenumber\": \"<string>\",\n  \"externalidentifier\": \"<string>\",\n  \"vehicleinfo\": {\n    \"type\": \"<string>\",\n    \"make\": \"<string>\",\n    \"model\": \"<string>\",\n    \"licenseplate\": \"<string>\",\n    \"color\": \"<string>\",\n    \"year\": \"<string>\"\n  },\n  \"dateofbirth\": \"<date>\",\n  \"workrelationship\": \"<string>\",\n  \"driverslicense\": \"<string>\",\n  \"vehicleids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fa2dba43-5890-4744-a7be-bbaec2d0e962",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "courier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"phonenumber\": \"+1234567890\",\n  \"externalidentifier\": \"<string>\",\n  \"vehicleinfo\": {\n    \"type\": \"bike\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"licenseplate\": \"string\",\n    \"color\": \"string\",\n    \"year\": \"string\"\n  },\n  \"dateofbirth\": \"<date>\",\n  \"workrelationship\": \"EMPLOYEE\",\n  \"driverslicense\": \"<string>\",\n  \"vehicleids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"externalidentifier\": \"string\",\n  \"firstname\": \"string\",\n  \"lastname\": \"string\",\n  \"phonenumber\": \"string\",\n  \"createdat\": \"string\",\n  \"firstversioncontractids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"vehicleinfo\": {\n    \"type\": \"pickup_truck\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"licenseplate\": \"string\",\n    \"color\": \"string\",\n    \"year\": \"string\"\n  },\n  \"courierlocation\": {\n    \"lat\": 9369.570034876731,\n    \"lng\": 3476.304189825482\n  },\n  \"vehicleids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dateofbirth\": \"1949-10-03\",\n  \"workrelationship\": \"CONTRACTOR\",\n  \"driverslicense\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba0dabfe-1529-4b26-9182-46f910a46a4d",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "courier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"phonenumber\": \"+1234567890\",\n  \"externalidentifier\": \"<string>\",\n  \"vehicleinfo\": {\n    \"type\": \"bike\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"licenseplate\": \"string\",\n    \"color\": \"string\",\n    \"year\": \"string\"\n  },\n  \"dateofbirth\": \"<date>\",\n  \"workrelationship\": \"EMPLOYEE\",\n  \"driverslicense\": \"<string>\",\n  \"vehicleids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true,\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 5175.474097118208,\n        \"key_1\": 9014.099307140345\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bcbef140-c77a-4632-b7f3-d76f7f471de7",
+          "name": "Get all couriers",
+          "request": {
+            "name": "Get all couriers",
+            "description": {
+              "content": "List all couriers registered for the organization's internal fleet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "couriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5db3963f-23c9-4d77-80de-04f1080a7865",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "couriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"externalidentifier\": \"string\",\n  \"firstname\": \"string\",\n  \"lastname\": \"string\",\n  \"phonenumber\": \"string\",\n  \"createdat\": \"string\",\n  \"firstversioncontractids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"vehicleinfo\": {\n    \"type\": \"pickup_truck\",\n    \"make\": \"string\",\n    \"model\": \"string\",\n    \"licenseplate\": \"string\",\n    \"color\": \"string\",\n    \"year\": \"string\"\n  },\n  \"courierlocation\": {\n    \"lat\": 9369.570034876731,\n    \"lng\": 3476.304189825482\n  },\n  \"vehicleids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dateofbirth\": \"1949-10-03\",\n  \"workrelationship\": \"CONTRACTOR\",\n  \"driverslicense\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2315d995-a434-49d2-8409-25ebe2d5ba02",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "couriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": true,\n        \"key_2\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 5175.474097118208,\n        \"key_1\": 9014.099307140345\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a3fc4455-a664-4146-85a1-9cef03a72af7",
+    "name": "Nash AI Functions Couriers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Shipping API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Dispatch and Manifest Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/dispatch-and-manifest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create, autodispatch, and manifest shipping orders in a single request. Each order is created, autodispatched using the org's dispatch strategy, then manifested with the provider it landed on. Per-order failures are returned in `errors` instead of aborting the batch. `shippingDetails` on an order, if provided, is folded into `orderMetadata.shipping_details` before create so providers can consume it during manifest."
+        },
+        {
+          "info": {
+            "name": "Manifest Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/manifest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create manifests for dispatched shipping orders. Groups orders by store location and provider, then generates manifest documents (e.g. AusPost order summaries)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

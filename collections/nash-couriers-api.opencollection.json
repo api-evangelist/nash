@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Couriers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Couriers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a courier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/courier",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a new courier for the organization's internal fleet with contact and vehicle details."
+        },
+        {
+          "info": {
+            "name": "Get all couriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/couriers"
+          },
+          "docs": "List all couriers registered for the organization's internal fleet."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

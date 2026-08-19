@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Webhooks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Webhook Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/webhooks/event-types"
+          },
+          "docs": "Return the canonical Svix event type names available for this organization (e.g. `delivery.dropoff_complete`, `delivery.status_updated`). Use this to map a user's natural-language description ('the dropoff complete webhook') to the canonical name accepted by `POST /v1/webhooks/messages/replay`. When the org's endpoints subscribe to all events, the full Svix catalog is returned instead."
+        },
+        {
+          "info": {
+            "name": "List Webhook Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/webhooks/messages",
+            "params": [
+              {
+                "name": "tag",
+                "value": "jb_abc123",
+                "type": "query",
+                "description": "Filter messages by tag. Nash stamps entity IDs as tags on every outbound webhook, so pass the prefixed Nash ID directly — e.g. `jb_abc123` to find every webhook about a job, `dlv_xyz789` for a delivery."
+              },
+              {
+                "name": "eventTypes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated Svix event types (e.g. delivery.status_updated)"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Svix channel"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Return messages sent before this timestamp"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Return messages sent after this timestamp"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query"
+              },
+              {
+                "name": "iterator",
+                "value": "",
+                "type": "query",
+                "description": "Svix pagination cursor — pass the `iterator` from a previous response to fetch the next page"
+              },
+              {
+                "name": "withContent",
+                "value": "",
+                "type": "query",
+                "description": "Include the message payload in the response. Defaults to true for debugging."
+              }
+            ]
+          },
+          "docs": "Inspect webhooks sent to this organization's configured endpoints via Svix. Primarily intended for debugging 'did the customer receive our webhook?' questions. Every outbound webhook is tagged with the relevant entity IDs (e.g. `jb_abc123`, `dlv_xyz789`), so pass the Nash ID as `tag` to find all webhooks about that entity. Returns an empty result if the organization has no Svix app configured."
+        },
+        {
+          "info": {
+            "name": "Replay Webhook Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/webhooks/messages/replay",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resend a Svix webhook. Two lookup modes:\n\n- `msgId`: replay a known message by its Svix ID.\n- `tag` + `eventType`: replay the most recent message matching both filters — intended for agent flows like 'resend the dropoff_complete webhook for dlv_123'. Both fields are required together so we never replay an unrelated event for the same entity (a job has many event types tagged with the same job ID).\n\n`eventType` must be the canonical Svix name (e.g. `delivery.dropoff_complete`), not a human descri"
+        },
+        {
+          "info": {
+            "name": "List Webhook Delivery Attempts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/webhooks/messages/:msg_id/attempts",
+            "params": [
+              {
+                "name": "msgId",
+                "value": "",
+                "type": "path",
+                "description": "Svix message ID"
+              }
+            ]
+          },
+          "docs": "Return the per-endpoint delivery attempt history for a single webhook message — status code, response body, timestamp, and retry attempts. Use this after locating the message via GET /v1/webhooks/messages to answer 'why didn't our webhook reach the customer?' questions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

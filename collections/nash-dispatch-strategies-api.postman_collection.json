@@ -1,0 +1,716 @@
+{
+  "item": [
+    {
+      "id": "279e8092-7bee-4ab5-99ff-9e83cc5d5346",
+      "name": "Dispatch Strategies",
+      "description": {
+        "content": "Dispatch Strategies",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6b2901a-b8b6-42e2-b17f-4016359e4b8b",
+          "name": "Evaluate dynamic dispatch",
+          "request": {
+            "name": "Evaluate dynamic dispatch",
+            "description": {
+              "content": "Evaluate dispatch rules and rank providers without creating a job or order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dispatch",
+                "evaluate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quotes\": [\n    {\n      \"providerId\": \"<string>\",\n      \"totalPriceCents\": \"<integer>\"\n    },\n    {\n      \"providerId\": \"<string>\",\n      \"totalPriceCents\": \"<integer>\"\n    }\n  ],\n  \"pickupAddress\": \"<string>\",\n  \"pickupLat\": \"<number>\",\n  \"pickupLng\": \"<number>\",\n  \"pickupAddressCity\": \"<string>\",\n  \"pickupAddressState\": \"<string>\",\n  \"pickupAddressZip\": \"<string>\",\n  \"pickupAddressCountry\": \"<string>\",\n  \"pickupBusinessName\": \"<string>\",\n  \"dropoffAddress\": \"<string>\",\n  \"dropoffLat\": \"<number>\",\n  \"dropoffLng\": \"<number>\",\n  \"dropoffAddressCity\": \"<string>\",\n  \"dropoffAddressState\": \"<string>\",\n  \"dropoffAddressZip\": \"<string>\",\n  \"dropoffAddressCountry\": \"<string>\",\n  \"dropoffBusinessName\": \"<string>\",\n  \"context\": {\n    \"packageValueCents\": \"<integer>\",\n    \"itemsCount\": \"<integer>\",\n    \"pickupTime\": \"<string>\",\n    \"dropoffTime\": \"<string>\",\n    \"drivingDistance\": \"<number>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"metadata\": {\n      \"key_0\": true,\n      \"key_1\": false\n    },\n    \"pickupStoreLocationId\": \"<string>\",\n    \"dropoffStoreLocationId\": \"<string>\",\n    \"packageHeight\": \"<number>\",\n    \"packageWidth\": \"<number>\",\n    \"packageDepth\": \"<number>\",\n    \"packageWeight\": \"<number>\",\n    \"totalWeight\": \"<number>\",\n    \"packageRequirements\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"packageDeliveryMode\": \"<string>\",\n    \"packageTipCents\": \"<integer>\",\n    \"numberOfPackages\": 1,\n    \"isBatch\": false\n  },\n  \"optionsGroupId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "776dfd68-979b-44ba-9395-1efec295f48d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dispatch",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quotes\": [\n    {\n      \"providerId\": \"string\",\n      \"totalPriceCents\": 5336\n    },\n    {\n      \"providerId\": \"string\",\n      \"totalPriceCents\": 8953\n    }\n  ],\n  \"pickupAddress\": \"<string>\",\n  \"pickupLat\": \"<number>\",\n  \"pickupLng\": \"<number>\",\n  \"pickupAddressCity\": \"<string>\",\n  \"pickupAddressState\": \"<string>\",\n  \"pickupAddressZip\": \"<string>\",\n  \"pickupAddressCountry\": \"<string>\",\n  \"pickupBusinessName\": \"<string>\",\n  \"dropoffAddress\": \"<string>\",\n  \"dropoffLat\": \"<number>\",\n  \"dropoffLng\": \"<number>\",\n  \"dropoffAddressCity\": \"<string>\",\n  \"dropoffAddressState\": \"<string>\",\n  \"dropoffAddressZip\": \"<string>\",\n  \"dropoffAddressCountry\": \"<string>\",\n  \"dropoffBusinessName\": \"<string>\",\n  \"context\": {\n    \"packageValueCents\": 5041,\n    \"itemsCount\": 7417,\n    \"pickupTime\": \"string\",\n    \"dropoffTime\": \"string\",\n    \"drivingDistance\": 7092.7534877931175,\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"pickupStoreLocationId\": \"string\",\n    \"dropoffStoreLocationId\": \"string\",\n    \"packageHeight\": 2867.3321991359057,\n    \"packageWidth\": 4709.767766655097,\n    \"packageDepth\": 4067.0839850175635,\n    \"packageWeight\": 7525.645295616762,\n    \"totalWeight\": 3583.1496990999367,\n    \"packageRequirements\": [\n      \"string\",\n      \"string\"\n    ],\n    \"packageDeliveryMode\": \"string\",\n    \"packageTipCents\": 5620,\n    \"numberOfPackages\": 1,\n    \"isBatch\": false\n  },\n  \"optionsGroupId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rankedProviders\": [\n    {\n      \"providerId\": \"string\",\n      \"parentProviderId\": \"string\",\n      \"providerName\": \"string\",\n      \"probability\": 4987.114003277358,\n      \"rank\": 1870\n    },\n    {\n      \"providerId\": \"string\",\n      \"parentProviderId\": \"string\",\n      \"providerName\": \"string\",\n      \"probability\": 4489.108939945513,\n      \"rank\": 5893\n    }\n  ],\n  \"dispatchRule\": {\n    \"matchedRuleId\": \"string\",\n    \"matchedRuleLabel\": \"string\",\n    \"matchedRuleCondition\": \"string\",\n    \"optionsGroupId\": \"string\",\n    \"optionsGroupLabel\": \"string\"\n  },\n  \"strategy\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0df56c59-f561-437e-99d2-cdc26d4b5a8e",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dispatch",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quotes\": [\n    {\n      \"providerId\": \"string\",\n      \"totalPriceCents\": 5336\n    },\n    {\n      \"providerId\": \"string\",\n      \"totalPriceCents\": 8953\n    }\n  ],\n  \"pickupAddress\": \"<string>\",\n  \"pickupLat\": \"<number>\",\n  \"pickupLng\": \"<number>\",\n  \"pickupAddressCity\": \"<string>\",\n  \"pickupAddressState\": \"<string>\",\n  \"pickupAddressZip\": \"<string>\",\n  \"pickupAddressCountry\": \"<string>\",\n  \"pickupBusinessName\": \"<string>\",\n  \"dropoffAddress\": \"<string>\",\n  \"dropoffLat\": \"<number>\",\n  \"dropoffLng\": \"<number>\",\n  \"dropoffAddressCity\": \"<string>\",\n  \"dropoffAddressState\": \"<string>\",\n  \"dropoffAddressZip\": \"<string>\",\n  \"dropoffAddressCountry\": \"<string>\",\n  \"dropoffBusinessName\": \"<string>\",\n  \"context\": {\n    \"packageValueCents\": 5041,\n    \"itemsCount\": 7417,\n    \"pickupTime\": \"string\",\n    \"dropoffTime\": \"string\",\n    \"drivingDistance\": 7092.7534877931175,\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"pickupStoreLocationId\": \"string\",\n    \"dropoffStoreLocationId\": \"string\",\n    \"packageHeight\": 2867.3321991359057,\n    \"packageWidth\": 4709.767766655097,\n    \"packageDepth\": 4067.0839850175635,\n    \"packageWeight\": 7525.645295616762,\n    \"totalWeight\": 3583.1496990999367,\n    \"packageRequirements\": [\n      \"string\",\n      \"string\"\n    ],\n    \"packageDeliveryMode\": \"string\",\n    \"packageTipCents\": 5620,\n    \"numberOfPackages\": 1,\n    \"isBatch\": false\n  },\n  \"optionsGroupId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 2806.805282285533\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbdb50b8-17ce-4b91-85ca-579e6e0c10eb",
+          "name": "Get dispatch strategies",
+          "request": {
+            "name": "Get dispatch strategies",
+            "description": {
+              "content": "List all dispatch strategies (options groups) configured for the organization. Dispatch strategies define provider selection rules, fallback logic, and quoting behavior.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "options_group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ea9415f-105d-42f1-b8cd-df9342c22590",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "options_group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"opn_WyMhHj\",\n    \"label\": \"New York City Strategy\",\n    \"allowedProviders\": [\n      \"string\",\n      \"string\"\n    ],\n    \"enableAutoDispatch\": false,\n    \"providerSelectionStrategy\": \"string\",\n    \"reassignOnFailure\": false,\n    \"enableMaxDeliveryFee\": true,\n    \"maxDeliveryFeeCents\": 5154,\n    \"costSplitMaxFixedPriceCents\": 4819,\n    \"costSplitMaxPercentage\": 2757.126408274925,\n    \"costSplitStrategy\": \"string\",\n    \"smartReassignment\": false\n  },\n  {\n    \"id\": \"opn_WyMhHj\",\n    \"label\": \"New York City Strategy\",\n    \"allowedProviders\": [\n      \"string\",\n      \"string\"\n    ],\n    \"enableAutoDispatch\": true,\n    \"providerSelectionStrategy\": \"string\",\n    \"reassignOnFailure\": true,\n    \"enableMaxDeliveryFee\": true,\n    \"maxDeliveryFeeCents\": 8856,\n    \"costSplitMaxFixedPriceCents\": 4356,\n    \"costSplitMaxPercentage\": 5630.557908551303,\n    \"costSplitStrategy\": \"string\",\n    \"smartReassignment\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a7c7236-128b-4c25-bd7f-dc87303bae23",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "options_group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 2806.805282285533\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a17a1bbf-3b57-4f91-a290-8b1eeb79704f",
+          "name": "Create dispatch strategy",
+          "request": {
+            "name": "Create dispatch strategy",
+            "description": {
+              "content": "Create a new dispatch strategy (options group) with provider selection rules, fallback logic, and quoting configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "options_group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"id\": \"<string>\",\n  \"allowedProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"providerSelectionStrategy\": \"<string>\",\n  \"reassignOnFailure\": \"<boolean>\",\n  \"enableMaxDeliveryFee\": \"<boolean>\",\n  \"maxDeliveryFeeCents\": \"<integer>\",\n  \"costSplitStrategy\": \"<string>\",\n  \"costSplitMaxPercentage\": \"<integer>\",\n  \"costSplitMaxFixedPriceCents\": \"<integer>\",\n  \"smartReassignment\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0f8e5c62-dfef-4e92-b1b2-a482088f9c0c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "options_group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"id\": \"<string>\",\n  \"allowedProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"providerSelectionStrategy\": \"<string>\",\n  \"reassignOnFailure\": \"<boolean>\",\n  \"enableMaxDeliveryFee\": \"<boolean>\",\n  \"maxDeliveryFeeCents\": \"<integer>\",\n  \"costSplitStrategy\": \"<string>\",\n  \"costSplitMaxPercentage\": \"<integer>\",\n  \"costSplitMaxFixedPriceCents\": \"<integer>\",\n  \"smartReassignment\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"id\": \"string\",\n  \"allowedProviders\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enableAutoDispatch\": false,\n  \"providerSelectionStrategy\": \"string\",\n  \"reassignOnFailure\": false,\n  \"enableMaxDeliveryFee\": false,\n  \"maxDeliveryFeeCents\": 3269,\n  \"costSplitStrategy\": \"string\",\n  \"costSplitMaxPercentage\": 3256,\n  \"costSplitMaxFixedPriceCents\": 1364,\n  \"smartReassignment\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "083cff4f-b0c4-4818-9d9e-9f5fe1132049",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "options_group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"id\": \"<string>\",\n  \"allowedProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"providerSelectionStrategy\": \"<string>\",\n  \"reassignOnFailure\": \"<boolean>\",\n  \"enableMaxDeliveryFee\": \"<boolean>\",\n  \"maxDeliveryFeeCents\": \"<integer>\",\n  \"costSplitStrategy\": \"<string>\",\n  \"costSplitMaxPercentage\": \"<integer>\",\n  \"costSplitMaxFixedPriceCents\": \"<integer>\",\n  \"smartReassignment\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 2806.805282285533\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd1f7031-36e4-43fd-82af-f19b25adefaf",
+          "name": "Delete dispatch strategy",
+          "request": {
+            "name": "Delete dispatch strategy",
+            "description": {
+              "content": "Delete a dispatch strategy (options group) by ID. Orders using this strategy will need to be reassigned to another strategy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "options_group",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ade4735-6daf-49b4-9b99-b5df6a1c0b47",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "options_group",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"id\": \"string\",\n  \"allowedProviders\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enableAutoDispatch\": false,\n  \"providerSelectionStrategy\": \"string\",\n  \"reassignOnFailure\": false,\n  \"enableMaxDeliveryFee\": false,\n  \"maxDeliveryFeeCents\": 3269,\n  \"costSplitStrategy\": \"string\",\n  \"costSplitMaxPercentage\": 3256,\n  \"costSplitMaxFixedPriceCents\": 1364,\n  \"smartReassignment\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4509197f-f4ab-45b7-87a1-d97f35e1cfdd",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "options_group",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 2806.805282285533\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d79e6e7f-1a6e-4260-968c-ae2af4afa9f4",
+          "name": "Update dispatch strategy",
+          "request": {
+            "name": "Update dispatch strategy",
+            "description": {
+              "content": "Update an existing dispatch strategy's provider selection rules, fallback logic, or quoting configuration. Only provided fields are updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "options_group",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"id\": \"<string>\",\n  \"allowedProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"providerSelectionStrategy\": \"<string>\",\n  \"reassignOnFailure\": \"<boolean>\",\n  \"enableMaxDeliveryFee\": \"<boolean>\",\n  \"maxDeliveryFeeCents\": \"<integer>\",\n  \"costSplitStrategy\": \"<string>\",\n  \"costSplitMaxPercentage\": \"<integer>\",\n  \"costSplitMaxFixedPriceCents\": \"<integer>\",\n  \"smartReassignment\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4b423e0-9076-47ce-90b2-41fb911e5294",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "options_group",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"id\": \"<string>\",\n  \"allowedProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"providerSelectionStrategy\": \"<string>\",\n  \"reassignOnFailure\": \"<boolean>\",\n  \"enableMaxDeliveryFee\": \"<boolean>\",\n  \"maxDeliveryFeeCents\": \"<integer>\",\n  \"costSplitStrategy\": \"<string>\",\n  \"costSplitMaxPercentage\": \"<integer>\",\n  \"costSplitMaxFixedPriceCents\": \"<integer>\",\n  \"smartReassignment\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"id\": \"string\",\n  \"allowedProviders\": [\n    \"string\",\n    \"string\"\n  ],\n  \"enableAutoDispatch\": false,\n  \"providerSelectionStrategy\": \"string\",\n  \"reassignOnFailure\": false,\n  \"enableMaxDeliveryFee\": false,\n  \"maxDeliveryFeeCents\": 3269,\n  \"costSplitStrategy\": \"string\",\n  \"costSplitMaxPercentage\": 3256,\n  \"costSplitMaxFixedPriceCents\": 1364,\n  \"smartReassignment\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c219228e-f5bf-448a-ac32-0ae2e089f7ea",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "options_group",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"id\": \"<string>\",\n  \"allowedProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enableAutoDispatch\": \"<boolean>\",\n  \"providerSelectionStrategy\": \"<string>\",\n  \"reassignOnFailure\": \"<boolean>\",\n  \"enableMaxDeliveryFee\": \"<boolean>\",\n  \"maxDeliveryFeeCents\": \"<integer>\",\n  \"costSplitStrategy\": \"<string>\",\n  \"costSplitMaxPercentage\": \"<integer>\",\n  \"costSplitMaxFixedPriceCents\": \"<integer>\",\n  \"smartReassignment\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false,\n        \"key_1\": 2806.805282285533\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c88c4610-7e0a-42fe-a527-b172a295535b",
+    "name": "Nash AI Functions Dispatch Strategies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

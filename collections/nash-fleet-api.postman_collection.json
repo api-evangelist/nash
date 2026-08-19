@@ -1,0 +1,339 @@
+{
+  "item": [
+    {
+      "id": "935f05c8-d197-499a-9339-5c57c78eb93b",
+      "name": "Fleet",
+      "description": {
+        "content": "Inbound endpoints fleets call to update in-flight deliveries.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab06b025-adde-4fbf-adb0-5a9689c5adda",
+          "name": "Bulk Update Deliveries",
+          "request": {
+            "name": "Bulk Update Deliveries",
+            "description": {
+              "content": "Apply updates to up to 100 deliveries in a single request. Each item is keyed by exactly one of `deliveryId` or `packageExternalIdentifier` (your own id set on the package at creation), plus the same field set as the single-delivery endpoint. The per-item result echoes back the key you sent under `deliveryId`. Per-item failures come back as a structured error in the response and do not affect the rest of the batch.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "fleet",
+                "deliveries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deliveries\": [\n    {\n      \"status\": \"<string>\",\n      \"coordinates\": {\n        \"latitude\": \"<number>\",\n        \"longitude\": \"<number>\"\n      },\n      \"proofOfDelivery\": [\n        {\n          \"podType\": \"<string>\",\n          \"imageUrl\": \"<string>\"\n        },\n        {\n          \"podType\": \"<string>\",\n          \"imageUrl\": \"<string>\"\n        }\n      ],\n      \"courier\": {\n        \"name\": \"<string>\",\n        \"phoneNumber\": \"<string>\",\n        \"pickupPhoneNumber\": \"<string>\",\n        \"dropoffPhoneNumber\": \"<string>\",\n        \"profileImageUrl\": \"<string>\",\n        \"vehicle\": {\n          \"make\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"color\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"licensePlate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"externalId\": \"<string>\"\n      },\n      \"failure\": {\n        \"code\": \"<string>\",\n        \"reason\": \"<string>\"\n      },\n      \"pickupNote\": \"<string>\",\n      \"dropoffNote\": \"<string>\",\n      \"parkingLocation\": \"<string>\",\n      \"returnParkingLocation\": \"<string>\",\n      \"pickupEta\": \"<dateTime>\",\n      \"dropoffEta\": \"<dateTime>\",\n      \"externalDeliveryId\": \"<string>\",\n      \"deliveryId\": \"<string>\",\n      \"packageExternalIdentifier\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e2bc02e-9be5-4c28-9bd4-ec50dcb764d4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fleet",
+                    "deliveries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveries\": [\n    {\n      \"status\": \"not_assigned_driver\",\n      \"coordinates\": {\n        \"latitude\": -25.995776040956926,\n        \"longitude\": 50.54622087074716\n      },\n      \"proofOfDelivery\": [\n        {\n          \"podType\": \"signature_proof_of_pickup\",\n          \"imageUrl\": \"string\"\n        },\n        {\n          \"podType\": \"signature_proof_of_delivery\",\n          \"imageUrl\": \"string\"\n        }\n      ],\n      \"courier\": {\n        \"name\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"pickupPhoneNumber\": \"string\",\n        \"dropoffPhoneNumber\": \"string\",\n        \"profileImageUrl\": \"string\",\n        \"vehicle\": {\n          \"make\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"color\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"licensePlate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"externalId\": \"string\"\n      },\n      \"failure\": {\n        \"code\": \"customer_unavailable\",\n        \"reason\": \"string\"\n      },\n      \"pickupNote\": \"string\",\n      \"dropoffNote\": \"string\",\n      \"parkingLocation\": \"string\",\n      \"returnParkingLocation\": \"string\",\n      \"pickupEta\": \"1992-02-13T07:10:47.570Z\",\n      \"dropoffEta\": \"1969-08-31T08:17:42.276Z\",\n      \"externalDeliveryId\": \"string\",\n      \"deliveryId\": \"string\",\n      \"packageExternalIdentifier\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"deliveryId\": \"string\",\n      \"success\": false,\n      \"errorCode\": \"string\",\n      \"errorMessage\": \"string\",\n      \"delivery\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"deliveryId\": \"string\",\n      \"success\": false,\n      \"errorCode\": \"string\",\n      \"errorMessage\": \"string\",\n      \"delivery\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f67201cf-52d1-454e-a72f-b16cba13ac22",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fleet",
+                    "deliveries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveries\": [\n    {\n      \"status\": \"not_assigned_driver\",\n      \"coordinates\": {\n        \"latitude\": -25.995776040956926,\n        \"longitude\": 50.54622087074716\n      },\n      \"proofOfDelivery\": [\n        {\n          \"podType\": \"signature_proof_of_pickup\",\n          \"imageUrl\": \"string\"\n        },\n        {\n          \"podType\": \"signature_proof_of_delivery\",\n          \"imageUrl\": \"string\"\n        }\n      ],\n      \"courier\": {\n        \"name\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"pickupPhoneNumber\": \"string\",\n        \"dropoffPhoneNumber\": \"string\",\n        \"profileImageUrl\": \"string\",\n        \"vehicle\": {\n          \"make\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"model\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"color\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"licensePlate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"externalId\": \"string\"\n      },\n      \"failure\": {\n        \"code\": \"customer_unavailable\",\n        \"reason\": \"string\"\n      },\n      \"pickupNote\": \"string\",\n      \"dropoffNote\": \"string\",\n      \"parkingLocation\": \"string\",\n      \"returnParkingLocation\": \"string\",\n      \"pickupEta\": \"1992-02-13T07:10:47.570Z\",\n      \"dropoffEta\": \"1969-08-31T08:17:42.276Z\",\n      \"externalDeliveryId\": \"string\",\n      \"deliveryId\": \"string\",\n      \"packageExternalIdentifier\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 5056,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 962,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c36e0364-b291-420d-b780-12dcf87ab2c5",
+          "name": "Update Delivery",
+          "request": {
+            "name": "Update Delivery",
+            "description": {
+              "content": "Apply a partial update — such as status, courier location, proof of delivery, courier identity, or ETAs — to a delivery your organization owns. Only available for deliveries fulfilled by your own fleet (not by a third-party courier integration). Returns the updated delivery.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "fleet",
+                "deliveries",
+                ":delivery_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "delivery_id",
+                  "description": "(Required) The Nash delivery id to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"coordinates\": {\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\"\n  },\n  \"proofOfDelivery\": [\n    {\n      \"podType\": \"<string>\",\n      \"imageUrl\": \"<string>\"\n    },\n    {\n      \"podType\": \"<string>\",\n      \"imageUrl\": \"<string>\"\n    }\n  ],\n  \"courier\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"pickupPhoneNumber\": \"<string>\",\n    \"dropoffPhoneNumber\": \"<string>\",\n    \"profileImageUrl\": \"<string>\",\n    \"vehicle\": {\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"color\": \"<string>\",\n      \"licensePlate\": \"<string>\"\n    },\n    \"externalId\": \"<string>\"\n  },\n  \"failure\": {\n    \"code\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"pickupNote\": \"<string>\",\n  \"dropoffNote\": \"<string>\",\n  \"parkingLocation\": \"<string>\",\n  \"returnParkingLocation\": \"<string>\",\n  \"pickupEta\": \"<dateTime>\",\n  \"dropoffEta\": \"<dateTime>\",\n  \"externalDeliveryId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7f84d068-6413-4b2f-be26-9b3a25eb6e21",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fleet",
+                    "deliveries",
+                    ":delivery_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "delivery_id",
+                      "description": "(Required) The Nash delivery id to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"pickup_enroute\",\n  \"coordinates\": {\n    \"latitude\": 42.04972303202865,\n    \"longitude\": -45.490860914497375\n  },\n  \"proofOfDelivery\": [\n    {\n      \"podType\": \"signature_proof_of_delivery\",\n      \"imageUrl\": \"string\"\n    },\n    {\n      \"podType\": \"signature_proof_of_delivery\",\n      \"imageUrl\": \"string\"\n    }\n  ],\n  \"courier\": {\n    \"name\": \"string\",\n    \"phoneNumber\": \"string\",\n    \"pickupPhoneNumber\": \"string\",\n    \"dropoffPhoneNumber\": \"string\",\n    \"profileImageUrl\": \"string\",\n    \"vehicle\": {\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"color\": \"string\",\n      \"licensePlate\": \"string\"\n    },\n    \"externalId\": \"string\"\n  },\n  \"failure\": {\n    \"code\": \"out_of_service_area\",\n    \"reason\": \"string\"\n  },\n  \"pickupNote\": \"<string>\",\n  \"dropoffNote\": \"<string>\",\n  \"parkingLocation\": \"<string>\",\n  \"returnParkingLocation\": \"<string>\",\n  \"pickupEta\": \"<dateTime>\",\n  \"dropoffEta\": \"<dateTime>\",\n  \"externalDeliveryId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dlv_01234567890\",\n  \"status\": \"dropoff_complete\",\n  \"isActive\": true,\n  \"priceCents\": 1225,\n  \"currency\": \"string\",\n  \"type\": \"string\",\n  \"statusHistory\": [\n    {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 893.4652660990716\n    }\n  ],\n  \"pickupEta\": \"string\",\n  \"dropoffEta\": \"string\",\n  \"dropoffDeadline\": \"string\",\n  \"documents\": [\n    {\n      \"createdAt\": \"string\",\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"contentType\": \"string\",\n      \"url\": \"string\",\n      \"data\": \"string\",\n      \"documentMetadata\": {\n        \"key_0\": true,\n        \"key_1\": 7871\n      }\n    },\n    {\n      \"createdAt\": \"string\",\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"contentType\": \"string\",\n      \"url\": \"string\",\n      \"data\": \"string\",\n      \"documentMetadata\": {\n        \"key_0\": 5613.69464650927,\n        \"key_1\": 9118.697682212134,\n        \"key_2\": 7465.129520451536,\n        \"key_3\": false\n      }\n    }\n  ],\n  \"nashFeeCents\": 2135,\n  \"courierName\": \"string\",\n  \"courierPhoneNumber\": \"string\",\n  \"courierPickupPhoneNumber\": \"string\",\n  \"courierDropoffPhoneNumber\": \"string\",\n  \"courierLocation\": {\n    \"key_0\": false\n  },\n  \"courierVehicle\": {\n    \"key_0\": \"string\"\n  },\n  \"courierProfileImage\": \"string\",\n  \"proofOfDelivery\": [\n    {\n      \"key_0\": 3734.7428498112645,\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": 1877,\n      \"key_1\": 3497.173417786005\n    }\n  ],\n  \"providerDeliveryId\": \"string\",\n  \"providerBatchId\": \"string\",\n  \"price\": 9095.494865017625,\n  \"taxAmountCents\": 3223,\n  \"tollFeeCents\": 7932,\n  \"waitFeeCents\": 7179,\n  \"waitTimeMinutes\": 7018,\n  \"cancellationFeeCents\": 6167,\n  \"returnFeeCents\": 6010,\n  \"otherProviderFees\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"insuranceFeeCents\": 3446,\n  \"totalPriceBreakdown\": {\n    \"key_0\": 8178,\n    \"key_1\": 7424,\n    \"key_2\": 2039,\n    \"key_3\": false\n  },\n  \"totalPriceCents\": 3319,\n  \"pickedItems\": [\n    {\n      \"sku\": \"string\",\n      \"requestedSku\": \"string\",\n      \"id\": \"string\",\n      \"requestedId\": \"string\",\n      \"quantity\": 6099,\n      \"requestedQuantity\": 5924,\n      \"scannedBarcode\": \"string\",\n      \"weight\": 6577.605854952158,\n      \"priceCents\": 4692,\n      \"status\": \"string\",\n      \"name\": \"string\",\n      \"scans\": [\n        {\n          \"substitutionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcodes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"substitutionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcodes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"sku\": \"string\",\n      \"requestedSku\": \"string\",\n      \"id\": \"string\",\n      \"requestedId\": \"string\",\n      \"quantity\": 2600,\n      \"requestedQuantity\": 4289,\n      \"scannedBarcode\": \"string\",\n      \"weight\": 8229.829394694301,\n      \"priceCents\": 1547,\n      \"status\": \"string\",\n      \"name\": \"string\",\n      \"scans\": [\n        {\n          \"substitutionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcodes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"substitutionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"barcodes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "573fbb97-16d9-4898-b359-449785db85cc",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "fleet",
+                    "deliveries",
+                    ":delivery_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "delivery_id",
+                      "description": "(Required) The Nash delivery id to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"pickup_enroute\",\n  \"coordinates\": {\n    \"latitude\": 42.04972303202865,\n    \"longitude\": -45.490860914497375\n  },\n  \"proofOfDelivery\": [\n    {\n      \"podType\": \"signature_proof_of_delivery\",\n      \"imageUrl\": \"string\"\n    },\n    {\n      \"podType\": \"signature_proof_of_delivery\",\n      \"imageUrl\": \"string\"\n    }\n  ],\n  \"courier\": {\n    \"name\": \"string\",\n    \"phoneNumber\": \"string\",\n    \"pickupPhoneNumber\": \"string\",\n    \"dropoffPhoneNumber\": \"string\",\n    \"profileImageUrl\": \"string\",\n    \"vehicle\": {\n      \"make\": \"string\",\n      \"model\": \"string\",\n      \"color\": \"string\",\n      \"licensePlate\": \"string\"\n    },\n    \"externalId\": \"string\"\n  },\n  \"failure\": {\n    \"code\": \"out_of_service_area\",\n    \"reason\": \"string\"\n  },\n  \"pickupNote\": \"<string>\",\n  \"dropoffNote\": \"<string>\",\n  \"parkingLocation\": \"<string>\",\n  \"returnParkingLocation\": \"<string>\",\n  \"pickupEta\": \"<dateTime>\",\n  \"dropoffEta\": \"<dateTime>\",\n  \"externalDeliveryId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 5056,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 962,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cd142a34-0e3f-4b35-a62b-f701bdd653aa",
+    "name": "Nash AI Functions Fleet API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

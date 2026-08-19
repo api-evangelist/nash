@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Feedback API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add Delivery Feedback by External Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/feedback/external_identifier/:external_identifier",
+            "params": [
+              {
+                "name": "externalIdentifier",
+                "value": "ext_123",
+                "type": "path",
+                "description": "External identifier for the job"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit feedback for a completed delivery using your external identifier instead of the Nash delivery ID."
+        },
+        {
+          "info": {
+            "name": "Add Delivery Feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/feedback/:delivery_id",
+            "params": [
+              {
+                "name": "deliveryId",
+                "value": "dlv_123",
+                "type": "path",
+                "description": "Delivery ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit feedback for a completed delivery, such as a rating or comments about the delivery experience."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

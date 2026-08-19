@@ -1,0 +1,611 @@
+{
+  "item": [
+    {
+      "id": "6b46d7f0-ddda-4cc5-96b8-cd46152088ed",
+      "name": "Shifts",
+      "description": {
+        "content": "Shifts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e292851-c745-4e0e-8528-e188d27be29d",
+          "name": "Create a shift",
+          "request": {
+            "name": "Create a shift",
+            "description": {
+              "content": "Create a courier shift with start/end times and an assigned store location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "shift"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"plannedStart\": \"<string>\",\n  \"plannedEnd\": \"<string>\",\n  \"id\": \"<string>\",\n  \"plannedBreakDuration\": \"<integer>\",\n  \"shiftMetadata\": {\n    \"key_0\": 9056,\n    \"key_1\": \"string\"\n  },\n  \"optimizationParams\": {\n    \"serviceTimeRelativeEfficiency\": \"<number>\",\n    \"plannedBreaks\": [\n      {\n        \"breakDuration\": \"<integer>\",\n        \"timeWindow\": \"<array>\",\n        \"maxWorkingTime\": \"<integer>\"\n      },\n      {\n        \"breakDuration\": \"<integer>\",\n        \"timeWindow\": \"<array>\",\n        \"maxWorkingTime\": \"<integer>\"\n      }\n    ],\n    \"departureDelay\": \"<integer>\",\n    \"shiftEndServiceTimeMinutes\": \"<integer>\",\n    \"vehicleConfig\": {\n      \"weight\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"length\": \"<integer>\",\n      \"width\": \"<integer>\",\n      \"axlecount\": \"<integer>\",\n      \"trailercount\": \"<integer>\",\n      \"weightunit\": \"<string>\",\n      \"lengthunit\": \"<string>\",\n      \"maxstops\": \"<integer>\",\n      \"maxdistance\": \"<integer>\",\n      \"maxduration\": \"<integer>\",\n      \"speedfactor\": \"<number>\",\n      \"capabilities\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"fixedcost\": \"<number>\",\n      \"costperunitdistance\": \"<number>\",\n      \"costperunittime\": \"<number>\",\n      \"vehicleprofile\": \"<string>\",\n      \"minordersperroute\": \"<integer>\",\n      \"parkingtime\": \"<number>\"\n    }\n  },\n  \"status\": \"<string>\",\n  \"storeLocationId\": \"<string>\",\n  \"externalStoreLocationId\": \"<string>\",\n  \"zoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"externalZoneIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1187a296-c6a9-49e5-afbc-862f6254b68d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shift"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "null",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c293b377-a324-4e16-a706-1c6e400f42b1",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shift"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "null",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3012.709792395265,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b525c43-f311-44f5-9abb-76691a88220c",
+          "name": "Get a shift",
+          "request": {
+            "name": "Get a shift",
+            "description": {
+              "content": "Retrieve a single courier shift by ID, including its times, assigned courier, and store location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "shift",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Shift ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbd36353-7f16-4f33-9e7c-d4a0159a88da",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shift",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Shift ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3a47a2e-9f42-4977-9e09-28b9126abc73",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shift",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Shift ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3012.709792395265,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "117b457c-5d28-44de-a8bd-3afe857dd759",
+          "name": "Get all shifts",
+          "request": {
+            "name": "Get all shifts",
+            "description": {
+              "content": "List courier shifts with optional filtering by time range and store location. Filter by start_time, end_time, store_location_id, or external_store_location_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "shifts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) The start time of the shifts to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) The end time of the shifts to list."
+                },
+                {
+                  "disabled": false,
+                  "key": "storeLocationId",
+                  "value": "<string>",
+                  "description": "The store location ID to list shifts for."
+                },
+                {
+                  "disabled": false,
+                  "key": "externalStoreLocationId",
+                  "value": "<string>",
+                  "description": "The external store location ID to list shifts for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c8cba19-30aa-40a7-97f5-37206d8fa1ae",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shifts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "2025-05-01T00:00:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2025-06-01T00:00:00Z"
+                    },
+                    {
+                      "key": "storeLocationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalStoreLocationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9ede105-449a-4af4-b271-45eafbf94884",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shifts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "2025-05-01T00:00:00Z"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2025-06-01T00:00:00Z"
+                    },
+                    {
+                      "key": "storeLocationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalStoreLocationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3012.709792395265,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a84300f7-a84d-41ee-a733-545c39e10082",
+          "name": "Upsert shifts",
+          "request": {
+            "name": "Upsert shifts",
+            "description": {
+              "content": "Create or update multiple courier shifts in a single request. Existing shifts are matched by ID for updates; new shifts are created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "shifts",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shifts\": [\n    {\n      \"name\": \"<string>\",\n      \"plannedStart\": \"<string>\",\n      \"plannedEnd\": \"<string>\",\n      \"id\": \"<string>\",\n      \"plannedBreakDuration\": \"<integer>\",\n      \"shiftMetadata\": {\n        \"key_0\": 8562,\n        \"key_1\": 1425\n      },\n      \"optimizationParams\": {\n        \"serviceTimeRelativeEfficiency\": \"<number>\",\n        \"plannedBreaks\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"departureDelay\": \"<integer>\",\n        \"shiftEndServiceTimeMinutes\": \"<integer>\",\n        \"vehicleConfig\": {\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"length\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"axlecount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"trailercount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lengthunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxstops\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxduration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"speedfactor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"capabilities\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fixedcost\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunitdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunittime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vehicleprofile\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"minordersperroute\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parkingtime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"status\": \"<string>\",\n      \"storeLocationId\": \"<string>\",\n      \"externalStoreLocationId\": \"<string>\",\n      \"zoneIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"externalZoneIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"plannedStart\": \"<string>\",\n      \"plannedEnd\": \"<string>\",\n      \"id\": \"<string>\",\n      \"plannedBreakDuration\": \"<integer>\",\n      \"shiftMetadata\": {\n        \"key_0\": 2175\n      },\n      \"optimizationParams\": {\n        \"serviceTimeRelativeEfficiency\": \"<number>\",\n        \"plannedBreaks\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"departureDelay\": \"<integer>\",\n        \"shiftEndServiceTimeMinutes\": \"<integer>\",\n        \"vehicleConfig\": {\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"length\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"axlecount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"trailercount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lengthunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxstops\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxduration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"speedfactor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"capabilities\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fixedcost\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunitdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunittime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vehicleprofile\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"minordersperroute\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parkingtime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"status\": \"<string>\",\n      \"storeLocationId\": \"<string>\",\n      \"externalStoreLocationId\": \"<string>\",\n      \"zoneIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"externalZoneIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6d47564-8cfb-453a-9204-2b306c6c969e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shifts",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shifts\": [\n    {\n      \"name\": \"Shift 1\",\n      \"plannedStart\": \"2021-01-01T00:00:00Z\",\n      \"plannedEnd\": \"2021-01-01T00:00:00Z\",\n      \"id\": \"string\",\n      \"plannedBreakDuration\": 4785,\n      \"shiftMetadata\": {\n        \"key_0\": true\n      },\n      \"optimizationParams\": {\n        \"serviceTimeRelativeEfficiency\": 8026.151189826918,\n        \"plannedBreaks\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"departureDelay\": 4566,\n        \"shiftEndServiceTimeMinutes\": 8076,\n        \"vehicleConfig\": {\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"length\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"axlecount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"trailercount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lengthunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxstops\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxduration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"speedfactor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"capabilities\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fixedcost\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunitdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunittime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vehicleprofile\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"minordersperroute\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parkingtime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"status\": \"string\",\n      \"storeLocationId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"externalZoneIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"Shift 1\",\n      \"plannedStart\": \"2021-01-01T00:00:00Z\",\n      \"plannedEnd\": \"2021-01-01T00:00:00Z\",\n      \"id\": \"string\",\n      \"plannedBreakDuration\": 5034,\n      \"shiftMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"optimizationParams\": {\n        \"serviceTimeRelativeEfficiency\": 3789.882591289481,\n        \"plannedBreaks\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"departureDelay\": 5183,\n        \"shiftEndServiceTimeMinutes\": 149,\n        \"vehicleConfig\": {\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"length\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"axlecount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"trailercount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lengthunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxstops\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxduration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"speedfactor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"capabilities\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fixedcost\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunitdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunittime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vehicleprofile\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"minordersperroute\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parkingtime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"status\": \"string\",\n      \"storeLocationId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"externalZoneIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6330d3d0-fe6c-42ec-b4b0-c059dfc12812",
+              "name": "Unprocessable Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shifts",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shifts\": [\n    {\n      \"name\": \"Shift 1\",\n      \"plannedStart\": \"2021-01-01T00:00:00Z\",\n      \"plannedEnd\": \"2021-01-01T00:00:00Z\",\n      \"id\": \"string\",\n      \"plannedBreakDuration\": 4785,\n      \"shiftMetadata\": {\n        \"key_0\": true\n      },\n      \"optimizationParams\": {\n        \"serviceTimeRelativeEfficiency\": 8026.151189826918,\n        \"plannedBreaks\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"departureDelay\": 4566,\n        \"shiftEndServiceTimeMinutes\": 8076,\n        \"vehicleConfig\": {\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"length\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"axlecount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"trailercount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lengthunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxstops\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxduration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"speedfactor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"capabilities\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fixedcost\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunitdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunittime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vehicleprofile\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"minordersperroute\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parkingtime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"status\": \"string\",\n      \"storeLocationId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"externalZoneIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"Shift 1\",\n      \"plannedStart\": \"2021-01-01T00:00:00Z\",\n      \"plannedEnd\": \"2021-01-01T00:00:00Z\",\n      \"id\": \"string\",\n      \"plannedBreakDuration\": 5034,\n      \"shiftMetadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"optimizationParams\": {\n        \"serviceTimeRelativeEfficiency\": 3789.882591289481,\n        \"plannedBreaks\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"departureDelay\": 5183,\n        \"shiftEndServiceTimeMinutes\": 149,\n        \"vehicleConfig\": {\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"length\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"axlecount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"trailercount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weightunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lengthunit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxstops\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxduration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"speedfactor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"capabilities\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fixedcost\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunitdistance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"costperunittime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vehicleprofile\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"minordersperroute\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parkingtime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"status\": \"string\",\n      \"storeLocationId\": \"string\",\n      \"externalStoreLocationId\": \"string\",\n      \"zoneIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"externalZoneIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": 3012.709792395265,\n        \"key_1\": \"string\"\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  },\n  {\n    \"error\": {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"details\": {\n        \"key_0\": false\n      }\n    },\n    \"response_status\": \"string\",\n    \"RequestID\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sandbox.usenash.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2c7c6320-fea8-4112-9e1a-24e7e3f78ca3",
+    "name": "Nash AI Functions Shifts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LLM-backed domain tools",
+      "type": "text/plain"
+    }
+  }
+}

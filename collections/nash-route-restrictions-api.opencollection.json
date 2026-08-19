@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nash AI Functions Route Restrictions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Route Restrictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Strategy Route Restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sandbox.usenash.com/v1/optimization-strategies/:id/route-restrictions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The OptimizationStrategy id (``ost_…``)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk-replace the route restrictions attached to ``<id>``. Empty list detaches all restrictions."
+        },
+        {
+          "info": {
+            "name": "List Route Restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/route-restrictions"
+          },
+          "docs": "List route restrictions in the calling organization's library."
+        },
+        {
+          "info": {
+            "name": "Create Route Restriction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sandbox.usenash.com/v1/route-restrictions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new route restriction with one or more avoid polygons."
+        },
+        {
+          "info": {
+            "name": "Get Route Restriction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sandbox.usenash.com/v1/route-restrictions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash route restriction id (``rrs_…``)."
+              }
+            ]
+          },
+          "docs": "Fetch a single route restriction by id."
+        },
+        {
+          "info": {
+            "name": "Update Route Restriction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sandbox.usenash.com/v1/route-restrictions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash route restriction id (``rrs_…``)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a route restriction. Omitted fields are left unchanged."
+        },
+        {
+          "info": {
+            "name": "Delete Route Restriction",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sandbox.usenash.com/v1/route-restrictions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Nash route restriction id (``rrs_…``)."
+              }
+            ]
+          },
+          "docs": "Delete a route restriction along with its CoverageArea and Polygon rows."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
