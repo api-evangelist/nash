@@ -36,6 +36,19 @@ modified: '2026-07-20'
 tags:
 - Company
 - Delivery
+- Last Mile Delivery
+- Logistics
+- Dispatch
+- Route Optimization
+- Fleet Management
+- Couriers
+- Shipping
+- Order
+- Webhook
+- AI Agents
+tags_raw:
+- Company
+- Delivery
 - Last-Mile Delivery
 - Logistics
 - Dispatch
@@ -382,7 +395,8 @@ apis:
   description: Miscellaneous
   humanURL: https://docs.usenash.com/api-reference/api-overview
   baseURL: https://api.usenash.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - Miscellaneous
   properties:
   - type: OpenAPI
@@ -413,6 +427,8 @@ apis:
   humanURL: https://docs.usenash.com/api-reference/api-overview
   baseURL: https://api.usenash.com/v1
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -503,6 +519,8 @@ apis:
   humanURL: https://docs.usenash.com/api-reference/api-overview
   baseURL: https://api.usenash.com/v1
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -773,6 +791,8 @@ apis:
   humanURL: https://docs.usenash.com/api-reference/api-overview
   baseURL: https://api.usenash.com/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -833,6 +853,8 @@ apis:
   humanURL: https://docs.usenash.com/api-reference/api-overview
   baseURL: https://api.usenash.com/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
@@ -863,6 +885,8 @@ apis:
   humanURL: https://docs.usenash.com/api-reference/api-overview
   baseURL: https://api.usenash.com/v1
   tags:
+  - Workflows
+  tags_raw:
   - Workflow
   properties:
   - type: OpenAPI
