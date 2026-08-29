@@ -1,0 +1,116 @@
+slug: nash
+provider: Nash
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 9
+edges:
+- tag: Dispatch Strategies
+  spec_file: nash-dispatch-strategies-api-openapi.yml
+  capability_id: BC-2420.10
+  capability_id_l1: BC-2420
+  capability_name: Dispatch Management
+  confidence: 0.85
+  evidence: 'POST /v1/dispatch/evaluate Evaluate dynamic dispatch; GET /v1/options_group Get dispatch
+    strategies; schemas: DispatchRuleResult, RankedProvider'
+  reason: Defines and evaluates dispatch strategies that rank courier providers for a delivery, i.e. rules-driven
+    assignment of loads to couriers — squarely dispatch management within transport operations execution.
+- tag: Fleet
+  spec_file: nash-fleet-api-openapi.yml
+  capability_id: BC-2420.40
+  capability_id_l1: BC-2420
+  capability_name: Last-Mile Delivery Operations Management
+  confidence: 0.85
+  evidence: PATCH /v1/fleet/deliveries "Bulk Update Deliveries"; schemas DeliveryStatusUpdateValue, ImageProof,
+    BarcodeProof, DeliveryFailureCode, CourierVehicle
+  reason: Operations update the status of in-progress deliveries with proof artefacts (image/barcode proof,
+    picked items, failure codes) for couriers/vehicles — final-leg delivery execution and proof-of-delivery,
+    per the vendor's last-mile delivery orchestration description.
+- tag: Route
+  spec_file: nash-route-api-openapi.yml
+  capability_id: BC-2420.10
+  capability_id_l1: BC-2420
+  capability_name: Dispatch Management
+  confidence: 0.8
+  evidence: POST /v1/routes/dispatch "Dispatch Routes"; POST /v1/routes/{id}/assign "Assign or Reassign
+    a Route"; schemas CourierSerializer, DriverGroupSerializer, RouteStopSerializer, ProofOfDeliverySerializer
+  reason: Routes of stops are created, assigned/reassigned to couriers or driver groups, timed and dispatched
+    — assignment of loads and drivers to transport moves, i.e. dispatch management in last-mile operations.
+- tag: Users
+  spec_file: nash-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: GET /v1/organization-management/users 'List Users'; POST /v1/organization-management/users/{user_id}/roles
+    'Add User Roles'
+  reason: Operations create/invite platform users and assign, replace and remove roles within an organisation
+    — role-based access administration, i.e. identity and access management, not HR employee records.
+- tag: AI Functions
+  spec_file: nash-ai-functions-api-openapi.yml
+  capability_id: BC-2420.40
+  capability_id_l1: BC-2420
+  capability_name: Last-Mile Delivery Operations Management
+  confidence: 0.75
+  evidence: POST /v1/ai/verify-photo Verify a delivery photo via LLM; POST /v1/ai/detect-dropoff-anomaly
+    Detect dropoff anomalies for a delivery
+  reason: 'Despite the ''AI Functions'' tag, the operations act on last-mile delivery artefacts: verifying
+    delivery photos and detecting dropoff anomalies, i.e. proof-of-delivery validation at the final leg.
+    Mapped to last-mile delivery operations rather than AI lifecycle management, since these are domain
+    tools not model-management endpoints.'
+- tag: Batch Job
+  spec_file: nash-batch-job-api-openapi.yml
+  capability_id: BC-2420
+  capability_id_l1: BC-2420
+  capability_name: Transport Operations Management
+  confidence: 0.7
+  evidence: 'POST /v1/jobs/{jobId}/{objectId}/cancel Cancel Job by Job ID and Task or Job Configuration
+    ID; POST /v1/jobs/{jobId}/batch/{batchId}/refresh_quotes; schemas: RouteSerializer, RouteStopSerializer,
+    CourierSerializer, DriverGroupSerializer'
+  reason: '''Jobs'' here are deliveries: the operations create batches of delivery jobs, update, refresh
+    courier quotes and cancel them, with route, stop, courier and driver-group schemas. That is execution
+    of transport moves, but the evidence straddles dispatch/assignment and last-mile execution, so only
+    the L1 is asserted.'
+- tag: Job
+  spec_file: nash-job-api-openapi.yml
+  capability_id: BC-2420.10
+  capability_id_l1: BC-2420
+  capability_name: Dispatch Management
+  confidence: 0.7
+  evidence: POST /v1/jobs/{id}/autodispatch "Autodispatch job"; POST /v1/jobs/{id}/rebook "Rebook Job";
+    schemas CourierSerializer, DriverGroupSerializer, RouteStopSerializer
+  reason: Jobs are deliveries that are created, autodispatched to couriers/driver groups, rebooked and
+    cancelled — assignment of loads to couriers, i.e. dispatch within transport operations. Some ambiguity
+    between dispatch and general last-mile execution.
+- tag: Notifications
+  spec_file: nash-notifications-api-openapi.yml
+  capability_id: BC-2510.40
+  capability_id_l1: BC-2510
+  capability_name: Exception and Alert Management
+  confidence: 0.7
+  evidence: schemas CreateStuckStatusTrigger, DeliveryIncidentReportParams, DeliveryStatusTransitionParams,
+    CreateDriverLocationVsDeliveryStatusTrigger, CreateOptimizationOrderUnassignedTrigger; POST /v1/notification/{id}/trigger
+    "Trigger Notification"
+  reason: Triggers are defined on delivery-operational anomalies (stuck status, incident report, driver
+    location vs delivery status, unassigned order) and fire stakeholder notifications — operational exception
+    detection and alerting. Partly generic notification configuration, hence moderate confidence.
+- tag: Order
+  spec_file: nash-order-api-openapi.yml
+  capability_id: BC-2420
+  capability_id_l1: BC-2420
+  capability_name: Transport Operations Management
+  confidence: 0.7
+  evidence: POST /v1/order/get_quotes "Get order quotes"; POST /v1/order/{id}/autodispatch "Autodispatch
+    order"; POST /v1/order/external-identifier/{externalId}/delivery-window "Upsert order by external
+    identifier with delivery window"
+  reason: Delivery orders are created, quoted, confirmed, given delivery windows and autodispatched into
+    deliveries — the intake side of last-mile transport execution. Ambiguous between order intake/quotation
+    and dispatch, so no L2 asserted.

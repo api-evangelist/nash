@@ -989,6 +989,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/nash-capability-edges.yml
+  name: Nash Business Capability Map
 - type: Overlay
   url: overlays/nash-openapi-overlay.yaml
 - type: Website
