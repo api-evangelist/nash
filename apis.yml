@@ -566,6 +566,8 @@ apis:
   humanURL: https://docs.usenash.com/api-reference/api-overview
   baseURL: https://api.usenash.com/v1
   tags:
+  - Providers
+  tags_raw:
   - Provider
   properties:
   - type: OpenAPI
