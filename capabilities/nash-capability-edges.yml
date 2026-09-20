@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 9
+edge_count: 13
 edges:
 - tag: Dispatch Strategies
   spec_file: nash-dispatch-strategies-api-openapi.yml
@@ -44,6 +44,15 @@ edges:
     a Route"; schemas CourierSerializer, DriverGroupSerializer, RouteStopSerializer, ProofOfDeliverySerializer
   reason: Routes of stops are created, assigned/reassigned to couriers or driver groups, timed and dispatched
     — assignment of loads and drivers to transport moves, i.e. dispatch management in last-mile operations.
+- tag: Shipping
+  spec_file: nash-shipping-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.8
+  evidence: '"Dispatch and Manifest Orders", schema "ManifestDocumentSerializer"'
+  reason: Manifesting and dispatching shipments is outbound transport execution, i.e. logistics operations.
+  recovered_from: vertical-automotive-mobility-edges.json
 - tag: Users
   spec_file: nash-users-api-openapi.yml
   capability_id: BC-620.20
@@ -66,6 +75,37 @@ edges:
     delivery photos and detecting dropoff anomalies, i.e. proof-of-delivery validation at the final leg.
     Mapped to last-mile delivery operations rather than AI lifecycle management, since these are domain
     tools not model-management endpoints.'
+- tag: Optimization Strategies
+  spec_file: nash-optimization-strategies-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.75
+  evidence: '"Create Optimization Strategy", schema "OptimizationBalanceRoutes"'
+  reason: Configuration of route-optimization strategies for last-mile delivery is transport/logistics
+    execution, mapping to Logistics Operations Management.
+  recovered_from: vertical-automotive-mobility-edges.json
+- tag: Webhooks
+  spec_file: nash-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.75
+  evidence: GET /v1/webhooks/event-types 'List Webhook Event Types', POST /v1/webhooks/messages/replay
+    'Replay Webhook Message', GET .../attempts 'List Webhook Delivery Attempts'
+  reason: Outbound event/webhook delivery inspection and replay for API consumers — the platform-integration
+    event subscription surface, purely technical eventing rather than a delivery business function.
+  recovered_from: vertical-automotive-mobility-edges.json
+- tag: Route Restrictions
+  spec_file: nash-route-restrictions-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.72
+  evidence: '"Create Route Restriction", "Set Strategy Route Restrictions"'
+  reason: Constraints applied to route planning/optimization are part of delivery transport planning and
+    execution.
+  recovered_from: vertical-automotive-mobility-edges.json
 - tag: Batch Job
   spec_file: nash-batch-job-api-openapi.yml
   capability_id: BC-2420
