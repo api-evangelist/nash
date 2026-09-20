@@ -994,6 +994,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Plans
+  url: plans/nash-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/nash-capability-edges.yml
   name: Nash Business Capability Map
