@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Store Locations API
+  title: Nash Store Locations API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Store Locations
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -145,7 +145,7 @@ paths:
     get:
       tags:
       - Store Locations
-      summary: Get store locations that cover specified location (latitude & longitude, city_zipcode)
+      summary: Get store locations that cover specified location (latitude & longitude…
       description: Find store locations whose delivery zones cover a given geographic point. Provide latitude/longitude, city_zipcode, or zipcode to find matching store locations.
       operationId: get_store_locations_coverage_v1_store_locations_coverage_get
       parameters:
@@ -423,86 +423,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    ParsedAddressInputSerializer:
-      title: ParsedAddressInputSerializer
-      required:
-      - street
-      - city
-      - country
-      type: object
-      properties:
-        number:
-          title: Number
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The number of the address.
-          default: null
-          example: '1600'
-        secondaryNumber:
-          title: Secondarynumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The secondary number of the address.
-          default: null
-          example: null
-        street:
-          title: Street
-          type: string
-          description: 'The street of the address. If your geocoding service does not split numbers from street names, you can pass the street name with the number in this field. Example: 1600 Pennsylvania Avenue NW.'
-          example: Pennsylvania Avenue NW
-        county:
-          title: County
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The county of the address.
-          default: null
-          example: Washington
-        city:
-          title: City
-          type: string
-          description: The city of the address.
-          example: Washington
-        state:
-          title: State
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The state of the address.
-          default: null
-          example: DC
-        postalCode:
-          title: Postalcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The postal code of the address.
-          default: null
-          example: '20500'
-        country:
-          title: Country
-          type: string
-          description: The country of the address.
-          example: US
-        latitude:
-          title: Latitude
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The latitude of the address.
-          default: null
-          example: 38.8948949
-        longitude:
-          title: Longitude
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The longitude of the address.
-          default: null
-          example: -77.0371581
-      description: Parsed address input serializer for creating a job.
     StoreLocationResponse:
       title: StoreLocationResponse
       required:
@@ -681,132 +601,6 @@ components:
           example:
             integration_name: ABC
       description: Response for store location.
-    CreateStoreLocationInputSerializer:
-      title: CreateStoreLocationInputSerializer
-      required:
-      - name
-      - phoneNumber
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          description: Store business name at the origin. Limited to 80 characters.
-        firstName:
-          title: Firstname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: First name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
-          default: null
-        lastName:
-          title: Lastname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Last name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
-          default: null
-        phoneNumber:
-          title: Phonenumber
-          type: string
-          description: 'The phone number to contact at the store location: ''+15555555555'''
-        email:
-          title: Email
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        pickupInstructions:
-          title: Pickupinstructions
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'Any special instructions for store location. Limited to 280 characters. Nash Recommended Input: Order [insert order number] for [insert customer name] from [business name]'
-          default: null
-        address:
-          title: Address
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'The full address in one line for the store location for this package within the Job. Address format: [Number] [Street], [second line], [city], [state] [zip code]. All address fields are required except ''second line''. Second line should include Apt/Suite/Unit/# appended to the number of the unit. Can be null if using address_components.'
-          default: null
-        addressComponents:
-          anyOf:
-          - $ref: '#/components/schemas/ParsedAddressInputSerializer'
-          - type: 'null'
-          description: 'A geocoded and componentized version of the pickup address. NOTE: THIS WILL BYPASS OUR ADDRESS GEOCODING SERVICE!'
-          default: null
-        externalId:
-          title: Externalid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Store location unique identifier from an external system.
-          default: null
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Free form tags specific to the location.
-          default: null
-          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
-        operatingHours:
-          title: Operatinghours
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: '[Integration Specific]: An object with keys that correspond to days of week (monday, tuesday, etc) and their corresponding operating hours / delivery windows. Example: {monday: {active: true, shifts: [[10:00, 17:00]]}, tuesday: {active: true, shifts: [[10:00, 17:00]]}, wednesday: {active: true, shifts: [[10:00, 17:00]]}, thursday: {active: true, shifts: [[10:00, 17:00]]}, friday: {active: true, shifts: [[10:00, 17:00]]}, saturday: {active: true, shifts: []}, sunday: {active: true, shifts: []}}'
-          default: null
-        prepTimeMinutes:
-          title: Preptimeminutes
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: '[Integration Specific]: the preparation time to apply for orders, if relying on Nash to compute the delivery windows. This only applies to specific integrations.'
-          default: null
-        zoneIds:
-          title: Zoneids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The zone ids to associate with the store location.
-          default: null
-          example:
-          - zone_01234567890123456789
-          - zone_01234567890123456789
-        zoneAssociations:
-          title: Zoneassociations
-          anyOf:
-          - type: array
-            items:
-              type: object
-              additionalProperties: true
-          - type: 'null'
-          description: The zone associations to associate with the store location.
-          default: null
-          example:
-          - end_date: '2025-01-01'
-            start_date: '2024-01-01'
-            zone_id: zone_01234567890123456789
-      description: Expected payload for creating a store location.
-    ListStoreLocationsResponse:
-      title: ListStoreLocationsResponse
-      required:
-      - storeLocations
-      type: object
-      properties:
-        storeLocations:
-          title: Storelocations
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreLocationResponse'
-      description: Response for list store locations.
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -827,259 +621,86 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    UpdateStoreLocationInputSerializer:
-      title: UpdateStoreLocationInputSerializer
-      type: object
-      properties:
-        externalId:
-          title: Externalid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Store location unique identifier from an external system.
-          default: null
-          example: '40123'
-        operatingHours:
-          title: Operatinghours
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: '[Integration Specific]: An object with keys that correspond to days of week (monday, tuesday, etc) and their corresponding operating hours / delivery windows.'
-          default: null
-          example:
-            friday:
-              active: true
-              shifts:
-              - - '10:00'
-                - '19:00'
-            monday:
-              active: true
-              shifts:
-              - - '10:00'
-                - '19:00'
-            saturday:
-              active: true
-              shifts:
-              - - '10:00'
-                - '19:00'
-            sunday:
-              active: true
-              shifts:
-              - - '11:00'
-                - '18:00'
-            thursday:
-              active: true
-              shifts:
-              - - '10:00'
-                - '19:00'
-            tuesday:
-              active: true
-              shifts:
-              - - '10:00'
-                - '19:00'
-            wednesday:
-              active: true
-              shifts:
-              - - '10:00'
-                - '19:00'
-        prepTimeMinutes:
-          title: Preptimeminutes
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: '[Integration Specific]: the preparation time to apply for orders, if relying on Nash to compute the delivery windows. This only applies to specific integrations.'
-          default: null
-        blackoutDates:
-          title: Blackoutdates
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The blackout dates of the store location.
-          default: null
-          example:
-          - '2024-01-01'
-          - '2024-01-02'
-        firstName:
-          title: Firstname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: First name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
-          default: null
-          example: Taylor
-        lastName:
-          title: Lastname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Last name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
-          default: null
-          example: Swift
-        email:
-          title: Email
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The email of the person at the store location.
-          default: null
-          example: taylor@swift.com
-        pickupInstructions:
-          title: Pickupinstructions
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'The pickup instructions of the store location. Limited to 280 characters. Nash Recommended Input: Order [insert order number] for [insert customer name] from [business name]'
-          default: null
-          example: Once you arrive at the store, please click above to let us know you are here. Then, go ahead and find a sales associate inside - they'll be happy to help you!
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Store business name at the origin. Limited to 80 characters.
-          default: null
-        phoneNumber:
-          title: Phonenumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'The phone number to contact at the store location: ''+15555555555'''
-          default: null
-        address:
-          title: Address
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'The full address in one line for the store location for this package within the Job. Address format: [Number] [Street], [second line], [city], [state] [zip code]. All address fields are required except ''second line''. Second line should include Apt/Suite/Unit/# appended to the number of the unit.'
-          default: null
-        addressComponents:
-          anyOf:
-          - $ref: '#/components/schemas/ParsedAddressInputSerializer'
-          - type: 'null'
-          description: 'A geocoded and componentized version of the pickup address. NOTE: THIS WILL BYPASS OUR ADDRESS GEOCODING SERVICE!'
-          default: null
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Free form tags specific to the location.
-          default: null
-          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
-        zoneIds:
-          title: Zoneids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The zone ids to associate with the store location.
-          default: null
-          example:
-          - zone_01234567890123456789
-          - zone_01234567890123456789
-        zoneAssociations:
-          title: Zoneassociations
-          anyOf:
-          - type: array
-            items:
-              type: object
-              additionalProperties: true
-          - type: 'null'
-          description: The zone associations to associate with the store location.
-          default: null
-          example:
-          - end_date: '2025-01-01'
-            start_date: '2024-01-01'
-            zone_id: zone_01234567890123456789
-      description: Expected input payload for updating a store location.
-    StoreLocationDayCapacityInputSerializer:
-      title: StoreLocationDayCapacityInputSerializer
+    ParsedAddressInputSerializer:
+      title: ParsedAddressInputSerializer
       required:
-      - storeLocationId
-      - date
-      - dayCapacity
+      - street
+      - city
+      - country
       type: object
       properties:
-        storeLocationId:
-          title: Storelocationid
+        number:
+          title: Number
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number of the address.
+          default: null
+          example: '1600'
+        secondaryNumber:
+          title: Secondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The secondary number of the address.
+          default: null
+          example: null
+        street:
+          title: Street
           type: string
-          description: The store location for which to set capacity.
-          example: stl_1234567890
-        date:
-          title: Date
-          pattern: (\d{4})-(\d{2})-(\d{2})
+          description: 'The street of the address. If your geocoding service does not split numbers from street names, you can pass the street name with the number in this field. Example: 1600 Pennsylvania Avenue NW.'
+          example: Pennsylvania Avenue NW
+        county:
+          title: County
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The county of the address.
+          default: null
+          example: Washington
+        city:
+          title: City
           type: string
-          description: The date for the specified capacity
-          example: '2024-10-06'
-        dayCapacity:
-          title: Daycapacity
-          type: object
-          additionalProperties: true
-          description: The capacity for the day.
-          example:
-            isActive: true
-            shiftCapacity:
-              00:00: 0
-              01:00: 0
-              02:00: 0
-              03:00: 0
-              04:00: 0
-              05:00: 0
-              06:00: 0
-              07:00: 0
-              08:00: 4
-              09:00: 4
-              '10:00': 4
-              '11:00': 4
-              '12:00': 4
-              '13:00': 4
-              '14:00': 6
-              '15:00': 6
-              '16:00': 6
-              '17:00': 6
-              '18:00': 0
-              '19:00': 0
-              '20:00': 0
-              '21:00': 0
-              '22:00': 0
-              '23:00': 0
-      description: Expected payload for the set store location day capacity endpoint.
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
+          description: The city of the address.
+          example: Washington
+        state:
+          title: State
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the address.
+          default: null
+          example: DC
+        postalCode:
+          title: Postalcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The postal code of the address.
+          default: null
+          example: '20500'
+        country:
+          title: Country
           type: string
-        RequestID:
-          title: Requestid
-          type: string
-    DeleteStoreLocationResponse:
-      title: DeleteStoreLocationResponse
-      required:
-      - id
-      - isDeleted
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-        isDeleted:
-          title: Isdeleted
-          type: boolean
-      description: Layered DELETE confirmation. Returns the deleted store id and the new soft-delete flag.
+          description: The country of the address.
+          example: US
+        latitude:
+          title: Latitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The latitude of the address.
+          default: null
+          example: 38.8948949
+        longitude:
+          title: Longitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The longitude of the address.
+          default: null
+          example: -77.0371581
+      description: Parsed address input serializer for creating a job.
     StoreLocationDefaultCapacityInputSerializer:
       title: StoreLocationDefaultCapacityInputSerializer
       required:
@@ -1288,6 +909,385 @@ components:
                 '22:00': 0
                 '23:00': 0
       description: Expected payload for the set store location default capacity endpoint.
+    StoreLocationDayCapacityInputSerializer:
+      title: StoreLocationDayCapacityInputSerializer
+      required:
+      - storeLocationId
+      - date
+      - dayCapacity
+      type: object
+      properties:
+        storeLocationId:
+          title: Storelocationid
+          type: string
+          description: The store location for which to set capacity.
+          example: stl_1234567890
+        date:
+          title: Date
+          pattern: (\d{4})-(\d{2})-(\d{2})
+          type: string
+          description: The date for the specified capacity
+          example: '2024-10-06'
+        dayCapacity:
+          title: Daycapacity
+          type: object
+          additionalProperties: true
+          description: The capacity for the day.
+          example:
+            isActive: true
+            shiftCapacity:
+              00:00: 0
+              01:00: 0
+              02:00: 0
+              03:00: 0
+              04:00: 0
+              05:00: 0
+              06:00: 0
+              07:00: 0
+              08:00: 4
+              09:00: 4
+              '10:00': 4
+              '11:00': 4
+              '12:00': 4
+              '13:00': 4
+              '14:00': 6
+              '15:00': 6
+              '16:00': 6
+              '17:00': 6
+              '18:00': 0
+              '19:00': 0
+              '20:00': 0
+              '21:00': 0
+              '22:00': 0
+              '23:00': 0
+      description: Expected payload for the set store location day capacity endpoint.
+    UpdateStoreLocationInputSerializer:
+      title: UpdateStoreLocationInputSerializer
+      type: object
+      properties:
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Store location unique identifier from an external system.
+          default: null
+          example: '40123'
+        operatingHours:
+          title: Operatinghours
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: '[Integration Specific]: An object with keys that correspond to days of week (monday, tuesday, etc) and their corresponding operating hours / delivery windows.'
+          default: null
+          example:
+            friday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            monday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            saturday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            sunday:
+              active: true
+              shifts:
+              - - '11:00'
+                - '18:00'
+            thursday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            tuesday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+            wednesday:
+              active: true
+              shifts:
+              - - '10:00'
+                - '19:00'
+        prepTimeMinutes:
+          title: Preptimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: '[Integration Specific]: the preparation time to apply for orders, if relying on Nash to compute the delivery windows. This only applies to specific integrations.'
+          default: null
+        blackoutDates:
+          title: Blackoutdates
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The blackout dates of the store location.
+          default: null
+          example:
+          - '2024-01-01'
+          - '2024-01-02'
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+          example: Taylor
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+          example: Swift
+        email:
+          title: Email
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The email of the person at the store location.
+          default: null
+          example: taylor@swift.com
+        pickupInstructions:
+          title: Pickupinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The pickup instructions of the store location. Limited to 280 characters. Nash Recommended Input: Order [insert order number] for [insert customer name] from [business name]'
+          default: null
+          example: Once you arrive at the store, please click above to let us know you are here. Then, go ahead and find a sales associate inside - they'll be happy to help you!
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Store business name at the origin. Limited to 80 characters.
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The phone number to contact at the store location: ''+15555555555'''
+          default: null
+        address:
+          title: Address
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The full address in one line for the store location for this package within the Job. Address format: [Number] [Street], [second line], [city], [state] [zip code]. All address fields are required except ''second line''. Second line should include Apt/Suite/Unit/# appended to the number of the unit.'
+          default: null
+        addressComponents:
+          anyOf:
+          - $ref: '#/components/schemas/ParsedAddressInputSerializer'
+          - type: 'null'
+          description: 'A geocoded and componentized version of the pickup address. NOTE: THIS WILL BYPASS OUR ADDRESS GEOCODING SERVICE!'
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Free form tags specific to the location.
+          default: null
+          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone ids to associate with the store location.
+          default: null
+          example:
+          - zone_01234567890123456789
+          - zone_01234567890123456789
+        zoneAssociations:
+          title: Zoneassociations
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: The zone associations to associate with the store location.
+          default: null
+          example:
+          - end_date: '2025-01-01'
+            start_date: '2024-01-01'
+            zone_id: zone_01234567890123456789
+      description: Expected input payload for updating a store location.
+    CreateStoreLocationInputSerializer:
+      title: CreateStoreLocationInputSerializer
+      required:
+      - name
+      - phoneNumber
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Store business name at the origin. Limited to 80 characters.
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name of the person at the store location. If unknown, pass 'Manager'. Limited to 80 characters.
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          type: string
+          description: 'The phone number to contact at the store location: ''+15555555555'''
+        email:
+          title: Email
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        pickupInstructions:
+          title: Pickupinstructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Any special instructions for store location. Limited to 280 characters. Nash Recommended Input: Order [insert order number] for [insert customer name] from [business name]'
+          default: null
+        address:
+          title: Address
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'The full address in one line for the store location for this package within the Job. Address format: [Number] [Street], [second line], [city], [state] [zip code]. All address fields are required except ''second line''. Second line should include Apt/Suite/Unit/# appended to the number of the unit. Can be null if using address_components.'
+          default: null
+        addressComponents:
+          anyOf:
+          - $ref: '#/components/schemas/ParsedAddressInputSerializer'
+          - type: 'null'
+          description: 'A geocoded and componentized version of the pickup address. NOTE: THIS WILL BYPASS OUR ADDRESS GEOCODING SERVICE!'
+          default: null
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Store location unique identifier from an external system.
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Free form tags specific to the location.
+          default: null
+          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
+        operatingHours:
+          title: Operatinghours
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: '[Integration Specific]: An object with keys that correspond to days of week (monday, tuesday, etc) and their corresponding operating hours / delivery windows. Example: {monday: {active: true, shifts: [[10:00, 17:00]]}, tuesday: {active: true, shifts: [[10:00, 17:00]]}, wednesday: {active: true, shifts: [[10:00, 17:00]]}, thursday: {active: true, shifts: [[10:00, 17:00]]}, friday: {active: true, shifts: [[10:00, 17:00]]}, saturday: {active: true, shifts: []}, sunday: {active: true, shifts: []}}'
+          default: null
+        prepTimeMinutes:
+          title: Preptimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: '[Integration Specific]: the preparation time to apply for orders, if relying on Nash to compute the delivery windows. This only applies to specific integrations.'
+          default: null
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone ids to associate with the store location.
+          default: null
+          example:
+          - zone_01234567890123456789
+          - zone_01234567890123456789
+        zoneAssociations:
+          title: Zoneassociations
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: The zone associations to associate with the store location.
+          default: null
+          example:
+          - end_date: '2025-01-01'
+            start_date: '2024-01-01'
+            zone_id: zone_01234567890123456789
+      description: Expected payload for creating a store location.
+    ListStoreLocationsResponse:
+      title: ListStoreLocationsResponse
+      required:
+      - storeLocations
+      type: object
+      properties:
+        storeLocations:
+          title: Storelocations
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreLocationResponse'
+      description: Response for list store locations.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    DeleteStoreLocationResponse:
+      title: DeleteStoreLocationResponse
+      required:
+      - id
+      - isDeleted
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        isDeleted:
+          title: Isdeleted
+          type: boolean
+      description: Layered DELETE confirmation. Returns the deleted store id and the new soft-delete flag.
   securitySchemes:
     Token:
       type: http

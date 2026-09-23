@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Batch Job API
+  title: Nash Batch Job API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Batch Job
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -178,706 +178,66 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    ItemScanSerializer:
-      title: ItemScanSerializer
-      type: object
-      properties:
-        substitutionType:
-          title: Substitutiontype
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        barcodes:
-          title: Barcodes
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/BarcodeInfoSerializer'
-          - type: 'null'
-          default: null
-      description: Serializer for individual item scans.
-    PackageSerializer:
-      title: PackageSerializer
+    BatchSerializer:
+      title: BatchSerializer
       required:
       - id
-      - requirements
-      - valueCents
-      - itemsCount
-      - pickupLocation
-      - dropoffLocation
+      - type
+      - objectSequence
+      - stopTypes
+      - quotes
       type: object
       properties:
         id:
           title: Id
           type: string
-          description: Package ID
-          example: pkg_01234567890
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Description
-          default: null
-          example: Package description
-        requirements:
-          title: Requirements
+        type:
+          title: Type
+          type: string
+        objectSequence:
+          title: Objectsequence
           type: array
           items:
             type: string
-          description: Requirements
-          example:
-          - photo_proof_of_delivery
-          - age_verification_on_delivery
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Tags
-          default: null
-          example:
-          - Alcohol
-        packageDeliveryMode:
-          title: Packagedeliverymode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Package delivery mode
-          default: null
-          example: now
-        pickupStartTime:
-          title: Pickupstarttime
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Pickup start time
-          default: null
-          example: '2021-01-01T00:00:00Z'
-        pickupEndTime:
-          title: Pickupendtime
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Pickup end time
-          default: null
-          example: '2021-01-01T00:00:00Z'
-        pickupBarcodes:
-          title: Pickupbarcodes
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          default: null
-        dropoffStartTime:
-          title: Dropoffstarttime
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Dropoff start time
-          default: null
-          example: '2021-01-01T00:00:00Z'
-        dropoffEndTime:
-          title: Dropoffendtime
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Dropoff end time
-          default: null
-          example: '2021-01-01T00:00:00Z'
-        dropoffBarcodes:
-          title: Dropoffbarcodes
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          default: null
-        valueCents:
-          title: Valuecents
-          type: integer
-        taxCents:
-          title: Taxcents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Tax in cents
-          default: null
-          example: 100
-        serviceFeeCents:
-          title: Servicefeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Service fee in cents
-          default: null
-          example: 100
-        itemsCount:
-          title: Itemscount
-          anyOf:
-          - type: integer
-          - type: number
-          description: Items count
-          example: 100
-        externalIdentifier:
-          title: Externalidentifier
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: External identifier
-          default: null
-          example: mini-mart-order-99
-        minimumVehicleSize:
-          title: Minimumvehiclesize
-          enum:
-          - any
-          - bike
-          - motorbike
-          - cargobike
-          - sedan
-          - car
-          - suv
-          - pickup_truck
-          - pickup
-          - van
-          - large_van
-          - extra_large_van
-          - truck
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'Minimum vehicle size required for the package. Allowed values: [''any'', ''bike'', ''motorbike'', ''cargobike'', ''sedan'', ''car'', ''suv'', ''pickup_truck'', ''pickup'', ''van'', ''large_van'', ''extra_large_van'', ''truck'']'
-          default: null
-          example: car
-        pickupLocation:
-          $ref: '#/components/schemas/LocationSerializer'
-        pickupStoreLocationId:
-          title: Pickupstorelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Pickup store location ID
-          default: null
-          example: store_01234567890
-        pickupStoreLocationExternalId:
-          title: Pickupstorelocationexternalid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Pickup store location external ID
-          default: null
-          example: '0123'
-        dropoffLocation:
-          $ref: '#/components/schemas/LocationSerializer'
-        dropoffStoreLocationId:
-          title: Dropoffstorelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Dropoff store location ID
-          default: null
-          example: store_01234567890
-        drivingMetrics:
-          title: Drivingmetrics
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Driving metrics (distance in meters, duration in seconds)
-          default: null
-          example:
-            distance: 100
-            duration: 100
-        value:
-          title: Value
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Value
-          default: null
-          example: 100.0
-        tax:
-          title: Tax
-          anyOf:
-          - type: integer
-          - type: number
-          - type: 'null'
-          description: Tax
-          default: null
-          example: 100
-        serviceFee:
-          title: Servicefee
-          anyOf:
-          - type: integer
-          - type: number
-          - type: 'null'
-          description: Service fee
-          default: null
-          example: 100
-        tipAmountCents:
-          title: Tipamountcents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        weight:
-          title: Weight
-          anyOf:
-          - type: integer
-          - type: number
-          - type: 'null'
-          description: Weight
-          default: null
-          example: 100
-        dimensions:
-          title: Dimensions
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Dimensions
-          default: null
-          example:
-            height: 100
-            length: 100
-            width: 100
-        items:
-          title: Items
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ItemOutput'
-          - type: 'null'
-          description: Items
-          default: null
-          example:
-          - count: 1
-            description: Item 1
-            valueCents: 100
-        referenceId:
-          title: Referenceid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Reference ID
-          default: null
-          example: mini-mart-order-99
-        packageMetadata:
-          title: Packagemetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Package metadata
-          default: null
-          example:
-            key: value
-      description: Generic serializer for packages used in many endpoints; Used for output.
-    OptionsGroupSerializer:
-      title: OptionsGroupSerializer
-      required:
-      - id
-      - label
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Dispatch Strategy ID
-          example: opn_WyMhHj
-        label:
-          title: Label
-          type: string
-          description: Dispatch Strategy Label
-          example: New York City Strategy
-        allowedProviders:
-          title: Allowedproviders
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Allowed providers
-          default: null
-          example:
-          - prv_01234567890
-          - prv_01234567891
-        enableAutoDispatch:
-          title: Enableautodispatch
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Enable auto dispatch
-          default: null
-          example: true
-        providerSelectionStrategy:
-          title: Providerselectionstrategy
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Provider selection strategy
-          default: null
-          example: cheapest
-        reassignOnFailure:
-          title: Reassignonfailure
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Reassign on failure
-          default: null
-          example: true
-        enableMaxDeliveryFee:
-          title: Enablemaxdeliveryfee
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Enable max delivery fee
-          default: null
-          example: true
-        maxDeliveryFeeCents:
-          title: Maxdeliveryfeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Max delivery fee in cents
-          default: null
-          example: 10000
-        costSplitMaxFixedPriceCents:
-          title: Costsplitmaxfixedpricecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Cost split max fixed price in cents
-          default: null
-          example: 10000
-        costSplitMaxPercentage:
-          title: Costsplitmaxpercentage
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Cost split max percentage
-          default: null
-          example: 0.1
-        costSplitStrategy:
-          title: Costsplitstrategy
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Cost split strategy
-          default: null
-          example: price
-        smartReassignment:
-          title: Smartreassignment
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Smart reassignment
-          default: null
-          example: true
-      description: Generic serializer for options groups used in many endpoints.
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    ReturnedJobMixin:
-      title: ReturnedJobMixin
-      required:
-      - id
-      - createdAt
-      - portalUrl
-      - isActive
-      - isBatch
-      - jobConfigurations
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Job ID
-          example: job_01234567890
-        createdAt:
-          title: Createdat
-          type: string
-          description: Created at
-          example: '2023-08-29T19:17:46.264523'
-        portalUrl:
-          title: Portalurl
-          type: string
-          description: Portal URL
-          example: https://usenash.com/portal/job_abc123
-        externalIdentifier:
-          title: Externalidentifier
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: External identifier
-          default: null
-          example: mini-mart-order-99
-        jobMetadata:
-          title: Jobmetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Job metadata
-          default: null
-          example:
-            key: value
-        isActive:
-          title: Isactive
-          type: boolean
-          description: Is the job active
-          example: true
-        isBatch:
-          title: Isbatch
-          type: boolean
-          description: Is the job a batch
-          example: false
-        jobConfigurations:
-          title: Jobconfigurations
+        stopTypes:
+          title: Stoptypes
           type: array
           items:
-            $ref: '#/components/schemas/JobConfigurationsSerializer'
-          description: Job configurations
-        optionsGroup:
-          anyOf:
-          - $ref: '#/components/schemas/OptionsGroupSerializer'
-          - type: 'null'
-          description: Options group
-          default: null
-        shortReferenceCode:
-          title: Shortreferencecode
+            $ref: '#/components/schemas/BatchStopTypes'
+        providerId:
+          title: Providerid
           anyOf:
           - type: string
           - type: 'null'
-          description: 7-digit non-unique human-readable reference code for the job.
           default: null
-          example: '0123456'
-        selectedConfiguration:
-          title: Selectedconfiguration
+        providerIsInternal:
+          title: Providerisinternal
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        winnerQuote:
+          title: Winnerquote
           anyOf:
           - type: object
-            additionalProperties:
-              type: array
-              items:
-                $ref: '#/components/schemas/TaskSerializer'
-          - type: 'null'
-          description: Selected configuration
-          default: null
-          example:
-            tasks: []
-          deprecated: true
-        jobSpecification:
-          title: Jobspecification
-          anyOf:
-          - type: object
-            additionalProperties:
-              type: array
-              items:
-                $ref: '#/components/schemas/PackageSerializer'
-          - type: 'null'
-          description: Job specification
-          default: null
-          example:
-            packages: []
-          deprecated: true
-        route:
-          anyOf:
-          - $ref: '#/components/schemas/RouteSerializer'
-          - type: 'null'
-          description: Route
-          default: null
-      description: A Nash Job.
-    DriverGroupSerializer:
-      title: DriverGroupSerializer
-      type: object
-      properties:
-        id:
-          title: Id
-          anyOf:
-          - type: string
+            additionalProperties: true
           - type: 'null'
           default: null
-        externalId:
-          title: Externalid
+        quotes:
+          title: Quotes
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteSerializer'
+        failedQuotes:
+          title: Failedquotes
           anyOf:
-          - type: string
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
           - type: 'null'
           default: null
-      description: Driver group details for a route.
-    VehicleSerializer:
-      title: VehicleSerializer
-      type: object
-      properties:
-        licensePlate:
-          title: Licenseplate
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        make:
-          title: Make
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        model:
-          title: Model
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        color:
-          title: Color
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        year:
-          title: Year
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        type:
-          title: Type
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-      description: Vehicle details for a route.
-    ParsedAddressInputSerializer:
-      title: ParsedAddressInputSerializer
-      required:
-      - street
-      - city
-      - country
-      type: object
-      properties:
-        number:
-          title: Number
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The number of the address.
-          default: null
-          example: '1600'
-        secondaryNumber:
-          title: Secondarynumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The secondary number of the address.
-          default: null
-          example: null
-        street:
-          title: Street
-          type: string
-          description: 'The street of the address. If your geocoding service does not split numbers from street names, you can pass the street name with the number in this field. Example: 1600 Pennsylvania Avenue NW.'
-          example: Pennsylvania Avenue NW
-        county:
-          title: County
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The county of the address.
-          default: null
-          example: Washington
-        city:
-          title: City
-          type: string
-          description: The city of the address.
-          example: Washington
-        state:
-          title: State
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The state of the address.
-          default: null
-          example: DC
-        postalCode:
-          title: Postalcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The postal code of the address.
-          default: null
-          example: '20500'
-        country:
-          title: Country
-          type: string
-          description: The country of the address.
-          example: US
-        latitude:
-          title: Latitude
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The latitude of the address.
-          default: null
-          example: 38.8948949
-        longitude:
-          title: Longitude
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The longitude of the address.
-          default: null
-          example: -77.0371581
-      description: Parsed address input serializer for creating a job.
-    NoteSerializer:
-      title: NoteSerializer
-      required:
-      - id
-      - createdAt
-      - note
-      - user
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Note ID
-          example: not_01234567890
-        createdAt:
-          title: Createdat
-          type: string
-          description: Created at
-          example: '2023-08-29T19:17:46.264523'
-        note:
-          title: Note
-          type: string
-          description: Note
-          example: Task note
-        user:
-          anyOf:
-          - $ref: '#/components/schemas/BasicUserSerializer'
-          - type: 'null'
-          description: User
-          example:
-            email: john.doe@example.com
-      description: Generic serializer for notes used in many endpoints.
+      description: Generic serializer for batches used in many endpoints.
     UpdateJobInputSerializer:
       title: UpdateJobInputSerializer
       type: object
@@ -1187,18 +547,371 @@ components:
           description: Package metadata
           default: null
       description: Expected input for update job endpoint.
-    CompressedAdvancedTaskSerializer:
-      title: CompressedAdvancedTaskSerializer
+    SubstituteItemObject:
+      title: SubstituteItemObject
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ID of the substitute item
+          default: null
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The SKU of the substitute item
+          default: null
+        quantity:
+          title: Quantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the substitute item
+          default: null
+    ItemScanSerializer:
+      title: ItemScanSerializer
+      type: object
+      properties:
+        substitutionType:
+          title: Substitutiontype
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        barcodes:
+          title: Barcodes
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/BarcodeInfoSerializer'
+          - type: 'null'
+          default: null
+      description: Serializer for individual item scans.
+    PackageRequirements:
+      title: PackageRequirements
+      enum:
+      - photo_proof_of_delivery
+      - signature_proof_of_delivery
+      - photo_proof_of_pickup
+      - photo_reference_on_dropoff
+      - photo_reference_capture_on_dropoff
+      - signature_proof_of_pickup
+      - photo_pre_delivery_verification
+      - age_verification_on_delivery
+      - id_verification_on_delivery
+      - barcode_scan_on_pickup
+      - barcode_scan_on_dropoff
+      - barcode_scan_on_return
+      - meet_on_delivery
+      - shipping_label
+      - two_person_team
+      - pincode_verification
+      - schedule_ii_controlled_substances
+      - alcohol
+      - tobacco
+      - vapes
+      - parking_check_in
+      - display_barcode_on_pickup
+      - pick_and_pack
+      type: string
+      description: 'Detailed description: https://docs.usenash.com/reference/package-requirements.'
+    RefreshBatchQuotesOutputSerializer:
+      title: RefreshBatchQuotesOutputSerializer
+      required:
+      - jobId
+      - quotes
+      type: object
+      properties:
+        jobId:
+          title: Jobid
+          type: string
+        quotes:
+          title: Quotes
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteSerializer'
+      description: Expected output after refreshing quotes for a batch job.
+    ProofOfDeliverySerializer:
+      title: ProofOfDeliverySerializer
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          title: Type
+          type: string
+          description: Type of proof of delivery, e.g., 'photo', 'signature', etc.
+        url:
+          title: Url
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: URL of the proof of delivery document.
+          default: null
+        uploadedAt:
+          title: Uploadedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the proof of delivery was uploaded.
+          default: null
+      description: Delivery tracking details for an order at a route stop.
+    ReturnedJobMixin:
+      title: ReturnedJobMixin
       required:
       - id
+      - createdAt
+      - portalUrl
+      - isActive
+      - isBatch
+      - jobConfigurations
       type: object
       properties:
         id:
           title: Id
           type: string
-          description: Task ID
-          example: tsk_01234567890
-      description: Generic serializer for tasks used in many endpoints.
+          description: Job ID
+          example: job_01234567890
+        createdAt:
+          title: Createdat
+          type: string
+          description: Created at
+          example: '2023-08-29T19:17:46.264523'
+        portalUrl:
+          title: Portalurl
+          type: string
+          description: Portal URL
+          example: https://usenash.com/portal/job_abc123
+        externalIdentifier:
+          title: Externalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: External identifier
+          default: null
+          example: mini-mart-order-99
+        jobMetadata:
+          title: Jobmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Job metadata
+          default: null
+          example:
+            key: value
+        isActive:
+          title: Isactive
+          type: boolean
+          description: Is the job active
+          example: true
+        isBatch:
+          title: Isbatch
+          type: boolean
+          description: Is the job a batch
+          example: false
+        jobConfigurations:
+          title: Jobconfigurations
+          type: array
+          items:
+            $ref: '#/components/schemas/JobConfigurationsSerializer'
+          description: Job configurations
+        optionsGroup:
+          anyOf:
+          - $ref: '#/components/schemas/OptionsGroupSerializer'
+          - type: 'null'
+          description: Options group
+          default: null
+        shortReferenceCode:
+          title: Shortreferencecode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 7-digit non-unique human-readable reference code for the job.
+          default: null
+          example: '0123456'
+        selectedConfiguration:
+          title: Selectedconfiguration
+          anyOf:
+          - type: object
+            additionalProperties:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaskSerializer'
+          - type: 'null'
+          description: Selected configuration
+          default: null
+          example:
+            tasks: []
+          deprecated: true
+        jobSpecification:
+          title: Jobspecification
+          anyOf:
+          - type: object
+            additionalProperties:
+              type: array
+              items:
+                $ref: '#/components/schemas/PackageSerializer'
+          - type: 'null'
+          description: Job specification
+          default: null
+          example:
+            packages: []
+          deprecated: true
+        route:
+          anyOf:
+          - $ref: '#/components/schemas/RouteSerializer'
+          - type: 'null'
+          description: Route
+          default: null
+      description: A Nash Job.
+    CourierSerializer:
+      title: CourierSerializer
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: Courier details for a route.
+    SubItemOutput:
+      title: SubItemOutput
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The merchant ID of the item
+          default: null
+          example: abc-123
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the item
+          default: null
+          example: A box of books
+        count:
+          title: Count
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the item
+          default: null
+          example: 2
+        dimensions:
+          anyOf:
+          - $ref: '#/components/schemas/Dimensions'
+          - type: 'null'
+          description: The dimensions of the item
+          default: null
+          example:
+            depth: 14
+            height: 10
+            width: 12
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The weight of the item in kilograms (kg)
+          default: null
+          example: 1.5
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The value of the item in cents
+          default: null
+          example: 1000
+        requirements:
+          title: Requirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of requirements for this item
+          default: null
+          example:
+          - age_verification_on_delivery
+        category:
+          title: Category
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The category of the item
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Barcode value for this item.
+          default: null
+          example: 0199312650999998913643M221872801002010908
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value data to attach to this item.
+          default: null
+          example:
+            packaging_type: CTN
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The SKU of the sub-item
+          default: null
+        substitution:
+          anyOf:
+          - $ref: '#/components/schemas/SubstitutionObject'
+          - type: 'null'
+          description: Substitution information for the sub-item
+          default: null
+        subItems:
+          title: Subitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubItemOutput'
+          - type: 'null'
+          description: The nested sub-items
+          default: null
+      description: Sub-item object returned by the API.
     QuoteSerializer:
       title: QuoteSerializer
       required:
@@ -1402,8 +1115,8 @@ components:
           default: null
           example: Error message
       description: Generic serializer for quotes used in many endpoints.
-    SubItemOutput:
-      title: SubItemOutput
+    ItemOutput:
+      title: ItemOutput
       type: object
       properties:
         id:
@@ -1493,19 +1206,6 @@ components:
           default: null
           example:
             packaging_type: CTN
-        sku:
-          title: Sku
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The SKU of the sub-item
-          default: null
-        substitution:
-          anyOf:
-          - $ref: '#/components/schemas/SubstitutionObject'
-          - type: 'null'
-          description: Substitution information for the sub-item
-          default: null
         subItems:
           title: Subitems
           anyOf:
@@ -1515,95 +1215,7 @@ components:
           - type: 'null'
           description: The nested sub-items
           default: null
-      description: Sub-item object returned by the API.
-    BatchSerializer:
-      title: BatchSerializer
-      required:
-      - id
-      - type
-      - objectSequence
-      - stopTypes
-      - quotes
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-        type:
-          title: Type
-          type: string
-        objectSequence:
-          title: Objectsequence
-          type: array
-          items:
-            type: string
-        stopTypes:
-          title: Stoptypes
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchStopTypes'
-        providerId:
-          title: Providerid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        providerIsInternal:
-          title: Providerisinternal
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        winnerQuote:
-          title: Winnerquote
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-        quotes:
-          title: Quotes
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteSerializer'
-        failedQuotes:
-          title: Failedquotes
-          anyOf:
-          - type: array
-            items:
-              type: object
-              additionalProperties: true
-          - type: 'null'
-          default: null
-      description: Generic serializer for batches used in many endpoints.
-    PackageRequirements:
-      title: PackageRequirements
-      enum:
-      - photo_proof_of_delivery
-      - signature_proof_of_delivery
-      - photo_proof_of_pickup
-      - photo_reference_on_dropoff
-      - photo_reference_capture_on_dropoff
-      - signature_proof_of_pickup
-      - photo_pre_delivery_verification
-      - age_verification_on_delivery
-      - id_verification_on_delivery
-      - barcode_scan_on_pickup
-      - barcode_scan_on_dropoff
-      - barcode_scan_on_return
-      - meet_on_delivery
-      - shipping_label
-      - two_person_team
-      - pincode_verification
-      - schedule_ii_controlled_substances
-      - alcohol
-      - tobacco
-      - vapes
-      - parking_check_in
-      - display_barcode_on_pickup
-      - pick_and_pack
-      type: string
-      description: 'Detailed description: https://docs.usenash.com/reference/package-requirements.'
+      description: Item object returned by the API.
     NashValidationError:
       title: NashValidationError
       required:
@@ -1620,26 +1232,160 @@ components:
         RequestID:
           title: Requestid
           type: string
-    LatLngSerializer:
-      title: LatLngSerializer
+    LocationSerializer:
+      title: LocationSerializer
       required:
-      - lat
-      - lng
+      - id
+      - address
+      - formattedAddress
+      - addressCity
+      - addressCountry
+      - timezoneId
+      - timezoneName
       type: object
       properties:
+        id:
+          title: Id
+          type: string
+          description: Location ID
+          example: loc_01234567890
+        address:
+          title: Address
+          type: string
+          description: Address
+          example: 1600 Amphitheatre Parkway
+        formattedAddress:
+          title: Formattedaddress
+          type: string
+          description: Formatted address
+          example: 1600 Amphitheatre Parkway
+        addressNumber:
+          title: Addressnumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Address number
+          default: null
+          example: '1600'
+        addressFormattedStreet:
+          title: Addressformattedstreet
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Address formatted street
+          default: null
+          example: Amphitheatre Parkway
+        addressCity:
+          title: Addresscity
+          type: string
+          description: Address city
+          example: Mountain View
+        addressCounty:
+          title: Addresscounty
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Address county
+          default: null
+          example: Santa Clara
+        addressState:
+          title: Addressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Address state
+          default: null
+          example: CA
+        addressZip:
+          title: Addresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Address zip
+          default: null
+          example: '94043'
+        addressCountry:
+          title: Addresscountry
+          type: string
+          description: Address country
+          example: US
+        timezoneId:
+          title: Timezoneid
+          type: string
+          description: Timezone ID
+          example: America/Los_Angeles
+        timezoneName:
+          title: Timezonename
+          type: string
+          description: Timezone name
+          example: Pacific Time
+        instructions:
+          title: Instructions
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Instructions
+          default: null
+          example: Turn left on Main St
+        businessName:
+          title: Businessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Business name
+          default: null
+          example: Nash
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: First name
+          default: null
+          example: John
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Last name
+          default: null
+          example: Doe
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Phone number
+          default: null
+          example: '+15555555555'
+        email:
+          title: Email
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Email
+          default: null
+          example: john.doe@example.com
         lat:
           title: Lat
-          type: number
-          description: Latitude coordinate.
-          example: 45.558214
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Latitude
+          default: null
+          example: 37.774929
         lng:
           title: Lng
-          type: number
-          description: Longitude coordinate.
-          example: -122.587074
-      description: Latitude/longitude coordinates.
-    SubstituteItemObject:
-      title: SubstituteItemObject
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Longitude
+          default: null
+          example: -122.419416
+      description: Generic serializer for location used in many endpoints.
+    DriverGroupSerializer:
+      title: DriverGroupSerializer
       type: object
       properties:
         id:
@@ -1647,22 +1393,549 @@ components:
           anyOf:
           - type: string
           - type: 'null'
-          description: The ID of the substitute item
           default: null
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: Driver group details for a route.
+    PickedItemsSerializer:
+      title: PickedItemsSerializer
+      type: object
+      properties:
         sku:
           title: Sku
           anyOf:
           - type: string
           - type: 'null'
-          description: The SKU of the substitute item
+          default: null
+        requestedSku:
+          title: Requestedsku
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        requestedId:
+          title: Requestedid
+          anyOf:
+          - type: string
+          - type: 'null'
           default: null
         quantity:
           title: Quantity
           anyOf:
           - type: integer
           - type: 'null'
-          description: The quantity of the substitute item
           default: null
+        requestedQuantity:
+          title: Requestedquantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        scannedBarcode:
+          title: Scannedbarcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        priceCents:
+          title: Pricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        status:
+          title: Status
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Per-item fulfillment outcome at pick time. One of: `picked`, `partially_picked`, `not_picked`, `substituted`.'
+          default: null
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        scans:
+          title: Scans
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ItemScanSerializer'
+          - type: 'null'
+          default: null
+      description: Generic serializer for picked items; Used for output.
+    OptionsGroupSerializer:
+      title: OptionsGroupSerializer
+      required:
+      - id
+      - label
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Dispatch Strategy ID
+          example: opn_WyMhHj
+        label:
+          title: Label
+          type: string
+          description: Dispatch Strategy Label
+          example: New York City Strategy
+        allowedProviders:
+          title: Allowedproviders
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Allowed providers
+          default: null
+          example:
+          - prv_01234567890
+          - prv_01234567891
+        enableAutoDispatch:
+          title: Enableautodispatch
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Enable auto dispatch
+          default: null
+          example: true
+        providerSelectionStrategy:
+          title: Providerselectionstrategy
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider selection strategy
+          default: null
+          example: cheapest
+        reassignOnFailure:
+          title: Reassignonfailure
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Reassign on failure
+          default: null
+          example: true
+        enableMaxDeliveryFee:
+          title: Enablemaxdeliveryfee
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Enable max delivery fee
+          default: null
+          example: true
+        maxDeliveryFeeCents:
+          title: Maxdeliveryfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Max delivery fee in cents
+          default: null
+          example: 10000
+        costSplitMaxFixedPriceCents:
+          title: Costsplitmaxfixedpricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Cost split max fixed price in cents
+          default: null
+          example: 10000
+        costSplitMaxPercentage:
+          title: Costsplitmaxpercentage
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Cost split max percentage
+          default: null
+          example: 0.1
+        costSplitStrategy:
+          title: Costsplitstrategy
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cost split strategy
+          default: null
+          example: price
+        smartReassignment:
+          title: Smartreassignment
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Smart reassignment
+          default: null
+          example: true
+      description: Generic serializer for options groups used in many endpoints.
+    Dimensions:
+      title: Dimensions
+      type: object
+      properties:
+        height:
+          title: Height
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The height of the item in centimeters (cm)
+          default: null
+          example: 10
+        width:
+          title: Width
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The width of the item in centimeters (cm)
+          default: null
+          example: 12
+        depth:
+          title: Depth
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The depth of the item in centimeters (cm)
+          default: null
+          example: 14
+    PackageSerializer:
+      title: PackageSerializer
+      required:
+      - id
+      - requirements
+      - valueCents
+      - itemsCount
+      - pickupLocation
+      - dropoffLocation
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Package ID
+          example: pkg_01234567890
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Description
+          default: null
+          example: Package description
+        requirements:
+          title: Requirements
+          type: array
+          items:
+            type: string
+          description: Requirements
+          example:
+          - photo_proof_of_delivery
+          - age_verification_on_delivery
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Tags
+          default: null
+          example:
+          - Alcohol
+        packageDeliveryMode:
+          title: Packagedeliverymode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Package delivery mode
+          default: null
+          example: now
+        pickupStartTime:
+          title: Pickupstarttime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup start time
+          default: null
+          example: '2021-01-01T00:00:00Z'
+        pickupEndTime:
+          title: Pickupendtime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup end time
+          default: null
+          example: '2021-01-01T00:00:00Z'
+        pickupBarcodes:
+          title: Pickupbarcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        dropoffStartTime:
+          title: Dropoffstarttime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff start time
+          default: null
+          example: '2021-01-01T00:00:00Z'
+        dropoffEndTime:
+          title: Dropoffendtime
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff end time
+          default: null
+          example: '2021-01-01T00:00:00Z'
+        dropoffBarcodes:
+          title: Dropoffbarcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        valueCents:
+          title: Valuecents
+          type: integer
+        taxCents:
+          title: Taxcents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Tax in cents
+          default: null
+          example: 100
+        serviceFeeCents:
+          title: Servicefeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Service fee in cents
+          default: null
+          example: 100
+        itemsCount:
+          title: Itemscount
+          anyOf:
+          - type: integer
+          - type: number
+          description: Items count
+          example: 100
+        externalIdentifier:
+          title: Externalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: External identifier
+          default: null
+          example: mini-mart-order-99
+        minimumVehicleSize:
+          title: Minimumvehiclesize
+          enum:
+          - any
+          - bike
+          - motorbike
+          - cargobike
+          - sedan
+          - car
+          - suv
+          - pickup_truck
+          - pickup
+          - van
+          - large_van
+          - extra_large_van
+          - truck
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Minimum vehicle size required for the package. Allowed values: [''any'', ''bike'', ''motorbike'', ''cargobike'', ''sedan'', ''car'', ''suv'', ''pickup_truck'', ''pickup'', ''van'', ''large_van'', ''extra_large_van'', ''truck'']'
+          default: null
+          example: car
+        pickupLocation:
+          $ref: '#/components/schemas/LocationSerializer'
+        pickupStoreLocationId:
+          title: Pickupstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup store location ID
+          default: null
+          example: store_01234567890
+        pickupStoreLocationExternalId:
+          title: Pickupstorelocationexternalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup store location external ID
+          default: null
+          example: '0123'
+        dropoffLocation:
+          $ref: '#/components/schemas/LocationSerializer'
+        dropoffStoreLocationId:
+          title: Dropoffstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff store location ID
+          default: null
+          example: store_01234567890
+        drivingMetrics:
+          title: Drivingmetrics
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Driving metrics (distance in meters, duration in seconds)
+          default: null
+          example:
+            distance: 100
+            duration: 100
+        value:
+          title: Value
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Value
+          default: null
+          example: 100.0
+        tax:
+          title: Tax
+          anyOf:
+          - type: integer
+          - type: number
+          - type: 'null'
+          description: Tax
+          default: null
+          example: 100
+        serviceFee:
+          title: Servicefee
+          anyOf:
+          - type: integer
+          - type: number
+          - type: 'null'
+          description: Service fee
+          default: null
+          example: 100
+        tipAmountCents:
+          title: Tipamountcents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        weight:
+          title: Weight
+          anyOf:
+          - type: integer
+          - type: number
+          - type: 'null'
+          description: Weight
+          default: null
+          example: 100
+        dimensions:
+          title: Dimensions
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Dimensions
+          default: null
+          example:
+            height: 100
+            length: 100
+            width: 100
+        items:
+          title: Items
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ItemOutput'
+          - type: 'null'
+          description: Items
+          default: null
+          example:
+          - count: 1
+            description: Item 1
+            valueCents: 100
+        referenceId:
+          title: Referenceid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Reference ID
+          default: null
+          example: mini-mart-order-99
+        packageMetadata:
+          title: Packagemetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Package metadata
+          default: null
+          example:
+            key: value
+      description: Generic serializer for packages used in many endpoints; Used for output.
+    ItemStatusHistoryEntrySerializer:
+      title: ItemStatusHistoryEntrySerializer
+      required:
+      - status
+      - createdAt
+      type: object
+      properties:
+        status:
+          title: Status
+          type: string
+          description: Item status at this point in time
+          example: picked
+        createdAt:
+          title: Createdat
+          type: string
+          description: Timestamp of the status change
+          example: '2025-04-25T03:20:00'
+      description: A single status change entry in an item's status history.
+    CompressedAdvancedTaskSerializer:
+      title: CompressedAdvancedTaskSerializer
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Task ID
+          example: tsk_01234567890
+      description: Generic serializer for tasks used in many endpoints.
+    BasicUserSerializer:
+      title: BasicUserSerializer
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          description: Email
+          example: john.doe@example.com
+      description: Generic serializer for basic users used in many endpoints.
     RouteStopSerializer:
       title: RouteStopSerializer
       required:
@@ -1808,6 +2081,735 @@ components:
           description: Orders associated with this stop, including tracking URLs and delivery details.
           default: null
       description: Represents a single stop within a planned route.
+    NoteSerializer:
+      title: NoteSerializer
+      required:
+      - id
+      - createdAt
+      - note
+      - user
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Note ID
+          example: not_01234567890
+        createdAt:
+          title: Createdat
+          type: string
+          description: Created at
+          example: '2023-08-29T19:17:46.264523'
+        note:
+          title: Note
+          type: string
+          description: Note
+          example: Task note
+        user:
+          anyOf:
+          - $ref: '#/components/schemas/BasicUserSerializer'
+          - type: 'null'
+          description: User
+          example:
+            email: john.doe@example.com
+      description: Generic serializer for notes used in many endpoints.
+    CourierPositionSerializer:
+      title: CourierPositionSerializer
+      required:
+      - lat
+      - lng
+      type: object
+      properties:
+        lat:
+          title: Lat
+          type: number
+          description: Latitude coordinate.
+        lng:
+          title: Lng
+          type: number
+          description: Longitude coordinate.
+        updatedAt:
+          title: Updatedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the position was last updated on the server.
+          default: null
+        capturedAt:
+          title: Capturedat
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Timestamp when the GPS position was captured on driver's device.
+          default: null
+        accuracy:
+          title: Accuracy
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Estimated horizontal accuracy radius in meters.
+          default: null
+        heading:
+          title: Heading
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Heading in degrees relative to true north.
+          default: null
+        speed:
+          title: Speed
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Speed in meters per second.
+          default: null
+        altitude:
+          title: Altitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Altitude in meters above sea level.
+          default: null
+        altitudeAccuracy:
+          title: Altitudeaccuracy
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Estimated altitude accuracy in meters.
+          default: null
+        batteryLevel:
+          title: Batterylevel
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Battery level from 0.0 to 1.0, if provided by device.
+          default: null
+        batteryIsCharging:
+          title: Batteryischarging
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the device is currently charging.
+          default: null
+        isMoving:
+          title: Ismoving
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the device is currently detected as moving.
+          default: null
+      description: Current GPS position of a courier.
+    VehicleSerializer:
+      title: VehicleSerializer
+      type: object
+      properties:
+        licensePlate:
+          title: Licenseplate
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        make:
+          title: Make
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        model:
+          title: Model
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        color:
+          title: Color
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        year:
+          title: Year
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: Vehicle details for a route.
+    CreateBatchJobInputSerializer:
+      title: CreateBatchJobInputSerializer
+      required:
+      - packages
+      type: object
+      properties:
+        packages:
+          title: Packages
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageSchemaMixin'
+        jobMetadata:
+          title: Jobmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        optionsGroupId:
+          title: Optionsgroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        externalIdentifier:
+          title: Externalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        inputDatetimesLocalizedToPickupTz:
+          title: Inputdatetimeslocalizedtopickuptz
+          type: boolean
+          default: false
+      description: Expected input for creating a batch job.
+    DeliverySerializer:
+      title: DeliverySerializer
+      required:
+      - id
+      - status
+      - isActive
+      - priceCents
+      - currency
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Delivery ID
+          example: dlv_01234567890
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        status:
+          title: Status
+          type: string
+          description: Delivery status
+          example: dropoff_complete
+        statusHistory:
+          title: Statushistory
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: Delivery status history
+          default: null
+          example:
+          - created_at: '2023-08-29T19:17:46.264523'
+            status: created
+          - created_at: '2023-08-29T19:17:47.509265'
+            status: not_assigned_driver
+        isActive:
+          title: Isactive
+          type: boolean
+          description: Is the delivery active
+        pickupEta:
+          title: Pickupeta
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup ETA
+          default: null
+        dropoffEta:
+          title: Dropoffeta
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff ETA
+          default: null
+        dropoffDeadline:
+          title: Dropoffdeadline
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff deadline
+          default: null
+        priceCents:
+          title: Pricecents
+          type: integer
+          description: Price in cents
+        currency:
+          title: Currency
+          type: string
+          description: Currency
+        documents:
+          title: Documents
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/DocumentSerializer'
+          - type: 'null'
+          description: Documents
+          default: null
+        nashFeeCents:
+          title: Nashfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Nash fee in cents
+          default: null
+        courierName:
+          title: Couriername
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier name
+          default: null
+        courierPhoneNumber:
+          title: Courierphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier phone number
+          default: null
+        courierPickupPhoneNumber:
+          title: Courierpickupphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier pickup phone number
+          default: null
+        courierDropoffPhoneNumber:
+          title: Courierdropoffphonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier dropoff phone number
+          default: null
+        courierLocation:
+          title: Courierlocation
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Courier location
+          default: null
+        courierVehicle:
+          title: Couriervehicle
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Courier vehicle
+          default: null
+        courierProfileImage:
+          title: Courierprofileimage
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Courier profile image
+          default: null
+        proofOfDelivery:
+          title: Proofofdelivery
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: Proof of delivery
+          default: null
+        providerDeliveryId:
+          title: Providerdeliveryid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider delivery id
+          default: null
+        providerBatchId:
+          title: Providerbatchid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider batch id
+          default: null
+        price:
+          title: Price
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Price
+          default: null
+        taxAmountCents:
+          title: Taxamountcents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Tax amount in cents
+          default: null
+        tollFeeCents:
+          title: Tollfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Toll fee in cents
+          default: null
+        waitFeeCents:
+          title: Waitfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Wait fee in cents
+          default: null
+        waitTimeMinutes:
+          title: Waittimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Wait time in minutes
+          default: null
+        cancellationFeeCents:
+          title: Cancellationfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Cancellation fee in cents
+          default: null
+        returnFeeCents:
+          title: Returnfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Return fee in cents
+          default: null
+        otherProviderFees:
+          title: Otherproviderfees
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Other provider fees
+          default: null
+        insuranceFeeCents:
+          title: Insurancefeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Insurance fee in cents
+          default: null
+        totalPriceBreakdown:
+          title: Totalpricebreakdown
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Total price breakdown
+          default: null
+        totalPriceCents:
+          title: Totalpricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Total price in cents
+          default: null
+        pickedItems:
+          title: Pickeditems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/PickedItemsSerializer'
+          - type: 'null'
+          description: Picked items
+          default: null
+      description: 'Generic serializer for deliveries used in many endpoints.
+
+
+        Some endpoints won''t return all fields, so they are optional. This means that they will return field names with
+
+        null values.'
+    ReturnedBatchJobMixin:
+      title: ReturnedBatchJobMixin
+      required:
+      - id
+      - createdAt
+      - portalUrl
+      - isActive
+      - isBatch
+      - batch
+      - route
+      - jobConfigurations
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Job ID
+          example: job_01234567890
+        createdAt:
+          title: Createdat
+          type: string
+          description: Created at
+          example: '2023-08-29T19:17:46.264523'
+        portalUrl:
+          title: Portalurl
+          type: string
+          description: Portal URL
+          example: https://usenash.com/portal/job_abc123
+        externalIdentifier:
+          title: Externalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: External identifier
+          default: null
+          example: mini-mart-order-99
+        jobMetadata:
+          title: Jobmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Job metadata
+          default: null
+          example:
+            key: value
+        isActive:
+          title: Isactive
+          type: boolean
+          description: Is the job active
+          example: true
+        isBatch:
+          title: Isbatch
+          type: boolean
+          description: Is the job a batch
+          example: false
+        batch:
+          $ref: '#/components/schemas/BatchSerializer'
+          description: Batch
+        route:
+          anyOf:
+          - $ref: '#/components/schemas/RouteSerializer'
+          - type: 'null'
+          description: Route
+        jobConfigurations:
+          title: Jobconfigurations
+          type: array
+          items:
+            $ref: '#/components/schemas/JobConfigurationsSerializer'
+          description: Job configurations
+        optionsGroup:
+          anyOf:
+          - $ref: '#/components/schemas/OptionsGroupSerializer'
+          - type: 'null'
+          description: Options group
+          default: null
+        shortReferenceCode:
+          title: Shortreferencecode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Short, non-unique human-readable reference code for the job.
+          default: null
+      description: The format for a returned batch job used in many endpoints.
+    FullJobPayload:
+      title: FullJobPayload
+      required:
+      - job
+      type: object
+      properties:
+        job:
+          $ref: '#/components/schemas/ReturnedJobMixin'
+      description: Expected output from autodispatch job endpoint.
+    OrderItemSerializer:
+      title: OrderItemSerializer
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The merchant ID of the item
+          default: null
+          example: item-001
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the item
+          default: null
+        count:
+          title: Count
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the item
+          default: null
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The value of the item in cents
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Barcode associated with the item
+          default: null
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: SKU of the item
+          default: null
+        category:
+          title: Category
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The category of the item
+          default: null
+        status:
+          title: Status
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Current lifecycle status of the item.
+          default: null
+          example: delivered
+        availableQuantity:
+          title: Availablequantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Quantity available after pickup (may differ from count)
+          default: null
+        statusMetadata:
+          anyOf:
+          - $ref: '#/components/schemas/ItemStatusMetadataSerializer'
+          - type: 'null'
+          description: Operational metadata tracked during the item's lifecycle.
+          default: null
+        statusHistory:
+          title: Statushistory
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ItemStatusHistoryEntrySerializer'
+          - type: 'null'
+          description: History of status changes for this item.
+          default: null
+        subItems:
+          title: Subitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/OrderItemSerializer'
+          - type: 'null'
+          description: Nested sub-items with their own status tracking.
+          default: null
+      description: 'Item with status tracking for route stop webhook payloads.
+
+
+        Combines item definition with lifecycle status from the route state machine.'
+    StopOrderSerializer:
+      title: StopOrderSerializer
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Order ID.
+          example: ord_Qr5bVt8WiByGh66z2g7xEu
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: External identifier for the order.
+          default: null
+        publicTrackingUrl:
+          title: Publictrackingurl
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Public tracking URL for the order.
+          default: null
+        pod:
+          title: Pod
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ProofOfDeliverySerializer'
+          - type: 'null'
+          description: Proof of delivery data (photos, signature, etc.) if captured.
+          default: null
+        orderItems:
+          title: Orderitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/OrderItemSerializer'
+          - type: 'null'
+          description: Items with lifecycle status tracking (picked, delivered, failed, etc.).
+          default: null
+      description: Order information associated with a route stop.
+    DocumentSerializer:
+      title: DocumentSerializer
+      required:
+      - createdAt
+      - id
+      - type
+      - contentType
+      type: object
+      properties:
+        createdAt:
+          title: Createdat
+          type: string
+        id:
+          title: Id
+          type: string
+        type:
+          title: Type
+          type: string
+        url:
+          title: Url
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        data:
+          title: Data
+          anyOf:
+          - type: string
+            format: binary
+          - type: 'null'
+          default: null
+        contentType:
+          title: Contenttype
+          type: string
+        documentMetadata:
+          title: Documentmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+      description: Generic serializer for Nash documents; Used for output.
     TaskSerializer:
       title: TaskSerializer
       required:
@@ -1961,494 +2963,53 @@ components:
             user:
               email: john.doe@example.com
       description: Generic serializer for tasks used in many endpoints.
-    ReturnedBatchJobMixin:
-      title: ReturnedBatchJobMixin
-      required:
-      - id
-      - createdAt
-      - portalUrl
-      - isActive
-      - isBatch
-      - batch
-      - route
-      - jobConfigurations
+    SubstitutionObject:
+      title: SubstitutionObject
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          description: Job ID
-          example: job_01234567890
-        createdAt:
-          title: Createdat
-          type: string
-          description: Created at
-          example: '2023-08-29T19:17:46.264523'
-        portalUrl:
-          title: Portalurl
-          type: string
-          description: Portal URL
-          example: https://usenash.com/portal/job_abc123
-        externalIdentifier:
-          title: Externalidentifier
+        preference:
+          title: Preference
           anyOf:
           - type: string
           - type: 'null'
-          description: External identifier
+          description: 'Substitution preference: refund or substitute'
           default: null
-          example: mini-mart-order-99
-        jobMetadata:
-          title: Jobmetadata
+        source:
+          title: Source
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Source of substitution, e.g., merchant, customer
+          default: null
+        substituteItems:
+          title: Substituteitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubstituteItemObject'
+          - type: 'null'
+          description: List of substitute items
+          default: null
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
           anyOf:
           - type: object
             additionalProperties: true
           - type: 'null'
-          description: Job metadata
           default: null
-          example:
-            key: value
-        isActive:
-          title: Isactive
-          type: boolean
-          description: Is the job active
-          example: true
-        isBatch:
-          title: Isbatch
-          type: boolean
-          description: Is the job a batch
-          example: false
-        batch:
-          $ref: '#/components/schemas/BatchSerializer'
-          description: Batch
-        route:
-          anyOf:
-          - $ref: '#/components/schemas/RouteSerializer'
-          - type: 'null'
-          description: Route
-        jobConfigurations:
-          title: Jobconfigurations
-          type: array
-          items:
-            $ref: '#/components/schemas/JobConfigurationsSerializer'
-          description: Job configurations
-        optionsGroup:
-          anyOf:
-          - $ref: '#/components/schemas/OptionsGroupSerializer'
-          - type: 'null'
-          description: Options group
-          default: null
-        shortReferenceCode:
-          title: Shortreferencecode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Short, non-unique human-readable reference code for the job.
-          default: null
-      description: The format for a returned batch job used in many endpoints.
-    RefreshBatchQuotesOutputSerializer:
-      title: RefreshBatchQuotesOutputSerializer
-      required:
-      - jobId
-      - quotes
-      type: object
-      properties:
-        jobId:
-          title: Jobid
-          type: string
-        quotes:
-          title: Quotes
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteSerializer'
-      description: Expected output after refreshing quotes for a batch job.
-    CourierSerializer:
-      title: CourierSerializer
-      type: object
-      properties:
-        id:
-          title: Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        firstName:
-          title: Firstname
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        lastName:
-          title: Lastname
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        phoneNumber:
-          title: Phonenumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-      description: Courier details for a route.
-    Dimensions:
-      title: Dimensions
-      type: object
-      properties:
-        height:
-          title: Height
-          anyOf:
-          - type: number
-          - type: integer
-          - type: 'null'
-          description: The height of the item in centimeters (cm)
-          default: null
-          example: 10
-        width:
-          title: Width
-          anyOf:
-          - type: number
-          - type: integer
-          - type: 'null'
-          description: The width of the item in centimeters (cm)
-          default: null
-          example: 12
-        depth:
-          title: Depth
-          anyOf:
-          - type: number
-          - type: integer
-          - type: 'null'
-          description: The depth of the item in centimeters (cm)
-          default: null
-          example: 14
-    ItemOutput:
-      title: ItemOutput
-      type: object
-      properties:
-        id:
-          title: Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The merchant ID of the item
-          default: null
-          example: abc-123
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The description of the item
-          default: null
-          example: A box of books
-        count:
-          title: Count
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The quantity of the item
-          default: null
-          example: 2
-        dimensions:
-          anyOf:
-          - $ref: '#/components/schemas/Dimensions'
-          - type: 'null'
-          description: The dimensions of the item
-          default: null
-          example:
-            depth: 14
-            height: 10
-            width: 12
-        weight:
-          title: Weight
-          anyOf:
-          - type: number
-          - type: integer
-          - type: 'null'
-          description: The weight of the item in kilograms (kg)
-          default: null
-          example: 1.5
-        valueCents:
-          title: Valuecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The value of the item in cents
-          default: null
-          example: 1000
-        requirements:
-          title: Requirements
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: List of requirements for this item
-          default: null
-          example:
-          - age_verification_on_delivery
-        category:
-          title: Category
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The category of the item
-          default: null
-        barcode:
-          title: Barcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Barcode value for this item.
-          default: null
-          example: 0199312650999998913643M221872801002010908
-        metadata:
-          title: Metadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Key-value data to attach to this item.
-          default: null
-          example:
-            packaging_type: CTN
-        subItems:
-          title: Subitems
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/SubItemOutput'
-          - type: 'null'
-          description: The nested sub-items
-          default: null
-      description: Item object returned by the API.
-    BasicUserSerializer:
-      title: BasicUserSerializer
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          title: Email
-          type: string
-          description: Email
-          example: john.doe@example.com
-      description: Generic serializer for basic users used in many endpoints.
-    StopOrderSerializer:
-      title: StopOrderSerializer
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Order ID.
-          example: ord_Qr5bVt8WiByGh66z2g7xEu
-        externalId:
-          title: Externalid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: External identifier for the order.
-          default: null
-        publicTrackingUrl:
-          title: Publictrackingurl
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Public tracking URL for the order.
-          default: null
-        pod:
-          title: Pod
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ProofOfDeliverySerializer'
-          - type: 'null'
-          description: Proof of delivery data (photos, signature, etc.) if captured.
-          default: null
-        orderItems:
-          title: Orderitems
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/OrderItemSerializer'
-          - type: 'null'
-          description: Items with lifecycle status tracking (picked, delivered, failed, etc.).
-          default: null
-      description: Order information associated with a route stop.
-    BatchStopTypes:
-      title: BatchStopTypes
-      enum:
-      - PICKUP
-      - DROPOFF
-      - RETURN
-      - DRIVER_BREAK
-      - ROUTE_START
-      - ROUTE_END
-      type: string
-      description: Various stop types for batch and route object.
-    ItemStatusHistoryEntrySerializer:
-      title: ItemStatusHistoryEntrySerializer
-      required:
-      - status
-      - createdAt
-      type: object
-      properties:
-        status:
-          title: Status
-          type: string
-          description: Item status at this point in time
-          example: picked
-        createdAt:
-          title: Createdat
-          type: string
-          description: Timestamp of the status change
-          example: '2025-04-25T03:20:00'
-      description: A single status change entry in an item's status history.
-    JobConfigurationsSerializer:
-      title: JobConfigurationsSerializer
-      required:
-      - id
-      - package
-      - tasks
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Job Configuration ID
-          example: cfg_01234567890
-        package:
-          $ref: '#/components/schemas/PackageSerializer'
-          description: Package
-        tasks:
-          title: Tasks
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskSerializer'
-          description: Tasks
-        advancedTask:
-          title: Advancedtask
-          anyOf:
-          - $ref: '#/components/schemas/TaskSerializer'
-          - $ref: '#/components/schemas/CompressedAdvancedTaskSerializer'
-          - type: 'null'
-          description: Advanced task
-          default: null
-        delivery:
-          anyOf:
-          - $ref: '#/components/schemas/DeliverySerializer'
-          - type: 'null'
-          description: Delivery
-          default: null
-        publicTrackingUrl:
-          title: Publictrackingurl
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Public tracking URL
-          default: null
-          example: https://usenash.com/tracking/job_abc123
-      description: Generic serializer for jbo configurations used in many endpoints.
-    OrderItemSerializer:
-      title: OrderItemSerializer
-      type: object
-      properties:
-        id:
-          title: Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The merchant ID of the item
-          default: null
-          example: item-001
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The description of the item
-          default: null
-        count:
-          title: Count
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The quantity of the item
-          default: null
-        valueCents:
-          title: Valuecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The value of the item in cents
-          default: null
-        barcode:
-          title: Barcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Barcode associated with the item
-          default: null
-        sku:
-          title: Sku
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: SKU of the item
-          default: null
-        category:
-          title: Category
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The category of the item
-          default: null
-        status:
-          title: Status
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Current lifecycle status of the item.
-          default: null
-          example: delivered
-        availableQuantity:
-          title: Availablequantity
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Quantity available after pickup (may differ from count)
-          default: null
-        statusMetadata:
-          anyOf:
-          - $ref: '#/components/schemas/ItemStatusMetadataSerializer'
-          - type: 'null'
-          description: Operational metadata tracked during the item's lifecycle.
-          default: null
-        statusHistory:
-          title: Statushistory
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ItemStatusHistoryEntrySerializer'
-          - type: 'null'
-          description: History of status changes for this item.
-          default: null
-        subItems:
-          title: Subitems
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/OrderItemSerializer'
-          - type: 'null'
-          description: Nested sub-items with their own status tracking.
-          default: null
-      description: 'Item with status tracking for route stop webhook payloads.
-
-
-        Combines item definition with lifecycle status from the route state machine.'
     PackageSchemaMixin:
       title: PackageSchemaMixin
       required:
@@ -2796,6 +3357,237 @@ components:
           - type: 'null'
           default: null
       description: Generic mixin for packages used in many endpoints; Used for input.
+    JobConfigurationsSerializer:
+      title: JobConfigurationsSerializer
+      required:
+      - id
+      - package
+      - tasks
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Job Configuration ID
+          example: cfg_01234567890
+        package:
+          $ref: '#/components/schemas/PackageSerializer'
+          description: Package
+        tasks:
+          title: Tasks
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskSerializer'
+          description: Tasks
+        advancedTask:
+          title: Advancedtask
+          anyOf:
+          - $ref: '#/components/schemas/TaskSerializer'
+          - $ref: '#/components/schemas/CompressedAdvancedTaskSerializer'
+          - type: 'null'
+          description: Advanced task
+          default: null
+        delivery:
+          anyOf:
+          - $ref: '#/components/schemas/DeliverySerializer'
+          - type: 'null'
+          description: Delivery
+          default: null
+        publicTrackingUrl:
+          title: Publictrackingurl
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Public tracking URL
+          default: null
+          example: https://usenash.com/tracking/job_abc123
+      description: Generic serializer for jbo configurations used in many endpoints.
+    BatchStopTypes:
+      title: BatchStopTypes
+      enum:
+      - PICKUP
+      - DROPOFF
+      - RETURN
+      - DRIVER_BREAK
+      - ROUTE_START
+      - ROUTE_END
+      type: string
+      description: Various stop types for batch and route object.
+    ParsedAddressInputSerializer:
+      title: ParsedAddressInputSerializer
+      required:
+      - street
+      - city
+      - country
+      type: object
+      properties:
+        number:
+          title: Number
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number of the address.
+          default: null
+          example: '1600'
+        secondaryNumber:
+          title: Secondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The secondary number of the address.
+          default: null
+          example: null
+        street:
+          title: Street
+          type: string
+          description: 'The street of the address. If your geocoding service does not split numbers from street names, you can pass the street name with the number in this field. Example: 1600 Pennsylvania Avenue NW.'
+          example: Pennsylvania Avenue NW
+        county:
+          title: County
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The county of the address.
+          default: null
+          example: Washington
+        city:
+          title: City
+          type: string
+          description: The city of the address.
+          example: Washington
+        state:
+          title: State
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the address.
+          default: null
+          example: DC
+        postalCode:
+          title: Postalcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The postal code of the address.
+          default: null
+          example: '20500'
+        country:
+          title: Country
+          type: string
+          description: The country of the address.
+          example: US
+        latitude:
+          title: Latitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The latitude of the address.
+          default: null
+          example: 38.8948949
+        longitude:
+          title: Longitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The longitude of the address.
+          default: null
+          example: -77.0371581
+      description: Parsed address input serializer for creating a job.
+    BarcodeInfoSerializer:
+      title: BarcodeInfoSerializer
+      type: object
+      properties:
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        priceCents:
+          title: Pricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        weightUnit:
+          title: Weightunit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        productCode:
+          title: Productcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        isVariableWeight:
+          title: Isvariableweight
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        variableValue:
+          title: Variablevalue
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        format:
+          title: Format
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        indicatorDigit:
+          title: Indicatordigit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        checkDigit:
+          title: Checkdigit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        manufacturerCode:
+          title: Manufacturercode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        itemReference:
+          title: Itemreference
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        pluCheckDigit:
+          title: Plucheckdigit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        barcodeSansCheckDigit:
+          title: Barcodesanscheckdigit
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        expirationDate:
+          title: Expirationdate
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: Serializer for barcode information in scans.
     ItemStatusMetadataSerializer:
       title: ItemStatusMetadataSerializer
       type: object
@@ -2844,113 +3636,24 @@ components:
           default: null
           example: dropoff
       description: Operational metadata tracked during item lifecycle in route delivery.
-    PickedItemsSerializer:
-      title: PickedItemsSerializer
+    LatLngSerializer:
+      title: LatLngSerializer
+      required:
+      - lat
+      - lng
       type: object
       properties:
-        sku:
-          title: Sku
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        requestedSku:
-          title: Requestedsku
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        id:
-          title: Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        requestedId:
-          title: Requestedid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        quantity:
-          title: Quantity
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        requestedQuantity:
-          title: Requestedquantity
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        scannedBarcode:
-          title: Scannedbarcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        weight:
-          title: Weight
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        priceCents:
-          title: Pricecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        status:
-          title: Status
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'Per-item fulfillment outcome at pick time. One of: `picked`, `partially_picked`, `not_picked`, `substituted`.'
-          default: null
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        scans:
-          title: Scans
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ItemScanSerializer'
-          - type: 'null'
-          default: null
-      description: Generic serializer for picked items; Used for output.
-    SubstitutionObject:
-      title: SubstitutionObject
-      type: object
-      properties:
-        preference:
-          title: Preference
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'Substitution preference: refund or substitute'
-          default: null
-        source:
-          title: Source
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Source of substitution, e.g., merchant, customer
-          default: null
-        substituteItems:
-          title: Substituteitems
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/SubstituteItemObject'
-          - type: 'null'
-          description: List of substitute items
-          default: null
+        lat:
+          title: Lat
+          type: number
+          description: Latitude coordinate.
+          example: 45.558214
+        lng:
+          title: Lng
+          type: number
+          description: Longitude coordinate.
+          example: -122.587074
+      description: Latitude/longitude coordinates.
     RouteSerializer:
       title: RouteSerializer
       required:
@@ -3121,709 +3824,6 @@ components:
           - created_at: '2025-04-25T03:15:00Z'
             status: STARTED
       description: Represents a planned sequence of stops for a delivery or batch.
-    CourierPositionSerializer:
-      title: CourierPositionSerializer
-      required:
-      - lat
-      - lng
-      type: object
-      properties:
-        lat:
-          title: Lat
-          type: number
-          description: Latitude coordinate.
-        lng:
-          title: Lng
-          type: number
-          description: Longitude coordinate.
-        updatedAt:
-          title: Updatedat
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Timestamp when the position was last updated on the server.
-          default: null
-        capturedAt:
-          title: Capturedat
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Timestamp when the GPS position was captured on driver's device.
-          default: null
-        accuracy:
-          title: Accuracy
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Estimated horizontal accuracy radius in meters.
-          default: null
-        heading:
-          title: Heading
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Heading in degrees relative to true north.
-          default: null
-        speed:
-          title: Speed
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Speed in meters per second.
-          default: null
-        altitude:
-          title: Altitude
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Altitude in meters above sea level.
-          default: null
-        altitudeAccuracy:
-          title: Altitudeaccuracy
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Estimated altitude accuracy in meters.
-          default: null
-        batteryLevel:
-          title: Batterylevel
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Battery level from 0.0 to 1.0, if provided by device.
-          default: null
-        batteryIsCharging:
-          title: Batteryischarging
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Whether the device is currently charging.
-          default: null
-        isMoving:
-          title: Ismoving
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Whether the device is currently detected as moving.
-          default: null
-      description: Current GPS position of a courier.
-    ProofOfDeliverySerializer:
-      title: ProofOfDeliverySerializer
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          title: Type
-          type: string
-          description: Type of proof of delivery, e.g., 'photo', 'signature', etc.
-        url:
-          title: Url
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: URL of the proof of delivery document.
-          default: null
-        uploadedAt:
-          title: Uploadedat
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Timestamp when the proof of delivery was uploaded.
-          default: null
-      description: Delivery tracking details for an order at a route stop.
-    DocumentSerializer:
-      title: DocumentSerializer
-      required:
-      - createdAt
-      - id
-      - type
-      - contentType
-      type: object
-      properties:
-        createdAt:
-          title: Createdat
-          type: string
-        id:
-          title: Id
-          type: string
-        type:
-          title: Type
-          type: string
-        url:
-          title: Url
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        data:
-          title: Data
-          anyOf:
-          - type: string
-            format: binary
-          - type: 'null'
-          default: null
-        contentType:
-          title: Contenttype
-          type: string
-        documentMetadata:
-          title: Documentmetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-      description: Generic serializer for Nash documents; Used for output.
-    CreateBatchJobInputSerializer:
-      title: CreateBatchJobInputSerializer
-      required:
-      - packages
-      type: object
-      properties:
-        packages:
-          title: Packages
-          type: array
-          items:
-            $ref: '#/components/schemas/PackageSchemaMixin'
-        jobMetadata:
-          title: Jobmetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-        optionsGroupId:
-          title: Optionsgroupid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        externalIdentifier:
-          title: Externalidentifier
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        inputDatetimesLocalizedToPickupTz:
-          title: Inputdatetimeslocalizedtopickuptz
-          type: boolean
-          default: false
-      description: Expected input for creating a batch job.
-    DeliverySerializer:
-      title: DeliverySerializer
-      required:
-      - id
-      - status
-      - isActive
-      - priceCents
-      - currency
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Delivery ID
-          example: dlv_01234567890
-        type:
-          title: Type
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        status:
-          title: Status
-          type: string
-          description: Delivery status
-          example: dropoff_complete
-        statusHistory:
-          title: Statushistory
-          anyOf:
-          - type: array
-            items:
-              type: object
-              additionalProperties: true
-          - type: 'null'
-          description: Delivery status history
-          default: null
-          example:
-          - created_at: '2023-08-29T19:17:46.264523'
-            status: created
-          - created_at: '2023-08-29T19:17:47.509265'
-            status: not_assigned_driver
-        isActive:
-          title: Isactive
-          type: boolean
-          description: Is the delivery active
-        pickupEta:
-          title: Pickupeta
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Pickup ETA
-          default: null
-        dropoffEta:
-          title: Dropoffeta
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Dropoff ETA
-          default: null
-        dropoffDeadline:
-          title: Dropoffdeadline
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Dropoff deadline
-          default: null
-        priceCents:
-          title: Pricecents
-          type: integer
-          description: Price in cents
-        currency:
-          title: Currency
-          type: string
-          description: Currency
-        documents:
-          title: Documents
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/DocumentSerializer'
-          - type: 'null'
-          description: Documents
-          default: null
-        nashFeeCents:
-          title: Nashfeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Nash fee in cents
-          default: null
-        courierName:
-          title: Couriername
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Courier name
-          default: null
-        courierPhoneNumber:
-          title: Courierphonenumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Courier phone number
-          default: null
-        courierPickupPhoneNumber:
-          title: Courierpickupphonenumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Courier pickup phone number
-          default: null
-        courierDropoffPhoneNumber:
-          title: Courierdropoffphonenumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Courier dropoff phone number
-          default: null
-        courierLocation:
-          title: Courierlocation
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Courier location
-          default: null
-        courierVehicle:
-          title: Couriervehicle
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Courier vehicle
-          default: null
-        courierProfileImage:
-          title: Courierprofileimage
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Courier profile image
-          default: null
-        proofOfDelivery:
-          title: Proofofdelivery
-          anyOf:
-          - type: array
-            items:
-              type: object
-              additionalProperties: true
-          - type: 'null'
-          description: Proof of delivery
-          default: null
-        providerDeliveryId:
-          title: Providerdeliveryid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Provider delivery id
-          default: null
-        providerBatchId:
-          title: Providerbatchid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Provider batch id
-          default: null
-        price:
-          title: Price
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Price
-          default: null
-        taxAmountCents:
-          title: Taxamountcents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Tax amount in cents
-          default: null
-        tollFeeCents:
-          title: Tollfeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Toll fee in cents
-          default: null
-        waitFeeCents:
-          title: Waitfeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Wait fee in cents
-          default: null
-        waitTimeMinutes:
-          title: Waittimeminutes
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Wait time in minutes
-          default: null
-        cancellationFeeCents:
-          title: Cancellationfeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Cancellation fee in cents
-          default: null
-        returnFeeCents:
-          title: Returnfeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Return fee in cents
-          default: null
-        otherProviderFees:
-          title: Otherproviderfees
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Other provider fees
-          default: null
-        insuranceFeeCents:
-          title: Insurancefeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Insurance fee in cents
-          default: null
-        totalPriceBreakdown:
-          title: Totalpricebreakdown
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Total price breakdown
-          default: null
-        totalPriceCents:
-          title: Totalpricecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Total price in cents
-          default: null
-        pickedItems:
-          title: Pickeditems
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/PickedItemsSerializer'
-          - type: 'null'
-          description: Picked items
-          default: null
-      description: 'Generic serializer for deliveries used in many endpoints.
-
-
-        Some endpoints won''t return all fields, so they are optional. This means that they will return field names with
-
-        null values.'
-    BarcodeInfoSerializer:
-      title: BarcodeInfoSerializer
-      type: object
-      properties:
-        weight:
-          title: Weight
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        priceCents:
-          title: Pricecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        weightUnit:
-          title: Weightunit
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        productCode:
-          title: Productcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        isVariableWeight:
-          title: Isvariableweight
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        barcode:
-          title: Barcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        variableValue:
-          title: Variablevalue
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        format:
-          title: Format
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        indicatorDigit:
-          title: Indicatordigit
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        checkDigit:
-          title: Checkdigit
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        manufacturerCode:
-          title: Manufacturercode
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        itemReference:
-          title: Itemreference
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        pluCheckDigit:
-          title: Plucheckdigit
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        barcodeSansCheckDigit:
-          title: Barcodesanscheckdigit
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        expirationDate:
-          title: Expirationdate
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-      description: Serializer for barcode information in scans.
-    LocationSerializer:
-      title: LocationSerializer
-      required:
-      - id
-      - address
-      - formattedAddress
-      - addressCity
-      - addressCountry
-      - timezoneId
-      - timezoneName
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Location ID
-          example: loc_01234567890
-        address:
-          title: Address
-          type: string
-          description: Address
-          example: 1600 Amphitheatre Parkway
-        formattedAddress:
-          title: Formattedaddress
-          type: string
-          description: Formatted address
-          example: 1600 Amphitheatre Parkway
-        addressNumber:
-          title: Addressnumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Address number
-          default: null
-          example: '1600'
-        addressFormattedStreet:
-          title: Addressformattedstreet
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Address formatted street
-          default: null
-          example: Amphitheatre Parkway
-        addressCity:
-          title: Addresscity
-          type: string
-          description: Address city
-          example: Mountain View
-        addressCounty:
-          title: Addresscounty
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Address county
-          default: null
-          example: Santa Clara
-        addressState:
-          title: Addressstate
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Address state
-          default: null
-          example: CA
-        addressZip:
-          title: Addresszip
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Address zip
-          default: null
-          example: '94043'
-        addressCountry:
-          title: Addresscountry
-          type: string
-          description: Address country
-          example: US
-        timezoneId:
-          title: Timezoneid
-          type: string
-          description: Timezone ID
-          example: America/Los_Angeles
-        timezoneName:
-          title: Timezonename
-          type: string
-          description: Timezone name
-          example: Pacific Time
-        instructions:
-          title: Instructions
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Instructions
-          default: null
-          example: Turn left on Main St
-        businessName:
-          title: Businessname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Business name
-          default: null
-          example: Nash
-        firstName:
-          title: Firstname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: First name
-          default: null
-          example: John
-        lastName:
-          title: Lastname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Last name
-          default: null
-          example: Doe
-        phoneNumber:
-          title: Phonenumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Phone number
-          default: null
-          example: '+15555555555'
-        email:
-          title: Email
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Email
-          default: null
-          example: john.doe@example.com
-        lat:
-          title: Lat
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Latitude
-          default: null
-          example: 37.774929
-        lng:
-          title: Lng
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Longitude
-          default: null
-          example: -122.419416
-      description: Generic serializer for location used in many endpoints.
-    FullJobPayload:
-      title: FullJobPayload
-      required:
-      - job
-      type: object
-      properties:
-        job:
-          $ref: '#/components/schemas/ReturnedJobMixin'
-      description: Expected output from autodispatch job endpoint.
   securitySchemes:
     Token:
       type: http

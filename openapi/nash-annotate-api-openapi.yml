@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Annotate API
+  title: Nash Annotate API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Annotate
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -63,6 +63,26 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
     CreateFlagInputSerializer:
       title: CreateFlagInputSerializer
       required:
@@ -106,26 +126,6 @@ components:
           type: string
           description: The notes to create a flag for.
       description: Expected payload for the create flag endpoint.
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
     FlagStatus:
       title: FlagStatus
       enum:

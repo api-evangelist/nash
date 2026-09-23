@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Route Restrictions API
+  title: Nash Route Restrictions API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Org-scoped geographic areas the route optimizer must avoid traversing.
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -22,7 +22,7 @@ paths:
       tags:
       - Route Restrictions
       summary: Set Strategy Route Restrictions
-      description: Bulk-replace the route restrictions attached to ``<id>``. Empty list detaches all restrictions.
+      description: Bulk-replace the route restrictions attached to ````. Empty list detaches all restrictions.
       operationId: route_restrictions_strategy_attach_v1_set_strategy_restrictions_route__id__route_restrictions_put
       parameters:
       - name: id
@@ -202,14 +202,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    DeleteRouteRestrictionResponse:
-      title: DeleteRouteRestrictionResponse
-      type: object
-      properties:
-        success:
-          title: Success
-          type: boolean
-          default: true
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -241,6 +233,17 @@ components:
           type: array
           items:
             type: string
+    RouteRestrictionsListResponse:
+      title: RouteRestrictionsListResponse
+      required:
+      - route_restrictions
+      type: object
+      properties:
+        route_restrictions:
+          title: Route Restrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRestrictionRead'
     RouteRestrictionUpdate:
       title: RouteRestrictionUpdate
       type: object
@@ -279,79 +282,14 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    SetStrategyRestrictionsResponse:
-      title: SetStrategyRestrictionsResponse
-      required:
-      - route_restrictions
+    DeleteRouteRestrictionResponse:
+      title: DeleteRouteRestrictionResponse
       type: object
       properties:
-        route_restrictions:
-          title: Route Restrictions
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteRestrictionRead'
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    RouteRestrictionCreate:
-      title: RouteRestrictionCreate
-      required:
-      - name
-      - polygons
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        polygons:
-          title: Polygons
-          type: array
-          items:
-            type: array
-            items:
-              maxItems: 2
-              minItems: 2
-              type: array
-              prefixItems:
-              - type: number
-              - type: number
-        restriction_metadata:
-          title: Restriction Metadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    RouteRestrictionsListResponse:
-      title: RouteRestrictionsListResponse
-      required:
-      - route_restrictions
-      type: object
-      properties:
-        route_restrictions:
-          title: Route Restrictions
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteRestrictionRead'
+        success:
+          title: Success
+          type: boolean
+          default: true
     RouteRestrictionRead:
       title: RouteRestrictionRead
       required:
@@ -405,6 +343,68 @@ components:
           items:
             type: string
           default: []
+    RouteRestrictionCreate:
+      title: RouteRestrictionCreate
+      required:
+      - name
+      - polygons
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        polygons:
+          title: Polygons
+          type: array
+          items:
+            type: array
+            items:
+              maxItems: 2
+              minItems: 2
+              type: array
+              prefixItems:
+              - type: number
+              - type: number
+        restriction_metadata:
+          title: Restriction Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    SetStrategyRestrictionsResponse:
+      title: SetStrategyRestrictionsResponse
+      required:
+      - route_restrictions
+      type: object
+      properties:
+        route_restrictions:
+          title: Route Restrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRestrictionRead'
   securitySchemes:
     Token:
       type: http

@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Miscellaneous API
+  title: Nash Miscellaneous API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Miscellaneous
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -40,22 +40,12 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
+    HealthCheckResponse:
+      title: HealthCheckResponse
+      enum:
+      - 'TRUE'
+      - 'FALSE'
+      type: string
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -76,12 +66,22 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    HealthCheckResponse:
-      title: HealthCheckResponse
-      enum:
-      - 'TRUE'
-      - 'FALSE'
-      type: string
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
   securitySchemes:
     Token:
       type: http

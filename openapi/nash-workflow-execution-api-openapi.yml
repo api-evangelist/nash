@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Workflow Execution API
+  title: Nash Workflow Execution API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Workflow execution history and monitoring
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -240,22 +240,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -276,6 +260,22 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
   securitySchemes:
     Token:
       type: http

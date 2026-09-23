@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Messaging API
+  title: Nash Messaging API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Messaging
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -61,37 +61,6 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    RecipientType:
-      title: RecipientType
-      enum:
-      - courier
-      - customer
-      - pickup_business
-      type: string
-      description: Enum for message recipient types.
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    MessageType:
-      title: MessageType
-      enum:
-      - sms
-      - email
-      type: string
-      description: Enum for message delivery types.
     SendMessageInput:
       title: SendMessageInput
       required:
@@ -110,6 +79,37 @@ components:
           $ref: '#/components/schemas/MessageType'
         message:
           title: Message
+          type: string
+    RecipientType:
+      title: RecipientType
+      enum:
+      - courier
+      - customer
+      - pickup_business
+      type: string
+      description: Enum for message recipient types.
+    MessageType:
+      title: MessageType
+      enum:
+      - sms
+      - email
+      type: string
+      description: Enum for message delivery types.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
           type: string
   securitySchemes:
     Token:

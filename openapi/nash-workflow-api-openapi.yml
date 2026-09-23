@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Workflow API
+  title: Nash Workflow API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Workflow automation management
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -183,158 +183,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    CreateWorkflowInputSerializer:
-      title: CreateWorkflowInputSerializer
-      required:
-      - name
-      - nodes
-      - edges
-      - trigger
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/WorkflowStatus'
-          - type: 'null'
-          default: null
-        nodes:
-          title: Nodes
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkflowNodeInputSerializer'
-        edges:
-          title: Edges
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkflowEdgeInputSerializer'
-        trigger:
-          $ref: '#/components/schemas/WorkflowTriggerInputSerializer'
-    WorkflowTriggerType:
-      title: WorkflowTriggerType
-      enum:
-      - manual
-      - webhook
-      - cron
-      - event
-      - subgraph
-      type: string
-      description: Types of workflow triggers.
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    UpdateWorkflowInputSerializer:
-      title: UpdateWorkflowInputSerializer
-      type: object
-      properties:
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/WorkflowStatus'
-          - type: 'null'
-          default: null
-        nodes:
-          title: Nodes
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/WorkflowNodeInputSerializer'
-          - type: 'null'
-          default: null
-        edges:
-          title: Edges
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/WorkflowEdgeInputSerializer'
-          - type: 'null'
-          default: null
-        trigger:
-          anyOf:
-          - $ref: '#/components/schemas/WorkflowTriggerInputSerializer'
-          - type: 'null'
-          default: null
-    WorkflowTriggerInputSerializer:
-      title: WorkflowTriggerInputSerializer
-      required:
-      - triggerType
-      type: object
-      properties:
-        triggerType:
-          $ref: '#/components/schemas/WorkflowTriggerType'
-          description: Currently only 'event' is supported via this REST API. Other trigger types (manual, cron, webhook) exist but are not exposed here.
-        eventTriggerType:
-          title: Eventtriggertype
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: For notification-based triggers only. Pass a NotificationTriggerType value from the GET /workflows/schema triggers list. Leave null for event triggers like order.created.
-          default: null
-        eventName:
-          title: Eventname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The event to listen for. For event triggers, set to the event name (e.g. 'order.created', 'order.creating'). For notification triggers, omit this. Defaults to 'notification_trigger.tripped'.
-          default: null
-        notificationTriggerParameters:
-          title: Notificationtriggerparameters
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Extra config for notification triggers. Not used for event triggers.
-          default: null
-        isEnabled:
-          title: Isenabled
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-    SetWorkflowStatusSerializer:
-      title: SetWorkflowStatusSerializer
-      required:
-      - status
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/WorkflowStatus'
     WorkflowEdgeType:
       title: WorkflowEdgeType
       enum:
@@ -398,64 +246,98 @@ components:
           - type: boolean
           - type: 'null'
           default: null
-    WorkflowEdgeInputSerializer:
-      title: WorkflowEdgeInputSerializer
+    WorkflowTriggerInputSerializer:
+      title: WorkflowTriggerInputSerializer
       required:
-      - edgeKey
-      - sourceNodeKey
-      - targetNodeKey
-      - executionOrder
+      - triggerType
       type: object
       properties:
-        edgeKey:
-          title: Edgekey
-          type: string
-          description: Unique key within this workflow.
-        sourceNodeKey:
-          title: Sourcenodekey
-          type: string
-          description: node_key of the source node.
-        targetNodeKey:
-          title: Targetnodekey
-          type: string
-          description: node_key of the target node.
-        executionOrder:
-          title: Executionorder
-          type: integer
-          description: Execution order when a node has multiple outgoing edges.
-        edgeType:
+        triggerType:
+          $ref: '#/components/schemas/WorkflowTriggerType'
+          description: Currently only 'event' is supported via this REST API. Other trigger types (manual, cron, webhook) exist but are not exposed here.
+        eventTriggerType:
+          title: Eventtriggertype
           anyOf:
-          - $ref: '#/components/schemas/WorkflowEdgeType'
+          - type: string
           - type: 'null'
-          description: 'Use ''default'' for trigger and action nodes. For filter nodes: ''success'' (condition met) or ''negative'' (condition not met).'
+          description: For notification-based triggers only. Pass a NotificationTriggerType value from the GET /workflows/schema triggers list. Leave null for event triggers like order.created.
           default: null
-    NashValidationError:
-      title: NashValidationError
+        eventName:
+          title: Eventname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The event to listen for. For event triggers, set to the event name (e.g. 'order.created', 'order.creating'). For notification triggers, omit this. Defaults to 'notification_trigger.tripped'.
+          default: null
+        notificationTriggerParameters:
+          title: Notificationtriggerparameters
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Extra config for notification triggers. Not used for event triggers.
+          default: null
+        isEnabled:
+          title: Isenabled
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+    NashErrorDetails:
+      title: NashErrorDetails
       required:
-      - error
-      - response_status
-      - RequestID
+      - code
+      - message
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
+        code:
+          title: Code
           type: string
-        RequestID:
-          title: Requestid
+        message:
+          title: Message
           type: string
-    WorkflowNodeType:
-      title: WorkflowNodeType
-      enum:
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    CreateWorkflowInputSerializer:
+      title: CreateWorkflowInputSerializer
+      required:
+      - name
+      - nodes
+      - edges
       - trigger
-      - action
-      - filter
-      - switch
-      - subgraph
-      - agent_invoke
-      type: string
-      description: Types of workflow nodes.
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowStatus'
+          - type: 'null'
+          default: null
+        nodes:
+          title: Nodes
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowNodeInputSerializer'
+        edges:
+          title: Edges
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowEdgeInputSerializer'
+        trigger:
+          $ref: '#/components/schemas/WorkflowTriggerInputSerializer'
     TriggerWorkflowSerializer:
       title: TriggerWorkflowSerializer
       type: object
@@ -491,6 +373,109 @@ components:
           type: boolean
           description: Run the workflow synchronously and return the completed result.
           default: false
+    WorkflowEdgeInputSerializer:
+      title: WorkflowEdgeInputSerializer
+      required:
+      - edgeKey
+      - sourceNodeKey
+      - targetNodeKey
+      - executionOrder
+      type: object
+      properties:
+        edgeKey:
+          title: Edgekey
+          type: string
+          description: Unique key within this workflow.
+        sourceNodeKey:
+          title: Sourcenodekey
+          type: string
+          description: node_key of the source node.
+        targetNodeKey:
+          title: Targetnodekey
+          type: string
+          description: node_key of the target node.
+        executionOrder:
+          title: Executionorder
+          type: integer
+          description: Execution order when a node has multiple outgoing edges.
+        edgeType:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowEdgeType'
+          - type: 'null'
+          description: 'Use ''default'' for trigger and action nodes. For filter nodes: ''success'' (condition met) or ''negative'' (condition not met).'
+          default: null
+    WorkflowStatus:
+      title: WorkflowStatus
+      enum:
+      - draft
+      - active
+      - inactive
+      - archived
+      - template
+      type: string
+    WorkflowNodeType:
+      title: WorkflowNodeType
+      enum:
+      - trigger
+      - action
+      - filter
+      - switch
+      - subgraph
+      - agent_invoke
+      type: string
+      description: Types of workflow nodes.
+    WorkflowTriggerType:
+      title: WorkflowTriggerType
+      enum:
+      - manual
+      - webhook
+      - cron
+      - event
+      - subgraph
+      type: string
+      description: Types of workflow triggers.
+    UpdateWorkflowInputSerializer:
+      title: UpdateWorkflowInputSerializer
+      type: object
+      properties:
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowStatus'
+          - type: 'null'
+          default: null
+        nodes:
+          title: Nodes
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/WorkflowNodeInputSerializer'
+          - type: 'null'
+          default: null
+        edges:
+          title: Edges
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/WorkflowEdgeInputSerializer'
+          - type: 'null'
+          default: null
+        trigger:
+          anyOf:
+          - $ref: '#/components/schemas/WorkflowTriggerInputSerializer'
+          - type: 'null'
+          default: null
     WorkflowNodeAction:
       title: WorkflowNodeAction
       enum:
@@ -515,15 +500,30 @@ components:
       - remove_order_from_route
       type: string
       description: Actions that can be performed by a workflow node.
-    WorkflowStatus:
-      title: WorkflowStatus
-      enum:
-      - draft
-      - active
-      - inactive
-      - archived
-      - template
-      type: string
+    SetWorkflowStatusSerializer:
+      title: SetWorkflowStatusSerializer
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
   securitySchemes:
     Token:
       type: http

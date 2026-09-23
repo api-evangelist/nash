@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Dispatch Strategies API
+  title: Nash Dispatch Strategies API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Dispatch Strategies
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -159,6 +159,41 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    DispatchQuoteInput:
+      title: DispatchQuoteInput
+      required:
+      - providerId
+      - totalPriceCents
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          type: string
+        totalPriceCents:
+          title: Totalpricecents
+          type: integer
+    EvaluateDispatchOutput:
+      title: EvaluateDispatchOutput
+      required:
+      - rankedProviders
+      type: object
+      properties:
+        dispatchRule:
+          anyOf:
+          - $ref: '#/components/schemas/DispatchRuleResult'
+          - type: 'null'
+          default: null
+        rankedProviders:
+          title: Rankedproviders
+          type: array
+          items:
+            $ref: '#/components/schemas/RankedProvider'
+        strategy:
+          title: Strategy
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
     RankedProvider:
       title: RankedProvider
       required:
@@ -184,6 +219,145 @@ components:
         rank:
           title: Rank
           type: integer
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    DispatchRuleContextInput:
+      title: DispatchRuleContextInput
+      type: object
+      properties:
+        packageValueCents:
+          title: Packagevaluecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        itemsCount:
+          title: Itemscount
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        pickupTime:
+          title: Pickuptime
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        dropoffTime:
+          title: Dropofftime
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        drivingDistance:
+          title: Drivingdistance
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+        pickupStoreLocationId:
+          title: Pickupstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        dropoffStoreLocationId:
+          title: Dropoffstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        packageHeight:
+          title: Packageheight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        packageWidth:
+          title: Packagewidth
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        packageDepth:
+          title: Packagedepth
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        packageWeight:
+          title: Packageweight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        totalWeight:
+          title: Totalweight
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        packageRequirements:
+          title: Packagerequirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        packageDeliveryMode:
+          title: Packagedeliverymode
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        packageTipCents:
+          title: Packagetipcents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        numberOfPackages:
+          title: Numberofpackages
+          type: integer
+          default: 1
+        isBatch:
+          title: Isbatch
+          type: boolean
+          default: false
     OptionsGroupSerializer:
       title: OptionsGroupSerializer
       required:
@@ -286,24 +460,130 @@ components:
           default: null
           example: true
       description: Generic serializer for options groups used in many endpoints.
-    NashErrorDetails:
-      title: NashErrorDetails
+    ListOptionsGroupOutputSerializer:
+      title: ListOptionsGroupOutputSerializer
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionsGroupSerializer'
+      description: Expected output for listing options groups.
+    OptionsGroupInputMixin:
+      title: OptionsGroupInputMixin
       required:
-      - code
-      - message
+      - label
       type: object
       properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
+        id:
+          title: Id
           anyOf:
-          - type: object
-            additionalProperties: true
+          - type: string
+          - type: 'null'
+          default: null
+        label:
+          title: Label
+          maxLength: 80
+          type: string
+        allowedProviders:
+          title: Allowedproviders
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        enableAutoDispatch:
+          title: Enableautodispatch
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        providerSelectionStrategy:
+          title: Providerselectionstrategy
+          enum:
+          - lowest_price
+          - preferred_order
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        reassignOnFailure:
+          title: Reassignonfailure
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        enableMaxDeliveryFee:
+          title: Enablemaxdeliveryfee
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        maxDeliveryFeeCents:
+          title: Maxdeliveryfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        costSplitStrategy:
+          title: Costsplitstrategy
+          enum:
+          - none
+          - price
+          - percentage
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        costSplitMaxPercentage:
+          title: Costsplitmaxpercentage
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        costSplitMaxFixedPriceCents:
+          title: Costsplitmaxfixedpricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        smartReassignment:
+          title: Smartreassignment
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+      description: Common schema for inputting a dispatch strategy.
+    DispatchRuleResult:
+      title: DispatchRuleResult
+      type: object
+      properties:
+        matchedRuleId:
+          title: Matchedruleid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        matchedRuleLabel:
+          title: Matchedrulelabel
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        matchedRuleCondition:
+          title: Matchedrulecondition
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        optionsGroupId:
+          title: Optionsgroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        optionsGroupLabel:
+          title: Optionsgrouplabel
+          anyOf:
+          - type: string
           - type: 'null'
           default: null
     EvaluateDispatchInput:
@@ -441,25 +721,6 @@ components:
           - type: 'null'
           description: If provided, skip dispatch rule evaluation and use this options group directly.
           default: null
-    ListOptionsGroupOutputSerializer:
-      title: ListOptionsGroupOutputSerializer
-      type: array
-      items:
-        $ref: '#/components/schemas/OptionsGroupSerializer'
-      description: Expected output for listing options groups.
-    DispatchQuoteInput:
-      title: DispatchQuoteInput
-      required:
-      - providerId
-      - totalPriceCents
-      type: object
-      properties:
-        providerId:
-          title: Providerid
-          type: string
-        totalPriceCents:
-          title: Totalpricecents
-          type: integer
     NashValidationError:
       title: NashValidationError
       required:
@@ -476,267 +737,6 @@ components:
         RequestID:
           title: Requestid
           type: string
-    OptionsGroupInputMixin:
-      title: OptionsGroupInputMixin
-      required:
-      - label
-      type: object
-      properties:
-        id:
-          title: Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        label:
-          title: Label
-          maxLength: 80
-          type: string
-        allowedProviders:
-          title: Allowedproviders
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          default: null
-        enableAutoDispatch:
-          title: Enableautodispatch
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        providerSelectionStrategy:
-          title: Providerselectionstrategy
-          enum:
-          - lowest_price
-          - preferred_order
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        reassignOnFailure:
-          title: Reassignonfailure
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        enableMaxDeliveryFee:
-          title: Enablemaxdeliveryfee
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        maxDeliveryFeeCents:
-          title: Maxdeliveryfeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        costSplitStrategy:
-          title: Costsplitstrategy
-          enum:
-          - none
-          - price
-          - percentage
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        costSplitMaxPercentage:
-          title: Costsplitmaxpercentage
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        costSplitMaxFixedPriceCents:
-          title: Costsplitmaxfixedpricecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        smartReassignment:
-          title: Smartreassignment
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-      description: Common schema for inputting a dispatch strategy.
-    EvaluateDispatchOutput:
-      title: EvaluateDispatchOutput
-      required:
-      - rankedProviders
-      type: object
-      properties:
-        dispatchRule:
-          anyOf:
-          - $ref: '#/components/schemas/DispatchRuleResult'
-          - type: 'null'
-          default: null
-        rankedProviders:
-          title: Rankedproviders
-          type: array
-          items:
-            $ref: '#/components/schemas/RankedProvider'
-        strategy:
-          title: Strategy
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-    DispatchRuleContextInput:
-      title: DispatchRuleContextInput
-      type: object
-      properties:
-        packageValueCents:
-          title: Packagevaluecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        itemsCount:
-          title: Itemscount
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        pickupTime:
-          title: Pickuptime
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        dropoffTime:
-          title: Dropofftime
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        drivingDistance:
-          title: Drivingdistance
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          default: null
-        metadata:
-          title: Metadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-        pickupStoreLocationId:
-          title: Pickupstorelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        dropoffStoreLocationId:
-          title: Dropoffstorelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        packageHeight:
-          title: Packageheight
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        packageWidth:
-          title: Packagewidth
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        packageDepth:
-          title: Packagedepth
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        packageWeight:
-          title: Packageweight
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        totalWeight:
-          title: Totalweight
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        packageRequirements:
-          title: Packagerequirements
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          default: null
-        packageDeliveryMode:
-          title: Packagedeliverymode
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        packageTipCents:
-          title: Packagetipcents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        numberOfPackages:
-          title: Numberofpackages
-          type: integer
-          default: 1
-        isBatch:
-          title: Isbatch
-          type: boolean
-          default: false
-    DispatchRuleResult:
-      title: DispatchRuleResult
-      type: object
-      properties:
-        matchedRuleId:
-          title: Matchedruleid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        matchedRuleLabel:
-          title: Matchedrulelabel
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        matchedRuleCondition:
-          title: Matchedrulecondition
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        optionsGroupId:
-          title: Optionsgroupid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        optionsGroupLabel:
-          title: Optionsgrouplabel
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
   securitySchemes:
     Token:
       type: http

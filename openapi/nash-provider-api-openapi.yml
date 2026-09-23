@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Provider API
+  title: Nash Provider API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Provider
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -41,41 +41,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    OrgProviderPayload:
-      title: OrgProviderPayload
-      required:
-      - providerId
-      - name
-      type: object
-      properties:
-        providerId:
-          title: Providerid
-          type: string
-        name:
-          title: Name
-          type: string
-        logo:
-          title: Logo
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -96,12 +61,47 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     ListOrgProvidersOutputSerializer:
       title: ListOrgProvidersOutputSerializer
       type: array
       items:
         $ref: '#/components/schemas/OrgProviderPayload'
       description: Expected output when listing org providers, it will return an array of this.
+    OrgProviderPayload:
+      title: OrgProviderPayload
+      required:
+      - providerId
+      - name
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          type: string
+        name:
+          title: Name
+          type: string
+        logo:
+          title: Logo
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

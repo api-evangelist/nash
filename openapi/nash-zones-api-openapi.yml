@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Zones API
+  title: Nash Zones API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Zones
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -317,7 +317,7 @@ paths:
       tags:
       - Zones
       summary: Query zones
-      description: Return full zone details for many zones in a single call. Filter by `ids` and/or `externalIds` (combined with OR); omit both to page through all of the organization's zones. Results come back under `data` with pagination under `meta`; each `data` item matches the shape of `GET /v1/zones/<id>`.
+      description: Return full zone details for many zones in a single call. Filter by `ids` and/or `externalIds` (combined with OR); omit both to page through all of the organization's zones. Results come back under `data` with pagination under `meta`; each `data` item matches the shape of `GET /v1/zones/`.
       operationId: zones_v1_query_zones_route_query_post
       requestBody:
         content:
@@ -461,73 +461,252 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    CreateZoneRestrictionInputSerializer:
-      title: CreateZoneRestrictionInputSerializer
-      required:
-      - name
+    ZoneLocationRead:
+      title: ZoneLocationRead
       type: object
       properties:
+        address:
+          title: Address
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Single-line formatted address of the store location.
+          default: null
+        addressFirstLine:
+          title: Addressfirstline
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Street line of the address.
+          default: null
+        addressSecondarynumber:
+          title: Addresssecondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Secondary number (unit, suite) if any.
+          default: null
+        addressCity:
+          title: Addresscity
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: City.
+          default: null
+        addressCountry:
+          title: Addresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Two-letter ISO country code.
+          default: null
+        addressState:
+          title: Addressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: State or region.
+          default: null
+        addressZip:
+          title: Addresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Postal code.
+          default: null
+        lat:
+          title: Lat
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Latitude.
+          default: null
+        lng:
+          title: Lng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Longitude.
+          default: null
+    UpsertZoneInputSerializer:
+      title: UpsertZoneInputSerializer
+      type: object
+      properties:
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The name of the zone.
+          default: null
+          example: Zone 1
+        coverageAreaId:
+          title: Coverageareaid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The coverage area id to associate with the zone.
+          default: null
+        polygon:
+          title: Polygon
+          anyOf:
+          - type: array
+            items:
+              type: array
+              items:
+                type: number
+          - type: 'null'
+          description: The zone boundary, as a single closed ring of [latitude, longitude] coordinate pairs. The first and last point must be identical to close the ring. Setting this replaces the polygon on the zone's coverage area (creating a coverage area if the zone has none).
+          default: null
+          example:
+          - - 37.7749
+            - -122.4194
+          - - 37.8049
+            - -122.4194
+          - - 37.8049
+            - -122.3894
+          - - 37.7749
+            - -122.3894
+          - - 37.7749
+            - -122.4194
+        storeLocationIds:
+          title: Storelocationids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The store location ids to associate with the zone.
+          default: null
+        storeLocationAssociations:
+          title: Storelocationassociations
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: The store location associations to associate with the zone.
+          default: null
+          example:
+          - end_date: '2025-01-01'
+            start_date: '2024-01-01'
+            store_location_id: stl_01234567890123456789
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Free form tags specific to the location.
+          default: null
+          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
+        zoneMetadata:
+          title: Zonemetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the zone.
+          default: null
+          example:
+            key: value
         externalId:
           title: Externalid
           anyOf:
           - type: string
           - type: 'null'
-          description: The external ID of the zone restriction.
+          description: The external id of the zone.
           default: null
+          example: zone_01234567890123456789
+        cityZipcodes:
+          title: Cityzipcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The city-zipcode pairs to associate with the zone.
+          default: null
+          example:
+          - Melbourne_3000
+          - Sydney_2000
+      description: Expected input payload for upserting a zone by external id.
+    ZoneDetailRead:
+      title: ZoneDetailRead
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Nash zone id.
         name:
           title: Name
-          type: string
-          description: The name of the zone restriction.
-        isActive:
-          title: Isactive
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Zone name.
+          default: null
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Your external id for the zone.
+          default: null
+        portalUrl:
+          title: Portalurl
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Nash portal URL for the zone.
+          default: null
+        coverageArea:
+          anyOf:
+          - $ref: '#/components/schemas/ZoneCoverageAreaRead'
+          - type: 'null'
+          description: Geographic area the zone covers.
+          default: null
+        storeLocations:
+          title: Storelocations
+          type: array
+          items:
+            $ref: '#/components/schemas/ZoneStoreLocationRead'
+          description: Store locations associated with the zone.
+        storeLocationAssociations:
+          title: Storelocationassociations
+          type: array
+          items:
+            $ref: '#/components/schemas/ZoneStoreLocationAssociationRead'
+          description: Store-location links with optional active date ranges.
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Free-form tags on the zone.
+          default: null
+        zoneMetadata:
+          title: Zonemetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Arbitrary key-value metadata stored on the zone.
+          default: null
+        isDeleted:
+          title: Isdeleted
           anyOf:
           - type: boolean
           - type: 'null'
-          description: Whether the zone restriction is active.
+          description: Whether the zone is soft-deleted.
           default: null
-        restrictionMetadata:
-          title: Restrictionmetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: The metadata of the zone restriction.
-          default: null
-          example:
-            key: value
-      description: Expected payload for the create zone restriction endpoint.
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    ListZoneRestrictionsResponse:
-      title: ListZoneRestrictionsResponse
-      required:
-      - zoneRestrictions
-      type: object
-      properties:
-        zoneRestrictions:
-          title: Zonerestrictions
-          type: array
-          items:
-            $ref: '#/components/schemas/ZoneRestrictionResponse'
-      description: Response for list zone restrictions.
+      description: Full detail for a single zone. Same shape as `GET /v1/zones/<id>`.
     ListZonesResponse:
       title: ListZonesResponse
       required:
@@ -540,86 +719,225 @@ components:
           items:
             $ref: '#/components/schemas/ZoneResponse'
       description: Response for list zones.
-    ParsedAddressInputSerializer:
-      title: ParsedAddressInputSerializer
+    ZoneRestrictionResponse:
+      title: ZoneRestrictionResponse
       required:
-      - street
-      - city
-      - country
+      - id
+      - externalId
+      - name
+      - isActive
+      - restrictionMetadata
       type: object
       properties:
-        number:
-          title: Number
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The number of the address.
-          default: null
-          example: '1600'
-        secondaryNumber:
-          title: Secondarynumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The secondary number of the address.
-          default: null
-          example: null
-        street:
-          title: Street
+        id:
+          title: Id
           type: string
-          description: 'The street of the address. If your geocoding service does not split numbers from street names, you can pass the street name with the number in this field. Example: 1600 Pennsylvania Avenue NW.'
-          example: Pennsylvania Avenue NW
-        county:
-          title: County
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The county of the address.
-          default: null
-          example: Washington
-        city:
-          title: City
+          description: The ID of the zone restriction.
+          example: res_01234567890123456789
+        externalId:
+          title: Externalid
           type: string
-          description: The city of the address.
-          example: Washington
-        state:
-          title: State
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The state of the address.
-          default: null
-          example: DC
-        postalCode:
-          title: Postalcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The postal code of the address.
-          default: null
-          example: '20500'
-        country:
-          title: Country
+          description: The external ID of the zone restriction.
+          example: ext_01234567890123456789
+        name:
+          title: Name
           type: string
-          description: The country of the address.
-          example: US
-        latitude:
-          title: Latitude
+          description: The name of the zone restriction.
+          example: Zone Restriction 1
+        isActive:
+          title: Isactive
+          type: boolean
+          description: Whether the zone restriction is active.
+          example: true
+        restrictionMetadata:
+          title: Restrictionmetadata
           anyOf:
-          - type: number
+          - type: object
+            additionalProperties: true
           - type: 'null'
-          description: The latitude of the address.
-          default: null
-          example: 38.8948949
-        longitude:
-          title: Longitude
+          description: The metadata of the zone restriction.
+          example:
+            restriction_metadata:
+              key: value
+      description: Response for zone restriction.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    ZoneResponse:
+      title: ZoneResponse
+      required:
+      - id
+      - name
+      - externalId
+      - portalUrl
+      - coverageArea
+      - storeLocations
+      - storeLocationAssociations
+      - zoneRestrictions
+      - tags
+      - zoneMetadata
+      - isDeleted
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the zone.
+          example: zone_01234567890123456789
+        name:
+          title: Name
           anyOf:
-          - type: number
+          - type: string
           - type: 'null'
-          description: The longitude of the address.
-          default: null
-          example: -77.0371581
-      description: Parsed address input serializer for creating a job.
+          description: The name of the zone.
+          example: Zone 1
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external ID of the zone.
+          example: ext_01234567890123456789
+        portalUrl:
+          title: Portalurl
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The portal URL of the zone.
+          example: https://portal.usenash.com/settings/zones/zone_01234567890123456789
+        coverageArea:
+          title: Coveragearea
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The coverage area of the zone.
+          example:
+            cities:
+            - San Francisco
+            cityZipcodes: []
+            countries: []
+            id: coa_01234567890123456789
+            states: []
+            zipCodes:
+            - '94114'
+        storeLocations:
+          title: Storelocations
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/StoreLocationResponse'
+          - type: 'null'
+          description: The store locations of the zone.
+          example:
+          - blackoutDates: []
+            email: ''
+            externalId: ext_01234567890123456789
+            firstName: Steve
+            id: stl_01234567890123456789
+            lastName: Kerr
+            location:
+              address: 120 E 34th St, New York, NY 10016, USA
+              addressCity: New York
+              addressCountry: US
+              addressFirstLine: 120 E 34th St
+              addressSecondarynumber: null
+              addressState: NY
+              addressZip: '10016'
+              lat: 40.7463656
+              lng: -73.9803215
+            name: '10392'
+            operatingHours:
+              friday:
+                active: true
+                shifts: []
+              monday:
+                active: true
+                shifts: []
+              saturday:
+                active: true
+                shifts: []
+              sunday:
+                active: true
+                shifts: []
+              thursday:
+                active: true
+                shifts: []
+              tuesday:
+                active: true
+                shifts: []
+              wednesday:
+                active: true
+                shifts: []
+            phoneNumber: '+16132525710'
+            pickupInstructions: ''
+            prepTimeMinutes: null
+            tags: []
+        storeLocationAssociations:
+          title: Storelocationassociations
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: The store location associations of the zone.
+          example:
+          - endDate: '2025-01-01'
+            startDate: '2024-01-01'
+            storeLocationId: stl_01234567890123456789
+        zoneRestrictions:
+          title: Zonerestrictions
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ZoneRestrictionResponse'
+          - type: 'null'
+          description: The zone restrictions of the zone.
+          example:
+          - id: res_01234567890123456789
+            name: Zone Restriction 1
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The tags of the zone.
+          example:
+          - service:rapid
+          - franchise_location
+        zoneMetadata:
+          title: Zonemetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the zone.
+          example:
+            key: value
+        isDeleted:
+          title: Isdeleted
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the zone is deleted.
+          example: false
+      description: Response for zone.
     StoreLocationResponse:
       title: StoreLocationResponse
       required:
@@ -798,340 +1116,74 @@ components:
           example:
             integration_name: ABC
       description: Response for store location.
-    ZoneCoverageAreaRead:
-      title: ZoneCoverageAreaRead
-      required:
-      - id
+    ZonesQueryRequest:
+      title: ZonesQueryRequest
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          description: Nash coverage area id.
-        cityZipcodes:
-          title: Cityzipcodes
+        ids:
+          title: Ids
           anyOf:
           - type: array
             items:
               type: string
           - type: 'null'
-          description: City and zip code pairs covered.
+          description: Nash zone ids to fetch (max 500). Combined with `externalIds` using OR. Omit to not filter by id; an empty list matches nothing.
           default: null
-        zipCodes:
-          title: Zipcodes
+          example:
+          - zone_BBVtiSryYx34xCskjb2WmA
+        externalIds:
+          title: Externalids
           anyOf:
           - type: array
             items:
               type: string
           - type: 'null'
-          description: Zip codes covered.
+          description: Your external zone ids to fetch (max 500). Combined with `ids` using OR. Omit to not filter by external id; an empty list matches nothing.
           default: null
-        cities:
-          title: Cities
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Cities covered.
-          default: null
-        states:
-          title: States
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: States or regions covered.
-          default: null
-        countries:
-          title: Countries
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Two-letter ISO country codes covered.
-          default: null
-        polygons:
-          title: Polygons
+          example:
+          - 7810BBTORQ
+        isDeleted:
+          title: Isdeleted
+          type: boolean
+          description: When true, return soft-deleted zones instead of active ones.
+          default: false
+        size:
+          title: Size
+          type: integer
+          description: Page size, 1 to 500. Requests above 500 return a ZONE_BULK_LIMIT_EXCEEDED error.
+          default: 100
+        offset:
+          title: Offset
+          type: integer
+          description: Number of zones to skip, for paging through the full result set.
+          default: 0
+      description: 'Body for `POST /v1/zones/query`.
+
+
+        `ids` and `externalIds` are optional and combined with OR. Omit both to
+
+        page through every zone in the organization; a provided but empty list
+
+        matches nothing.'
+      example:
+        externalIds:
+        - 7810BBTORQ
+        - 7810BBWAUR
+        isDeleted: false
+        offset: 0
+        size: 100
+    UpsertZonesInputSerializer:
+      title: UpsertZonesInputSerializer
+      required:
+      - zones
+      type: object
+      properties:
+        zones:
+          title: Zones
           type: array
           items:
-            $ref: '#/components/schemas/ZonePolygonRead'
-          description: Geometry boundaries attached to this coverage area.
-    UpsertZoneInputSerializer:
-      title: UpsertZoneInputSerializer
-      type: object
-      properties:
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The name of the zone.
-          default: null
-          example: Zone 1
-        coverageAreaId:
-          title: Coverageareaid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The coverage area id to associate with the zone.
-          default: null
-        polygon:
-          title: Polygon
-          anyOf:
-          - type: array
-            items:
-              type: array
-              items:
-                type: number
-          - type: 'null'
-          description: The zone boundary, as a single closed ring of [latitude, longitude] coordinate pairs. The first and last point must be identical to close the ring. Setting this replaces the polygon on the zone's coverage area (creating a coverage area if the zone has none).
-          default: null
-          example:
-          - - 37.7749
-            - -122.4194
-          - - 37.8049
-            - -122.4194
-          - - 37.8049
-            - -122.3894
-          - - 37.7749
-            - -122.3894
-          - - 37.7749
-            - -122.4194
-        storeLocationIds:
-          title: Storelocationids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The store location ids to associate with the zone.
-          default: null
-        storeLocationAssociations:
-          title: Storelocationassociations
-          anyOf:
-          - type: array
-            items:
-              type: object
-              additionalProperties: true
-          - type: 'null'
-          description: The store location associations to associate with the zone.
-          default: null
-          example:
-          - end_date: '2025-01-01'
-            start_date: '2024-01-01'
-            store_location_id: stl_01234567890123456789
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Free form tags specific to the location.
-          default: null
-          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
-        zoneMetadata:
-          title: Zonemetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: The metadata of the zone.
-          default: null
-          example:
-            key: value
-        externalId:
-          title: Externalid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external id of the zone.
-          default: null
-          example: zone_01234567890123456789
-        cityZipcodes:
-          title: Cityzipcodes
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The city-zipcode pairs to associate with the zone.
-          default: null
-          example:
-          - Melbourne_3000
-          - Sydney_2000
-      description: Expected input payload for upserting a zone by external id.
-    UpdateZoneInputSerializer:
-      title: UpdateZoneInputSerializer
-      type: object
-      properties:
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The name of the zone.
-          default: null
-          example: Zone 1
-        coverageAreaId:
-          title: Coverageareaid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The coverage area id to associate with the zone.
-          default: null
-        polygon:
-          title: Polygon
-          anyOf:
-          - type: array
-            items:
-              type: array
-              items:
-                type: number
-          - type: 'null'
-          description: The zone boundary, as a single closed ring of [latitude, longitude] coordinate pairs. The first and last point must be identical to close the ring. Setting this replaces the polygon on the zone's coverage area (creating a coverage area if the zone has none).
-          default: null
-          example:
-          - - 37.7749
-            - -122.4194
-          - - 37.8049
-            - -122.4194
-          - - 37.8049
-            - -122.3894
-          - - 37.7749
-            - -122.3894
-          - - 37.7749
-            - -122.4194
-        storeLocationIds:
-          title: Storelocationids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The store location ids to associate with the zone.
-          default: null
-        storeLocationAssociations:
-          title: Storelocationassociations
-          anyOf:
-          - type: array
-            items:
-              type: object
-              additionalProperties: true
-          - type: 'null'
-          description: The store location associations to associate with the zone.
-          default: null
-          example:
-          - end_date: '2025-01-01'
-            start_date: '2024-01-01'
-            store_location_id: stl_01234567890123456789
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Free form tags specific to the location.
-          default: null
-          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
-        zoneMetadata:
-          title: Zonemetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: The metadata of the zone.
-          default: null
-          example:
-            key: value
-      description: Expected input payload for updating a zone.
-    ZoneLocationRead:
-      title: ZoneLocationRead
-      type: object
-      properties:
-        address:
-          title: Address
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Single-line formatted address of the store location.
-          default: null
-        addressFirstLine:
-          title: Addressfirstline
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Street line of the address.
-          default: null
-        addressSecondarynumber:
-          title: Addresssecondarynumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Secondary number (unit, suite) if any.
-          default: null
-        addressCity:
-          title: Addresscity
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: City.
-          default: null
-        addressCountry:
-          title: Addresscountry
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Two-letter ISO country code.
-          default: null
-        addressState:
-          title: Addressstate
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: State or region.
-          default: null
-        addressZip:
-          title: Addresszip
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Postal code.
-          default: null
-        lat:
-          title: Lat
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Latitude.
-          default: null
-        lng:
-          title: Lng
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Longitude.
-          default: null
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
+            $ref: '#/components/schemas/UpsertZoneInputSerializer'
+      description: Expected input payload for upserting multiple zones.
     ZoneStoreLocationRead:
       title: ZoneStoreLocationRead
       required:
@@ -1230,115 +1282,6 @@ components:
           - type: 'null'
           description: Address and coordinates of the store.
           default: null
-    UpsertZonesInputSerializer:
-      title: UpsertZonesInputSerializer
-      required:
-      - zones
-      type: object
-      properties:
-        zones:
-          title: Zones
-          type: array
-          items:
-            $ref: '#/components/schemas/UpsertZoneInputSerializer'
-      description: Expected input payload for upserting multiple zones.
-    ZonesQueryRequest:
-      title: ZonesQueryRequest
-      type: object
-      properties:
-        ids:
-          title: Ids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Nash zone ids to fetch (max 500). Combined with `externalIds` using OR. Omit to not filter by id; an empty list matches nothing.
-          default: null
-          example:
-          - zone_BBVtiSryYx34xCskjb2WmA
-        externalIds:
-          title: Externalids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Your external zone ids to fetch (max 500). Combined with `ids` using OR. Omit to not filter by external id; an empty list matches nothing.
-          default: null
-          example:
-          - 7810BBTORQ
-        isDeleted:
-          title: Isdeleted
-          type: boolean
-          description: When true, return soft-deleted zones instead of active ones.
-          default: false
-        size:
-          title: Size
-          type: integer
-          description: Page size, 1 to 500. Requests above 500 return a ZONE_BULK_LIMIT_EXCEEDED error.
-          default: 100
-        offset:
-          title: Offset
-          type: integer
-          description: Number of zones to skip, for paging through the full result set.
-          default: 0
-      description: 'Body for `POST /v1/zones/query`.
-
-
-        `ids` and `externalIds` are optional and combined with OR. Omit both to
-
-        page through every zone in the organization; a provided but empty list
-
-        matches nothing.'
-      example:
-        externalIds:
-        - 7810BBTORQ
-        - 7810BBWAUR
-        isDeleted: false
-        offset: 0
-        size: 100
-    ZoneRestrictionResponse:
-      title: ZoneRestrictionResponse
-      required:
-      - id
-      - externalId
-      - name
-      - isActive
-      - restrictionMetadata
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: The ID of the zone restriction.
-          example: res_01234567890123456789
-        externalId:
-          title: Externalid
-          type: string
-          description: The external ID of the zone restriction.
-          example: ext_01234567890123456789
-        name:
-          title: Name
-          type: string
-          description: The name of the zone restriction.
-          example: Zone Restriction 1
-        isActive:
-          title: Isactive
-          type: boolean
-          description: Whether the zone restriction is active.
-          example: true
-        restrictionMetadata:
-          title: Restrictionmetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: The metadata of the zone restriction.
-          example:
-            restriction_metadata:
-              key: value
-      description: Response for zone restriction.
     CreateZoneInputSerializer:
       title: CreateZoneInputSerializer
       type: object
@@ -1434,6 +1377,394 @@ components:
           example:
             key: value
       description: Expected payload for creating a zone.
+    ListZoneRestrictionsResponse:
+      title: ListZoneRestrictionsResponse
+      required:
+      - zoneRestrictions
+      type: object
+      properties:
+        zoneRestrictions:
+          title: Zonerestrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/ZoneRestrictionResponse'
+      description: Response for list zone restrictions.
+    ZoneCoverageAreaRead:
+      title: ZoneCoverageAreaRead
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Nash coverage area id.
+        cityZipcodes:
+          title: Cityzipcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: City and zip code pairs covered.
+          default: null
+        zipCodes:
+          title: Zipcodes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Zip codes covered.
+          default: null
+        cities:
+          title: Cities
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Cities covered.
+          default: null
+        states:
+          title: States
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: States or regions covered.
+          default: null
+        countries:
+          title: Countries
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Two-letter ISO country codes covered.
+          default: null
+        polygons:
+          title: Polygons
+          type: array
+          items:
+            $ref: '#/components/schemas/ZonePolygonRead'
+          description: Geometry boundaries attached to this coverage area.
+    ZonePolygonRead:
+      title: ZonePolygonRead
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Nash polygon id.
+        polygonData:
+          title: Polygondata
+          anyOf:
+          - type: array
+            items:
+              type: array
+              items:
+                type: number
+          - type: 'null'
+          description: Closed ring of [latitude, longitude] coordinate pairs defining the boundary.
+          default: null
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    UpsertZoneRestrictionInputSerializer:
+      title: UpsertZoneRestrictionInputSerializer
+      required:
+      - name
+      type: object
+      properties:
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external id of the zone restriction.
+          default: null
+          example: zone_01234567890123456789
+        name:
+          title: Name
+          type: string
+          description: The name of the zone restriction.
+        isActive:
+          title: Isactive
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the zone restriction is active.
+          default: null
+        restrictionMetadata:
+          title: Restrictionmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the zone restriction.
+          default: null
+          example:
+            key: value
+      description: Expected input payload for upserting a zone restriction by external id.
+    ParsedAddressInputSerializer:
+      title: ParsedAddressInputSerializer
+      required:
+      - street
+      - city
+      - country
+      type: object
+      properties:
+        number:
+          title: Number
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The number of the address.
+          default: null
+          example: '1600'
+        secondaryNumber:
+          title: Secondarynumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The secondary number of the address.
+          default: null
+          example: null
+        street:
+          title: Street
+          type: string
+          description: 'The street of the address. If your geocoding service does not split numbers from street names, you can pass the street name with the number in this field. Example: 1600 Pennsylvania Avenue NW.'
+          example: Pennsylvania Avenue NW
+        county:
+          title: County
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The county of the address.
+          default: null
+          example: Washington
+        city:
+          title: City
+          type: string
+          description: The city of the address.
+          example: Washington
+        state:
+          title: State
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the address.
+          default: null
+          example: DC
+        postalCode:
+          title: Postalcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The postal code of the address.
+          default: null
+          example: '20500'
+        country:
+          title: Country
+          type: string
+          description: The country of the address.
+          example: US
+        latitude:
+          title: Latitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The latitude of the address.
+          default: null
+          example: 38.8948949
+        longitude:
+          title: Longitude
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The longitude of the address.
+          default: null
+          example: -77.0371581
+      description: Parsed address input serializer for creating a job.
+    CreateZoneRestrictionInputSerializer:
+      title: CreateZoneRestrictionInputSerializer
+      required:
+      - name
+      type: object
+      properties:
+        externalId:
+          title: Externalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external ID of the zone restriction.
+          default: null
+        name:
+          title: Name
+          type: string
+          description: The name of the zone restriction.
+        isActive:
+          title: Isactive
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether the zone restriction is active.
+          default: null
+        restrictionMetadata:
+          title: Restrictionmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the zone restriction.
+          default: null
+          example:
+            key: value
+      description: Expected payload for the create zone restriction endpoint.
+    UpdateZoneInputSerializer:
+      title: UpdateZoneInputSerializer
+      type: object
+      properties:
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The name of the zone.
+          default: null
+          example: Zone 1
+        coverageAreaId:
+          title: Coverageareaid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The coverage area id to associate with the zone.
+          default: null
+        polygon:
+          title: Polygon
+          anyOf:
+          - type: array
+            items:
+              type: array
+              items:
+                type: number
+          - type: 'null'
+          description: The zone boundary, as a single closed ring of [latitude, longitude] coordinate pairs. The first and last point must be identical to close the ring. Setting this replaces the polygon on the zone's coverage area (creating a coverage area if the zone has none).
+          default: null
+          example:
+          - - 37.7749
+            - -122.4194
+          - - 37.8049
+            - -122.4194
+          - - 37.8049
+            - -122.3894
+          - - 37.7749
+            - -122.3894
+          - - 37.7749
+            - -122.4194
+        storeLocationIds:
+          title: Storelocationids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The store location ids to associate with the zone.
+          default: null
+        storeLocationAssociations:
+          title: Storelocationassociations
+          anyOf:
+          - type: array
+            items:
+              type: object
+              additionalProperties: true
+          - type: 'null'
+          description: The store location associations to associate with the zone.
+          default: null
+          example:
+          - end_date: '2025-01-01'
+            start_date: '2024-01-01'
+            store_location_id: stl_01234567890123456789
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Free form tags specific to the location.
+          default: null
+          example: '[''service:rapid'', ''service:express'', ''franchise_location'']'
+        zoneMetadata:
+          title: Zonemetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the zone.
+          default: null
+          example:
+            key: value
+      description: Expected input payload for updating a zone.
+    ZoneStoreLocationAssociationRead:
+      title: ZoneStoreLocationAssociationRead
+      required:
+      - storeLocationId
+      type: object
+      properties:
+        storeLocationId:
+          title: Storelocationid
+          type: string
+          description: Nash id of the associated store location.
+        startDate:
+          title: Startdate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Start of the window during which the association is active (null = always).
+          default: null
+        endDate:
+          title: Enddate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: End of the window during which the association is active (null = open-ended).
+          default: null
+    UpsertZoneRestrictionsInputSerializer:
+      title: UpsertZoneRestrictionsInputSerializer
+      required:
+      - zoneRestrictions
+      type: object
+      properties:
+        zoneRestrictions:
+          title: Zonerestrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/UpsertZoneRestrictionInputSerializer'
+      description: Expected input payload for upserting multiple zone restrictions.
     ZonesQueryResponse:
       title: ZonesQueryResponse
       required:
@@ -1475,337 +1806,6 @@ components:
           description: Offset used for this response.
           example: 0
       description: Offset-pagination metadata for a single page of a query response.
-    ZoneDetailRead:
-      title: ZoneDetailRead
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Nash zone id.
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Zone name.
-          default: null
-        externalId:
-          title: Externalid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Your external id for the zone.
-          default: null
-        portalUrl:
-          title: Portalurl
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Nash portal URL for the zone.
-          default: null
-        coverageArea:
-          anyOf:
-          - $ref: '#/components/schemas/ZoneCoverageAreaRead'
-          - type: 'null'
-          description: Geographic area the zone covers.
-          default: null
-        storeLocations:
-          title: Storelocations
-          type: array
-          items:
-            $ref: '#/components/schemas/ZoneStoreLocationRead'
-          description: Store locations associated with the zone.
-        storeLocationAssociations:
-          title: Storelocationassociations
-          type: array
-          items:
-            $ref: '#/components/schemas/ZoneStoreLocationAssociationRead'
-          description: Store-location links with optional active date ranges.
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Free-form tags on the zone.
-          default: null
-        zoneMetadata:
-          title: Zonemetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Arbitrary key-value metadata stored on the zone.
-          default: null
-        isDeleted:
-          title: Isdeleted
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Whether the zone is soft-deleted.
-          default: null
-      description: Full detail for a single zone. Same shape as `GET /v1/zones/<id>`.
-    UpsertZoneRestrictionsInputSerializer:
-      title: UpsertZoneRestrictionsInputSerializer
-      required:
-      - zoneRestrictions
-      type: object
-      properties:
-        zoneRestrictions:
-          title: Zonerestrictions
-          type: array
-          items:
-            $ref: '#/components/schemas/UpsertZoneRestrictionInputSerializer'
-      description: Expected input payload for upserting multiple zone restrictions.
-    ZoneStoreLocationAssociationRead:
-      title: ZoneStoreLocationAssociationRead
-      required:
-      - storeLocationId
-      type: object
-      properties:
-        storeLocationId:
-          title: Storelocationid
-          type: string
-          description: Nash id of the associated store location.
-        startDate:
-          title: Startdate
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Start of the window during which the association is active (null = always).
-          default: null
-        endDate:
-          title: Enddate
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: End of the window during which the association is active (null = open-ended).
-          default: null
-    ZonePolygonRead:
-      title: ZonePolygonRead
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Nash polygon id.
-        polygonData:
-          title: Polygondata
-          anyOf:
-          - type: array
-            items:
-              type: array
-              items:
-                type: number
-          - type: 'null'
-          description: Closed ring of [latitude, longitude] coordinate pairs defining the boundary.
-          default: null
-    ZoneResponse:
-      title: ZoneResponse
-      required:
-      - id
-      - name
-      - externalId
-      - portalUrl
-      - coverageArea
-      - storeLocations
-      - storeLocationAssociations
-      - zoneRestrictions
-      - tags
-      - zoneMetadata
-      - isDeleted
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: The ID of the zone.
-          example: zone_01234567890123456789
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The name of the zone.
-          example: Zone 1
-        externalId:
-          title: Externalid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external ID of the zone.
-          example: ext_01234567890123456789
-        portalUrl:
-          title: Portalurl
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The portal URL of the zone.
-          example: https://portal.usenash.com/settings/zones/zone_01234567890123456789
-        coverageArea:
-          title: Coveragearea
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: The coverage area of the zone.
-          example:
-            cities:
-            - San Francisco
-            cityZipcodes: []
-            countries: []
-            id: coa_01234567890123456789
-            states: []
-            zipCodes:
-            - '94114'
-        storeLocations:
-          title: Storelocations
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/StoreLocationResponse'
-          - type: 'null'
-          description: The store locations of the zone.
-          example:
-          - blackoutDates: []
-            email: ''
-            externalId: ext_01234567890123456789
-            firstName: Steve
-            id: stl_01234567890123456789
-            lastName: Kerr
-            location:
-              address: 120 E 34th St, New York, NY 10016, USA
-              addressCity: New York
-              addressCountry: US
-              addressFirstLine: 120 E 34th St
-              addressSecondarynumber: null
-              addressState: NY
-              addressZip: '10016'
-              lat: 40.7463656
-              lng: -73.9803215
-            name: '10392'
-            operatingHours:
-              friday:
-                active: true
-                shifts: []
-              monday:
-                active: true
-                shifts: []
-              saturday:
-                active: true
-                shifts: []
-              sunday:
-                active: true
-                shifts: []
-              thursday:
-                active: true
-                shifts: []
-              tuesday:
-                active: true
-                shifts: []
-              wednesday:
-                active: true
-                shifts: []
-            phoneNumber: '+16132525710'
-            pickupInstructions: ''
-            prepTimeMinutes: null
-            tags: []
-        storeLocationAssociations:
-          title: Storelocationassociations
-          anyOf:
-          - type: array
-            items:
-              type: object
-              additionalProperties: true
-          - type: 'null'
-          description: The store location associations of the zone.
-          example:
-          - endDate: '2025-01-01'
-            startDate: '2024-01-01'
-            storeLocationId: stl_01234567890123456789
-        zoneRestrictions:
-          title: Zonerestrictions
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ZoneRestrictionResponse'
-          - type: 'null'
-          description: The zone restrictions of the zone.
-          example:
-          - id: res_01234567890123456789
-            name: Zone Restriction 1
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The tags of the zone.
-          example:
-          - service:rapid
-          - franchise_location
-        zoneMetadata:
-          title: Zonemetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: The metadata of the zone.
-          example:
-            key: value
-        isDeleted:
-          title: Isdeleted
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Whether the zone is deleted.
-          example: false
-      description: Response for zone.
-    UpsertZoneRestrictionInputSerializer:
-      title: UpsertZoneRestrictionInputSerializer
-      required:
-      - name
-      type: object
-      properties:
-        externalId:
-          title: Externalid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external id of the zone restriction.
-          default: null
-          example: zone_01234567890123456789
-        name:
-          title: Name
-          type: string
-          description: The name of the zone restriction.
-        isActive:
-          title: Isactive
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Whether the zone restriction is active.
-          default: null
-        restrictionMetadata:
-          title: Restrictionmetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: The metadata of the zone restriction.
-          default: null
-          example:
-            key: value
-      description: Expected input payload for upserting a zone restriction by external id.
   securitySchemes:
     Token:
       type: http

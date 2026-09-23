@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Nash AI Functions API
   version: 1.0.0
@@ -85,13 +85,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    PhotoType:
-      title: PhotoType
-      enum:
-      - pod
-      - pickup
-      - signature
-      type: string
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -143,6 +136,16 @@ components:
           title: Imageurl
           type: string
           description: Public URL of the image whose faces should be masked.
+    DetectDropoffAnomalyInputSerializer:
+      title: DetectDropoffAnomalyInputSerializer
+      required:
+      - deliveryId
+      type: object
+      properties:
+        deliveryId:
+          title: Deliveryid
+          type: string
+          description: The delivery to analyse for dropoff anomalies.
     NashValidationError:
       title: NashValidationError
       required:
@@ -159,16 +162,13 @@ components:
         RequestID:
           title: Requestid
           type: string
-    DetectDropoffAnomalyInputSerializer:
-      title: DetectDropoffAnomalyInputSerializer
-      required:
-      - deliveryId
-      type: object
-      properties:
-        deliveryId:
-          title: Deliveryid
-          type: string
-          description: The delivery to analyse for dropoff anomalies.
+    PhotoType:
+      title: PhotoType
+      enum:
+      - pod
+      - pickup
+      - signature
+      type: string
   securitySchemes:
     Token:
       type: http

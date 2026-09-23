@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Store Catalog API
+  title: Nash Store Catalog API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Store Catalog
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -320,397 +320,52 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    PackSizeSpecificationOutputSerializer:
-      title: PackSizeSpecificationOutputSerializer
-      type: object
-      properties:
-        value:
-          title: Value
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The size value
-          default: null
-          example: 100.0
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Description of the size specification
-          default: null
-          example: Large
-    ProductInputSerializer:
-      title: ProductInputSerializer
+    StoreInventoryListInputSerializer:
+      title: StoreInventoryListInputSerializer
       required:
-      - name
-      - categories
-      - weight
-      - dimensions
-      - identifiers
+      - inventory
       type: object
       properties:
-        externalIdentifier:
-          title: Externalidentifier
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external ID of the product from an external system
-          default: null
-          example: ext_001
-        sku:
-          title: Sku
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The Stock Keeping Unit (SKU) for the product
-          default: null
-          example: ORG-BAN-001
-        name:
-          title: Name
-          type: string
-          description: The name of the product
-          example: Organic Bananas
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The description of the product
-          default: null
-          example: Fresh organic bananas, perfect for smoothies and baking
-        imageUrls:
-          title: Imageurls
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: List of image URLs for the product
-          default: null
-          example:
-          - https://example.com/bananas1.jpg
-          - https://example.com/bananas2.jpg
-        categories:
-          title: Categories
+        inventory:
+          title: Inventory
           type: array
           items:
-            type: string
-          description: List of categories the product belongs to
-          example:
-          - Produce
-          - Fruits
-          - Organic
-        weight:
-          title: Weight
-          type: number
-          description: The weight of the product
-          example: 0.5
-        dimensions:
-          $ref: '#/components/schemas/DimensionInputSerializer'
-          description: Dimensions of the product
-          example:
-            depth: 8.0
-            height: 4.0
-            width: 12.0
-        identifiers:
-          title: Identifiers
-          type: array
-          items:
-            $ref: '#/components/schemas/IdentifierInputSerializer'
-          description: List of identifiers for the product
-          example:
-          - type: UPC
-            value: '123456789012'
-        attributes:
-          title: Attributes
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: List of attributes for the product
-          default: null
-          example:
-          - WEIGHTED
-        details:
-          anyOf:
-          - $ref: '#/components/schemas/DetailsInputSerializer'
-          - type: 'null'
-          description: Additional product details including weight and size specifications
-          default: null
-          example:
-            packSizeSpecification:
-              description: 10 units per pack
-              value: 10
-            sizeSpecification:
-              description: ea
-              value: 1.0
-            weightedItemInfo:
-              weightPerItem: 0.12
-              weightUnit: kg
-        providerConfigs:
-          title: Providerconfigs
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ProviderConfigInputSerializer'
-          - type: 'null'
-          description: Provider-specific configurations for this product
-          default: null
-          example:
-          - categories:
-            - Produce
-            - Fruits
-            - Organic
-            provider: X
-            serviceType: pick_and_deliver
-    StoreInventoryInputSerializer:
-      title: StoreInventoryInputSerializer
-      required:
-      - available
-      type: object
-      properties:
-        externalProductId:
-          title: Externalproductid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external product ID from an external system
-          default: null
-          example: ext_001
-        externalStoreLocationId:
-          title: Externalstorelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external store ID from an external system
-          default: null
-          example: store_001
-        quantity:
-          title: Quantity
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The quantity of the product in stock
-          default: null
-          example: 50
-        valueCents:
-          title: Valuecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The price of the product in cents
-          default: null
-          example: 299
-        currency:
-          title: Currency
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The currency code for the product price
-          default: null
-          example: USD
-        available:
-          title: Available
-          type: boolean
-          description: Whether the product is available for purchase
-          example: true
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationDataInputSerializer'
-          - type: 'null'
-          description: The location data for the product in the store
-          default: null
-          example:
-            aisle: Produce
-            bay: Fruits
-            shelf: Bananas
-        details:
-          anyOf:
-          - $ref: '#/components/schemas/StoreInventoryDetailsInputSerializer'
-          - type: 'null'
-          description: Additional inventory details
-          default: null
-          example:
-            weightedItemInfo:
-              valueCentsPerMeasurementUnit: 120
-        providerConfigs:
-          title: Providerconfigs
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/InventoryProviderConfigInputSerializer'
-          - type: 'null'
-          description: Provider-specific configurations for this inventory item
-          default: null
-          example:
-          - currency: USD
-            details:
-              weightedItemInfo:
-                valueCentsPerMeasurementUnit: 135
-            discount:
-              endTime: '2025-12-17T00:00:00Z'
-              startTime: '2025-12-10T00:00:00Z'
-              valueCents: 270
-            provider: X
-            serviceType: pick_and_deliver
-            valueCents: 299
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    ProductsOutputSerializer:
-      title: ProductsOutputSerializer
+            $ref: '#/components/schemas/StoreInventoryInputSerializer'
+          description: List of store inventory to create or update
+    StoreInventoryListOutputSerializer:
+      title: StoreInventoryListOutputSerializer
       type: array
       items:
-        $ref: '#/components/schemas/ProductOutputSerializer'
-      description: Expected output when listing products, it will return an array of ProductOutputSerializer.
-    DetailsInputSerializer:
-      title: DetailsInputSerializer
+        $ref: '#/components/schemas/StoreInventoryOutputSerializer'
+      description: Expected output when listing products, it will return an array of StoreInventoryOutputSerializer.
+    DimensionOutputSerializer:
+      title: DimensionOutputSerializer
       type: object
       properties:
-        weightedItemInfo:
-          anyOf:
-          - $ref: '#/components/schemas/WeightedItemInfoInputSerializer'
-          - type: 'null'
-          description: Weight information per item
-          default: null
-        sizeSpecification:
-          anyOf:
-          - $ref: '#/components/schemas/SizeSpecificationInputSerializer'
-          - type: 'null'
-          description: Size specification details
-          default: null
-        packSizeSpecification:
-          anyOf:
-          - $ref: '#/components/schemas/PackSizeSpecificationInputSerializer'
-          - type: 'null'
-          description: Pack size specification details
-          default: null
-        skillsRequired:
-          title: Skillsrequired
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Skills required for handling this product
-          default: null
-          example:
-          - gas_oven_installation
-        dropoffServiceTimeSeconds:
-          title: Dropoffservicetimeseconds
-          anyOf:
-          - minimum: 0.0
-            type: integer
-          - type: 'null'
-          description: Service time in seconds for handling this product at the dropoff (e.g. install, setup)
-          default: null
-          example: 600
-    PackSizeSpecificationInputSerializer:
-      title: PackSizeSpecificationInputSerializer
-      type: object
-      properties:
-        value:
-          title: Value
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The size value
-          default: null
-          example: 100.0
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Description of the size specification
-          default: null
-          example: Large
-    StoreInventoryWeightedItemInfoInputSerializer:
-      title: StoreInventoryWeightedItemInfoInputSerializer
-      type: object
-      properties:
-        valueCentsPerMeasurementUnit:
-          title: Valuecentspermeasurementunit
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The price per cents per measurement unit
-          default: null
-          example: 120
-    WeightedItemInfoInputSerializer:
-      title: WeightedItemInfoInputSerializer
-      type: object
-      properties:
-        weightPerItem:
-          title: Weightperitem
+        depth:
+          title: Depth
           anyOf:
           - type: number
           - type: 'null'
-          description: The weight per individual item
+          description: The depth dimension of the product
           default: null
-          example: 0.5
-        weightUnit:
-          title: Weightunit
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The unit of weight measurement
-          default: null
-          example: kg
-    StoreInventoryDetailsInputSerializer:
-      title: StoreInventoryDetailsInputSerializer
-      type: object
-      properties:
-        weightedItemInfo:
-          anyOf:
-          - $ref: '#/components/schemas/StoreInventoryWeightedItemInfoInputSerializer'
-          - type: 'null'
-          description: Weight information per inventory item
-          default: null
-        taxPercentage:
-          title: Taxpercentage
+          example: 10.5
+        width:
+          title: Width
           anyOf:
           - type: number
           - type: 'null'
-          description: Tax rate as a decimal (e.g., 0.1 for 10%)
+          description: The width dimension of the product
           default: null
-          example: 0.1
-    IdentifierOutputSerializer:
-      title: IdentifierOutputSerializer
-      required:
-      - type
-      - value
-      type: object
-      properties:
-        type:
-          title: Type
-          type: string
-          description: The type of identifier
-          example: UPC
-        value:
-          title: Value
-          type: string
-          description: The value of the identifier
-          example: '123456789012'
+          example: 5.0
+        height:
+          title: Height
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The height dimension of the product
+          default: null
+          example: 15.2
     InventoryProviderConfigInputSerializer:
       title: InventoryProviderConfigInputSerializer
       required:
@@ -772,152 +427,34 @@ components:
           description: Tax rate as a decimal (e.g., 0.1 for 10%)
           default: null
           example: 0.1
-    InventoryProviderConfigOutputSerializer:
-      title: InventoryProviderConfigOutputSerializer
-      required:
-      - provider
-      - serviceType
-      - valueCents
-      - currency
+    WeightedItemInfoInputSerializer:
+      title: WeightedItemInfoInputSerializer
       type: object
       properties:
-        provider:
-          title: Provider
-          type: string
-          description: Provider name
-          example: X
-        serviceType:
-          title: Servicetype
-          type: string
-          description: Service type (e.g., pick_and_deliver, marketplace)
-          example: pick_and_deliver
-        valueCents:
-          title: Valuecents
-          type: integer
-          description: The price of the product in cents for this provider
-          example: 299
-        currency:
-          title: Currency
-          type: string
-          description: The currency code for the product price
-          example: USD
-        details:
-          anyOf:
-          - $ref: '#/components/schemas/StoreInventoryDetailsOutputSerializer'
-          - type: 'null'
-          description: Additional pricing details for this provider
-          default: null
-        available:
-          title: Available
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Whether this provider config is available
-          default: null
-          example: true
-        discount:
-          anyOf:
-          - $ref: '#/components/schemas/InventoryDiscountOutputSerializer'
-          - type: 'null'
-          description: Optional discount pricing for this provider config
-          default: null
-          example:
-            endTime: '2025-12-17T00:00:00Z'
-            startTime: '2025-12-10T00:00:00Z'
-            valueCents: 270
-        taxPercentage:
-          title: Taxpercentage
+        weightPerItem:
+          title: Weightperitem
           anyOf:
           - type: number
           - type: 'null'
-          description: Tax rate as a decimal (e.g., 0.1 for 10%)
+          description: The weight per individual item
           default: null
-          example: 0.1
-    InventoryDiscountOutputSerializer:
-      title: InventoryDiscountOutputSerializer
-      required:
-      - valueCents
-      - startTime
-      - endTime
-      type: object
-      properties:
-        valueCents:
-          title: Valuecents
-          type: integer
-          description: The discounted price in cents
-          example: 270
-        startTime:
-          title: Starttime
-          type: string
-          description: The start time of the discount period in ISO 8601 format
-          example: '2025-12-10T00:00:00Z'
-        endTime:
-          title: Endtime
-          type: string
-          description: The end time of the discount period in ISO 8601 format
-          example: '2025-12-17T00:00:00Z'
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    ProviderConfigInputSerializer:
-      title: ProviderConfigInputSerializer
-      required:
-      - provider
-      - serviceType
-      type: object
-      properties:
-        provider:
-          title: Provider
-          type: string
-          description: Provider name
-          example: X
-        serviceType:
-          title: Servicetype
-          type: string
-          description: Service type (e.g., pick_and_deliver, marketplace)
-          example: pick_and_deliver
-        categories:
-          title: Categories
+          example: 0.5
+        weightUnit:
+          title: Weightunit
           anyOf:
-          - type: array
-            items:
-              type: string
+          - type: string
           - type: 'null'
-          description: Provider-specific categories for this product
+          description: The unit of weight measurement
           default: null
-          example:
-          - Produce
-          - Fruits
-          - Organic
-        enabled:
-          title: Enabled
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Whether this provider config is enabled
-          default: null
-          example: true
-    SizeSpecificationOutputSerializer:
-      title: SizeSpecificationOutputSerializer
+          example: kg
+    PackSizeSpecificationInputSerializer:
+      title: PackSizeSpecificationInputSerializer
       type: object
       properties:
         value:
           title: Value
           anyOf:
-          - type: number
+          - type: string
           - type: 'null'
           description: The size value
           default: null
@@ -947,129 +484,68 @@ components:
           type: string
           description: The value of the identifier
           example: '123456789012'
-    StoreInventoryListOutputSerializer:
-      title: StoreInventoryListOutputSerializer
-      type: array
-      items:
-        $ref: '#/components/schemas/StoreInventoryOutputSerializer'
-      description: Expected output when listing products, it will return an array of StoreInventoryOutputSerializer.
-    StoreInventoryListInputSerializer:
-      title: StoreInventoryListInputSerializer
-      required:
-      - inventory
+    PackSizeSpecificationOutputSerializer:
+      title: PackSizeSpecificationOutputSerializer
       type: object
       properties:
-        inventory:
-          title: Inventory
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreInventoryInputSerializer'
-          description: List of store inventory to create or update
-    StoreInventoryOutputSerializer:
-      title: StoreInventoryOutputSerializer
-      required:
-      - id
-      - productId
-      - storeLocationId
-      - quantity
-      - available
+        value:
+          title: Value
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The size value
+          default: null
+          example: 100.0
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Description of the size specification
+          default: null
+          example: Large
+    DetailsInputSerializer:
+      title: DetailsInputSerializer
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-        productId:
-          title: Productid
-          type: string
-          description: The product ID associated with this inventory item
-          example: prod_123
-        externalProductId:
-          title: Externalproductid
+        weightedItemInfo:
           anyOf:
-          - type: string
+          - $ref: '#/components/schemas/WeightedItemInfoInputSerializer'
           - type: 'null'
-          description: The external product ID from an external system
+          description: Weight information per item
           default: null
-          example: ext_001
-        storeLocationId:
-          title: Storelocationid
-          type: string
-          description: The store location ID where this inventory is located
-          example: store_001
-        externalStoreLocationId:
-          title: Externalstorelocationid
+        sizeSpecification:
           anyOf:
-          - type: string
+          - $ref: '#/components/schemas/SizeSpecificationInputSerializer'
           - type: 'null'
-          description: The external store ID from an external system
+          description: Size specification details
           default: null
-          example: ext_store_002
-        quantity:
-          title: Quantity
-          type: integer
-          description: The quantity of the product in stock
-          example: 50
-        valueCents:
-          title: Valuecents
+        packSizeSpecification:
           anyOf:
-          - type: integer
+          - $ref: '#/components/schemas/PackSizeSpecificationInputSerializer'
           - type: 'null'
-          description: The price of the product in cents
+          description: Pack size specification details
           default: null
-          example: 299
-        currency:
-          title: Currency
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The currency code for the product price
-          default: null
-          example: USD
-        available:
-          title: Available
-          type: boolean
-          description: Whether the product is available for purchase
-          example: true
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationDataOutputSerializer'
-          - type: 'null'
-          description: The location data for the product in the store
-          default: null
-          example:
-            aisle: Produce
-            bay: Fruits
-            shelf: Bananas
-        details:
-          anyOf:
-          - $ref: '#/components/schemas/StoreInventoryDetailsOutputSerializer'
-          - type: 'null'
-          description: Additional inventory details
-          default: null
-          example:
-            weightedItemInfo:
-              valueCentsPerMeasurementUnit: 120
-        providerConfigs:
-          title: Providerconfigs
+        skillsRequired:
+          title: Skillsrequired
           anyOf:
           - type: array
             items:
-              $ref: '#/components/schemas/InventoryProviderConfigOutputSerializer'
+              type: string
           - type: 'null'
-          description: Provider-specific configurations for this inventory item
+          description: Skills required for handling this product
           default: null
           example:
-          - currency: USD
-            details:
-              weightedItemInfo:
-                valueCentsPerMeasurementUnit: 135
-            discount:
-              endTime: '2025-12-17T00:00:00Z'
-              startTime: '2025-12-10T00:00:00Z'
-              valueCents: 270
-            provider: X
-            serviceType: pick_and_deliver
-            valueCents: 299
+          - gas_oven_installation
+        dropoffServiceTimeSeconds:
+          title: Dropoffservicetimeseconds
+          anyOf:
+          - minimum: 0.0
+            type: integer
+          - type: 'null'
+          description: Service time in seconds for handling this product at the dropoff (e.g. install, setup)
+          default: null
+          example: 600
     SizeSpecificationInputSerializer:
       title: SizeSpecificationInputSerializer
       type: object
@@ -1090,133 +566,44 @@ components:
           description: Description of the size specification
           default: null
           example: Large
-    LocationDataOutputSerializer:
-      title: LocationDataOutputSerializer
+    WeightedItemInfoOutputSerializer:
+      title: WeightedItemInfoOutputSerializer
       type: object
       properties:
-        aisle:
-          title: Aisle
+        weightPerItem:
+          title: Weightperitem
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The weight per individual item
+          default: null
+          example: 0.5
+        weightUnit:
+          title: Weightunit
           anyOf:
           - type: string
           - type: 'null'
-          description: The aisle location of the product in the store
+          description: The unit of weight measurement
           default: null
-          example: Aisle 5
-        bay:
-          title: Bay
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The bay location of the product in the store
-          default: null
-          example: Bay 3
-        shelf:
-          title: Shelf
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The shelf location of the product in the store
-          default: null
-          example: Shelf 2
-    InventoryDiscountInputSerializer:
-      title: InventoryDiscountInputSerializer
+          example: kg
+    NashValidationError:
+      title: NashValidationError
       required:
-      - valueCents
-      - startTime
-      - endTime
+      - error
+      - response_status
+      - RequestID
       type: object
       properties:
-        valueCents:
-          title: Valuecents
-          type: integer
-          description: The discounted price in cents
-          example: 270
-        startTime:
-          title: Starttime
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
           type: string
-          description: The start time of the discount period in ISO 8601 format
-          example: '2025-12-10T00:00:00Z'
-        endTime:
-          title: Endtime
+        RequestID:
+          title: Requestid
           type: string
-          description: The end time of the discount period in ISO 8601 format
-          example: '2025-12-17T00:00:00Z'
-    DimensionOutputSerializer:
-      title: DimensionOutputSerializer
-      type: object
-      properties:
-        depth:
-          title: Depth
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The depth dimension of the product
-          default: null
-          example: 10.5
-        width:
-          title: Width
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The width dimension of the product
-          default: null
-          example: 5.0
-        height:
-          title: Height
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The height dimension of the product
-          default: null
-          example: 15.2
-    StoreInventoryDetailsOutputSerializer:
-      title: StoreInventoryDetailsOutputSerializer
-      type: object
-      properties:
-        weightedItemInfo:
-          anyOf:
-          - $ref: '#/components/schemas/StoreInventoryWeightedItemInfoOutputSerializer'
-          - type: 'null'
-          description: Weight information per inventory item
-          default: null
-        taxPercentage:
-          title: Taxpercentage
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Tax rate as a decimal (e.g., 0.1 for 10%)
-          default: null
-          example: 0.1
-    DimensionInputSerializer:
-      title: DimensionInputSerializer
-      type: object
-      properties:
-        depth:
-          title: Depth
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The depth dimension of the product
-          default: null
-          example: 10.5
-        width:
-          title: Width
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The width dimension of the product
-          default: null
-          example: 5.0
-        height:
-          title: Height
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The height dimension of the product
-          default: null
-          example: 15.2
-    StoreInventoryWeightedItemInfoOutputSerializer:
-      title: StoreInventoryWeightedItemInfoOutputSerializer
+    StoreInventoryWeightedItemInfoInputSerializer:
+      title: StoreInventoryWeightedItemInfoInputSerializer
       type: object
       properties:
         valueCentsPerMeasurementUnit:
@@ -1227,18 +614,6 @@ components:
           description: The price per cents per measurement unit
           default: null
           example: 120
-    ProductsInputSerializer:
-      title: ProductsInputSerializer
-      required:
-      - products
-      type: object
-      properties:
-        products:
-          title: Products
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductInputSerializer'
-          description: List of products to create
     LocationDataInputSerializer:
       title: LocationDataInputSerializer
       type: object
@@ -1267,96 +642,6 @@ components:
           description: The shelf location of the product in the store
           default: null
           example: Shelf 2
-    DetailsOutputSerializer:
-      title: DetailsOutputSerializer
-      type: object
-      properties:
-        weightedItemInfo:
-          anyOf:
-          - $ref: '#/components/schemas/WeightedItemInfoOutputSerializer'
-          - type: 'null'
-          description: Weight information per item
-          default: null
-        sizeSpecification:
-          anyOf:
-          - $ref: '#/components/schemas/SizeSpecificationOutputSerializer'
-          - type: 'null'
-          description: Size specification details
-          default: null
-        packSizeSpecification:
-          anyOf:
-          - $ref: '#/components/schemas/PackSizeSpecificationOutputSerializer'
-          - type: 'null'
-          description: Pack size specification details
-          default: null
-    InventoryPaginationOutput:
-      title: InventoryPaginationOutput
-      required:
-      - inventory
-      - totalResults
-      type: object
-      properties:
-        inventory:
-          title: Inventory
-          type: array
-          items:
-            $ref: '#/components/schemas/StoreInventoryOutputSerializer'
-        totalResults:
-          title: Totalresults
-          type: integer
-    ProviderConfigOutputSerializer:
-      title: ProviderConfigOutputSerializer
-      required:
-      - provider
-      - serviceType
-      type: object
-      properties:
-        provider:
-          title: Provider
-          type: string
-          description: Provider name
-          example: X
-        serviceType:
-          title: Servicetype
-          type: string
-          description: Service type (e.g., pick_and_deliver, marketplace)
-          example: pick_and_deliver
-        categories:
-          title: Categories
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Provider-specific categories for this product
-          default: null
-          example:
-          - Produce
-          - Fruits
-          - Organic
-        enabled:
-          title: Enabled
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Whether this provider config is enabled
-          default: null
-          example: true
-    ProductsPaginationOutput:
-      title: ProductsPaginationOutput
-      required:
-      - products
-      - totalResults
-      type: object
-      properties:
-        products:
-          title: Products
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductOutputSerializer'
-        totalResults:
-          title: Totalresults
-          type: integer
     ProductOutputSerializer:
       title: ProductOutputSerializer
       required:
@@ -1494,26 +779,741 @@ components:
             - Organic
             provider: X
             serviceType: pick_and_deliver
-    WeightedItemInfoOutputSerializer:
-      title: WeightedItemInfoOutputSerializer
+    ProductsPaginationOutput:
+      title: ProductsPaginationOutput
+      required:
+      - products
+      - totalResults
       type: object
       properties:
-        weightPerItem:
-          title: Weightperitem
+        products:
+          title: Products
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOutputSerializer'
+        totalResults:
+          title: Totalresults
+          type: integer
+    StoreInventoryWeightedItemInfoOutputSerializer:
+      title: StoreInventoryWeightedItemInfoOutputSerializer
+      type: object
+      properties:
+        valueCentsPerMeasurementUnit:
+          title: Valuecentspermeasurementunit
           anyOf:
-          - type: number
+          - type: integer
           - type: 'null'
-          description: The weight per individual item
+          description: The price per cents per measurement unit
           default: null
-          example: 0.5
-        weightUnit:
-          title: Weightunit
+          example: 120
+    ProductsInputSerializer:
+      title: ProductsInputSerializer
+      required:
+      - products
+      type: object
+      properties:
+        products:
+          title: Products
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductInputSerializer'
+          description: List of products to create
+    IdentifierOutputSerializer:
+      title: IdentifierOutputSerializer
+      required:
+      - type
+      - value
+      type: object
+      properties:
+        type:
+          title: Type
+          type: string
+          description: The type of identifier
+          example: UPC
+        value:
+          title: Value
+          type: string
+          description: The value of the identifier
+          example: '123456789012'
+    ProductInputSerializer:
+      title: ProductInputSerializer
+      required:
+      - name
+      - categories
+      - weight
+      - dimensions
+      - identifiers
+      type: object
+      properties:
+        externalIdentifier:
+          title: Externalidentifier
           anyOf:
           - type: string
           - type: 'null'
-          description: The unit of weight measurement
+          description: The external ID of the product from an external system
           default: null
-          example: kg
+          example: ext_001
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The Stock Keeping Unit (SKU) for the product
+          default: null
+          example: ORG-BAN-001
+        name:
+          title: Name
+          type: string
+          description: The name of the product
+          example: Organic Bananas
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the product
+          default: null
+          example: Fresh organic bananas, perfect for smoothies and baking
+        imageUrls:
+          title: Imageurls
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of image URLs for the product
+          default: null
+          example:
+          - https://example.com/bananas1.jpg
+          - https://example.com/bananas2.jpg
+        categories:
+          title: Categories
+          type: array
+          items:
+            type: string
+          description: List of categories the product belongs to
+          example:
+          - Produce
+          - Fruits
+          - Organic
+        weight:
+          title: Weight
+          type: number
+          description: The weight of the product
+          example: 0.5
+        dimensions:
+          $ref: '#/components/schemas/DimensionInputSerializer'
+          description: Dimensions of the product
+          example:
+            depth: 8.0
+            height: 4.0
+            width: 12.0
+        identifiers:
+          title: Identifiers
+          type: array
+          items:
+            $ref: '#/components/schemas/IdentifierInputSerializer'
+          description: List of identifiers for the product
+          example:
+          - type: UPC
+            value: '123456789012'
+        attributes:
+          title: Attributes
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of attributes for the product
+          default: null
+          example:
+          - WEIGHTED
+        details:
+          anyOf:
+          - $ref: '#/components/schemas/DetailsInputSerializer'
+          - type: 'null'
+          description: Additional product details including weight and size specifications
+          default: null
+          example:
+            packSizeSpecification:
+              description: 10 units per pack
+              value: 10
+            sizeSpecification:
+              description: ea
+              value: 1.0
+            weightedItemInfo:
+              weightPerItem: 0.12
+              weightUnit: kg
+        providerConfigs:
+          title: Providerconfigs
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ProviderConfigInputSerializer'
+          - type: 'null'
+          description: Provider-specific configurations for this product
+          default: null
+          example:
+          - categories:
+            - Produce
+            - Fruits
+            - Organic
+            provider: X
+            serviceType: pick_and_deliver
+    DetailsOutputSerializer:
+      title: DetailsOutputSerializer
+      type: object
+      properties:
+        weightedItemInfo:
+          anyOf:
+          - $ref: '#/components/schemas/WeightedItemInfoOutputSerializer'
+          - type: 'null'
+          description: Weight information per item
+          default: null
+        sizeSpecification:
+          anyOf:
+          - $ref: '#/components/schemas/SizeSpecificationOutputSerializer'
+          - type: 'null'
+          description: Size specification details
+          default: null
+        packSizeSpecification:
+          anyOf:
+          - $ref: '#/components/schemas/PackSizeSpecificationOutputSerializer'
+          - type: 'null'
+          description: Pack size specification details
+          default: null
+    StoreInventoryOutputSerializer:
+      title: StoreInventoryOutputSerializer
+      required:
+      - id
+      - productId
+      - storeLocationId
+      - quantity
+      - available
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        productId:
+          title: Productid
+          type: string
+          description: The product ID associated with this inventory item
+          example: prod_123
+        externalProductId:
+          title: Externalproductid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external product ID from an external system
+          default: null
+          example: ext_001
+        storeLocationId:
+          title: Storelocationid
+          type: string
+          description: The store location ID where this inventory is located
+          example: store_001
+        externalStoreLocationId:
+          title: Externalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external store ID from an external system
+          default: null
+          example: ext_store_002
+        quantity:
+          title: Quantity
+          type: integer
+          description: The quantity of the product in stock
+          example: 50
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The price of the product in cents
+          default: null
+          example: 299
+        currency:
+          title: Currency
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The currency code for the product price
+          default: null
+          example: USD
+        available:
+          title: Available
+          type: boolean
+          description: Whether the product is available for purchase
+          example: true
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationDataOutputSerializer'
+          - type: 'null'
+          description: The location data for the product in the store
+          default: null
+          example:
+            aisle: Produce
+            bay: Fruits
+            shelf: Bananas
+        details:
+          anyOf:
+          - $ref: '#/components/schemas/StoreInventoryDetailsOutputSerializer'
+          - type: 'null'
+          description: Additional inventory details
+          default: null
+          example:
+            weightedItemInfo:
+              valueCentsPerMeasurementUnit: 120
+        providerConfigs:
+          title: Providerconfigs
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/InventoryProviderConfigOutputSerializer'
+          - type: 'null'
+          description: Provider-specific configurations for this inventory item
+          default: null
+          example:
+          - currency: USD
+            details:
+              weightedItemInfo:
+                valueCentsPerMeasurementUnit: 135
+            discount:
+              endTime: '2025-12-17T00:00:00Z'
+              startTime: '2025-12-10T00:00:00Z'
+              valueCents: 270
+            provider: X
+            serviceType: pick_and_deliver
+            valueCents: 299
+    StoreInventoryInputSerializer:
+      title: StoreInventoryInputSerializer
+      required:
+      - available
+      type: object
+      properties:
+        externalProductId:
+          title: Externalproductid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external product ID from an external system
+          default: null
+          example: ext_001
+        externalStoreLocationId:
+          title: Externalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external store ID from an external system
+          default: null
+          example: store_001
+        quantity:
+          title: Quantity
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the product in stock
+          default: null
+          example: 50
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The price of the product in cents
+          default: null
+          example: 299
+        currency:
+          title: Currency
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The currency code for the product price
+          default: null
+          example: USD
+        available:
+          title: Available
+          type: boolean
+          description: Whether the product is available for purchase
+          example: true
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationDataInputSerializer'
+          - type: 'null'
+          description: The location data for the product in the store
+          default: null
+          example:
+            aisle: Produce
+            bay: Fruits
+            shelf: Bananas
+        details:
+          anyOf:
+          - $ref: '#/components/schemas/StoreInventoryDetailsInputSerializer'
+          - type: 'null'
+          description: Additional inventory details
+          default: null
+          example:
+            weightedItemInfo:
+              valueCentsPerMeasurementUnit: 120
+        providerConfigs:
+          title: Providerconfigs
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/InventoryProviderConfigInputSerializer'
+          - type: 'null'
+          description: Provider-specific configurations for this inventory item
+          default: null
+          example:
+          - currency: USD
+            details:
+              weightedItemInfo:
+                valueCentsPerMeasurementUnit: 135
+            discount:
+              endTime: '2025-12-17T00:00:00Z'
+              startTime: '2025-12-10T00:00:00Z'
+              valueCents: 270
+            provider: X
+            serviceType: pick_and_deliver
+            valueCents: 299
+    InventoryProviderConfigOutputSerializer:
+      title: InventoryProviderConfigOutputSerializer
+      required:
+      - provider
+      - serviceType
+      - valueCents
+      - currency
+      type: object
+      properties:
+        provider:
+          title: Provider
+          type: string
+          description: Provider name
+          example: X
+        serviceType:
+          title: Servicetype
+          type: string
+          description: Service type (e.g., pick_and_deliver, marketplace)
+          example: pick_and_deliver
+        valueCents:
+          title: Valuecents
+          type: integer
+          description: The price of the product in cents for this provider
+          example: 299
+        currency:
+          title: Currency
+          type: string
+          description: The currency code for the product price
+          example: USD
+        details:
+          anyOf:
+          - $ref: '#/components/schemas/StoreInventoryDetailsOutputSerializer'
+          - type: 'null'
+          description: Additional pricing details for this provider
+          default: null
+        available:
+          title: Available
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether this provider config is available
+          default: null
+          example: true
+        discount:
+          anyOf:
+          - $ref: '#/components/schemas/InventoryDiscountOutputSerializer'
+          - type: 'null'
+          description: Optional discount pricing for this provider config
+          default: null
+          example:
+            endTime: '2025-12-17T00:00:00Z'
+            startTime: '2025-12-10T00:00:00Z'
+            valueCents: 270
+        taxPercentage:
+          title: Taxpercentage
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Tax rate as a decimal (e.g., 0.1 for 10%)
+          default: null
+          example: 0.1
+    InventoryDiscountOutputSerializer:
+      title: InventoryDiscountOutputSerializer
+      required:
+      - valueCents
+      - startTime
+      - endTime
+      type: object
+      properties:
+        valueCents:
+          title: Valuecents
+          type: integer
+          description: The discounted price in cents
+          example: 270
+        startTime:
+          title: Starttime
+          type: string
+          description: The start time of the discount period in ISO 8601 format
+          example: '2025-12-10T00:00:00Z'
+        endTime:
+          title: Endtime
+          type: string
+          description: The end time of the discount period in ISO 8601 format
+          example: '2025-12-17T00:00:00Z'
+    InventoryPaginationOutput:
+      title: InventoryPaginationOutput
+      required:
+      - inventory
+      - totalResults
+      type: object
+      properties:
+        inventory:
+          title: Inventory
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreInventoryOutputSerializer'
+        totalResults:
+          title: Totalresults
+          type: integer
+    DimensionInputSerializer:
+      title: DimensionInputSerializer
+      type: object
+      properties:
+        depth:
+          title: Depth
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The depth dimension of the product
+          default: null
+          example: 10.5
+        width:
+          title: Width
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The width dimension of the product
+          default: null
+          example: 5.0
+        height:
+          title: Height
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The height dimension of the product
+          default: null
+          example: 15.2
+    StoreInventoryDetailsOutputSerializer:
+      title: StoreInventoryDetailsOutputSerializer
+      type: object
+      properties:
+        weightedItemInfo:
+          anyOf:
+          - $ref: '#/components/schemas/StoreInventoryWeightedItemInfoOutputSerializer'
+          - type: 'null'
+          description: Weight information per inventory item
+          default: null
+        taxPercentage:
+          title: Taxpercentage
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Tax rate as a decimal (e.g., 0.1 for 10%)
+          default: null
+          example: 0.1
+    ProviderConfigInputSerializer:
+      title: ProviderConfigInputSerializer
+      required:
+      - provider
+      - serviceType
+      type: object
+      properties:
+        provider:
+          title: Provider
+          type: string
+          description: Provider name
+          example: X
+        serviceType:
+          title: Servicetype
+          type: string
+          description: Service type (e.g., pick_and_deliver, marketplace)
+          example: pick_and_deliver
+        categories:
+          title: Categories
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Provider-specific categories for this product
+          default: null
+          example:
+          - Produce
+          - Fruits
+          - Organic
+        enabled:
+          title: Enabled
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether this provider config is enabled
+          default: null
+          example: true
+    SizeSpecificationOutputSerializer:
+      title: SizeSpecificationOutputSerializer
+      type: object
+      properties:
+        value:
+          title: Value
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The size value
+          default: null
+          example: 100.0
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Description of the size specification
+          default: null
+          example: Large
+    StoreInventoryDetailsInputSerializer:
+      title: StoreInventoryDetailsInputSerializer
+      type: object
+      properties:
+        weightedItemInfo:
+          anyOf:
+          - $ref: '#/components/schemas/StoreInventoryWeightedItemInfoInputSerializer'
+          - type: 'null'
+          description: Weight information per inventory item
+          default: null
+        taxPercentage:
+          title: Taxpercentage
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Tax rate as a decimal (e.g., 0.1 for 10%)
+          default: null
+          example: 0.1
+    LocationDataOutputSerializer:
+      title: LocationDataOutputSerializer
+      type: object
+      properties:
+        aisle:
+          title: Aisle
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The aisle location of the product in the store
+          default: null
+          example: Aisle 5
+        bay:
+          title: Bay
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The bay location of the product in the store
+          default: null
+          example: Bay 3
+        shelf:
+          title: Shelf
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The shelf location of the product in the store
+          default: null
+          example: Shelf 2
+    ProductsOutputSerializer:
+      title: ProductsOutputSerializer
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductOutputSerializer'
+      description: Expected output when listing products, it will return an array of ProductOutputSerializer.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    InventoryDiscountInputSerializer:
+      title: InventoryDiscountInputSerializer
+      required:
+      - valueCents
+      - startTime
+      - endTime
+      type: object
+      properties:
+        valueCents:
+          title: Valuecents
+          type: integer
+          description: The discounted price in cents
+          example: 270
+        startTime:
+          title: Starttime
+          type: string
+          description: The start time of the discount period in ISO 8601 format
+          example: '2025-12-10T00:00:00Z'
+        endTime:
+          title: Endtime
+          type: string
+          description: The end time of the discount period in ISO 8601 format
+          example: '2025-12-17T00:00:00Z'
+    ProviderConfigOutputSerializer:
+      title: ProviderConfigOutputSerializer
+      required:
+      - provider
+      - serviceType
+      type: object
+      properties:
+        provider:
+          title: Provider
+          type: string
+          description: Provider name
+          example: X
+        serviceType:
+          title: Servicetype
+          type: string
+          description: Service type (e.g., pick_and_deliver, marketplace)
+          example: pick_and_deliver
+        categories:
+          title: Categories
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Provider-specific categories for this product
+          default: null
+          example:
+          - Produce
+          - Fruits
+          - Organic
+        enabled:
+          title: Enabled
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Whether this provider config is enabled
+          default: null
+          example: true
   securitySchemes:
     Token:
       type: http

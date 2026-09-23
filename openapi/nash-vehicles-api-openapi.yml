@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nash AI Functions Vehicles API
+  title: Nash Vehicles API
   version: 1.0.0
-  description: LLM-backed domain tools
+  description: Vehicles
 servers:
 - url: https://api.sandbox.usenash.com
   description: Sandbox API
@@ -69,6 +69,72 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    VehicleInfo:
+      title: VehicleInfo
+      type: object
+      properties:
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleDisplaySize'
+          - type: 'null'
+          description: The type of the vehicle.
+          default: null
+        make:
+          title: Make
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The make of the vehicle.
+          default: null
+        model:
+          title: Model
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The model of the vehicle.
+          default: null
+        licenseplate:
+          title: Licenseplate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The license plate of the vehicle.
+          default: null
+        color:
+          title: Color
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The color of the vehicle.
+          default: null
+        year:
+          title: Year
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The year of the vehicle.
+          default: null
+      description: Response for vehicle info.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
     VehicleConfig:
       title: VehicleConfig
       type: object
@@ -215,26 +281,6 @@ components:
           description: Parking time at order locations (in hours).
           default: null
       description: Response for vehicle config.
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
     CreateVehicleInputSerializer:
       title: CreateVehicleInputSerializer
       required:
@@ -301,6 +347,20 @@ components:
           - cor_1
           - cor_2
       description: Input for creating a vehicle.
+    VehicleDisplaySize:
+      title: VehicleDisplaySize
+      enum:
+      - bike
+      - motorbike
+      - cargobike
+      - car
+      - suv
+      - pickup_truck
+      - van
+      - truck
+      - large_van
+      - extra_large_van
+      type: string
     VehicleResponse:
       title: VehicleResponse
       required:
@@ -363,66 +423,6 @@ components:
         RequestID:
           title: Requestid
           type: string
-    VehicleInfo:
-      title: VehicleInfo
-      type: object
-      properties:
-        type:
-          anyOf:
-          - $ref: '#/components/schemas/VehicleDisplaySize'
-          - type: 'null'
-          description: The type of the vehicle.
-          default: null
-        make:
-          title: Make
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The make of the vehicle.
-          default: null
-        model:
-          title: Model
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The model of the vehicle.
-          default: null
-        licenseplate:
-          title: Licenseplate
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The license plate of the vehicle.
-          default: null
-        color:
-          title: Color
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The color of the vehicle.
-          default: null
-        year:
-          title: Year
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The year of the vehicle.
-          default: null
-      description: Response for vehicle info.
-    VehicleDisplaySize:
-      title: VehicleDisplaySize
-      enum:
-      - bike
-      - motorbike
-      - cargobike
-      - car
-      - suv
-      - pickup_truck
-      - van
-      - truck
-      - large_van
-      - extra_large_van
-      type: string
   securitySchemes:
     Token:
       type: http
