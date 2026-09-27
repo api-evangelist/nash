@@ -93,6 +93,22 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -113,22 +129,31 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    NashValidationError:
-      title: NashValidationError
+    ListContractsResponse:
+      title: ListContractsResponse
       required:
-      - error
-      - response_status
-      - RequestID
+      - contracts
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
+        contracts:
+          title: Contracts
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractReadDetailed'
+        next_cursor:
+          title: Next Cursor
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: 'Response body for ``GET /v1/contracts``.
+
+
+        Items are typed as the wider ``ContractReadDetailed``. In summary mode the
+
+        service nulls the detailed fields so summary callers get a uniform shape
+
+        with the extra fields blanked.'
     ContractReadDetailed:
       title: ContractReadDetailed
       required:
@@ -303,31 +328,6 @@ components:
           - type: 'null'
           default: null
       description: Full payload — populated when the caller asks for ``include=details``.
-    ListContractsResponse:
-      title: ListContractsResponse
-      required:
-      - contracts
-      type: object
-      properties:
-        contracts:
-          title: Contracts
-          type: array
-          items:
-            $ref: '#/components/schemas/ContractReadDetailed'
-        next_cursor:
-          title: Next Cursor
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-      description: 'Response body for ``GET /v1/contracts``.
-
-
-        Items are typed as the wider ``ContractReadDetailed``. In summary mode the
-
-        service nulls the detailed fields so summary callers get a uniform shape
-
-        with the extra fields blanked.'
   securitySchemes:
     Token:
       type: http

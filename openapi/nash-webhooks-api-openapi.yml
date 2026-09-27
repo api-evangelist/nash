@@ -224,6 +224,69 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    WebhookMessage:
+      title: WebhookMessage
+      required:
+      - id
+      - eventType
+      - timestamp
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        eventId:
+          title: Eventid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        eventType:
+          title: Eventtype
+          type: string
+        timestamp:
+          title: Timestamp
+          type: string
+          format: date-time
+        channels:
+          title: Channels
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        tags:
+          title: Tags
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        payload:
+          title: Payload
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
     WebhookMessageReplayRequest:
       title: WebhookMessageReplayRequest
       type: object
@@ -267,26 +330,26 @@ components:
           - type: 'null'
           description: Optional Svix idempotency key forwarded on each per-endpoint resend call.
           default: null
-    NashErrorDetails:
-      title: NashErrorDetails
+    WebhookEventTypesResponse:
+      title: WebhookEventTypesResponse
       required:
-      - code
-      - message
+      - eventTypes
+      - source
       type: object
       properties:
-        code:
-          title: Code
+        eventTypes:
+          title: Eventtypes
+          type: array
+          items:
+            type: string
+          description: Sorted list of Svix event type names (e.g. `delivery.dropoff_complete`).
+        source:
+          title: Source
+          enum:
+          - org_active
+          - catalog
           type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
+          description: '`org_active` when filtered to types this org''s endpoints subscribe to; `catalog` when at least one endpoint subscribes to all events, in which case the full Svix event-type catalog is returned.'
     WebhookMessageReplayResult:
       title: WebhookMessageReplayResult
       required:
@@ -341,53 +404,6 @@ components:
         done:
           title: Done
           type: boolean
-    WebhookMessage:
-      title: WebhookMessage
-      required:
-      - id
-      - eventType
-      - timestamp
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-        eventId:
-          title: Eventid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        eventType:
-          title: Eventtype
-          type: string
-        timestamp:
-          title: Timestamp
-          type: string
-          format: date-time
-        channels:
-          title: Channels
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          default: null
-        tags:
-          title: Tags
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          default: null
-        payload:
-          title: Payload
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
     WebhookMessageReplayResponse:
       title: WebhookMessageReplayResponse
       required:
@@ -424,49 +440,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebhookMessageReplayResult'
-    WebhookMessageAttemptsResponse:
-      title: WebhookMessageAttemptsResponse
-      required:
-      - results
-      - done
-      type: object
-      properties:
-        results:
-          title: Results
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookMessageAttempt'
-        iterator:
-          title: Iterator
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        prevIterator:
-          title: Previterator
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        done:
-          title: Done
-          type: boolean
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
     WebhookMessageAttempt:
       title: WebhookMessageAttempt
       required:
@@ -522,26 +495,53 @@ components:
           title: Timestamp
           type: string
           format: date-time
-    WebhookEventTypesResponse:
-      title: WebhookEventTypesResponse
+    WebhookMessageAttemptsResponse:
+      title: WebhookMessageAttemptsResponse
       required:
-      - eventTypes
-      - source
+      - results
+      - done
       type: object
       properties:
-        eventTypes:
-          title: Eventtypes
+        results:
+          title: Results
           type: array
           items:
-            type: string
-          description: Sorted list of Svix event type names (e.g. `delivery.dropoff_complete`).
-        source:
-          title: Source
-          enum:
-          - org_active
-          - catalog
+            $ref: '#/components/schemas/WebhookMessageAttempt'
+        iterator:
+          title: Iterator
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        prevIterator:
+          title: Previterator
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        done:
+          title: Done
+          type: boolean
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
           type: string
-          description: '`org_active` when filtered to types this org''s endpoints subscribe to; `catalog` when at least one endpoint subscribes to all events, in which case the full Svix event-type catalog is returned.'
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

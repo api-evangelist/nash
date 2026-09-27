@@ -47,26 +47,18 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
+    CreateTemplatesInputSerializer:
+      title: CreateTemplatesInputSerializer
       required:
-      - code
-      - message
+      - templates
       type: object
       properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
+        templates:
+          title: Templates
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateTemplateInputSerializer'
+      description: Expected payload for creating multiple templates.
     CreateTemplateInputSerializer:
       title: CreateTemplateInputSerializer
       required:
@@ -271,18 +263,6 @@ components:
           description: Whether to overwrite existing instances
           example: true
       description: Response for a delivery window.
-    CreateTemplatesInputSerializer:
-      title: CreateTemplatesInputSerializer
-      required:
-      - templates
-      type: object
-      properties:
-        templates:
-          title: Templates
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateTemplateInputSerializer'
-      description: Expected payload for creating multiple templates.
     TemplatesResponse:
       title: TemplatesResponse
       required:
@@ -311,6 +291,26 @@ components:
         RequestID:
           title: Requestid
           type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

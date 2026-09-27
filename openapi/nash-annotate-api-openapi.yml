@@ -63,26 +63,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
     CreateFlagInputSerializer:
       title: CreateFlagInputSerializer
       required:
@@ -149,6 +129,26 @@ components:
         RequestID:
           title: Requestid
           type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
     CreateNoteInputSerializer:
       title: CreateNoteInputSerializer
       required:

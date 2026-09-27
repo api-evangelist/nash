@@ -85,26 +85,16 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
+    DetectDropoffAnomalyInputSerializer:
+      title: DetectDropoffAnomalyInputSerializer
       required:
-      - code
-      - message
+      - deliveryId
       type: object
       properties:
-        code:
-          title: Code
+        deliveryId:
+          title: Deliveryid
           type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
+          description: The delivery to analyse for dropoff anomalies.
     VerifyPhotoInputSerializer:
       title: VerifyPhotoInputSerializer
       required:
@@ -136,16 +126,13 @@ components:
           title: Imageurl
           type: string
           description: Public URL of the image whose faces should be masked.
-    DetectDropoffAnomalyInputSerializer:
-      title: DetectDropoffAnomalyInputSerializer
-      required:
-      - deliveryId
-      type: object
-      properties:
-        deliveryId:
-          title: Deliveryid
-          type: string
-          description: The delivery to analyse for dropoff anomalies.
+    PhotoType:
+      title: PhotoType
+      enum:
+      - pod
+      - pickup
+      - signature
+      type: string
     NashValidationError:
       title: NashValidationError
       required:
@@ -162,13 +149,26 @@ components:
         RequestID:
           title: Requestid
           type: string
-    PhotoType:
-      title: PhotoType
-      enum:
-      - pod
-      - pickup
-      - signature
-      type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

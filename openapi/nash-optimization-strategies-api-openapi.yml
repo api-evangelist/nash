@@ -129,25 +129,39 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
+    OptimizationScheduleInputSerializer:
+      title: OptimizationScheduleInputSerializer
       type: object
       properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
+        cronExpression:
+          title: Cronexpression
           anyOf:
-          - type: object
-            additionalProperties: true
+          - type: string
           - type: 'null'
+          description: Cron expression controlling when the strategy runs (input timezone).
+          default: null
+        startDate:
+          title: Startdate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Earliest time the schedule may fire.
+          default: null
+        endDate:
+          title: Enddate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Latest time the schedule may fire.
+          default: null
+        inputTimezoneId:
+          title: Inputtimezoneid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: IANA timezone id used to interpret the cron expression (e.g. 'America/New_York').
           default: null
     CadenceTierInputSerializer:
       title: CadenceTierInputSerializer
@@ -164,185 +178,17 @@ components:
         intervalMinutes:
           title: Intervalminutes
           type: integer
-    CreateOptimizationStrategyInputSerializer:
-      title: CreateOptimizationStrategyInputSerializer
+    DynamicCadenceConfigInputSerializer:
+      title: DynamicCadenceConfigInputSerializer
       required:
-      - label
+      - tiersBeforeCutoff
       type: object
       properties:
-        optimizationSchedules:
-          title: Optimizationschedules
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/OptimizationScheduleInputSerializer'
-          - type: 'null'
-          default: null
-        contractIds:
-          title: Contractids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Contracts considered during optimization.
-          default: null
-        shiftContractId:
-          title: Shiftcontractid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Contract id of the provider supplying shifts for this strategy.
-          default: null
-        pickupServiceTimeSeconds:
-          title: Pickupservicetimeseconds
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        dropoffServiceTimeSeconds:
-          title: Dropoffservicetimeseconds
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        incrementalServiceTimeSeconds:
-          title: Incrementalservicetimeseconds
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        enableAutoDispatch:
-          title: Enableautodispatch
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        autodispatchWithinXMinutesOfPickupTime:
-          title: Autodispatchwithinxminutesofpickuptime
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Deprecated. Use pickup_time_from_in_minutes / pickup_time_to_in_minutes.
-          default: null
-        earliestDispatchMinutesBeforePickup:
-          title: Earliestdispatchminutesbeforepickup
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Deprecated. Use pickup_time_from_in_minutes / pickup_time_to_in_minutes.
-          default: null
-        pickupTimeFromInMinutes:
-          title: Pickuptimefrominminutes
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Lower bound (inclusive) of the pickup time window to optimize, in minutes from now.
-          default: null
-        pickupTimeToInMinutes:
-          title: Pickuptimetoinminutes
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Upper bound (exclusive) of the pickup time window to optimize, in minutes from now.
-          default: null
-        contractOptimizationOverrideParameters:
-          title: Contractoptimizationoverrideparameters
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/ContractOverrideParametersSerializer'
-          - type: 'null'
-          default: null
-        unassignedOrdersOptionsGroupId:
-          title: Unassignedordersoptionsgroupid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        defaultTrafficSource:
-          title: Defaulttrafficsource
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        trafficTimeOffsetWeeks:
-          title: Traffictimeoffsetweeks
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        zones:
-          title: Zones
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Zone ids assigned to this strategy.
-          default: null
-        storeLocations:
-          title: Storelocations
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Store location ids assigned to this strategy.
-          default: null
-        softCapabilities:
-          title: Softcapabilities
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          default: null
-        searchLevel:
-          title: Searchlevel
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        clusteringLevel:
-          title: Clusteringlevel
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        softClusterLabel:
-          title: Softclusterlabel
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        balanceRoutes:
-          anyOf:
-          - $ref: '#/components/schemas/OptimizationBalanceRoutes'
-          - type: 'null'
-          default: null
-        saveOptimizedRoutes:
-          title: Saveoptimizedroutes
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        dynamicCadenceConfig:
-          anyOf:
-          - $ref: '#/components/schemas/DynamicCadenceConfigInputSerializer'
-          - type: 'null'
-          default: null
-        label:
-          title: Label
-          type: string
-          description: Human-readable name for the strategy.
-    OptimizationBalanceRoutes:
-      title: OptimizationBalanceRoutes
-      enum:
-      - none
-      - same_vehicle_type
-      - all_vehicle_types
-      type: string
+        tiersBeforeCutoff:
+          title: Tiersbeforecutoff
+          type: array
+          items:
+            $ref: '#/components/schemas/CadenceTierInputSerializer'
     UpdateOptimizationStrategyInputSerializer:
       title: UpdateOptimizationStrategyInputSerializer
       type: object
@@ -515,51 +361,194 @@ components:
           - type: string
           - type: 'null'
           default: null
-    OptimizationScheduleInputSerializer:
-      title: OptimizationScheduleInputSerializer
-      type: object
-      properties:
-        cronExpression:
-          title: Cronexpression
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Cron expression controlling when the strategy runs (input timezone).
-          default: null
-        startDate:
-          title: Startdate
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Earliest time the schedule may fire.
-          default: null
-        endDate:
-          title: Enddate
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Latest time the schedule may fire.
-          default: null
-        inputTimezoneId:
-          title: Inputtimezoneid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: IANA timezone id used to interpret the cron expression (e.g. 'America/New_York').
-          default: null
-    DynamicCadenceConfigInputSerializer:
-      title: DynamicCadenceConfigInputSerializer
+    CreateOptimizationStrategyInputSerializer:
+      title: CreateOptimizationStrategyInputSerializer
       required:
-      - tiersBeforeCutoff
+      - label
       type: object
       properties:
-        tiersBeforeCutoff:
-          title: Tiersbeforecutoff
-          type: array
-          items:
-            $ref: '#/components/schemas/CadenceTierInputSerializer'
+        optimizationSchedules:
+          title: Optimizationschedules
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/OptimizationScheduleInputSerializer'
+          - type: 'null'
+          default: null
+        contractIds:
+          title: Contractids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Contracts considered during optimization.
+          default: null
+        shiftContractId:
+          title: Shiftcontractid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Contract id of the provider supplying shifts for this strategy.
+          default: null
+        pickupServiceTimeSeconds:
+          title: Pickupservicetimeseconds
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        dropoffServiceTimeSeconds:
+          title: Dropoffservicetimeseconds
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        incrementalServiceTimeSeconds:
+          title: Incrementalservicetimeseconds
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        enableAutoDispatch:
+          title: Enableautodispatch
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        autodispatchWithinXMinutesOfPickupTime:
+          title: Autodispatchwithinxminutesofpickuptime
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Deprecated. Use pickup_time_from_in_minutes / pickup_time_to_in_minutes.
+          default: null
+        earliestDispatchMinutesBeforePickup:
+          title: Earliestdispatchminutesbeforepickup
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Deprecated. Use pickup_time_from_in_minutes / pickup_time_to_in_minutes.
+          default: null
+        pickupTimeFromInMinutes:
+          title: Pickuptimefrominminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Lower bound (inclusive) of the pickup time window to optimize, in minutes from now.
+          default: null
+        pickupTimeToInMinutes:
+          title: Pickuptimetoinminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Upper bound (exclusive) of the pickup time window to optimize, in minutes from now.
+          default: null
+        contractOptimizationOverrideParameters:
+          title: Contractoptimizationoverrideparameters
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ContractOverrideParametersSerializer'
+          - type: 'null'
+          default: null
+        unassignedOrdersOptionsGroupId:
+          title: Unassignedordersoptionsgroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        defaultTrafficSource:
+          title: Defaulttrafficsource
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        trafficTimeOffsetWeeks:
+          title: Traffictimeoffsetweeks
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        zones:
+          title: Zones
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Zone ids assigned to this strategy.
+          default: null
+        storeLocations:
+          title: Storelocations
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Store location ids assigned to this strategy.
+          default: null
+        softCapabilities:
+          title: Softcapabilities
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default: null
+        searchLevel:
+          title: Searchlevel
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        clusteringLevel:
+          title: Clusteringlevel
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        softClusterLabel:
+          title: Softclusterlabel
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        balanceRoutes:
+          anyOf:
+          - $ref: '#/components/schemas/OptimizationBalanceRoutes'
+          - type: 'null'
+          default: null
+        saveOptimizedRoutes:
+          title: Saveoptimizedroutes
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        dynamicCadenceConfig:
+          anyOf:
+          - $ref: '#/components/schemas/DynamicCadenceConfigInputSerializer'
+          - type: 'null'
+          default: null
+        label:
+          title: Label
+          type: string
+          description: Human-readable name for the strategy.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     ContractOverrideParametersSerializer:
       title: ContractOverrideParametersSerializer
       required:
@@ -611,22 +600,33 @@ components:
           - type: boolean
           - type: 'null'
           default: null
-    NashValidationError:
-      title: NashValidationError
+    NashErrorDetails:
+      title: NashErrorDetails
       required:
-      - error
-      - response_status
-      - RequestID
+      - code
+      - message
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
+        code:
+          title: Code
           type: string
-        RequestID:
-          title: Requestid
+        message:
+          title: Message
           type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    OptimizationBalanceRoutes:
+      title: OptimizationBalanceRoutes
+      enum:
+      - none
+      - same_vehicle_type
+      - all_vehicle_types
+      type: string
   securitySchemes:
     Token:
       type: http

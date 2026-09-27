@@ -40,12 +40,22 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    HealthCheckResponse:
-      title: HealthCheckResponse
-      enum:
-      - 'TRUE'
-      - 'FALSE'
-      type: string
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -66,22 +76,12 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
+    HealthCheckResponse:
+      title: HealthCheckResponse
+      enum:
+      - 'TRUE'
+      - 'FALSE'
+      type: string
   securitySchemes:
     Token:
       type: http

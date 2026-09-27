@@ -115,26 +115,52 @@ components:
           description: The year of the vehicle.
           default: null
       description: Response for vehicle info.
-    NashErrorDetails:
-      title: NashErrorDetails
+    VehicleResponse:
+      title: VehicleResponse
       required:
-      - code
-      - message
+      - id
+      - name
+      - providerid
+      - externalidentifier
+      - enabled
+      - vehicleinfo
+      - vehicleconfig
+      - courierids
       type: object
       properties:
-        code:
-          title: Code
+        id:
+          title: Id
           type: string
-        message:
-          title: Message
+          description: The ID of the vehicle.
+        name:
+          title: Name
           type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
+          description: The name of the vehicle.
+        providerid:
+          title: Providerid
+          type: string
+          description: The provider ID of the vehicle.
+        externalidentifier:
+          title: Externalidentifier
+          type: string
+          description: The external identifier of the vehicle.
+        enabled:
+          title: Enabled
+          type: boolean
+          description: Whether the vehicle is enabled.
+        vehicleinfo:
+          $ref: '#/components/schemas/VehicleInfo'
+          description: The vehicle info of the vehicle.
+        vehicleconfig:
+          $ref: '#/components/schemas/VehicleConfig'
+          description: The vehicle config of the vehicle.
+        courierids:
+          title: Courierids
+          type: array
+          items:
+            type: string
+          description: The couriers of the vehicle.
+      description: Response for vehicle.
     VehicleConfig:
       title: VehicleConfig
       type: object
@@ -281,6 +307,20 @@ components:
           description: Parking time at order locations (in hours).
           default: null
       description: Response for vehicle config.
+    VehicleDisplaySize:
+      title: VehicleDisplaySize
+      enum:
+      - bike
+      - motorbike
+      - cargobike
+      - car
+      - suv
+      - pickup_truck
+      - van
+      - truck
+      - large_van
+      - extra_large_van
+      type: string
     CreateVehicleInputSerializer:
       title: CreateVehicleInputSerializer
       required:
@@ -347,66 +387,6 @@ components:
           - cor_1
           - cor_2
       description: Input for creating a vehicle.
-    VehicleDisplaySize:
-      title: VehicleDisplaySize
-      enum:
-      - bike
-      - motorbike
-      - cargobike
-      - car
-      - suv
-      - pickup_truck
-      - van
-      - truck
-      - large_van
-      - extra_large_van
-      type: string
-    VehicleResponse:
-      title: VehicleResponse
-      required:
-      - id
-      - name
-      - providerid
-      - externalidentifier
-      - enabled
-      - vehicleinfo
-      - vehicleconfig
-      - courierids
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: The ID of the vehicle.
-        name:
-          title: Name
-          type: string
-          description: The name of the vehicle.
-        providerid:
-          title: Providerid
-          type: string
-          description: The provider ID of the vehicle.
-        externalidentifier:
-          title: Externalidentifier
-          type: string
-          description: The external identifier of the vehicle.
-        enabled:
-          title: Enabled
-          type: boolean
-          description: Whether the vehicle is enabled.
-        vehicleinfo:
-          $ref: '#/components/schemas/VehicleInfo'
-          description: The vehicle info of the vehicle.
-        vehicleconfig:
-          $ref: '#/components/schemas/VehicleConfig'
-          description: The vehicle config of the vehicle.
-        courierids:
-          title: Courierids
-          type: array
-          items:
-            type: string
-          description: The couriers of the vehicle.
-      description: Response for vehicle.
     NashValidationError:
       title: NashValidationError
       required:
@@ -423,6 +403,26 @@ components:
         RequestID:
           title: Requestid
           type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

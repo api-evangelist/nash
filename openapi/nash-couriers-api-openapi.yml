@@ -194,48 +194,6 @@ components:
             type: string
           description: The vehicles of the courier.
       description: Response for courier.
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    WorkRelationship:
-      title: WorkRelationship
-      enum:
-      - EMPLOYEE
-      - CONTRACTOR
-      type: string
-    VehicleLocation:
-      title: VehicleLocation
-      required:
-      - lat
-      - lng
-      type: object
-      properties:
-        lat:
-          title: Lat
-          type: number
-          description: The latitude of the vehicle location.
-        lng:
-          title: Lng
-          type: number
-          description: The longitude of the vehicle location.
-      description: Response for vehicle location.
     VehicleDisplaySize:
       title: VehicleDisplaySize
       enum:
@@ -249,6 +207,12 @@ components:
       - truck
       - large_van
       - extra_large_van
+      type: string
+    WorkRelationship:
+      title: WorkRelationship
+      enum:
+      - EMPLOYEE
+      - CONTRACTOR
       type: string
     CreateCourierInputSerializer:
       title: CreateCourierInputSerializer
@@ -331,6 +295,22 @@ components:
           - veh_1
           - veh_2
       description: Input for creating a courier.
+    VehicleLocation:
+      title: VehicleLocation
+      required:
+      - lat
+      - lng
+      type: object
+      properties:
+        lat:
+          title: Lat
+          type: number
+          description: The latitude of the vehicle location.
+        lng:
+          title: Lng
+          type: number
+          description: The longitude of the vehicle location.
+      description: Response for vehicle location.
     NashValidationError:
       title: NashValidationError
       required:
@@ -347,6 +327,26 @@ components:
         RequestID:
           title: Requestid
           type: string
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

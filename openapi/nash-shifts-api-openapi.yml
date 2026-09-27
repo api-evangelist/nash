@@ -193,120 +193,55 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    CreateShiftsInputSerializer:
-      title: CreateShiftsInputSerializer
-      required:
-      - shifts
+    OptimizationParams:
+      title: OptimizationParams
       type: object
       properties:
-        shifts:
-          title: Shifts
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateShiftInputSerializer'
-      description: Input for creating multiple shifts.
-    CreateShiftInputSerializer:
-      title: CreateShiftInputSerializer
-      required:
-      - name
-      - plannedStart
-      - plannedEnd
-      type: object
-      properties:
-        id:
-          title: Id
+        serviceTimeRelativeEfficiency:
+          title: Servicetimerelativeefficiency
           anyOf:
-          - type: string
+          - type: number
           - type: 'null'
-          description: The ID of the shift.
+          description: The service time relative efficiency of the shift.
           default: null
-          example: sft_fKUFVWZQGbEfsyMwJYntE2
-        name:
-          title: Name
-          type: string
-          description: The name of the shift.
-          example: Shift 1
-        plannedStart:
-          title: Plannedstart
-          type: string
-          description: The planned start timestamp of the shift.
-          example: '2021-01-01T00:00:00Z'
-        plannedEnd:
-          title: Plannedend
-          type: string
-          description: The planned end timestamp of the shift.
-          example: '2021-01-01T00:00:00Z'
-        plannedBreakDuration:
-          title: Plannedbreakduration
+          example: 1.0
+        plannedBreaks:
+          title: Plannedbreaks
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/BreakConfiguration'
+          - type: 'null'
+          description: The planned breaks of the shift. (in minutes)
+          default: null
+          example:
+          - end: 30
+            start: 0
+        departureDelay:
+          title: Departuredelay
           anyOf:
           - type: integer
           - type: 'null'
-          description: The planned break duration of the shift.
+          description: The departure delay. (in minutes)
           default: null
-          example: 30
-        shiftMetadata:
-          title: Shiftmetadata
+          example: 15
+        shiftEndServiceTimeMinutes:
+          title: Shiftendservicetimeminutes
           anyOf:
-          - type: object
-            additionalProperties: true
+          - type: integer
           - type: 'null'
-          description: The metadata of the shift.
+          description: Buffer between return to depot and shift end (e.g. refueling). (in minutes)
+          default: null
+          example: 10
+        vehicleConfig:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleConfig'
+          - type: 'null'
+          description: The vehicle config of the shift.
           default: null
           example:
             key: value
-        optimizationParams:
-          anyOf:
-          - $ref: '#/components/schemas/OptimizationParams'
-          - type: 'null'
-          description: The optimization parameters of the shift.
-          default: null
-        status:
-          title: Status
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The status of the shift.
-          default: null
-          example: active
-        storeLocationId:
-          title: Storelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The store location ID of the shift.
-          default: null
-          example: '123'
-        externalStoreLocationId:
-          title: Externalstorelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external store location ID of the shift.
-          default: null
-          example: '123'
-        zoneIds:
-          title: Zoneids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The zone IDs of the shift.
-          default: null
-          example:
-          - '123'
-        externalZoneIds:
-          title: Externalzoneids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The external zone IDs of the shift.
-          default: null
-          example:
-          - '123'
-      description: Input for creating a shift.
+      description: Input for creating optimization params.
     VehicleConfig:
       title: VehicleConfig
       type: object
@@ -453,90 +388,108 @@ components:
           description: Parking time at order locations (in hours).
           default: null
       description: Response for vehicle config.
-    OptimizationParams:
-      title: OptimizationParams
+    CreateShiftInputSerializer:
+      title: CreateShiftInputSerializer
+      required:
+      - name
+      - plannedStart
+      - plannedEnd
       type: object
       properties:
-        serviceTimeRelativeEfficiency:
-          title: Servicetimerelativeefficiency
+        id:
+          title: Id
           anyOf:
-          - type: number
+          - type: string
           - type: 'null'
-          description: The service time relative efficiency of the shift.
+          description: The ID of the shift.
           default: null
-          example: 1.0
-        plannedBreaks:
-          title: Plannedbreaks
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/BreakConfiguration'
-          - type: 'null'
-          description: The planned breaks of the shift. (in minutes)
-          default: null
-          example:
-          - end: 30
-            start: 0
-        departureDelay:
-          title: Departuredelay
+          example: sft_fKUFVWZQGbEfsyMwJYntE2
+        name:
+          title: Name
+          type: string
+          description: The name of the shift.
+          example: Shift 1
+        plannedStart:
+          title: Plannedstart
+          type: string
+          description: The planned start timestamp of the shift.
+          example: '2021-01-01T00:00:00Z'
+        plannedEnd:
+          title: Plannedend
+          type: string
+          description: The planned end timestamp of the shift.
+          example: '2021-01-01T00:00:00Z'
+        plannedBreakDuration:
+          title: Plannedbreakduration
           anyOf:
           - type: integer
           - type: 'null'
-          description: The departure delay. (in minutes)
+          description: The planned break duration of the shift.
           default: null
-          example: 15
-        shiftEndServiceTimeMinutes:
-          title: Shiftendservicetimeminutes
+          example: 30
+        shiftMetadata:
+          title: Shiftmetadata
           anyOf:
-          - type: integer
+          - type: object
+            additionalProperties: true
           - type: 'null'
-          description: Buffer between return to depot and shift end (e.g. refueling). (in minutes)
-          default: null
-          example: 10
-        vehicleConfig:
-          anyOf:
-          - $ref: '#/components/schemas/VehicleConfig'
-          - type: 'null'
-          description: The vehicle config of the shift.
+          description: The metadata of the shift.
           default: null
           example:
             key: value
-      description: Input for creating optimization params.
-    BreakConfiguration:
-      title: BreakConfiguration
-      required:
-      - breakDuration
-      type: object
-      properties:
-        timeWindow:
-          title: Timewindow
+        optimizationParams:
           anyOf:
-          - maxItems: 2
-            minItems: 2
-            type: array
-            prefixItems:
-            - type: integer
-            - type: integer
+          - $ref: '#/components/schemas/OptimizationParams'
           - type: 'null'
-          description: The time window of the break. (in minutes)
+          description: The optimization parameters of the shift.
+          default: null
+        status:
+          title: Status
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The status of the shift.
+          default: null
+          example: active
+        storeLocationId:
+          title: Storelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The store location ID of the shift.
+          default: null
+          example: '123'
+        externalStoreLocationId:
+          title: Externalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external store location ID of the shift.
+          default: null
+          example: '123'
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone IDs of the shift.
           default: null
           example:
-          - 0
-          - 30
-        breakDuration:
-          title: Breakduration
-          type: integer
-          description: The break duration of the break. (in minutes)
-          example: 30
-        maxWorkingTime:
-          title: Maxworkingtime
+          - '123'
+        externalZoneIds:
+          title: Externalzoneids
           anyOf:
-          - type: integer
+          - type: array
+            items:
+              type: string
           - type: 'null'
-          description: The max working time of the break. (in minutes)
+          description: The external zone IDs of the shift.
           default: null
-          example: 30
-      description: Input for creating a break configuration.
+          example:
+          - '123'
+      description: Input for creating a shift.
     ShiftResponse:
       title: ShiftResponse
       required:
@@ -645,6 +598,18 @@ components:
           type: string
           description: The update timestamp of the shift.
       description: Response for shift.
+    CreateShiftsInputSerializer:
+      title: CreateShiftsInputSerializer
+      required:
+      - shifts
+      type: object
+      properties:
+        shifts:
+          title: Shifts
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateShiftInputSerializer'
+      description: Input for creating multiple shifts.
     NashValidationError:
       title: NashValidationError
       required:
@@ -661,6 +626,41 @@ components:
         RequestID:
           title: Requestid
           type: string
+    BreakConfiguration:
+      title: BreakConfiguration
+      required:
+      - breakDuration
+      type: object
+      properties:
+        timeWindow:
+          title: Timewindow
+          anyOf:
+          - maxItems: 2
+            minItems: 2
+            type: array
+            prefixItems:
+            - type: integer
+            - type: integer
+          - type: 'null'
+          description: The time window of the break. (in minutes)
+          default: null
+          example:
+          - 0
+          - 30
+        breakDuration:
+          title: Breakduration
+          type: integer
+          description: The break duration of the break. (in minutes)
+          example: 30
+        maxWorkingTime:
+          title: Maxworkingtime
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The max working time of the break. (in minutes)
+          default: null
+          example: 30
+      description: Input for creating a break configuration.
   securitySchemes:
     Token:
       type: http

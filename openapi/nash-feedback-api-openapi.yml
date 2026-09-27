@@ -114,6 +114,22 @@ components:
           - type: 'null'
           description: Feedback comment
           default: null
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -134,22 +150,6 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
     FeedbackOutputSerializer:
       title: FeedbackOutputSerializer
       required:

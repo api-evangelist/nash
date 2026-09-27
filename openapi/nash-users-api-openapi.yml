@@ -288,128 +288,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    RoleIds:
-      title: RoleIds
-      required:
-      - roleIds
-      type: object
-      properties:
-        roleIds:
-          title: Roleids
-          type: array
-          items:
-            type: string
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    UserInvite:
-      title: UserInvite
-      required:
-      - email
-      - roleIds
-      type: object
-      properties:
-        email:
-          title: Email
-          type: string
-          format: email
-        roleIds:
-          title: Roleids
-          type: array
-          items:
-            type: string
-    UserCreate:
-      title: UserCreate
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          title: Email
-          type: string
-          format: email
-        roleIds:
-          title: Roleids
-          type: array
-          items:
-            type: string
-          default: []
-        firstName:
-          title: Firstname
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        lastName:
-          title: Lastname
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        phoneNumber:
-          title: Phonenumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        auth0Id:
-          title: Auth0Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        isNashSuperuser:
-          title: Isnashsuperuser
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        isNashOperations:
-          title: Isnashoperations
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-    RoleRead:
-      title: RoleRead
-      required:
-      - id
-      - name
-      - organizationId
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-        name:
-          title: Name
-          type: string
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        organizationId:
-          title: Organizationid
-          type: string
     UserRead:
       title: UserRead
       required:
@@ -465,6 +343,128 @@ components:
           items:
             $ref: '#/components/schemas/RoleRead'
           default: []
+    UserInvite:
+      title: UserInvite
+      required:
+      - email
+      - roleIds
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          format: email
+        roleIds:
+          title: Roleids
+          type: array
+          items:
+            type: string
+    RoleRead:
+      title: RoleRead
+      required:
+      - id
+      - name
+      - organizationId
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        organizationId:
+          title: Organizationid
+          type: string
+    MutationResult:
+      title: MutationResult
+      type: object
+      properties:
+        success:
+          title: Success
+          type: boolean
+          default: true
+      description: Standard success response for role mutation endpoints.
+    UserCreate:
+      title: UserCreate
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          format: email
+        roleIds:
+          title: Roleids
+          type: array
+          items:
+            type: string
+          default: []
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        auth0Id:
+          title: Auth0Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        isNashSuperuser:
+          title: Isnashsuperuser
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        isNashOperations:
+          title: Isnashoperations
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+    RoleIds:
+      title: RoleIds
+      required:
+      - roleIds
+      type: object
+      properties:
+        roleIds:
+          title: Roleids
+          type: array
+          items:
+            type: string
+    RolesListResponse:
+      title: RolesListResponse
+      required:
+      - roles
+      type: object
+      properties:
+        roles:
+          title: Roles
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleRead'
     UsersListResponse:
       title: UsersListResponse
       required:
@@ -476,15 +476,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserRead'
-    MutationResult:
-      title: MutationResult
-      type: object
-      properties:
-        success:
-          title: Success
-          type: boolean
-          default: true
-      description: Standard success response for role mutation endpoints.
     NashValidationError:
       title: NashValidationError
       required:
@@ -501,17 +492,26 @@ components:
         RequestID:
           title: Requestid
           type: string
-    RolesListResponse:
-      title: RolesListResponse
+    NashErrorDetails:
+      title: NashErrorDetails
       required:
-      - roles
+      - code
+      - message
       type: object
       properties:
-        roles:
-          title: Roles
-          type: array
-          items:
-            $ref: '#/components/schemas/RoleRead'
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

@@ -202,94 +202,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    SetStrategyRestrictionsRequest:
-      title: SetStrategyRestrictionsRequest
-      required:
-      - route_restriction_ids
-      type: object
-      properties:
-        route_restriction_ids:
-          title: Route Restriction Ids
-          type: array
-          items:
-            type: string
-    RouteRestrictionsListResponse:
-      title: RouteRestrictionsListResponse
-      required:
-      - route_restrictions
-      type: object
-      properties:
-        route_restrictions:
-          title: Route Restrictions
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteRestrictionRead'
-    RouteRestrictionUpdate:
-      title: RouteRestrictionUpdate
-      type: object
-      properties:
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        polygons:
-          title: Polygons
-          anyOf:
-          - type: array
-            items:
-              type: array
-              items:
-                maxItems: 2
-                minItems: 2
-                type: array
-                prefixItems:
-                - type: number
-                - type: number
-          - type: 'null'
-          default: null
-        restriction_metadata:
-          title: Restriction Metadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    DeleteRouteRestrictionResponse:
-      title: DeleteRouteRestrictionResponse
-      type: object
-      properties:
-        success:
-          title: Success
-          type: boolean
-          default: true
     RouteRestrictionRead:
       title: RouteRestrictionRead
       required:
@@ -343,6 +255,28 @@ components:
           items:
             type: string
           default: []
+    RouteRestrictionsListResponse:
+      title: RouteRestrictionsListResponse
+      required:
+      - route_restrictions
+      type: object
+      properties:
+        route_restrictions:
+          title: Route Restrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRestrictionRead'
+    SetStrategyRestrictionsResponse:
+      title: SetStrategyRestrictionsResponse
+      required:
+      - route_restrictions
+      type: object
+      properties:
+        route_restrictions:
+          title: Route Restrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRestrictionRead'
     RouteRestrictionCreate:
       title: RouteRestrictionCreate
       required:
@@ -378,6 +312,25 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
+    DeleteRouteRestrictionResponse:
+      title: DeleteRouteRestrictionResponse
+      type: object
+      properties:
+        success:
+          title: Success
+          type: boolean
+          default: true
+    SetStrategyRestrictionsRequest:
+      title: SetStrategyRestrictionsRequest
+      required:
+      - route_restriction_ids
+      type: object
+      properties:
+        route_restriction_ids:
+          title: Route Restriction Ids
+          type: array
+          items:
+            type: string
     NashValidationError:
       title: NashValidationError
       required:
@@ -394,17 +347,64 @@ components:
         RequestID:
           title: Requestid
           type: string
-    SetStrategyRestrictionsResponse:
-      title: SetStrategyRestrictionsResponse
-      required:
-      - route_restrictions
+    RouteRestrictionUpdate:
+      title: RouteRestrictionUpdate
       type: object
       properties:
-        route_restrictions:
-          title: Route Restrictions
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteRestrictionRead'
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        polygons:
+          title: Polygons
+          anyOf:
+          - type: array
+            items:
+              type: array
+              items:
+                maxItems: 2
+                minItems: 2
+                type: array
+                prefixItems:
+                - type: number
+                - type: number
+          - type: 'null'
+          default: null
+        restriction_metadata:
+          title: Restriction Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http
