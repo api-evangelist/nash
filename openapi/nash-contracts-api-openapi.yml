@@ -109,51 +109,6 @@ components:
         RequestID:
           title: Requestid
           type: string
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    ListContractsResponse:
-      title: ListContractsResponse
-      required:
-      - contracts
-      type: object
-      properties:
-        contracts:
-          title: Contracts
-          type: array
-          items:
-            $ref: '#/components/schemas/ContractReadDetailed'
-        next_cursor:
-          title: Next Cursor
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-      description: 'Response body for ``GET /v1/contracts``.
-
-
-        Items are typed as the wider ``ContractReadDetailed``. In summary mode the
-
-        service nulls the detailed fields so summary callers get a uniform shape
-
-        with the extra fields blanked.'
     ContractReadDetailed:
       title: ContractReadDetailed
       required:
@@ -328,6 +283,51 @@ components:
           - type: 'null'
           default: null
       description: Full payload — populated when the caller asks for ``include=details``.
+    ListContractsResponse:
+      title: ListContractsResponse
+      required:
+      - contracts
+      type: object
+      properties:
+        contracts:
+          title: Contracts
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractReadDetailed'
+        next_cursor:
+          title: Next Cursor
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      description: 'Response body for ``GET /v1/contracts``.
+
+
+        Items are typed as the wider ``ContractReadDetailed``. In summary mode the
+
+        service nulls the detailed fields so summary callers get a uniform shape
+
+        with the extra fields blanked.'
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

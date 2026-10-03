@@ -173,26 +173,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
     OptimizationParams:
       title: OptimizationParams
       type: object
@@ -242,6 +222,134 @@ components:
           example:
             key: value
       description: Input for creating optimization params.
+    ShiftResponse:
+      title: ShiftResponse
+      required:
+      - id
+      - name
+      - plannedStart
+      - plannedEnd
+      - status
+      - createdAt
+      - updatedAt
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the shift.
+        name:
+          title: Name
+          type: string
+          description: The name of the shift.
+        plannedStart:
+          title: Plannedstart
+          type: string
+          description: The planned start timestamp of the shift.
+        plannedEnd:
+          title: Plannedend
+          type: string
+          description: The planned end timestamp of the shift.
+        plannedBreakDuration:
+          title: Plannedbreakduration
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The planned break duration of the shift.
+          default: null
+        shiftMetadata:
+          title: Shiftmetadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: The metadata of the shift.
+          default: null
+        optimizationParams:
+          anyOf:
+          - $ref: '#/components/schemas/OptimizationParams'
+          - type: 'null'
+          description: The optimization parameters of the shift.
+          default: null
+        status:
+          title: Status
+          type: string
+          description: The status of the shift.
+        storeLocationId:
+          title: Storelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The store location ID of the shift.
+          default: null
+        externalStoreLocationId:
+          title: Externalstorelocationid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external store location ID of the shift.
+          default: null
+        zoneIds:
+          title: Zoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The zone IDs of the shift.
+          default: null
+        externalZoneIds:
+          title: Externalzoneids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The external zone IDs of the shift.
+          default: null
+        courierId:
+          title: Courierid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The courier ID of the shift.
+          default: null
+        vehicleId:
+          title: Vehicleid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The vehicle ID of the shift.
+          default: null
+        createdAt:
+          title: Createdat
+          type: string
+          description: The creation timestamp of the shift.
+        updatedAt:
+          title: Updatedat
+          type: string
+          description: The update timestamp of the shift.
+      description: Response for shift.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
     VehicleConfig:
       title: VehicleConfig
       type: object
@@ -388,6 +496,22 @@ components:
           description: Parking time at order locations (in hours).
           default: null
       description: Response for vehicle config.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     CreateShiftInputSerializer:
       title: CreateShiftInputSerializer
       required:
@@ -490,114 +614,6 @@ components:
           example:
           - '123'
       description: Input for creating a shift.
-    ShiftResponse:
-      title: ShiftResponse
-      required:
-      - id
-      - name
-      - plannedStart
-      - plannedEnd
-      - status
-      - createdAt
-      - updatedAt
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: The ID of the shift.
-        name:
-          title: Name
-          type: string
-          description: The name of the shift.
-        plannedStart:
-          title: Plannedstart
-          type: string
-          description: The planned start timestamp of the shift.
-        plannedEnd:
-          title: Plannedend
-          type: string
-          description: The planned end timestamp of the shift.
-        plannedBreakDuration:
-          title: Plannedbreakduration
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The planned break duration of the shift.
-          default: null
-        shiftMetadata:
-          title: Shiftmetadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: The metadata of the shift.
-          default: null
-        optimizationParams:
-          anyOf:
-          - $ref: '#/components/schemas/OptimizationParams'
-          - type: 'null'
-          description: The optimization parameters of the shift.
-          default: null
-        status:
-          title: Status
-          type: string
-          description: The status of the shift.
-        storeLocationId:
-          title: Storelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The store location ID of the shift.
-          default: null
-        externalStoreLocationId:
-          title: Externalstorelocationid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external store location ID of the shift.
-          default: null
-        zoneIds:
-          title: Zoneids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The zone IDs of the shift.
-          default: null
-        externalZoneIds:
-          title: Externalzoneids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The external zone IDs of the shift.
-          default: null
-        courierId:
-          title: Courierid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The courier ID of the shift.
-          default: null
-        vehicleId:
-          title: Vehicleid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The vehicle ID of the shift.
-          default: null
-        createdAt:
-          title: Createdat
-          type: string
-          description: The creation timestamp of the shift.
-        updatedAt:
-          title: Updatedat
-          type: string
-          description: The update timestamp of the shift.
-      description: Response for shift.
     CreateShiftsInputSerializer:
       title: CreateShiftsInputSerializer
       required:
@@ -610,22 +626,6 @@ components:
           items:
             $ref: '#/components/schemas/CreateShiftInputSerializer'
       description: Input for creating multiple shifts.
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
     BreakConfiguration:
       title: BreakConfiguration
       required:

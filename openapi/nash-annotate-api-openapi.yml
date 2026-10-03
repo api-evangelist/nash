@@ -63,6 +63,72 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    FlagStatus:
+      title: FlagStatus
+      enum:
+      - NEEDS_ATTENTION
+      - ACKNOWLEDGED
+      - RESOLVED
+      type: string
+    CreateNoteInputSerializer:
+      title: CreateNoteInputSerializer
+      required:
+      - jobId
+      - note
+      type: object
+      properties:
+        jobId:
+          title: Jobid
+          type: string
+          description: The job ID to create a note for.
+        taskId:
+          title: Taskid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The task ID to create a note for.
+          default: null
+        note:
+          title: Note
+          type: string
+          description: The note to create.
+      description: Expected payload for the create note endpoint.
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     CreateFlagInputSerializer:
       title: CreateFlagInputSerializer
       required:
@@ -106,72 +172,6 @@ components:
           type: string
           description: The notes to create a flag for.
       description: Expected payload for the create flag endpoint.
-    FlagStatus:
-      title: FlagStatus
-      enum:
-      - NEEDS_ATTENTION
-      - ACKNOWLEDGED
-      - RESOLVED
-      type: string
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    CreateNoteInputSerializer:
-      title: CreateNoteInputSerializer
-      required:
-      - jobId
-      - note
-      type: object
-      properties:
-        jobId:
-          title: Jobid
-          type: string
-          description: The job ID to create a note for.
-        taskId:
-          title: Taskid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The task ID to create a note for.
-          default: null
-        note:
-          title: Note
-          type: string
-          description: The note to create.
-      description: Expected payload for the create note endpoint.
   securitySchemes:
     Token:
       type: http

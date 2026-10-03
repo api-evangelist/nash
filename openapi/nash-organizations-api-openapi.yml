@@ -41,6 +41,22 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     OrganizationSummaryResponse:
       title: OrganizationSummaryResponse
       required:
@@ -58,32 +74,6 @@ components:
           - type: 'null'
           description: Organization name
           default: null
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    ListOrganizationChildrenResponse:
-      title: ListOrganizationChildrenResponse
-      type: object
-      properties:
-        children:
-          title: Children
-          type: array
-          items:
-            $ref: '#/components/schemas/OrganizationSummaryResponse'
-          description: Direct child organizations of the authenticated organization.
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -104,6 +94,16 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
+    ListOrganizationChildrenResponse:
+      title: ListOrganizationChildrenResponse
+      type: object
+      properties:
+        children:
+          title: Children
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationSummaryResponse'
+          description: Direct child organizations of the authenticated organization.
   securitySchemes:
     Token:
       type: http

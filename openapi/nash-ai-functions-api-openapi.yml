@@ -85,16 +85,36 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    DetectDropoffAnomalyInputSerializer:
-      title: DetectDropoffAnomalyInputSerializer
+    NashErrorDetails:
+      title: NashErrorDetails
       required:
-      - deliveryId
+      - code
+      - message
       type: object
       properties:
-        deliveryId:
-          title: Deliveryid
+        code:
+          title: Code
           type: string
-          description: The delivery to analyse for dropoff anomalies.
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    MaskFaceInPhotoInputSerializer:
+      title: MaskFaceInPhotoInputSerializer
+      required:
+      - imageUrl
+      type: object
+      properties:
+        imageUrl:
+          title: Imageurl
+          type: string
+          description: Public URL of the image whose faces should be masked.
     VerifyPhotoInputSerializer:
       title: VerifyPhotoInputSerializer
       required:
@@ -116,23 +136,16 @@ components:
           - type: 'null'
           description: Optional extra guidance for the LLM (e.g. 'Is the package on the doorstep?').
           default: null
-    MaskFaceInPhotoInputSerializer:
-      title: MaskFaceInPhotoInputSerializer
+    DetectDropoffAnomalyInputSerializer:
+      title: DetectDropoffAnomalyInputSerializer
       required:
-      - imageUrl
+      - deliveryId
       type: object
       properties:
-        imageUrl:
-          title: Imageurl
+        deliveryId:
+          title: Deliveryid
           type: string
-          description: Public URL of the image whose faces should be masked.
-    PhotoType:
-      title: PhotoType
-      enum:
-      - pod
-      - pickup
-      - signature
-      type: string
+          description: The delivery to analyse for dropoff anomalies.
     NashValidationError:
       title: NashValidationError
       required:
@@ -149,26 +162,13 @@ components:
         RequestID:
           title: Requestid
           type: string
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
+    PhotoType:
+      title: PhotoType
+      enum:
+      - pod
+      - pickup
+      - signature
+      type: string
   securitySchemes:
     Token:
       type: http

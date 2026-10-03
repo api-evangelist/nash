@@ -57,6 +57,12 @@ components:
         RequestID:
           title: Requestid
           type: string
+    ListOrgProvidersOutputSerializer:
+      title: ListOrgProvidersOutputSerializer
+      type: array
+      items:
+        $ref: '#/components/schemas/OrgProviderPayload'
+      description: Expected output when listing org providers, it will return an array of this.
     OrgProviderPayload:
       title: OrgProviderPayload
       required:
@@ -76,12 +82,6 @@ components:
           - type: string
           - type: 'null'
           default: null
-    ListOrgProvidersOutputSerializer:
-      title: ListOrgProvidersOutputSerializer
-      type: array
-      items:
-        $ref: '#/components/schemas/OrgProviderPayload'
-      description: Expected output when listing org providers, it will return an array of this.
     NashErrorDetails:
       title: NashErrorDetails
       required:

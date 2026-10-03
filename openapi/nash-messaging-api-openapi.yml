@@ -41,13 +41,26 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    MessageType:
-      title: MessageType
-      enum:
-      - sms
-      - email
-      type: string
-      description: Enum for message delivery types.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
     RecipientType:
       title: RecipientType
       enum:
@@ -72,26 +85,13 @@ components:
         RequestID:
           title: Requestid
           type: string
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
+    MessageType:
+      title: MessageType
+      enum:
+      - sms
+      - email
+      type: string
+      description: Enum for message delivery types.
     SendMessageInput:
       title: SendMessageInput
       required:

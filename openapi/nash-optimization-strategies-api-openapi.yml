@@ -129,66 +129,64 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    OptimizationScheduleInputSerializer:
-      title: OptimizationScheduleInputSerializer
-      type: object
-      properties:
-        cronExpression:
-          title: Cronexpression
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Cron expression controlling when the strategy runs (input timezone).
-          default: null
-        startDate:
-          title: Startdate
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Earliest time the schedule may fire.
-          default: null
-        endDate:
-          title: Enddate
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Latest time the schedule may fire.
-          default: null
-        inputTimezoneId:
-          title: Inputtimezoneid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: IANA timezone id used to interpret the cron expression (e.g. 'America/New_York').
-          default: null
-    CadenceTierInputSerializer:
-      title: CadenceTierInputSerializer
+    OptimizationBalanceRoutes:
+      title: OptimizationBalanceRoutes
+      enum:
+      - none
+      - same_vehicle_type
+      - all_vehicle_types
+      type: string
+    ContractOverrideParametersSerializer:
+      title: ContractOverrideParametersSerializer
       required:
-      - intervalMinutes
+      - contractId
       type: object
       properties:
-        maxHours:
-          title: Maxhours
+        contractId:
+          title: Contractid
+          type: string
+        vehicleCount:
+          title: Vehiclecount
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        dispatchStrategyId:
+          title: Dispatchstrategyid
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        leadTimeMinutes:
+          title: Leadtimeminutes
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        fixedCost:
+          title: Fixedcost
           anyOf:
           - type: number
           - type: 'null'
           default: null
-        intervalMinutes:
-          title: Intervalminutes
-          type: integer
-    DynamicCadenceConfigInputSerializer:
-      title: DynamicCadenceConfigInputSerializer
-      required:
-      - tiersBeforeCutoff
-      type: object
-      properties:
-        tiersBeforeCutoff:
-          title: Tiersbeforecutoff
-          type: array
-          items:
-            $ref: '#/components/schemas/CadenceTierInputSerializer'
+        maxOrdersPerRoute:
+          title: Maxordersperroute
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        minOrdersPerRoute:
+          title: Minordersperroute
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        useAllVehicles:
+          title: Useallvehicles
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
     UpdateOptimizationStrategyInputSerializer:
       title: UpdateOptimizationStrategyInputSerializer
       type: object
@@ -361,6 +359,102 @@ components:
           - type: string
           - type: 'null'
           default: null
+    OptimizationScheduleInputSerializer:
+      title: OptimizationScheduleInputSerializer
+      type: object
+      properties:
+        cronExpression:
+          title: Cronexpression
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cron expression controlling when the strategy runs (input timezone).
+          default: null
+        startDate:
+          title: Startdate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Earliest time the schedule may fire.
+          default: null
+        endDate:
+          title: Enddate
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Latest time the schedule may fire.
+          default: null
+        inputTimezoneId:
+          title: Inputtimezoneid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: IANA timezone id used to interpret the cron expression (e.g. 'America/New_York').
+          default: null
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    DynamicCadenceConfigInputSerializer:
+      title: DynamicCadenceConfigInputSerializer
+      required:
+      - tiersBeforeCutoff
+      type: object
+      properties:
+        tiersBeforeCutoff:
+          title: Tiersbeforecutoff
+          type: array
+          items:
+            $ref: '#/components/schemas/CadenceTierInputSerializer'
+    CadenceTierInputSerializer:
+      title: CadenceTierInputSerializer
+      required:
+      - intervalMinutes
+      type: object
+      properties:
+        maxHours:
+          title: Maxhours
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        intervalMinutes:
+          title: Intervalminutes
+          type: integer
     CreateOptimizationStrategyInputSerializer:
       title: CreateOptimizationStrategyInputSerializer
       required:
@@ -533,100 +627,6 @@ components:
           title: Label
           type: string
           description: Human-readable name for the strategy.
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    ContractOverrideParametersSerializer:
-      title: ContractOverrideParametersSerializer
-      required:
-      - contractId
-      type: object
-      properties:
-        contractId:
-          title: Contractid
-          type: string
-        vehicleCount:
-          title: Vehiclecount
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        dispatchStrategyId:
-          title: Dispatchstrategyid
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        leadTimeMinutes:
-          title: Leadtimeminutes
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        fixedCost:
-          title: Fixedcost
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        maxOrdersPerRoute:
-          title: Maxordersperroute
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        minOrdersPerRoute:
-          title: Minordersperroute
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        useAllVehicles:
-          title: Useallvehicles
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    OptimizationBalanceRoutes:
-      title: OptimizationBalanceRoutes
-      enum:
-      - none
-      - same_vehicle_type
-      - all_vehicle_types
-      type: string
   securitySchemes:
     Token:
       type: http

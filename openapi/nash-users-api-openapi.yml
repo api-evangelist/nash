@@ -288,100 +288,26 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    UserRead:
-      title: UserRead
+    NashErrorDetails:
+      title: NashErrorDetails
       required:
-      - id
-      - isActive
+      - code
+      - message
       type: object
       properties:
-        id:
-          title: Id
+        code:
+          title: Code
           type: string
-        email:
-          title: Email
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        auth0Id:
-          title: Auth0Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        firstName:
-          title: Firstname
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        lastName:
-          title: Lastname
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        isActive:
-          title: Isactive
-          type: boolean
-        isNashSuperuser:
-          title: Isnashsuperuser
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        isNashOperations:
-          title: Isnashoperations
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        roles:
-          title: Roles
-          type: array
-          items:
-            $ref: '#/components/schemas/RoleRead'
-          default: []
-    UserInvite:
-      title: UserInvite
-      required:
-      - email
-      - roleIds
-      type: object
-      properties:
-        email:
-          title: Email
+        message:
+          title: Message
           type: string
-          format: email
-        roleIds:
-          title: Roleids
-          type: array
-          items:
-            type: string
-    RoleRead:
-      title: RoleRead
-      required:
-      - id
-      - name
-      - organizationId
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-        name:
-          title: Name
-          type: string
-        description:
-          title: Description
+        details:
+          title: Details
           anyOf:
-          - type: string
+          - type: object
+            additionalProperties: true
           - type: 'null'
           default: null
-        organizationId:
-          title: Organizationid
-          type: string
     MutationResult:
       title: MutationResult
       type: object
@@ -454,6 +380,61 @@ components:
           type: array
           items:
             type: string
+    RoleRead:
+      title: RoleRead
+      required:
+      - id
+      - name
+      - organizationId
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        organizationId:
+          title: Organizationid
+          type: string
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    UserInvite:
+      title: UserInvite
+      required:
+      - email
+      - roleIds
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          format: email
+        roleIds:
+          title: Roleids
+          type: array
+          items:
+            type: string
     RolesListResponse:
       title: RolesListResponse
       required:
@@ -476,42 +457,61 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserRead'
-    NashValidationError:
-      title: NashValidationError
+    UserRead:
+      title: UserRead
       required:
-      - error
-      - response_status
-      - RequestID
+      - id
+      - isActive
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
+        id:
+          title: Id
           type: string
-        RequestID:
-          title: Requestid
-          type: string
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
+        email:
+          title: Email
           anyOf:
-          - type: object
-            additionalProperties: true
+          - type: string
           - type: 'null'
           default: null
+        auth0Id:
+          title: Auth0Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        isActive:
+          title: Isactive
+          type: boolean
+        isNashSuperuser:
+          title: Isnashsuperuser
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        isNashOperations:
+          title: Isnashoperations
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        roles:
+          title: Roles
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleRead'
+          default: []
   securitySchemes:
     Token:
       type: http

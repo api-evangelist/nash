@@ -69,6 +69,143 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    CreateCourierInputSerializer:
+      title: CreateCourierInputSerializer
+      required:
+      - firstname
+      - lastname
+      - phonenumber
+      type: object
+      properties:
+        externalidentifier:
+          title: Externalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external identifier of the courier.
+          default: null
+          example: courier_ext_1
+        firstname:
+          title: Firstname
+          type: string
+          description: The first name of the courier.
+          example: John
+        lastname:
+          title: Lastname
+          type: string
+          description: The last name of the courier.
+          example: Doe
+        phonenumber:
+          title: Phonenumber
+          type: string
+          description: The phone number of the courier.
+          example: '+1234567890'
+        vehicleinfo:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleInfo'
+          - type: 'null'
+          description: The vehicle info of the courier.
+          default: null
+          example:
+            color: Red
+            licensePlate: ABC123
+            make: Toyota
+            model: Camry
+            type: car
+            year: '2020'
+        dateofbirth:
+          title: Dateofbirth
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: The date of birth of the courier.
+          default: null
+          example: '1990-01-15'
+        workrelationship:
+          anyOf:
+          - $ref: '#/components/schemas/WorkRelationship'
+          - type: 'null'
+          description: The work relationship type of the courier.
+          default: null
+          example: EMPLOYEE
+        driverslicense:
+          title: Driverslicense
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The driver's license number of the courier.
+          default: null
+          example: DL123456
+        vehicleids:
+          title: Vehicleids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The vehicles of the courier.
+          default: null
+          example:
+          - veh_1
+          - veh_2
+      description: Input for creating a courier.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    VehicleDisplaySize:
+      title: VehicleDisplaySize
+      enum:
+      - bike
+      - motorbike
+      - cargobike
+      - car
+      - suv
+      - pickup_truck
+      - van
+      - truck
+      - large_van
+      - extra_large_van
+      type: string
+    WorkRelationship:
+      title: WorkRelationship
+      enum:
+      - EMPLOYEE
+      - CONTRACTOR
+      type: string
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
     VehicleInfo:
       title: VehicleInfo
       type: object
@@ -194,107 +331,6 @@ components:
             type: string
           description: The vehicles of the courier.
       description: Response for courier.
-    VehicleDisplaySize:
-      title: VehicleDisplaySize
-      enum:
-      - bike
-      - motorbike
-      - cargobike
-      - car
-      - suv
-      - pickup_truck
-      - van
-      - truck
-      - large_van
-      - extra_large_van
-      type: string
-    WorkRelationship:
-      title: WorkRelationship
-      enum:
-      - EMPLOYEE
-      - CONTRACTOR
-      type: string
-    CreateCourierInputSerializer:
-      title: CreateCourierInputSerializer
-      required:
-      - firstname
-      - lastname
-      - phonenumber
-      type: object
-      properties:
-        externalidentifier:
-          title: Externalidentifier
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external identifier of the courier.
-          default: null
-          example: courier_ext_1
-        firstname:
-          title: Firstname
-          type: string
-          description: The first name of the courier.
-          example: John
-        lastname:
-          title: Lastname
-          type: string
-          description: The last name of the courier.
-          example: Doe
-        phonenumber:
-          title: Phonenumber
-          type: string
-          description: The phone number of the courier.
-          example: '+1234567890'
-        vehicleinfo:
-          anyOf:
-          - $ref: '#/components/schemas/VehicleInfo'
-          - type: 'null'
-          description: The vehicle info of the courier.
-          default: null
-          example:
-            color: Red
-            licensePlate: ABC123
-            make: Toyota
-            model: Camry
-            type: car
-            year: '2020'
-        dateofbirth:
-          title: Dateofbirth
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          description: The date of birth of the courier.
-          default: null
-          example: '1990-01-15'
-        workrelationship:
-          anyOf:
-          - $ref: '#/components/schemas/WorkRelationship'
-          - type: 'null'
-          description: The work relationship type of the courier.
-          default: null
-          example: EMPLOYEE
-        driverslicense:
-          title: Driverslicense
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The driver's license number of the courier.
-          default: null
-          example: DL123456
-        vehicleids:
-          title: Vehicleids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The vehicles of the courier.
-          default: null
-          example:
-          - veh_1
-          - veh_2
-      description: Input for creating a courier.
     VehicleLocation:
       title: VehicleLocation
       required:
@@ -311,42 +347,6 @@ components:
           type: number
           description: The longitude of the vehicle location.
       description: Response for vehicle location.
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
   securitySchemes:
     Token:
       type: http
