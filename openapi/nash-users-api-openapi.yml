@@ -288,6 +288,53 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    UsersListResponse:
+      title: UsersListResponse
+      required:
+      - users
+      type: object
+      properties:
+        users:
+          title: Users
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRead'
+    MutationResult:
+      title: MutationResult
+      type: object
+      properties:
+        success:
+          title: Success
+          type: boolean
+          default: true
+      description: Standard success response for role mutation endpoints.
+    RolesListResponse:
+      title: RolesListResponse
+      required:
+      - roles
+      type: object
+      properties:
+        roles:
+          title: Roles
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleRead'
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -306,67 +353,6 @@ components:
           anyOf:
           - type: object
             additionalProperties: true
-          - type: 'null'
-          default: null
-    MutationResult:
-      title: MutationResult
-      type: object
-      properties:
-        success:
-          title: Success
-          type: boolean
-          default: true
-      description: Standard success response for role mutation endpoints.
-    UserCreate:
-      title: UserCreate
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          title: Email
-          type: string
-          format: email
-        roleIds:
-          title: Roleids
-          type: array
-          items:
-            type: string
-          default: []
-        firstName:
-          title: Firstname
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        lastName:
-          title: Lastname
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        phoneNumber:
-          title: Phonenumber
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        auth0Id:
-          title: Auth0Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        isNashSuperuser:
-          title: Isnashsuperuser
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          default: null
-        isNashOperations:
-          title: Isnashoperations
-          anyOf:
-          - type: boolean
           - type: 'null'
           default: null
     RoleIds:
@@ -403,22 +389,6 @@ components:
         organizationId:
           title: Organizationid
           type: string
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
     UserInvite:
       title: UserInvite
       required:
@@ -435,28 +405,6 @@ components:
           type: array
           items:
             type: string
-    RolesListResponse:
-      title: RolesListResponse
-      required:
-      - roles
-      type: object
-      properties:
-        roles:
-          title: Roles
-          type: array
-          items:
-            $ref: '#/components/schemas/RoleRead'
-    UsersListResponse:
-      title: UsersListResponse
-      required:
-      - users
-      type: object
-      properties:
-        users:
-          title: Users
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRead'
     UserRead:
       title: UserRead
       required:
@@ -512,6 +460,58 @@ components:
           items:
             $ref: '#/components/schemas/RoleRead'
           default: []
+    UserCreate:
+      title: UserCreate
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          format: email
+        roleIds:
+          title: Roleids
+          type: array
+          items:
+            type: string
+          default: []
+        firstName:
+          title: Firstname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        lastName:
+          title: Lastname
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        phoneNumber:
+          title: Phonenumber
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        auth0Id:
+          title: Auth0Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        isNashSuperuser:
+          title: Isnashsuperuser
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
+        isNashOperations:
+          title: Isnashoperations
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

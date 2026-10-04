@@ -41,6 +41,56 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    RecipientType:
+      title: RecipientType
+      enum:
+      - courier
+      - customer
+      - pickup_business
+      type: string
+      description: Enum for message recipient types.
+    SendMessageInput:
+      title: SendMessageInput
+      required:
+      - order_id
+      - recipient_type
+      - message_type
+      - message
+      type: object
+      properties:
+        order_id:
+          title: Order Id
+          type: string
+        recipient_type:
+          $ref: '#/components/schemas/RecipientType'
+        message_type:
+          $ref: '#/components/schemas/MessageType'
+        message:
+          title: Message
+          type: string
+    MessageType:
+      title: MessageType
+      enum:
+      - sms
+      - email
+      type: string
+      description: Enum for message delivery types.
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -61,56 +111,6 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    RecipientType:
-      title: RecipientType
-      enum:
-      - courier
-      - customer
-      - pickup_business
-      type: string
-      description: Enum for message recipient types.
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    MessageType:
-      title: MessageType
-      enum:
-      - sms
-      - email
-      type: string
-      description: Enum for message delivery types.
-    SendMessageInput:
-      title: SendMessageInput
-      required:
-      - order_id
-      - recipient_type
-      - message_type
-      - message
-      type: object
-      properties:
-        order_id:
-          title: Order Id
-          type: string
-        recipient_type:
-          $ref: '#/components/schemas/RecipientType'
-        message_type:
-          $ref: '#/components/schemas/MessageType'
-        message:
-          title: Message
-          type: string
   securitySchemes:
     Token:
       type: http

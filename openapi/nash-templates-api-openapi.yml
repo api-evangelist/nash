@@ -47,124 +47,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    CreateTemplatesInputSerializer:
-      title: CreateTemplatesInputSerializer
-      required:
-      - templates
-      type: object
-      properties:
-        templates:
-          title: Templates
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateTemplateInputSerializer'
-      description: Expected payload for creating multiple templates.
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    TemplateOutput:
-      title: TemplateOutput
-      required:
-      - id
-      - type
-      - payload
-      - externalId
-      - name
-      - startDatetime
-      - endDatetime
-      - daysOfWeek
-      - generationFrequencyValue
-      - generationFrequencyUnit
-      - createInstancesUpToValue
-      - createInstancesUpToUnit
-      - overrideExistingInstances
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: The ID of the template.
-          example: tpl_01234567890123456789
-        type:
-          title: Type
-          type: string
-          description: Template type (e.g., DELIVERY_WINDOW)
-          example: DELIVERY_WINDOW
-        payload:
-          title: Payload
-          type: object
-          additionalProperties: true
-          description: Required for templates
-        externalId:
-          title: Externalid
-          type: string
-          description: External identifier for the template
-        name:
-          title: Name
-          type: string
-          description: Name of the template
-        startDatetime:
-          title: Startdatetime
-          type: string
-          description: The start datetime of the template.
-          example: '2024-01-01T12:00:00'
-        endDatetime:
-          title: Enddatetime
-          type: string
-          description: The end datetime of the template.
-          example: '2024-01-01T12:00:00'
-        daysOfWeek:
-          title: Daysofweek
-          type: array
-          items:
-            type: string
-          description: Days of the week for template usage
-          example:
-          - MONDAY
-          - TUESDAY
-        generationFrequencyValue:
-          title: Generationfrequencyvalue
-          type: integer
-          description: How often to create instances (value)
-          example: 1
-        generationFrequencyUnit:
-          title: Generationfrequencyunit
-          type: string
-          description: How often to create instances (unit)
-          example: DAY
-        createInstancesUpToValue:
-          title: Createinstancesuptovalue
-          type: integer
-          description: How far into the future to create instances (value)
-          example: 1
-        createInstancesUpToUnit:
-          title: Createinstancesuptounit
-          type: string
-          description: How far into the future to create instances (unit)
-          example: DAY
-        overrideExistingInstances:
-          title: Overrideexistinginstances
-          type: boolean
-          description: Whether to overwrite existing instances
-          example: true
-      description: Response for a delivery window.
     NashValidationError:
       title: NashValidationError
       required:
@@ -299,6 +181,124 @@ components:
           default: null
           example: true
       description: Expected payload for creating a template.
+    CreateTemplatesInputSerializer:
+      title: CreateTemplatesInputSerializer
+      required:
+      - templates
+      type: object
+      properties:
+        templates:
+          title: Templates
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateTemplateInputSerializer'
+      description: Expected payload for creating multiple templates.
+    TemplateOutput:
+      title: TemplateOutput
+      required:
+      - id
+      - type
+      - payload
+      - externalId
+      - name
+      - startDatetime
+      - endDatetime
+      - daysOfWeek
+      - generationFrequencyValue
+      - generationFrequencyUnit
+      - createInstancesUpToValue
+      - createInstancesUpToUnit
+      - overrideExistingInstances
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the template.
+          example: tpl_01234567890123456789
+        type:
+          title: Type
+          type: string
+          description: Template type (e.g., DELIVERY_WINDOW)
+          example: DELIVERY_WINDOW
+        payload:
+          title: Payload
+          type: object
+          additionalProperties: true
+          description: Required for templates
+        externalId:
+          title: Externalid
+          type: string
+          description: External identifier for the template
+        name:
+          title: Name
+          type: string
+          description: Name of the template
+        startDatetime:
+          title: Startdatetime
+          type: string
+          description: The start datetime of the template.
+          example: '2024-01-01T12:00:00'
+        endDatetime:
+          title: Enddatetime
+          type: string
+          description: The end datetime of the template.
+          example: '2024-01-01T12:00:00'
+        daysOfWeek:
+          title: Daysofweek
+          type: array
+          items:
+            type: string
+          description: Days of the week for template usage
+          example:
+          - MONDAY
+          - TUESDAY
+        generationFrequencyValue:
+          title: Generationfrequencyvalue
+          type: integer
+          description: How often to create instances (value)
+          example: 1
+        generationFrequencyUnit:
+          title: Generationfrequencyunit
+          type: string
+          description: How often to create instances (unit)
+          example: DAY
+        createInstancesUpToValue:
+          title: Createinstancesuptovalue
+          type: integer
+          description: How far into the future to create instances (value)
+          example: 1
+        createInstancesUpToUnit:
+          title: Createinstancesuptounit
+          type: string
+          description: How far into the future to create instances (unit)
+          example: DAY
+        overrideExistingInstances:
+          title: Overrideexistinginstances
+          type: boolean
+          description: Whether to overwrite existing instances
+          example: true
+      description: Response for a delivery window.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
     TemplatesResponse:
       title: TemplatesResponse
       required:

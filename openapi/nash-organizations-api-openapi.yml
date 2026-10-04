@@ -57,23 +57,6 @@ components:
         RequestID:
           title: Requestid
           type: string
-    OrganizationSummaryResponse:
-      title: OrganizationSummaryResponse
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Organization ID
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Organization name
-          default: null
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -104,6 +87,23 @@ components:
           items:
             $ref: '#/components/schemas/OrganizationSummaryResponse'
           description: Direct child organizations of the authenticated organization.
+    OrganizationSummaryResponse:
+      title: OrganizationSummaryResponse
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Organization ID
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Organization name
+          default: null
   securitySchemes:
     Token:
       type: http

@@ -202,64 +202,22 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
+    NashValidationError:
+      title: NashValidationError
       required:
-      - code
-      - message
+      - error
+      - response_status
+      - RequestID
       type: object
       properties:
-        code:
-          title: Code
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
           type: string
-        message:
-          title: Message
+        RequestID:
+          title: Requestid
           type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    RouteRestrictionUpdate:
-      title: RouteRestrictionUpdate
-      type: object
-      properties:
-        name:
-          title: Name
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        polygons:
-          title: Polygons
-          anyOf:
-          - type: array
-            items:
-              type: array
-              items:
-                maxItems: 2
-                minItems: 2
-                type: array
-                prefixItems:
-                - type: number
-                - type: number
-          - type: 'null'
-          default: null
-        restriction_metadata:
-          title: Restriction Metadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
     RouteRestrictionCreate:
       title: RouteRestrictionCreate
       required:
@@ -295,22 +253,39 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    NashValidationError:
-      title: NashValidationError
+    SetStrategyRestrictionsRequest:
+      title: SetStrategyRestrictionsRequest
       required:
-      - error
-      - response_status
-      - RequestID
+      - route_restriction_ids
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
+        route_restriction_ids:
+          title: Route Restriction Ids
+          type: array
+          items:
+            type: string
+    SetStrategyRestrictionsResponse:
+      title: SetStrategyRestrictionsResponse
+      required:
+      - route_restrictions
+      type: object
+      properties:
+        route_restrictions:
+          title: Route Restrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRestrictionRead'
+    RouteRestrictionsListResponse:
+      title: RouteRestrictionsListResponse
+      required:
+      - route_restrictions
+      type: object
+      properties:
+        route_restrictions:
+          title: Route Restrictions
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRestrictionRead'
     RouteRestrictionRead:
       title: RouteRestrictionRead
       required:
@@ -364,6 +339,26 @@ components:
           items:
             type: string
           default: []
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
     DeleteRouteRestrictionResponse:
       title: DeleteRouteRestrictionResponse
       type: object
@@ -372,39 +367,44 @@ components:
           title: Success
           type: boolean
           default: true
-    SetStrategyRestrictionsResponse:
-      title: SetStrategyRestrictionsResponse
-      required:
-      - route_restrictions
+    RouteRestrictionUpdate:
+      title: RouteRestrictionUpdate
       type: object
       properties:
-        route_restrictions:
-          title: Route Restrictions
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteRestrictionRead'
-    RouteRestrictionsListResponse:
-      title: RouteRestrictionsListResponse
-      required:
-      - route_restrictions
-      type: object
-      properties:
-        route_restrictions:
-          title: Route Restrictions
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteRestrictionRead'
-    SetStrategyRestrictionsRequest:
-      title: SetStrategyRestrictionsRequest
-      required:
-      - route_restriction_ids
-      type: object
-      properties:
-        route_restriction_ids:
-          title: Route Restriction Ids
-          type: array
-          items:
-            type: string
+        name:
+          title: Name
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        polygons:
+          title: Polygons
+          anyOf:
+          - type: array
+            items:
+              type: array
+              items:
+                maxItems: 2
+                minItems: 2
+                type: array
+                prefixItems:
+                - type: number
+                - type: number
+          - type: 'null'
+          default: null
+        restriction_metadata:
+          title: Restriction Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http

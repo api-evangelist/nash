@@ -75,132 +75,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    ManifestOrdersResponseSerializer:
-      title: ManifestOrdersResponseSerializer
-      required:
-      - manifests
-      type: object
-      properties:
-        manifests:
-          title: Manifests
-          type: array
-          items:
-            $ref: '#/components/schemas/ManifestResultSerializer'
-          description: List of manifest results grouped by provider and store location.
-    SubItemInput:
-      title: SubItemInput
-      type: object
-      properties:
-        id:
-          title: Id
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The merchant ID of the item
-          default: null
-          example: abc-123
-        description:
-          title: Description
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The description of the item
-          default: null
-          example: A box of books
-        count:
-          title: Count
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The quantity of the item
-          default: null
-          example: 2
-        dimensions:
-          anyOf:
-          - $ref: '#/components/schemas/Dimensions'
-          - type: 'null'
-          description: The dimensions of the item
-          default: null
-          example:
-            depth: 14
-            height: 10
-            width: 12
-        weight:
-          title: Weight
-          anyOf:
-          - type: number
-          - type: integer
-          - type: 'null'
-          description: The weight of the item in kilograms (kg)
-          default: null
-          example: 1.5
-        valueCents:
-          title: Valuecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: The value of the item in cents
-          default: null
-          example: 1000
-        requirements:
-          title: Requirements
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: List of requirements for this item
-          default: null
-          example:
-          - age_verification_on_delivery
-        category:
-          title: Category
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The category of the item
-          default: null
-        barcode:
-          title: Barcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Barcode value for this item.
-          default: null
-          example: 0199312650999998913643M221872801002010908
-        metadata:
-          title: Metadata
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Key-value data to attach to this item.
-          default: null
-          example:
-            packaging_type: CTN
-        sku:
-          title: Sku
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The SKU of the sub-item
-          default: null
-        substitution:
-          anyOf:
-          - $ref: '#/components/schemas/SubstitutionObject'
-          - type: 'null'
-          description: Substitution preferences for the sub-item
-          default: null
-        subItems:
-          title: Subitems
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/SubItemInput'
-          - type: 'null'
-          description: The nested sub-items
-          default: null
-      description: Sub-item input object for API requests.
     NashValidationError:
       title: NashValidationError
       required:
@@ -217,93 +91,6 @@ components:
         RequestID:
           title: Requestid
           type: string
-    SubstitutionObject:
-      title: SubstitutionObject
-      type: object
-      properties:
-        preference:
-          title: Preference
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: 'Substitution preference: refund or substitute'
-          default: null
-        source:
-          title: Source
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Source of substitution, e.g., merchant, customer
-          default: null
-        substituteItems:
-          title: Substituteitems
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/SubstituteItemObject'
-          - type: 'null'
-          description: List of substitute items
-          default: null
-    ManifestDocumentSerializer:
-      title: ManifestDocumentSerializer
-      required:
-      - id
-      - url
-      - contentType
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Document ID.
-        url:
-          title: Url
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: URL to download the manifest PDF.
-        contentType:
-          title: Contenttype
-          type: string
-          description: MIME type of the document.
-    DispatchAndManifestResponseSerializer:
-      title: DispatchAndManifestResponseSerializer
-      required:
-      - manifests
-      type: object
-      properties:
-        manifests:
-          title: Manifests
-          type: array
-          items:
-            $ref: '#/components/schemas/ManifestResultSerializer'
-          description: Manifest results for orders that successfully created, dispatched, and manifested.
-        errors:
-          title: Errors
-          type: array
-          items:
-            $ref: '#/components/schemas/ManifestOrderErrorSerializer'
-          description: Per-order failures encountered during create, dispatch, validate, or manifest.
-    PickupPaymentBarcode:
-      title: PickupPaymentBarcode
-      type: object
-      properties:
-        type:
-          title: Type
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The barcode symbology (e.g. CODE128, QR).
-          default: null
-          example: CODE128
-        value:
-          title: Value
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The barcode value the courier should present at pickup.
-          default: null
-          example: '1234567890'
     ManifestResultSerializer:
       title: ManifestResultSerializer
       required:
@@ -328,84 +115,38 @@ components:
           items:
             $ref: '#/components/schemas/ManifestDocumentSerializer'
           description: Generated manifest documents.
-    ShippingDetails:
-      title: ShippingDetails
+    ManifestOrdersInputSerializer:
+      title: ManifestOrdersInputSerializer
       type: object
       properties:
-        providerId:
-          title: Providerid
+        orderIds:
+          title: Orderids
           anyOf:
-          - type: string
+          - type: array
+            items:
+              type: string
           - type: 'null'
-          description: Provider that will fulfil this order's shipment.
+          description: List of Nash order IDs to manifest.
           default: null
-        providerConsignmentId:
-          title: Providerconsignmentid
+        externalOrderIds:
+          title: Externalorderids
           anyOf:
-          - type: string
+          - type: array
+            items:
+              type: string
           - type: 'null'
-          description: Provider consignment ID for this order's shipment.
+          description: List of external order IDs to manifest.
           default: null
-        providerExternalId:
-          title: Providerexternalid
+        providerIds:
+          title: Providerids
           anyOf:
-          - type: string
+          - type: array
+            items:
+              type: string
           - type: 'null'
-          description: Provider-assigned tracking/identifier for this order (formerly tracking_number).
+          description: List of provider IDs. Manifests all eligible orders dispatched to these providers.
           default: null
-        speed:
-          title: Speed
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Delivery speed for this order (e.g. 'STANDARD', 'EXPRESS', 'same_day').
-          default: null
-          example: STANDARD
-        type:
-          title: Type
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Shipment type for this order (provider-specific, e.g. 'NEUTRAL').
-          default: null
-          example: NEUTRAL
-        movementType:
-          title: Movementtype
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Provider movement type for this shipment (e.g. 'DESPATCH').
-          default: null
-          example: DESPATCH
-        chargeAccountId:
-          title: Chargeaccountid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Charge account to bill this shipment against.
-          default: null
-        sortCode:
-          title: Sortcode
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Identifier for the warehouse load/run this shipment belongs to (e.g. Pet Circle WMS sort code).
-          default: null
-          example: PCLOAD-01
-      description: Per-order shipping attributes applied when manifesting.
-    DispatchAndManifestInputSerializer:
-      title: DispatchAndManifestInputSerializer
-      required:
-      - orders
-      type: object
-      properties:
-        orders:
-          title: Orders
-          type: array
-          items:
-            $ref: '#/components/schemas/ManifestOrderInput'
-          description: Orders to create, dispatch, and manifest.
-      description: Create, dispatch, and manifest orders in a single request.
+      description: Manifest orders that have already been dispatched.
     OptimizationParameters:
       title: OptimizationParameters
       type: object
@@ -475,94 +216,6 @@ components:
           - type: string
           - type: 'null'
           description: The sequence group for the order
-          default: null
-    Dimensions:
-      title: Dimensions
-      type: object
-      properties:
-        height:
-          title: Height
-          anyOf:
-          - type: number
-          - type: integer
-          - type: 'null'
-          description: The height of the item in centimeters (cm)
-          default: null
-          example: 10
-        width:
-          title: Width
-          anyOf:
-          - type: number
-          - type: integer
-          - type: 'null'
-          description: The width of the item in centimeters (cm)
-          default: null
-          example: 12
-        depth:
-          title: Depth
-          anyOf:
-          - type: number
-          - type: integer
-          - type: 'null'
-          description: The depth of the item in centimeters (cm)
-          default: null
-          example: 14
-    ManifestOrderErrorSerializer:
-      title: ManifestOrderErrorSerializer
-      required:
-      - stage
-      - message
-      type: object
-      properties:
-        identifier:
-          title: Identifier
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Caller-supplied identifier (external_id, or positional like orders[2]).
-          default: null
-        orderId:
-          title: Orderid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Nash order ID, present once the order has been created.
-          default: null
-        stage:
-          title: Stage
-          type: string
-          description: 'Stage at which the failure occurred: ''create'', ''dispatch'', ''validate'', ''manifest''.'
-        message:
-          title: Message
-          type: string
-          description: Human-readable failure message.
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          description: Opaque debug blob with provider-level context when available (e.g. provider_status_code, provider_message, provider_response_body). Keys inside this object are not subject to the camelCase contract — treat as free-form.
-          default: null
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
           default: null
     ItemInput:
       title: ItemInput
@@ -665,6 +318,71 @@ components:
           description: The nested sub-items
           default: null
       description: Item input object for API requests.
+    ManifestOrderErrorSerializer:
+      title: ManifestOrderErrorSerializer
+      required:
+      - stage
+      - message
+      type: object
+      properties:
+        identifier:
+          title: Identifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Caller-supplied identifier (external_id, or positional like orders[2]).
+          default: null
+        orderId:
+          title: Orderid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Nash order ID, present once the order has been created.
+          default: null
+        stage:
+          title: Stage
+          type: string
+          description: 'Stage at which the failure occurred: ''create'', ''dispatch'', ''validate'', ''manifest''.'
+        message:
+          title: Message
+          type: string
+          description: Human-readable failure message.
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Opaque debug blob with provider-level context when available (e.g. provider_status_code, provider_message, provider_response_body). Keys inside this object are not subject to the camelCase contract — treat as free-form.
+          default: null
+    PackageRequirements:
+      title: PackageRequirements
+      enum:
+      - photo_proof_of_delivery
+      - signature_proof_of_delivery
+      - photo_proof_of_pickup
+      - photo_reference_on_dropoff
+      - photo_reference_capture_on_dropoff
+      - signature_proof_of_pickup
+      - photo_pre_delivery_verification
+      - age_verification_on_delivery
+      - id_verification_on_delivery
+      - barcode_scan_on_pickup
+      - barcode_scan_on_dropoff
+      - barcode_scan_on_return
+      - meet_on_delivery
+      - shipping_label
+      - two_person_team
+      - pincode_verification
+      - schedule_ii_controlled_substances
+      - alcohol
+      - tobacco
+      - vapes
+      - parking_check_in
+      - display_barcode_on_pickup
+      - pick_and_pack
+      type: string
+      description: 'Detailed description: https://docs.usenash.com/reference/package-requirements.'
     ManifestOrderInput:
       title: ManifestOrderInput
       type: object
@@ -1221,38 +939,145 @@ components:
           description: If true, the courier pays for the order at pickup using a provider-issued card.
           default: null
           example: true
-    ManifestOrdersInputSerializer:
-      title: ManifestOrdersInputSerializer
+    PickupPaymentBarcode:
+      title: PickupPaymentBarcode
       type: object
       properties:
-        orderIds:
-          title: Orderids
+        type:
+          title: Type
           anyOf:
-          - type: array
-            items:
-              type: string
+          - type: string
           - type: 'null'
-          description: List of Nash order IDs to manifest.
+          description: The barcode symbology (e.g. CODE128, QR).
           default: null
-        externalOrderIds:
-          title: Externalorderids
+          example: CODE128
+        value:
+          title: Value
           anyOf:
-          - type: array
-            items:
-              type: string
+          - type: string
           - type: 'null'
-          description: List of external order IDs to manifest.
+          description: The barcode value the courier should present at pickup.
           default: null
-        providerIds:
-          title: Providerids
+          example: '1234567890'
+    ManifestDocumentSerializer:
+      title: ManifestDocumentSerializer
+      required:
+      - id
+      - url
+      - contentType
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Document ID.
+        url:
+          title: Url
           anyOf:
-          - type: array
-            items:
-              type: string
+          - type: string
           - type: 'null'
-          description: List of provider IDs. Manifests all eligible orders dispatched to these providers.
+          description: URL to download the manifest PDF.
+        contentType:
+          title: Contenttype
+          type: string
+          description: MIME type of the document.
+    ManifestOrdersResponseSerializer:
+      title: ManifestOrdersResponseSerializer
+      required:
+      - manifests
+      type: object
+      properties:
+        manifests:
+          title: Manifests
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestResultSerializer'
+          description: List of manifest results grouped by provider and store location.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
           default: null
-      description: Manifest orders that have already been dispatched.
+    ShippingDetails:
+      title: ShippingDetails
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider that will fulfil this order's shipment.
+          default: null
+        providerConsignmentId:
+          title: Providerconsignmentid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider consignment ID for this order's shipment.
+          default: null
+        providerExternalId:
+          title: Providerexternalid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider-assigned tracking/identifier for this order (formerly tracking_number).
+          default: null
+        speed:
+          title: Speed
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Delivery speed for this order (e.g. 'STANDARD', 'EXPRESS', 'same_day').
+          default: null
+          example: STANDARD
+        type:
+          title: Type
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Shipment type for this order (provider-specific, e.g. 'NEUTRAL').
+          default: null
+          example: NEUTRAL
+        movementType:
+          title: Movementtype
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider movement type for this shipment (e.g. 'DESPATCH').
+          default: null
+          example: DESPATCH
+        chargeAccountId:
+          title: Chargeaccountid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Charge account to bill this shipment against.
+          default: null
+        sortCode:
+          title: Sortcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Identifier for the warehouse load/run this shipment belongs to (e.g. Pet Circle WMS sort code).
+          default: null
+          example: PCLOAD-01
+      description: Per-order shipping attributes applied when manifesting.
     SubstituteItemObject:
       title: SubstituteItemObject
       type: object
@@ -1278,34 +1103,209 @@ components:
           - type: 'null'
           description: The quantity of the substitute item
           default: null
-    PackageRequirements:
-      title: PackageRequirements
-      enum:
-      - photo_proof_of_delivery
-      - signature_proof_of_delivery
-      - photo_proof_of_pickup
-      - photo_reference_on_dropoff
-      - photo_reference_capture_on_dropoff
-      - signature_proof_of_pickup
-      - photo_pre_delivery_verification
-      - age_verification_on_delivery
-      - id_verification_on_delivery
-      - barcode_scan_on_pickup
-      - barcode_scan_on_dropoff
-      - barcode_scan_on_return
-      - meet_on_delivery
-      - shipping_label
-      - two_person_team
-      - pincode_verification
-      - schedule_ii_controlled_substances
-      - alcohol
-      - tobacco
-      - vapes
-      - parking_check_in
-      - display_barcode_on_pickup
-      - pick_and_pack
-      type: string
-      description: 'Detailed description: https://docs.usenash.com/reference/package-requirements.'
+    Dimensions:
+      title: Dimensions
+      type: object
+      properties:
+        height:
+          title: Height
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The height of the item in centimeters (cm)
+          default: null
+          example: 10
+        width:
+          title: Width
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The width of the item in centimeters (cm)
+          default: null
+          example: 12
+        depth:
+          title: Depth
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The depth of the item in centimeters (cm)
+          default: null
+          example: 14
+    DispatchAndManifestResponseSerializer:
+      title: DispatchAndManifestResponseSerializer
+      required:
+      - manifests
+      type: object
+      properties:
+        manifests:
+          title: Manifests
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestResultSerializer'
+          description: Manifest results for orders that successfully created, dispatched, and manifested.
+        errors:
+          title: Errors
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestOrderErrorSerializer'
+          description: Per-order failures encountered during create, dispatch, validate, or manifest.
+    SubItemInput:
+      title: SubItemInput
+      type: object
+      properties:
+        id:
+          title: Id
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The merchant ID of the item
+          default: null
+          example: abc-123
+        description:
+          title: Description
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The description of the item
+          default: null
+          example: A box of books
+        count:
+          title: Count
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The quantity of the item
+          default: null
+          example: 2
+        dimensions:
+          anyOf:
+          - $ref: '#/components/schemas/Dimensions'
+          - type: 'null'
+          description: The dimensions of the item
+          default: null
+          example:
+            depth: 14
+            height: 10
+            width: 12
+        weight:
+          title: Weight
+          anyOf:
+          - type: number
+          - type: integer
+          - type: 'null'
+          description: The weight of the item in kilograms (kg)
+          default: null
+          example: 1.5
+        valueCents:
+          title: Valuecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The value of the item in cents
+          default: null
+          example: 1000
+        requirements:
+          title: Requirements
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of requirements for this item
+          default: null
+          example:
+          - age_verification_on_delivery
+        category:
+          title: Category
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The category of the item
+          default: null
+        barcode:
+          title: Barcode
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Barcode value for this item.
+          default: null
+          example: 0199312650999998913643M221872801002010908
+        metadata:
+          title: Metadata
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          description: Key-value data to attach to this item.
+          default: null
+          example:
+            packaging_type: CTN
+        sku:
+          title: Sku
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The SKU of the sub-item
+          default: null
+        substitution:
+          anyOf:
+          - $ref: '#/components/schemas/SubstitutionObject'
+          - type: 'null'
+          description: Substitution preferences for the sub-item
+          default: null
+        subItems:
+          title: Subitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubItemInput'
+          - type: 'null'
+          description: The nested sub-items
+          default: null
+      description: Sub-item input object for API requests.
+    DispatchAndManifestInputSerializer:
+      title: DispatchAndManifestInputSerializer
+      required:
+      - orders
+      type: object
+      properties:
+        orders:
+          title: Orders
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestOrderInput'
+          description: Orders to create, dispatch, and manifest.
+      description: Create, dispatch, and manifest orders in a single request.
+    SubstitutionObject:
+      title: SubstitutionObject
+      type: object
+      properties:
+        preference:
+          title: Preference
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Substitution preference: refund or substitute'
+          default: null
+        source:
+          title: Source
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Source of substitution, e.g., merchant, customer
+          default: null
+        substituteItems:
+          title: Substituteitems
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/SubstituteItemObject'
+          - type: 'null'
+          description: List of substitute items
+          default: null
   securitySchemes:
     Token:
       type: http

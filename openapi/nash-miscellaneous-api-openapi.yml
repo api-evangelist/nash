@@ -56,12 +56,6 @@ components:
         RequestID:
           title: Requestid
           type: string
-    HealthCheckResponse:
-      title: HealthCheckResponse
-      enum:
-      - 'TRUE'
-      - 'FALSE'
-      type: string
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -82,6 +76,12 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
+    HealthCheckResponse:
+      title: HealthCheckResponse
+      enum:
+      - 'TRUE'
+      - 'FALSE'
+      type: string
   securitySchemes:
     Token:
       type: http

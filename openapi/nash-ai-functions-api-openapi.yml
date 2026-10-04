@@ -85,67 +85,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    MaskFaceInPhotoInputSerializer:
-      title: MaskFaceInPhotoInputSerializer
-      required:
-      - imageUrl
-      type: object
-      properties:
-        imageUrl:
-          title: Imageurl
-          type: string
-          description: Public URL of the image whose faces should be masked.
-    VerifyPhotoInputSerializer:
-      title: VerifyPhotoInputSerializer
-      required:
-      - jobId
-      - photoType
-      type: object
-      properties:
-        jobId:
-          title: Jobid
-          type: string
-          description: The job to verify a photo for.
-        photoType:
-          $ref: '#/components/schemas/PhotoType'
-          description: Which photo to verify.
-        userQuestion:
-          title: Userquestion
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Optional extra guidance for the LLM (e.g. 'Is the package on the doorstep?').
-          default: null
-    DetectDropoffAnomalyInputSerializer:
-      title: DetectDropoffAnomalyInputSerializer
-      required:
-      - deliveryId
-      type: object
-      properties:
-        deliveryId:
-          title: Deliveryid
-          type: string
-          description: The delivery to analyse for dropoff anomalies.
     NashValidationError:
       title: NashValidationError
       required:
@@ -169,6 +108,67 @@ components:
       - pickup
       - signature
       type: string
+    DetectDropoffAnomalyInputSerializer:
+      title: DetectDropoffAnomalyInputSerializer
+      required:
+      - deliveryId
+      type: object
+      properties:
+        deliveryId:
+          title: Deliveryid
+          type: string
+          description: The delivery to analyse for dropoff anomalies.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    VerifyPhotoInputSerializer:
+      title: VerifyPhotoInputSerializer
+      required:
+      - jobId
+      - photoType
+      type: object
+      properties:
+        jobId:
+          title: Jobid
+          type: string
+          description: The job to verify a photo for.
+        photoType:
+          $ref: '#/components/schemas/PhotoType'
+          description: Which photo to verify.
+        userQuestion:
+          title: Userquestion
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Optional extra guidance for the LLM (e.g. 'Is the package on the doorstep?').
+          default: null
+    MaskFaceInPhotoInputSerializer:
+      title: MaskFaceInPhotoInputSerializer
+      required:
+      - imageUrl
+      type: object
+      properties:
+        imageUrl:
+          title: Imageurl
+          type: string
+          description: Public URL of the image whose faces should be masked.
   securitySchemes:
     Token:
       type: http

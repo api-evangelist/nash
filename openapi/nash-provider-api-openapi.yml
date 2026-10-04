@@ -63,25 +63,6 @@ components:
       items:
         $ref: '#/components/schemas/OrgProviderPayload'
       description: Expected output when listing org providers, it will return an array of this.
-    OrgProviderPayload:
-      title: OrgProviderPayload
-      required:
-      - providerId
-      - name
-      type: object
-      properties:
-        providerId:
-          title: Providerid
-          type: string
-        name:
-          title: Name
-          type: string
-        logo:
-          title: Logo
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -100,6 +81,25 @@ components:
           anyOf:
           - type: object
             additionalProperties: true
+          - type: 'null'
+          default: null
+    OrgProviderPayload:
+      title: OrgProviderPayload
+      required:
+      - providerId
+      - name
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          type: string
+        name:
+          title: Name
+          type: string
+        logo:
+          title: Logo
+          anyOf:
+          - type: string
           - type: 'null'
           default: null
   securitySchemes:

@@ -69,6 +69,102 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
+    VehicleDisplaySize:
+      title: VehicleDisplaySize
+      enum:
+      - bike
+      - motorbike
+      - cargobike
+      - car
+      - suv
+      - pickup_truck
+      - van
+      - truck
+      - large_van
+      - extra_large_van
+      type: string
+    CreateVehicleInputSerializer:
+      title: CreateVehicleInputSerializer
+      required:
+      - name
+      - enabled
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          description: The name of the vehicle.
+          example: Vehicle 1
+        enabled:
+          title: Enabled
+          type: boolean
+          description: Whether the vehicle is enabled.
+          example: true
+        externalidentifier:
+          title: Externalidentifier
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The external identifier of the vehicle.
+          default: null
+          example: vehicle_ext_1
+        vehicleinfo:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleInfo'
+          - type: 'null'
+          description: The vehicle info of the vehicle.
+          default: null
+          example:
+            color: Red
+            licensePlate: ABC123
+            make: Toyota
+            model: Camry
+            type: car
+            year: '2020'
+        vehicleconfig:
+          anyOf:
+          - $ref: '#/components/schemas/VehicleConfig'
+          - type: 'null'
+          description: The vehicle config of the vehicle.
+          default: null
+          example:
+            height: 1000
+            length: 1000
+            maxDistance: 1000
+            maxDuration: 1000
+            maxStops: 1000
+            speedFactor: 1.0
+            weight: 1000
+            width: 1000
+        courierids:
+          title: Courierids
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: The couriers of the vehicle.
+          default: null
+          example:
+          - cor_1
+          - cor_2
+      description: Input for creating a vehicle.
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -89,20 +185,52 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    VehicleDisplaySize:
-      title: VehicleDisplaySize
-      enum:
-      - bike
-      - motorbike
-      - cargobike
-      - car
-      - suv
-      - pickup_truck
-      - van
-      - truck
-      - large_van
-      - extra_large_van
-      type: string
+    VehicleResponse:
+      title: VehicleResponse
+      required:
+      - id
+      - name
+      - providerid
+      - externalidentifier
+      - enabled
+      - vehicleinfo
+      - vehicleconfig
+      - courierids
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the vehicle.
+        name:
+          title: Name
+          type: string
+          description: The name of the vehicle.
+        providerid:
+          title: Providerid
+          type: string
+          description: The provider ID of the vehicle.
+        externalidentifier:
+          title: Externalidentifier
+          type: string
+          description: The external identifier of the vehicle.
+        enabled:
+          title: Enabled
+          type: boolean
+          description: Whether the vehicle is enabled.
+        vehicleinfo:
+          $ref: '#/components/schemas/VehicleInfo'
+          description: The vehicle info of the vehicle.
+        vehicleconfig:
+          $ref: '#/components/schemas/VehicleConfig'
+          description: The vehicle config of the vehicle.
+        courierids:
+          title: Courierids
+          type: array
+          items:
+            type: string
+          description: The couriers of the vehicle.
+      description: Response for vehicle.
     VehicleConfig:
       title: VehicleConfig
       type: object
@@ -249,22 +377,6 @@ components:
           description: Parking time at order locations (in hours).
           default: null
       description: Response for vehicle config.
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
     VehicleInfo:
       title: VehicleInfo
       type: object
@@ -311,118 +423,6 @@ components:
           description: The year of the vehicle.
           default: null
       description: Response for vehicle info.
-    CreateVehicleInputSerializer:
-      title: CreateVehicleInputSerializer
-      required:
-      - name
-      - enabled
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          description: The name of the vehicle.
-          example: Vehicle 1
-        enabled:
-          title: Enabled
-          type: boolean
-          description: Whether the vehicle is enabled.
-          example: true
-        externalidentifier:
-          title: Externalidentifier
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The external identifier of the vehicle.
-          default: null
-          example: vehicle_ext_1
-        vehicleinfo:
-          anyOf:
-          - $ref: '#/components/schemas/VehicleInfo'
-          - type: 'null'
-          description: The vehicle info of the vehicle.
-          default: null
-          example:
-            color: Red
-            licensePlate: ABC123
-            make: Toyota
-            model: Camry
-            type: car
-            year: '2020'
-        vehicleconfig:
-          anyOf:
-          - $ref: '#/components/schemas/VehicleConfig'
-          - type: 'null'
-          description: The vehicle config of the vehicle.
-          default: null
-          example:
-            height: 1000
-            length: 1000
-            maxDistance: 1000
-            maxDuration: 1000
-            maxStops: 1000
-            speedFactor: 1.0
-            weight: 1000
-            width: 1000
-        courierids:
-          title: Courierids
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: The couriers of the vehicle.
-          default: null
-          example:
-          - cor_1
-          - cor_2
-      description: Input for creating a vehicle.
-    VehicleResponse:
-      title: VehicleResponse
-      required:
-      - id
-      - name
-      - providerid
-      - externalidentifier
-      - enabled
-      - vehicleinfo
-      - vehicleconfig
-      - courierids
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: The ID of the vehicle.
-        name:
-          title: Name
-          type: string
-          description: The name of the vehicle.
-        providerid:
-          title: Providerid
-          type: string
-          description: The provider ID of the vehicle.
-        externalidentifier:
-          title: Externalidentifier
-          type: string
-          description: The external identifier of the vehicle.
-        enabled:
-          title: Enabled
-          type: boolean
-          description: Whether the vehicle is enabled.
-        vehicleinfo:
-          $ref: '#/components/schemas/VehicleInfo'
-          description: The vehicle info of the vehicle.
-        vehicleconfig:
-          $ref: '#/components/schemas/VehicleConfig'
-          description: The vehicle config of the vehicle.
-        courierids:
-          title: Courierids
-          type: array
-          items:
-            type: string
-          description: The couriers of the vehicle.
-      description: Response for vehicle.
   securitySchemes:
     Token:
       type: http

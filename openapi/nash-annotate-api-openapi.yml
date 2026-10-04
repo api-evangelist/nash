@@ -63,33 +63,22 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashErrorDetails:
-      title: NashErrorDetails
+    NashValidationError:
+      title: NashValidationError
       required:
-      - code
-      - message
+      - error
+      - response_status
+      - RequestID
       type: object
       properties:
-        code:
-          title: Code
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
           type: string
-        message:
-          title: Message
+        RequestID:
+          title: Requestid
           type: string
-        details:
-          title: Details
-          anyOf:
-          - type: object
-            additionalProperties: true
-          - type: 'null'
-          default: null
-    FlagStatus:
-      title: FlagStatus
-      enum:
-      - NEEDS_ATTENTION
-      - ACKNOWLEDGED
-      - RESOLVED
-      type: string
     CreateNoteInputSerializer:
       title: CreateNoteInputSerializer
       required:
@@ -113,22 +102,13 @@ components:
           type: string
           description: The note to create.
       description: Expected payload for the create note endpoint.
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
+    FlagStatus:
+      title: FlagStatus
+      enum:
+      - NEEDS_ATTENTION
+      - ACKNOWLEDGED
+      - RESOLVED
+      type: string
     CreateFlagInputSerializer:
       title: CreateFlagInputSerializer
       required:
@@ -172,6 +152,26 @@ components:
           type: string
           description: The notes to create a flag for.
       description: Expected payload for the create flag endpoint.
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
   securitySchemes:
     Token:
       type: http
