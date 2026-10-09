@@ -1,53 +1,31 @@
-generated: '2026-07-20'
+generated: '2026-09-23'
 method: generated
-source: openapi/nash-openapi-original.json
+source: openapi/nash-ai-functions-api-openapi.yml, openapi/nash-annotate-api-openapi.yml, openapi/nash-batch-job-api-openapi.yml,
+  openapi/nash-contracts-api-openapi.yml, openapi/nash-couriers-api-openapi.yml, openapi/nash-delivery-windows-api-openapi.yml,
+  openapi/nash-dispatch-strategies-api-openapi.yml, openapi/nash-feedback-api-openapi.yml, openapi/nash-fleet-api-openapi.yml,
+  openapi/nash-job-api-openapi.yml, openapi/nash-messaging-api-openapi.yml, openapi/nash-miscellaneous-api-openapi.yml,
+  openapi/nash-notifications-api-openapi.yml, openapi/nash-optimization-strategies-api-openapi.yml,
+  openapi/nash-order-api-openapi.yml, openapi/nash-organizations-api-openapi.yml, openapi/nash-provider-api-openapi.yml,
+  openapi/nash-route-api-openapi.yml, openapi/nash-route-restrictions-api-openapi.yml, openapi/nash-shifts-api-openapi.yml,
+  openapi/nash-shipping-api-openapi.yml, openapi/nash-store-catalog-api-openapi.yml, openapi/nash-store-locations-api-openapi.yml,
+  openapi/nash-templates-api-openapi.yml, openapi/nash-users-api-openapi.yml, openapi/nash-vehicles-api-openapi.yml,
+  openapi/nash-webhooks-api-openapi.yml, openapi/nash-workflow-api-openapi.yml, openapi/nash-workflow-execution-api-openapi.yml,
+  openapi/nash-zones-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 173
   by_action_class:
-    acting: 118
-    connected: 55
+    acting: 116
+    connected: 57
   by_consequence:
+    write: 83
+    read: 57
     safety-critical: 16
-    write: 84
-    read: 55
-    physical: 18
+    physical: 17
   human_in_the_loop_required: 16
 operations:
-- path: /v1/activities/{id}/dispatch
-  method: post
-  operationId: dispatch_optimized_orders_v1_activities__string_id__dispatch_post
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /v1/activities/{id}/save-routes
-  method: post
-  operationId: routes_v1_save_optimization_routes_activities__string_id__save_routes_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/ai/detect-dropoff-anomaly
   method: post
   operationId: detect_dropoff_anomaly_v1_ai_detect_dropoff_anomaly_post
@@ -96,9 +74,89 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/flags
+  method: post
+  operationId: create_flag_v1_flags_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/notes
+  method: post
+  operationId: create_note_v1_notes_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v1/batch_job
   method: post
   operationId: create_batch_job_v1_batch_job_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/{id}/{jobConfigurationId}
+  method: patch
+  operationId: update_job_v1_jobs__string_id___string_jobConfigurationId__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/{jobId}/batch/{batchId}/refresh_quotes
+  method: post
+  operationId: refresh_quotes_batch_v1_jobs__string_jobId__batch__string_batchId__refresh_quotes_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/jobs/{jobId}/{objectId}/cancel
+  method: post
+  operationId: cancel_job_v1_jobs__string_jobId___string_objectId__cancel_post
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -350,9 +408,55 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/dispatch-and-manifest
+- path: /v1/eligible_delivery_windows
+  method: get
+  operationId: get_eligible_delivery_windows_v1_eligible_delivery_windows_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/order/external-identifier/{externalId}/delivery-window/book
   method: post
-  operationId: dispatch_and_manifest_v1_dispatch_and_manifest_post
+  operationId: book_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_book_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/order/external-identifier/{externalId}/delivery-window/confirm
+  method: post
+  operationId: confirm_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_confirm_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/order/external-identifier/{externalId}/delivery-window/revoke
+  method: post
+  operationId: revoke_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_revoke_post
   x-agentic-access:
     action-class: acting
     consequence: safety-critical
@@ -382,9 +486,9 @@ operations:
     escalation:
       human-in-the-loop: required
     audit: required
-- path: /v1/eligible_delivery_windows
+- path: /v1/options_group
   method: get
-  operationId: get_eligible_delivery_windows_v1_eligible_delivery_windows_get
+  operationId: list_options_group_v1_options_group_get
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -392,6 +496,54 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /v1/options_group
+  method: post
+  operationId: create_options_group_v1_options_group_post
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/options_group/{id}
+  method: delete
+  operationId: delete_options_group_v1_options_group__string_id__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/options_group/{id}
+  method: patch
+  operationId: update_options_group_v1_options_group__string_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
 - path: /v1/feedback/external_identifier/{external_identifier}
   method: post
   operationId: add_delivery_feedback_by_external_id_v1_feedback_external_identifier__string_external_identifier__post
@@ -424,22 +576,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/flags
-  method: post
-  operationId: create_flag_v1_flags_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/fleet/deliveries
   method: patch
   operationId: deliveries_v1_bulk_update_deliveries_route_patch
@@ -459,42 +595,6 @@ operations:
 - path: /v1/fleet/deliveries/{delivery_id}
   method: patch
   operationId: deliveries_v1_update_delivery_route__delivery_id__patch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/health-check
-  method: get
-  operationId: public_health_check_endpoint_v1_health_check_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/inventory
-  method: get
-  operationId: get_inventory_pagination_v1_inventory_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/inventory
-  method: post
-  operationId: upsert_inventory_v1_inventory_post
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -666,38 +766,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/jobs/{id}/{jobConfigurationId}
-  method: patch
-  operationId: update_job_v1_jobs__string_id___string_jobConfigurationId__patch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/jobs/{jobId}/batch/{batchId}/refresh_quotes
-  method: post
-  operationId: refresh_quotes_batch_v1_jobs__string_jobId__batch__string_batchId__refresh_quotes_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/jobs/{jobId}/cancel
   method: post
   operationId: cancel_job_v1_jobs__string_jobId__cancel_post
@@ -762,22 +830,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/jobs/{jobId}/{objectId}/cancel
-  method: post
-  operationId: cancel_job_v1_jobs__string_jobId___string_objectId__cancel_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/jobs/{jobId}/{taskId}/reassign
   method: post
   operationId: reassign_task_v1_jobs__string_jobId___string_taskId__reassign_post
@@ -794,18 +846,36 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/manifest
+- path: /v1/refund-request/{id}
+  method: get
+  operationId: get_refund_request_v1_refund_request__string_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/refund-requests
+  method: get
+  operationId: get_refund_requests_v1_refund_requests_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/select_quote
   method: post
-  operationId: create_manifest_v1_manifest_post
+  operationId: select_quote_v1_select_quote_post
   x-agentic-access:
     action-class: acting
-    consequence: physical
+    consequence: write
     subject: required
     audience: null
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
+      max-ttl: 900
     escalation:
       human-in-the-loop: conditional
       triggers:
@@ -830,22 +900,16 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/notes
-  method: post
-  operationId: create_note_v1_notes_post
+- path: /v1/health-check
+  method: get
+  operationId: public_health_check_endpoint_v1_health_check_get
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/notification-triggers
   method: get
   operationId: list_notification_triggers_v1_notification_triggers_get
@@ -895,6 +959,48 @@ operations:
 - path: /v1/notification/{id}/trigger
   method: post
   operationId: trigger_notification_v1_notification__string_id__trigger_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/organization-management/notifications/deny-list
+  method: get
+  operationId: _get_deny_list_v1_organization_management_notifications_deny_list_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/organization-management/notifications/deny-list
+  method: post
+  operationId: _add_contact_to_deny_list_v1_organization_management_notifications_deny_list_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/organization-management/notifications/deny-list
+  method: delete
+  operationId: _remove_contact_from_deny_list_v1_organization_management_notifications_deny_list_delete
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -976,80 +1082,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/optimization-strategies/{id}/route-restrictions
-  method: put
-  operationId: route_restrictions_strategy_attach_v1_set_strategy_restrictions_route__id__route_restrictions_put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/options_group
-  method: get
-  operationId: list_options_group_v1_options_group_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/options_group
-  method: post
-  operationId: create_options_group_v1_options_group_post
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /v1/options_group/{id}
-  method: delete
-  operationId: delete_options_group_v1_options_group__string_id__delete
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /v1/options_group/{id}
-  method: patch
-  operationId: update_options_group_v1_options_group__string_id__patch
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
 - path: /v1/order
   method: post
   operationId: create_order_v1_order_post
@@ -1120,76 +1152,16 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/order/external-identifier/{externalId}/delivery-window/book
-  method: post
-  operationId: book_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_book_post
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/order/external-identifier/{externalId}/delivery-window/confirm
-  method: post
-  operationId: confirm_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_confirm_post
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/order/external-identifier/{externalId}/delivery-window/revoke
-  method: post
-  operationId: revoke_delivery_window_v1_order_external_identifier__string_externalId__delivery_window_revoke_post
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
 - path: /v1/order/get_quotes
   method: post
   operationId: get_order_quotes_v1_order_get_quotes_post
   x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/order/refresh_quotes
   method: post
   operationId: refresh_order_quotes_v1_order_refresh_quotes_post
@@ -1440,162 +1412,18 @@ operations:
     escalation:
       human-in-the-loop: required
     audit: required
-- path: /v1/organization-management/notifications/deny-list
-  method: get
-  operationId: _get_deny_list_v1_organization_management_notifications_deny_list_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/organization-management/notifications/deny-list
+- path: /v2/orders/upsert/bulk
   method: post
-  operationId: _add_contact_to_deny_list_v1_organization_management_notifications_deny_list_post
+  operationId: orders_v2_bulk_upsert_orders_route_upsert_bulk_post
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
     audience: null
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/organization-management/notifications/deny-list
-  method: delete
-  operationId: _remove_contact_from_deny_list_v1_organization_management_notifications_deny_list_delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/organization-management/roles
-  method: get
-  operationId: users_v1_list_roles_route_roles_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/organization-management/roles/{role_id}/users
-  method: get
-  operationId: users_v1_list_users_in_role_route_roles__role_id__users_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/organization-management/users
-  method: get
-  operationId: users_v1_list_users_route_users_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/organization-management/users
-  method: post
-  operationId: users_v1_create_user_route_users_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/organization-management/users/invite
-  method: post
-  operationId: users_v1_invite_user_route_users_invite_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/organization-management/users/{user_id}/roles
-  method: get
-  operationId: users_v1_get_user_roles_route_users__user_id__roles_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/organization-management/users/{user_id}/roles
-  method: post
-  operationId: users_v1_add_user_roles_route_users__user_id__roles_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/organization-management/users/{user_id}/roles
-  method: delete
-  operationId: users_v1_remove_user_roles_route_users__user_id__roles_delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/organization-management/users/{user_id}/roles
-  method: patch
-  operationId: users_v1_replace_user_roles_route_users__user_id__roles_patch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
@@ -1612,52 +1440,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/product/external_identifier/{externalIdentifier}
-  method: get
-  operationId: get_product_by_external_identifier_v1_product_external_identifier__string_externalIdentifier__get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/product/{id}
-  method: get
-  operationId: get_product_v1_product__string_id__get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/products
-  method: get
-  operationId: get_products_pagination_v1_products_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/products
-  method: post
-  operationId: upsert_products_v1_products_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/providers
   method: get
   operationId: list_org_providers_v1_providers_get
@@ -1668,81 +1450,25 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/refund-request/{id}
-  method: get
-  operationId: get_refund_request_v1_refund_request__string_id__get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/refund-requests
-  method: get
-  operationId: get_refund_requests_v1_refund_requests_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/route-restrictions
-  method: get
-  operationId: route_restrictions_v1_list_route_restrictions_route_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/route-restrictions
+- path: /v1/activities/{id}/dispatch
   method: post
-  operationId: route_restrictions_v1_create_route_restriction_route_post
+  operationId: dispatch_optimized_orders_v1_activities__string_id__dispatch_post
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: safety-critical
     subject: required
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
     escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
+      human-in-the-loop: required
     audit: required
-- path: /v1/route-restrictions/{id}
-  method: get
-  operationId: route_restrictions_v1_get_route_restriction_route__id__get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/route-restrictions/{id}
-  method: delete
-  operationId: route_restrictions_v1_delete_route_restriction_route__id__delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/route-restrictions/{id}
-  method: patch
-  operationId: route_restrictions_v1_update_route_restriction_route__id__patch
+- path: /v1/activities/{id}/save-routes
+  method: post
+  operationId: routes_v1_save_optimization_routes_activities__string_id__save_routes_post
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1846,9 +1572,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/select_quote
-  method: post
-  operationId: select_quote_v1_select_quote_post
+- path: /v1/optimization-strategies/{id}/route-restrictions
+  method: put
+  operationId: route_restrictions_strategy_attach_v1_set_strategy_restrictions_route__id__route_restrictions_put
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1862,9 +1588,19 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/set_store_location_day_capacity
+- path: /v1/route-restrictions
+  method: get
+  operationId: route_restrictions_v1_list_route_restrictions_route_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/route-restrictions
   method: post
-  operationId: set_store_location_day_capacity_v1_set_store_location_day_capacity_post
+  operationId: route_restrictions_v1_create_route_restriction_route_post
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1878,9 +1614,35 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/set_store_location_default_capacity
-  method: post
-  operationId: set_store_location_default_capacity_v1_set_store_location_default_capacity_post
+- path: /v1/route-restrictions/{id}
+  method: get
+  operationId: route_restrictions_v1_get_route_restriction_route__id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/route-restrictions/{id}
+  method: delete
+  operationId: route_restrictions_v1_delete_route_restriction_route__id__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/route-restrictions/{id}
+  method: patch
+  operationId: route_restrictions_v1_update_route_restriction_route__id__patch
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1933,6 +1695,144 @@ operations:
 - path: /v1/shifts/upsert
   method: post
   operationId: upsert_shifts_v1_shifts_upsert_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/dispatch-and-manifest
+  method: post
+  operationId: dispatch_and_manifest_v1_dispatch_and_manifest_post
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/manifest
+  method: post
+  operationId: create_manifest_v1_manifest_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/inventory
+  method: get
+  operationId: get_inventory_pagination_v1_inventory_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/inventory
+  method: post
+  operationId: upsert_inventory_v1_inventory_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/product/external_identifier/{externalIdentifier}
+  method: get
+  operationId: get_product_by_external_identifier_v1_product_external_identifier__string_externalIdentifier__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/product/{id}
+  method: get
+  operationId: get_product_v1_product__string_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/products
+  method: get
+  operationId: get_products_pagination_v1_products_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/products
+  method: post
+  operationId: upsert_products_v1_products_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/set_store_location_day_capacity
+  method: post
+  operationId: set_store_location_day_capacity_v1_set_store_location_day_capacity_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/set_store_location_default_capacity
+  method: post
+  operationId: set_store_location_default_capacity_v1_set_store_location_default_capacity_post
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2098,6 +1998,126 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/organization-management/roles
+  method: get
+  operationId: users_v1_list_roles_route_roles_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/organization-management/roles/{role_id}/users
+  method: get
+  operationId: users_v1_list_users_in_role_route_roles__role_id__users_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/organization-management/users
+  method: get
+  operationId: users_v1_list_users_route_users_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/organization-management/users
+  method: post
+  operationId: users_v1_create_user_route_users_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/organization-management/users/invite
+  method: post
+  operationId: users_v1_invite_user_route_users_invite_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/organization-management/users/{user_id}/roles
+  method: get
+  operationId: users_v1_get_user_roles_route_users__user_id__roles_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/organization-management/users/{user_id}/roles
+  method: post
+  operationId: users_v1_add_user_roles_route_users__user_id__roles_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/organization-management/users/{user_id}/roles
+  method: delete
+  operationId: users_v1_remove_user_roles_route_users__user_id__roles_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/organization-management/users/{user_id}/roles
+  method: patch
+  operationId: users_v1_replace_user_roles_route_users__user_id__roles_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v1/vehicle
   method: post
   operationId: create_vehicle_v1_vehicle_post
@@ -2170,16 +2190,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/workflow-executions/{id}
-  method: get
-  operationId: get_workflow_execution_v1_workflow_executions__string_id__get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /v1/workflows
   method: get
   operationId: list_workflows_v1_workflows_get
@@ -2242,26 +2252,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workflows/{id}/executions
-  method: get
-  operationId: list_workflow_executions_v1_workflows__string_id__executions_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workflows/{id}/executions/count
-  method: get
-  operationId: count_workflow_executions_v1_workflows__string_id__executions_count_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /v1/workflows/{id}/status
   method: post
   operationId: set_workflow_status_v1_workflows__string_id__status_post
@@ -2294,6 +2284,36 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/workflow-executions/{id}
+  method: get
+  operationId: get_workflow_execution_v1_workflow_executions__string_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workflows/{id}/executions
+  method: get
+  operationId: list_workflow_executions_v1_workflows__string_id__executions_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workflows/{id}/executions/count
+  method: get
+  operationId: count_workflow_executions_v1_workflows__string_id__executions_count_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/zone-restrictions
   method: get
   operationId: get_zone_restrictions_v1_zone_restrictions_get
@@ -2402,18 +2422,12 @@ operations:
   method: post
   operationId: zones_v1_query_zones_route_query_post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/zones/upsert
   method: post
   operationId: upsert_zones_v1_zones_upsert_post
@@ -2466,24 +2480,6 @@ operations:
     audience: null
     token:
       max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/orders/upsert/bulk
-  method: post
-  operationId: orders_v2_bulk_upsert_orders_route_upsert_bulk_post
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
