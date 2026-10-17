@@ -41,6 +41,16 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    ListOrganizationChildrenResponse:
+      title: ListOrganizationChildrenResponse
+      type: object
+      properties:
+        children:
+          title: Children
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationSummaryResponse'
+          description: Direct child organizations of the authenticated organization.
     NashValidationError:
       title: NashValidationError
       required:
@@ -77,16 +87,6 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
-    ListOrganizationChildrenResponse:
-      title: ListOrganizationChildrenResponse
-      type: object
-      properties:
-        children:
-          title: Children
-          type: array
-          items:
-            $ref: '#/components/schemas/OrganizationSummaryResponse'
-          description: Direct child organizations of the authenticated organization.
     OrganizationSummaryResponse:
       title: OrganizationSummaryResponse
       required:

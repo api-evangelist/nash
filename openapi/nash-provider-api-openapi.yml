@@ -41,6 +41,12 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    ListOrgProvidersOutputSerializer:
+      title: ListOrgProvidersOutputSerializer
+      type: array
+      items:
+        $ref: '#/components/schemas/OrgProviderPayload'
+      description: Expected output when listing org providers, it will return an array of this.
     NashValidationError:
       title: NashValidationError
       required:
@@ -57,12 +63,6 @@ components:
         RequestID:
           title: Requestid
           type: string
-    ListOrgProvidersOutputSerializer:
-      title: ListOrgProvidersOutputSerializer
-      type: array
-      items:
-        $ref: '#/components/schemas/OrgProviderPayload'
-      description: Expected output when listing org providers, it will return an array of this.
     NashErrorDetails:
       title: NashErrorDetails
       required:

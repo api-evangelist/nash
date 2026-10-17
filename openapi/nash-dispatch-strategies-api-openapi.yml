@@ -159,22 +159,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
     EvaluateDispatchOutput:
       title: EvaluateDispatchOutput
       required:
@@ -197,12 +181,108 @@ components:
           - type: string
           - type: 'null'
           default: null
-    ListOptionsGroupOutputSerializer:
-      title: ListOptionsGroupOutputSerializer
-      type: array
-      items:
-        $ref: '#/components/schemas/OptionsGroupSerializer'
-      description: Expected output for listing options groups.
+    OptionsGroupSerializer:
+      title: OptionsGroupSerializer
+      required:
+      - id
+      - label
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          description: Dispatch Strategy ID
+          example: opn_WyMhHj
+        label:
+          title: Label
+          type: string
+          description: Dispatch Strategy Label
+          example: New York City Strategy
+        allowedProviders:
+          title: Allowedproviders
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Allowed providers
+          default: null
+          example:
+          - prv_01234567890
+          - prv_01234567891
+        enableAutoDispatch:
+          title: Enableautodispatch
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Enable auto dispatch
+          default: null
+          example: true
+        providerSelectionStrategy:
+          title: Providerselectionstrategy
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Provider selection strategy
+          default: null
+          example: cheapest
+        reassignOnFailure:
+          title: Reassignonfailure
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Reassign on failure
+          default: null
+          example: true
+        enableMaxDeliveryFee:
+          title: Enablemaxdeliveryfee
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Enable max delivery fee
+          default: null
+          example: true
+        maxDeliveryFeeCents:
+          title: Maxdeliveryfeecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Max delivery fee in cents
+          default: null
+          example: 10000
+        costSplitMaxFixedPriceCents:
+          title: Costsplitmaxfixedpricecents
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Cost split max fixed price in cents
+          default: null
+          example: 10000
+        costSplitMaxPercentage:
+          title: Costsplitmaxpercentage
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Cost split max percentage
+          default: null
+          example: 0.1
+        costSplitStrategy:
+          title: Costsplitstrategy
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cost split strategy
+          default: null
+          example: price
+        smartReassignment:
+          title: Smartreassignment
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Smart reassignment
+          default: null
+          example: true
+      description: Generic serializer for options groups used in many endpoints.
     DispatchQuoteInput:
       title: DispatchQuoteInput
       required:
@@ -215,6 +295,57 @@ components:
           type: string
         totalPriceCents:
           title: Totalpricecents
+          type: integer
+    NashErrorDetails:
+      title: NashErrorDetails
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        message:
+          title: Message
+          type: string
+        details:
+          title: Details
+          anyOf:
+          - type: object
+            additionalProperties: true
+          - type: 'null'
+          default: null
+    ListOptionsGroupOutputSerializer:
+      title: ListOptionsGroupOutputSerializer
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionsGroupSerializer'
+      description: Expected output for listing options groups.
+    RankedProvider:
+      title: RankedProvider
+      required:
+      - providerId
+      - parentProviderId
+      - providerName
+      - probability
+      - rank
+      type: object
+      properties:
+        providerId:
+          title: Providerid
+          type: string
+        parentProviderId:
+          title: Parentproviderid
+          type: string
+        providerName:
+          title: Providername
+          type: string
+        probability:
+          title: Probability
+          type: number
+        rank:
+          title: Rank
           type: integer
     DispatchRuleResult:
       title: DispatchRuleResult
@@ -249,141 +380,6 @@ components:
           anyOf:
           - type: string
           - type: 'null'
-          default: null
-    EvaluateDispatchInput:
-      title: EvaluateDispatchInput
-      required:
-      - quotes
-      type: object
-      properties:
-        pickupAddress:
-          title: Pickupaddress
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The full pickup address in one line. Will be geocoded to lat/lng if pickupLat/pickupLng not provided.
-          default: null
-        pickupLat:
-          title: Pickuplat
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The pickup latitude coordinate.
-          default: null
-        pickupLng:
-          title: Pickuplng
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The pickup longitude coordinate.
-          default: null
-        pickupAddressCity:
-          title: Pickupaddresscity
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The city of the pickup address.
-          default: null
-        pickupAddressState:
-          title: Pickupaddressstate
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The state of the pickup address.
-          default: null
-        pickupAddressZip:
-          title: Pickupaddresszip
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The zip or postal code of the pickup address.
-          default: null
-        pickupAddressCountry:
-          title: Pickupaddresscountry
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The ISO 3166-1 alpha-2 country code of the pickup address.
-          default: null
-        pickupBusinessName:
-          title: Pickupbusinessname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Pickup business name.
-          default: null
-        dropoffAddress:
-          title: Dropoffaddress
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The full dropoff address in one line. Will be geocoded to lat/lng if dropoffLat/dropoffLng not provided.
-          default: null
-        dropoffLat:
-          title: Dropofflat
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The dropoff latitude coordinate.
-          default: null
-        dropoffLng:
-          title: Dropofflng
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: The dropoff longitude coordinate.
-          default: null
-        dropoffAddressCity:
-          title: Dropoffaddresscity
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The city of the dropoff address.
-          default: null
-        dropoffAddressState:
-          title: Dropoffaddressstate
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The state of the dropoff address.
-          default: null
-        dropoffAddressZip:
-          title: Dropoffaddresszip
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The zip or postal code of the dropoff address.
-          default: null
-        dropoffAddressCountry:
-          title: Dropoffaddresscountry
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: The ISO 3166-1 alpha-2 country code of the dropoff address.
-          default: null
-        dropoffBusinessName:
-          title: Dropoffbusinessname
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Dropoff business name.
-          default: null
-        quotes:
-          title: Quotes
-          type: array
-          items:
-            $ref: '#/components/schemas/DispatchQuoteInput'
-        context:
-          anyOf:
-          - $ref: '#/components/schemas/DispatchRuleContextInput'
-          - type: 'null'
-          default: null
-        optionsGroupId:
-          title: Optionsgroupid
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If provided, skip dispatch rule evaluation and use this options group directly.
           default: null
     OptionsGroupInputMixin:
       title: OptionsGroupInputMixin
@@ -590,152 +586,156 @@ components:
           title: Isbatch
           type: boolean
           default: false
-    RankedProvider:
-      title: RankedProvider
+    NashValidationError:
+      title: NashValidationError
       required:
-      - providerId
-      - parentProviderId
-      - providerName
-      - probability
-      - rank
+      - error
+      - response_status
+      - RequestID
       type: object
       properties:
-        providerId:
-          title: Providerid
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
           type: string
-        parentProviderId:
-          title: Parentproviderid
+        RequestID:
+          title: Requestid
           type: string
-        providerName:
-          title: Providername
-          type: string
-        probability:
-          title: Probability
-          type: number
-        rank:
-          title: Rank
-          type: integer
-    OptionsGroupSerializer:
-      title: OptionsGroupSerializer
+    EvaluateDispatchInput:
+      title: EvaluateDispatchInput
       required:
-      - id
-      - label
+      - quotes
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          description: Dispatch Strategy ID
-          example: opn_WyMhHj
-        label:
-          title: Label
-          type: string
-          description: Dispatch Strategy Label
-          example: New York City Strategy
-        allowedProviders:
-          title: Allowedproviders
-          anyOf:
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-          description: Allowed providers
-          default: null
-          example:
-          - prv_01234567890
-          - prv_01234567891
-        enableAutoDispatch:
-          title: Enableautodispatch
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Enable auto dispatch
-          default: null
-          example: true
-        providerSelectionStrategy:
-          title: Providerselectionstrategy
+        pickupAddress:
+          title: Pickupaddress
           anyOf:
           - type: string
           - type: 'null'
-          description: Provider selection strategy
+          description: The full pickup address in one line. Will be geocoded to lat/lng if pickupLat/pickupLng not provided.
           default: null
-          example: cheapest
-        reassignOnFailure:
-          title: Reassignonfailure
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Reassign on failure
-          default: null
-          example: true
-        enableMaxDeliveryFee:
-          title: Enablemaxdeliveryfee
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Enable max delivery fee
-          default: null
-          example: true
-        maxDeliveryFeeCents:
-          title: Maxdeliveryfeecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Max delivery fee in cents
-          default: null
-          example: 10000
-        costSplitMaxFixedPriceCents:
-          title: Costsplitmaxfixedpricecents
-          anyOf:
-          - type: integer
-          - type: 'null'
-          description: Cost split max fixed price in cents
-          default: null
-          example: 10000
-        costSplitMaxPercentage:
-          title: Costsplitmaxpercentage
+        pickupLat:
+          title: Pickuplat
           anyOf:
           - type: number
           - type: 'null'
-          description: Cost split max percentage
+          description: The pickup latitude coordinate.
           default: null
-          example: 0.1
-        costSplitStrategy:
-          title: Costsplitstrategy
+        pickupLng:
+          title: Pickuplng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The pickup longitude coordinate.
+          default: null
+        pickupAddressCity:
+          title: Pickupaddresscity
           anyOf:
           - type: string
           - type: 'null'
-          description: Cost split strategy
+          description: The city of the pickup address.
           default: null
-          example: price
-        smartReassignment:
-          title: Smartreassignment
+        pickupAddressState:
+          title: Pickupaddressstate
           anyOf:
-          - type: boolean
+          - type: string
           - type: 'null'
-          description: Smart reassignment
+          description: The state of the pickup address.
           default: null
-          example: true
-      description: Generic serializer for options groups used in many endpoints.
-    NashErrorDetails:
-      title: NashErrorDetails
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        message:
-          title: Message
-          type: string
-        details:
-          title: Details
+        pickupAddressZip:
+          title: Pickupaddresszip
           anyOf:
-          - type: object
-            additionalProperties: true
+          - type: string
           - type: 'null'
+          description: The zip or postal code of the pickup address.
+          default: null
+        pickupAddressCountry:
+          title: Pickupaddresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ISO 3166-1 alpha-2 country code of the pickup address.
+          default: null
+        pickupBusinessName:
+          title: Pickupbusinessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Pickup business name.
+          default: null
+        dropoffAddress:
+          title: Dropoffaddress
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The full dropoff address in one line. Will be geocoded to lat/lng if dropoffLat/dropoffLng not provided.
+          default: null
+        dropoffLat:
+          title: Dropofflat
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The dropoff latitude coordinate.
+          default: null
+        dropoffLng:
+          title: Dropofflng
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: The dropoff longitude coordinate.
+          default: null
+        dropoffAddressCity:
+          title: Dropoffaddresscity
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The city of the dropoff address.
+          default: null
+        dropoffAddressState:
+          title: Dropoffaddressstate
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The state of the dropoff address.
+          default: null
+        dropoffAddressZip:
+          title: Dropoffaddresszip
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The zip or postal code of the dropoff address.
+          default: null
+        dropoffAddressCountry:
+          title: Dropoffaddresscountry
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The ISO 3166-1 alpha-2 country code of the dropoff address.
+          default: null
+        dropoffBusinessName:
+          title: Dropoffbusinessname
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Dropoff business name.
+          default: null
+        quotes:
+          title: Quotes
+          type: array
+          items:
+            $ref: '#/components/schemas/DispatchQuoteInput'
+        context:
+          anyOf:
+          - $ref: '#/components/schemas/DispatchRuleContextInput'
+          - type: 'null'
+          default: null
+        optionsGroupId:
+          title: Optionsgroupid
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If provided, skip dispatch rule evaluation and use this options group directly.
           default: null
   securitySchemes:
     Token:

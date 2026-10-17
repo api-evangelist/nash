@@ -63,22 +63,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
     CreateNoteInputSerializer:
       title: CreateNoteInputSerializer
       required:
@@ -102,13 +86,6 @@ components:
           type: string
           description: The note to create.
       description: Expected payload for the create note endpoint.
-    FlagStatus:
-      title: FlagStatus
-      enum:
-      - NEEDS_ATTENTION
-      - ACKNOWLEDGED
-      - RESOLVED
-      type: string
     CreateFlagInputSerializer:
       title: CreateFlagInputSerializer
       required:
@@ -152,6 +129,13 @@ components:
           type: string
           description: The notes to create a flag for.
       description: Expected payload for the create flag endpoint.
+    FlagStatus:
+      title: FlagStatus
+      enum:
+      - NEEDS_ATTENTION
+      - ACKNOWLEDGED
+      - RESOLVED
+      type: string
     NashErrorDetails:
       title: NashErrorDetails
       required:
@@ -172,6 +156,22 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
+    NashValidationError:
+      title: NashValidationError
+      required:
+      - error
+      - response_status
+      - RequestID
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
+          type: string
+        RequestID:
+          title: Requestid
+          type: string
   securitySchemes:
     Token:
       type: http

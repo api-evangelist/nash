@@ -85,29 +85,6 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
-    NashValidationError:
-      title: NashValidationError
-      required:
-      - error
-      - response_status
-      - RequestID
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NashErrorDetails'
-        response_status:
-          title: Response Status
-          type: string
-        RequestID:
-          title: Requestid
-          type: string
-    PhotoType:
-      title: PhotoType
-      enum:
-      - pod
-      - pickup
-      - signature
-      type: string
     DetectDropoffAnomalyInputSerializer:
       title: DetectDropoffAnomalyInputSerializer
       required:
@@ -138,6 +115,23 @@ components:
             additionalProperties: true
           - type: 'null'
           default: null
+    MaskFaceInPhotoInputSerializer:
+      title: MaskFaceInPhotoInputSerializer
+      required:
+      - imageUrl
+      type: object
+      properties:
+        imageUrl:
+          title: Imageurl
+          type: string
+          description: Public URL of the image whose faces should be masked.
+    PhotoType:
+      title: PhotoType
+      enum:
+      - pod
+      - pickup
+      - signature
+      type: string
     VerifyPhotoInputSerializer:
       title: VerifyPhotoInputSerializer
       required:
@@ -159,16 +153,22 @@ components:
           - type: 'null'
           description: Optional extra guidance for the LLM (e.g. 'Is the package on the doorstep?').
           default: null
-    MaskFaceInPhotoInputSerializer:
-      title: MaskFaceInPhotoInputSerializer
+    NashValidationError:
+      title: NashValidationError
       required:
-      - imageUrl
+      - error
+      - response_status
+      - RequestID
       type: object
       properties:
-        imageUrl:
-          title: Imageurl
+        error:
+          $ref: '#/components/schemas/NashErrorDetails'
+        response_status:
+          title: Response Status
           type: string
-          description: Public URL of the image whose faces should be masked.
+        RequestID:
+          title: Requestid
+          type: string
   securitySchemes:
     Token:
       type: http

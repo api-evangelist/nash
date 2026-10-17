@@ -97,6 +97,23 @@ paths:
                   $ref: '#/components/schemas/NashValidationError'
 components:
   schemas:
+    AddFeedbackInputSerializer:
+      title: AddFeedbackInputSerializer
+      required:
+      - score
+      type: object
+      properties:
+        score:
+          title: Score
+          type: number
+          description: Feedback score
+        comment:
+          title: Comment
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Feedback comment
+          default: null
     NashValidationError:
       title: NashValidationError
       required:
@@ -113,12 +130,22 @@ components:
         RequestID:
           title: Requestid
           type: string
-    AddFeedbackInputSerializer:
-      title: AddFeedbackInputSerializer
+    FeedbackOutputSerializer:
+      title: FeedbackOutputSerializer
       required:
+      - id
+      - deliveryId
       - score
       type: object
       properties:
+        id:
+          title: Id
+          type: string
+          description: Feedback ID
+        deliveryId:
+          title: Deliveryid
+          type: string
+          description: Delivery ID
         score:
           title: Score
           type: number
@@ -149,33 +176,6 @@ components:
           - type: object
             additionalProperties: true
           - type: 'null'
-          default: null
-    FeedbackOutputSerializer:
-      title: FeedbackOutputSerializer
-      required:
-      - id
-      - deliveryId
-      - score
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          description: Feedback ID
-        deliveryId:
-          title: Deliveryid
-          type: string
-          description: Delivery ID
-        score:
-          title: Score
-          type: number
-          description: Feedback score
-        comment:
-          title: Comment
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Feedback comment
           default: null
   securitySchemes:
     Token:
